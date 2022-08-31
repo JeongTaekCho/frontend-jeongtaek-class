@@ -18,7 +18,7 @@ import {
   MainSelectInputBox,
   FormSubmitBtn,
   ErrorMsg,
-} from "../../styles/emotion";
+} from "../../../styles/emotion";
 
 const BoardWrite = () => {
   const [writer, setWriter] = useState("");
@@ -37,76 +37,84 @@ const BoardWrite = () => {
   const [zipCodeError, setZipCodeError] = useState("");
   const [addressError, setAddressError] = useState("");
   const [youtubeLinkError, setYoutubeLinkError] = useState("");
-  const [writeConfirm, setWriteConfirm] = useState(true);
 
-  const onchangeWriter = (event) => {
-    setWriter(event.target.value);
-    if (event.target.value !== "") {
+  const onChangeinputState = (event) => {
+    const {
+      target: { name, value },
+    } = event;
+
+    //인풋 상태 값 저장
+    if (name === "writer") {
+      setWriter(value);
+    } else if (name === "password") {
+      setPassword(value);
+    } else if (name === "title") {
+      setTitle(value);
+    } else if (name === "content") {
+      setContent(value);
+    } else if (name === "zipCode") {
+      setZipCode(value);
+    } else if (name === "address") {
+      setAddress(value);
+    } else if (name === "address2") {
+      setAddress2(value);
+    } else if (name === "youtubeLink") {
+      setYoutubeLink(value);
+    }
+
+    // 인풋에 값 넣었을 때 에러메세지 지우기
+    if (name === "writer" && value !== "") {
       setWriterError("");
-    }
-  };
-  const onchangePassword = (event) => {
-    setPassword(event.target.value);
-    if (event.target.value !== "") {
+    } else if (name === "password" && value !== "") {
       setPasswordError("");
-    }
-  };
-  const onchangeTitle = (event) => {
-    setTitle(event.target.value);
-    if (event.target.value !== "") {
+    } else if (name === "title" && value !== "") {
       setTitleError("");
-    }
-  };
-  const onchangeContent = (event) => {
-    setContent(event.target.value);
-    if (event.target.value !== "") {
+    } else if (name === "content" && value !== "") {
       setContentError("");
-    }
-  };
-  const onchangeZipCode = (event) => {
-    setZipCode(event.target.value);
-    if (event.target.value !== "") {
+    } else if (name === "zipCode" && value !== "") {
       setZipCodeError("");
-    }
-  };
-  const onchangeAddress = (event) => {
-    setAddress(event.target.value);
-  };
-  const onchangeAddress2 = (event) => {
-    setAddress2(event.target.value);
-    if (event.target.value !== "") {
+    } else if (name === "address2" && value !== "") {
       setAddressError("");
-    }
-  };
-  const onchangeYoutubeLink = (event) => {
-    setYoutubeLink(event.target.value);
-    if (event.target.value !== "") {
+    } else if (name === "youtubeLink" && value !== "") {
       setYoutubeLinkError("");
     }
   };
 
+  //회원가입 완료 시 필수 값 체크
   const onSubmitBoard = (event) => {
     event.preventDefault();
-    if (writer === "") {
+    if (!writer) {
       setWriterError("작성자를 입력해주세요.");
     }
-    if (password === "") {
+    if (!password) {
       setPasswordError("비밀번호를 입력해주세요.");
     }
-    if (title === "") {
+    if (!title) {
       setTitleError("제목을 입력해주세요.");
     }
-    if (content === "") {
+    if (!content) {
       setContentError("내용을 입력해주세요.");
     }
-    if (zipCode === "") {
+    if (!zipCode) {
       setZipCodeError("우편번호를 찾으세요");
     }
-    if (address2 === "") {
+    if (!address2) {
       setAddressError("상세주소를 입력해주세요.");
     }
-    if (youtubeLink === "") {
+    if (!youtubeLink) {
       setYoutubeLinkError("유튜브 링크를 입력해주세요.");
+    }
+    if (
+      writer &&
+      password &&
+      title &&
+      content &&
+      zipCode &&
+      address &&
+      address2 &&
+      youtubeLink
+    ) {
+      alert("회원가입이 완료 되었습니다.");
     }
   };
 
@@ -122,7 +130,8 @@ const BoardWrite = () => {
                 <DefaultInput
                   type="text"
                   placeholder="이름을 적어주세요."
-                  onChange={onchangeWriter}
+                  onChange={onChangeinputState}
+                  name="writer"
                 />
                 <ErrorMsg>{writerError}</ErrorMsg>
               </DefaultInputBox>
@@ -133,7 +142,8 @@ const BoardWrite = () => {
                 <DefaultInput
                   type="password"
                   placeholder="비밀번호를 입력해주세요."
-                  onChange={onchangePassword}
+                  onChange={onChangeinputState}
+                  name="password"
                 />
                 <ErrorMsg>{passwordError}</ErrorMsg>
               </DefaultInputBox>
@@ -144,7 +154,8 @@ const BoardWrite = () => {
             <DefaultInput
               type="text"
               placeholder="제목을 작성해주세요."
-              onChange={onchangeTitle}
+              onChange={onChangeinputState}
+              name="title"
             />
             <ErrorMsg>{titleError}</ErrorMsg>
           </DefaultInputBox>
@@ -153,26 +164,36 @@ const BoardWrite = () => {
             <textarea
               type="text"
               placeholder="내용을 작성해주세요."
-              onChange={onchangeContent}
+              onChange={onChangeinputState}
+              name="content"
             />
             <ErrorMsg>{contentError}</ErrorMsg>
           </TextareaBox>
           <AddressWriteBox>
             <p>주소</p>
             <AddressNumInputBox>
-              <AddressNumInput onChange={onchangeZipCode} placeholder="00000" />
+              <AddressNumInput
+                onChange={onChangeinputState}
+                placeholder="00000"
+                name="zipCode"
+              />
               <button type="button">우편번호 검색</button>
               <ErrorMsg>{zipCodeError}</ErrorMsg>
             </AddressNumInputBox>
-            <DefaultInput className="m1530" onChange={onchangeAddress} />
-            <DefaultInput onChange={onchangeAddress2} />
+            <DefaultInput
+              className="m1530"
+              onChange={onChangeinputState}
+              name="address"
+            />
+            <DefaultInput onChange={onChangeinputState} name="address2" />
             <ErrorMsg>{addressError}</ErrorMsg>
           </AddressWriteBox>
           <DefaultInputBox>
             <p>유튜브</p>
             <DefaultInput
               placeholder="링크를 복사해주세요."
-              onChange={onchangeYoutubeLink}
+              onChange={onChangeinputState}
+              name="youtubeLink"
             />
             <ErrorMsg>{youtubeLinkError}</ErrorMsg>
           </DefaultInputBox>
