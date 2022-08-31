@@ -14,11 +14,12 @@
 // - console.log("Even")으로 입력하면 "Even"이라는 값이 출력됩니다.
 
 function evenOdd(num) {
+  if (num === 0) return "Zero";
+
   if (num % 2 === 0) {
     return "Even";
   } else if (num % 2 === 1) {
     return "Odd";
-  } else if (num === 0) {
-    return "Zero";
   }
+
 }
