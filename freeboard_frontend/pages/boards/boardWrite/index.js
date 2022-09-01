@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useMutation, useQuery, gql } from "@apollo/client";
 import {
   Wrapper,
   Container,
@@ -20,7 +21,36 @@ import {
   ErrorMsg,
 } from "../../../styles/emotion";
 
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+const FETCH_BOARD = gql`
+  query {
+    fetchBoard(boardId: "63108b6b6cf4690029959d81") {
+      _id
+      writer
+      title
+      contents
+    }
+  }
+`;
+
 const BoardWrite = () => {
+  //게시판 인풋 상태관리
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
@@ -30,6 +60,7 @@ const BoardWrite = () => {
   const [address2, setAddress2] = useState("");
   const [youtubeLink, setYoutubeLink] = useState("");
 
+  //에러메세지 상태관리
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
@@ -38,6 +69,7 @@ const BoardWrite = () => {
   const [addressError, setAddressError] = useState("");
   const [youtubeLinkError, setYoutubeLinkError] = useState("");
 
+  //게시판 인풋 온페인지 함수
   const onChangeinputState = (event) => {
     const {
       target: { name, value },
@@ -80,9 +112,32 @@ const BoardWrite = () => {
     }
   };
 
+  //게시글 등록 API;
+
+  const [createBoard] = useMutation(CREATE_BOARD);
+
   //회원가입 완료 시 필수 값 체크
   const onSubmitBoard = (event) => {
     event.preventDefault();
+
+    const result = createBoard({
+      variables: {
+        createBoardInput: {
+          writer,
+          password,
+          title,
+          contents: content,
+          youtubeUrl: youtubeLink,
+          boardAddress: {
+            zipcode: zipCode,
+            address,
+            addressDetail: address2,
+          },
+          images: [],
+        },
+      },
+    });
+
     if (!writer) {
       setWriterError("작성자를 입력해주세요.");
     }
