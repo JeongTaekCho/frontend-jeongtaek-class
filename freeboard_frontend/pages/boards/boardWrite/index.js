@@ -118,10 +118,10 @@ const BoardWrite = () => {
   const [createBoard] = useMutation(CREATE_BOARD);
 
   //회원가입 완료 시 필수 값 체크
-  const onSubmitBoard = (event) => {
+  const onSubmitBoard = async (event) => {
     event.preventDefault();
 
-    const result = createBoard({
+    const result = await createBoard({
       variables: {
         createBoardInput: {
           writer,
