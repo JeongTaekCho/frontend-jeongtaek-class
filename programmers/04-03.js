@@ -16,4 +16,12 @@
 
 function makeNumber(num) {
   let str = "";
+
+  for (let i = 1; i <= num; i++) {
+    str = str += i;
+    str = str += "-";
+  }
+  str = str.slice(0, str.length - 1);
+
+  return str;
 }

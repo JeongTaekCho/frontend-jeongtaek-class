@@ -34,6 +34,7 @@ const CREATE_BOARD = gql`
       images
       createdAt
       updatedAt
+      boardAddress
     }
   }
 `;
@@ -169,7 +170,7 @@ const BoardWrite = () => {
       address2 &&
       youtubeLink
     ) {
-      alert("회원가입이 완료 되었습니다.");
+      // alert("회원가입이 완료 되었습니다.");
     }
   };
 

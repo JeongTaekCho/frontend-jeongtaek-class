@@ -25,4 +25,15 @@
 
 function bigNum(str) {
   let biggest = 0;
+  let sNum = 0;
+
+  for (let i = 0; i <= str.length - 1; i++) {
+    num = Number(str[i]);
+    if (num > sNum) {
+      sNum = num;
+    }
+  }
+  biggest = sNum;
+
+  return biggest;
 }
