@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { useMutation, useQuery, gql } from "@apollo/client";
 import {
   Wrapper,
@@ -34,18 +35,6 @@ const CREATE_BOARD = gql`
       images
       createdAt
       updatedAt
-      boardAddress
-    }
-  }
-`;
-
-const FETCH_BOARD = gql`
-  query {
-    fetchBoard(boardId: "63108b6b6cf4690029959d81") {
-      _id
-      writer
-      title
-      contents
     }
   }
 `;
@@ -70,6 +59,7 @@ const BoardWrite = () => {
   const [addressError, setAddressError] = useState("");
   const [youtubeLinkError, setYoutubeLinkError] = useState("");
 
+  const router = useRouter();
   //게시판 인풋 온페인지 함수
   const onChangeinputState = (event) => {
     const {
@@ -121,7 +111,7 @@ const BoardWrite = () => {
   const onSubmitBoard = async (event) => {
     event.preventDefault();
 
-    const result = await createBoard({
+    const { data } = await createBoard({
       variables: {
         createBoardInput: {
           writer,
@@ -171,6 +161,7 @@ const BoardWrite = () => {
       youtubeLink
     ) {
       alert("회원가입이 완료 되었습니다.");
+      router.push(`/boards/boardDetail/${data.createBoard._id}`);
     }
   };
 

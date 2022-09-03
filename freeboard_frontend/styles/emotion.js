@@ -157,3 +157,137 @@ export const ErrorMsg = styled.span`
   font-weight: 500;
   color: #f00;
 `;
+
+// 게시판 상세페이지 //
+
+export const BoardDetailContainer = styled.div`
+  width: 1200px;
+  padding: 80px 102px;
+  box-shadow: 0px 0px 8px #000;
+  margin: 64px auto 0;
+`;
+
+export const BoardDetailTitleContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 0;
+  border-bottom: 1px solid #bdbdbd;
+`;
+export const DetailWriterAndDateBox = styled.div`
+  display: flex;
+  gap: 17px;
+`;
+export const DetailProfileImg = styled.div`
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  background: #bdbdbd;
+`;
+export const DetailWriterAndDate = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+export const DetailWriter = styled.p`
+  font-size: 24px;
+  font-weight: 500;
+  color: #000;
+`;
+export const DetailDate = styled.p`
+  font-size: 16px;
+  font-weight: 400;
+  color: #828282;
+`;
+
+export const ShareAndGpsBox = styled.div`
+  display: flex;
+  gap: 23px;
+  align-item: center;
+  position: relative;
+`;
+
+export const DetailAddressBox = styled.div`
+  width: 376px;
+  height: 64px;
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: -65px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 16px;
+`;
+
+export const DetailAddressText = styled.span`
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+`;
+
+export const DefaultBtn = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
+`;
+
+export const BoardDetailContentContainer = styled.div`
+  width: 100%;
+  padding-top: 80px;
+`;
+
+export const BoardDetailTitle = styled.h2`
+  font-size: 36px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 40px;
+`;
+
+export const DetailImage = styled.div`
+  width: 100%;
+  height: 480px;
+  background: blue;
+  color: #fff;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const DetailContentBox = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  word-break: break-all;
+  line-height: 1.6;
+  margin-bottom: 120px;
+`;
+export const IfrmaeContainer = styled.div`
+  width: 486px;
+  height: 240px;
+  background: blue;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 160px;
+`;
+
+export const LikeAndUnLikeBox = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+`;
+export const LikeAndUnLIkeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+`;
+export const LikeText = styled.span`
+  font-size: 18px;
+  font-weight: 500;
+`;
