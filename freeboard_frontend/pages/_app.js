@@ -1,5 +1,7 @@
 import "../styles/globals.css";
 import { ApolloProvider, InMemoryCache, ApolloClient } from "@apollo/client";
+import { ThemeProvider } from "@emotion/react";
+import theme from "../styles/theme";
 
 function MyApp({ Component, pageProps }) {
   const client = new ApolloClient({
@@ -9,7 +11,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <ApolloProvider client={client}>
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </ApolloProvider>
   );
 }

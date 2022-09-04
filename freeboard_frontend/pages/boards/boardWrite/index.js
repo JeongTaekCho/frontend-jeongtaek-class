@@ -20,6 +20,7 @@ import {
   MainSelectInputBox,
   FormSubmitBtn,
   ErrorMsg,
+  CommentLengthBox,
 } from "../../../styles/emotion";
 
 const CREATE_BOARD = gql`
@@ -111,57 +112,61 @@ const BoardWrite = () => {
   const onSubmitBoard = async (event) => {
     event.preventDefault();
 
-    const { data } = await createBoard({
-      variables: {
-        createBoardInput: {
-          writer,
-          password,
-          title,
-          contents: content,
-          youtubeUrl: youtubeLink,
-          boardAddress: {
-            zipcode: zipCode,
-            address,
-            addressDetail: address2,
+    try {
+      const { data } = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer,
+            password,
+            title,
+            contents: content,
+            youtubeUrl: youtubeLink,
+            boardAddress: {
+              zipcode: zipCode,
+              address,
+              addressDetail: address2,
+            },
+            images: [],
           },
-          images: [],
         },
-      },
-    });
+      });
 
-    if (!writer) {
-      setWriterError("작성자를 입력해주세요.");
-    }
-    if (!password) {
-      setPasswordError("비밀번호를 입력해주세요.");
-    }
-    if (!title) {
-      setTitleError("제목을 입력해주세요.");
-    }
-    if (!content) {
-      setContentError("내용을 입력해주세요.");
-    }
-    if (!zipCode) {
-      setZipCodeError("우편번호를 찾으세요");
-    }
-    if (!address2) {
-      setAddressError("상세주소를 입력해주세요.");
-    }
-    if (!youtubeLink) {
-      setYoutubeLinkError("유튜브 링크를 입력해주세요.");
-    }
-    if (
-      writer &&
-      password &&
-      title &&
-      content &&
-      zipCode &&
-      address &&
-      address2 &&
-      youtubeLink
-    ) {
-      alert("회원가입이 완료 되었습니다.");
-      router.push(`/boards/boardDetail/${data.createBoard._id}`);
+      if (!writer) {
+        setWriterError("작성자를 입력해주세요.");
+      }
+      if (!password) {
+        setPasswordError("비밀번호를 입력해주세요.");
+      }
+      if (!title) {
+        setTitleError("제목을 입력해주세요.");
+      }
+      if (!content) {
+        setContentError("내용을 입력해주세요.");
+      }
+      if (!zipCode) {
+        setZipCodeError("우편번호를 찾으세요");
+      }
+      if (!address2) {
+        setAddressError("상세주소를 입력해주세요.");
+      }
+      if (!youtubeLink) {
+        setYoutubeLinkError("유튜브 링크를 입력해주세요.");
+      }
+      if (
+        writer &&
+        password &&
+        title &&
+        content &&
+        zipCode &&
+        address &&
+        address2 &&
+        youtubeLink
+      ) {
+        alert("게시글 등록이 완료 되었습니다.");
+        router.push(`/boards/boardDetail/${data.createBoard._id}`);
+      }
+    } catch (error) {
+      alert(error);
     }
   };
 
@@ -247,9 +252,15 @@ const BoardWrite = () => {
           <PhotoClipBox>
             <p>사진 첨부</p>
             <PhotoClipBtnBox>
-              <button>+</button>
-              <button>+</button>
-              <button>+</button>
+              <button>
+                <span>+</span>
+              </button>
+              <button>
+                <span>+</span>
+              </button>
+              <button>
+                <span>+</span>
+              </button>
             </PhotoClipBtnBox>
           </PhotoClipBox>
           <MainSelectBox>
