@@ -37,6 +37,7 @@ import {
   CommentModifyBtn,
 } from "../../../../styles/emotion";
 
+//게시글 정보 받아오기
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
@@ -77,14 +78,47 @@ const FETCH_BOARD = gql`
   }
 `;
 
+//좋아요 개수 업!
 const LIKE_UP = gql`
   mutation likeBoard($boardId: ID!) {
     likeBoard(boardId: $boardId)
   }
 `;
+
+//싫어요 개수 업!
 const LIKE_DOWN = gql`
   mutation dislikeBoard($boardId: ID!) {
     dislikeBoard(boardId: $boardId)
+  }
+`;
+
+//댓글 작성하기
+const CREATE_COMMENT = gql`
+  mutation createBoardComment(
+    $createBoardCommentInput: CreateBoardCommentInput!
+    $boardId: ID!
+  ) {
+    createBoardComment(
+      boardId: $boardId
+      createBoardCommentInput: $createBoardCommentInput
+    ) {
+      _id
+      writer
+      contents
+    }
+  }
+`;
+
+const FETCH_COMMENT = gql`
+  query fetchBoardComments($page: Int, $boardId: ID!) {
+    fetchBoardComments(page: $page, boardId: $boardId) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+      deletedAt
+    }
   }
 `;
 
@@ -92,6 +126,12 @@ const BoardDetail = () => {
   const router = useRouter();
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
+      boardId: router.query.id,
+    },
+  });
+  const commentResult = useQuery(FETCH_COMMENT, {
+    variables: {
+      page: 1,
       boardId: router.query.id,
     },
   });
@@ -152,7 +192,22 @@ const BoardDetail = () => {
 
   const boardDetailDate = data?.fetchBoard.createdAt.slice(0, 10);
 
-  console.log(writer, password, comment);
+  const [createComment] = useMutation(CREATE_COMMENT);
+
+  const onClickCommentSubmit = async () => {
+    const result = await createComment({
+      variables: {
+        boardId: router.query.id,
+        createBoardCommentInput: {
+          writer,
+          password,
+          contents: comment,
+          rating: 0.3,
+        },
+      },
+    });
+    alert("댓글 작성 완료");
+  };
 
   return (
     <>
@@ -267,7 +322,9 @@ const BoardDetail = () => {
             />
             <CommentSubmitBox>
               <CommentLengthBox>{comment.length}/100</CommentLengthBox>
-              <CommentSubmit>등록하기</CommentSubmit>
+              <CommentSubmit onClick={onClickCommentSubmit}>
+                등록하기
+              </CommentSubmit>
             </CommentSubmitBox>
           </CommentTextareaBox>
         </CommentContainer>
@@ -300,6 +357,7 @@ const BoardDetail = () => {
             </CommentSubmitBox>
           </CommentTextareaBox>
         </CommentContainer> */}
+        {/* <p>{commentResult.data?.fetchBoardComments[0].contents}</p> */}
       </BoardDetailContainer>
     </>
   );
