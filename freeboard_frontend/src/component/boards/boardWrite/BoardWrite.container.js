@@ -25,6 +25,7 @@ const BoardWrite = () => {
   const [youtubeLinkError, setYoutubeLinkError] = useState("");
 
   const router = useRouter();
+
   //게시판 인풋 온페인지 함수
   const onChangeinputState = (event) => {
     const {

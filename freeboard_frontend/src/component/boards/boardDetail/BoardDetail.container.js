@@ -18,6 +18,7 @@ const BoardDetail = () => {
       boardId: router.query.id,
     },
   });
+
   const commentResult = useQuery(FETCH_COMMENT, {
     variables: {
       page: 1,
@@ -32,6 +33,7 @@ const BoardDetail = () => {
   const [writer, setWriter] = useState("");
   const [comment, setComment] = useState("");
   const [password, setPassword] = useState("");
+  const [commentArray, setCommentArray] = useState([]);
 
   useEffect(() => {
     setLikeCount(data && data.fetchBoard.likeCount);
@@ -39,6 +41,9 @@ const BoardDetail = () => {
   useEffect(() => {
     setDisLikeCount(data && data.fetchBoard.dislikeCount);
   }, [data]);
+  useEffect(() => {
+    setCommentArray(commentResult.data && commentResult.data.fetchBoardComment);
+  }, []);
 
   const onChangeComment = (event) => {
     const {
@@ -99,7 +104,9 @@ const BoardDetail = () => {
         },
       },
     });
+    setCommentArray([commentResult.data?.fetchBoardComment]);
     alert("댓글 작성 완료");
+    router.reload();
   };
   return (
     <>
@@ -119,6 +126,8 @@ const BoardDetail = () => {
         goBoardWrite={goBoardWrite}
         data={data}
         router={router}
+        commentResult={commentResult.data}
+        commentArray={commentArray}
       />
     </>
   );

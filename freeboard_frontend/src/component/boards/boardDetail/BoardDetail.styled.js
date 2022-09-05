@@ -52,11 +52,11 @@ export const ShareAndGpsBox = styled.div`
 `;
 
 export const DetailAddressBox = styled.div`
-  width: 376px;
-  height: 64px;
+  width: 37.6rem;
+  height: 6.4rem;
   background: rgba(0, 0, 0, 0.6);
   position: absolute;
-  top: -65px;
+  top: -6.5rem;
   right: 10px;
   display: flex;
   flex-direction: column;
@@ -282,11 +282,69 @@ export const CommentSubmit = styled.button`
 `;
 
 export const CommentModifyBtn = styled(CommentSubmit)`
-  background: #ffd600;
+  background: ${(props) => props.theme.mainColor};
   color: #000;
 `;
 
 export const CommentBox = styled.div`
   width: 100%;
-  padding: 20px 0;
+  padding: 2rem 0;
+`;
+
+export const CommentViewContainer = styled.div`
+  width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #bdbdbd;
+  @media ${(props) => props.theme.tablet} {
+    width: 90%;
+  }
+`;
+
+export const CommentViewBtnBox = styled.div`
+  display: flex;
+  gap: 15px;
+`;
+
+export const CommentViewProfileImg = styled.div`
+  width: 4rem;
+  height: 4rem;
+  background: gray;
+  border-radius: 50%;
+  margin-top: 5px;
+`;
+export const CommentViewProfileBox = styled.div`
+  display: flex;
+  gap: 1.6rem;
+`;
+export const CommentNameAndRating = styled.div`
+  display: flex;
+  gap: 1.6rem;
+  margin-bottom: 4px;
+`;
+export const CommentRatingBox = styled.div`
+  display: flex;
+  gap: 4px;
+`;
+export const CommentViewName = styled.p`
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #000;
+`;
+export const CommentRatingContentBox = styled.div``;
+export const CommentViewContent = styled.p`
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #4f4f4f;
+  word-break: break-all;
+  margin-bottom: 20px;
+`;
+
+export const CommentViewDate = styled.p`
+  font-size: 12px;
+  font-weight: 400;
+  color: #bdbdbd;
 `;
