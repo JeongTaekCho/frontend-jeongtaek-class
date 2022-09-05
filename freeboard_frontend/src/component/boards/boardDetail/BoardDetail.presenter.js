@@ -13,6 +13,7 @@ const BoardDetailUi = ({
   onModalBtn,
   boardDetailDate,
   onClickCommentSubmit,
+  goBoardWrite,
   data,
 }) => {
   return (
@@ -75,11 +76,7 @@ const BoardDetailUi = ({
           <S.BoardDefaultBtn>목록으로</S.BoardDefaultBtn>
           <S.BoardDefaultBtn>수정하기</S.BoardDefaultBtn>
           <S.BoardDefaultBtn>삭제하기</S.BoardDefaultBtn>
-          <S.BoardDefaultBtn
-            onClick={() => {
-              router.push("/boards/boardWrite");
-            }}
-          >
+          <S.BoardDefaultBtn onClick={goBoardWrite}>
             게시글 작성(임시)
           </S.BoardDefaultBtn>
         </S.BoardBtnContainer>

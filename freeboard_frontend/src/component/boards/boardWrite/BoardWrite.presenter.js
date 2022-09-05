@@ -110,11 +110,11 @@ const BoardWriteUi = ({
               <S.MainSelectInputBox>
                 <div>
                   <input id="youtube" type="radio" name="mainSelect" />
-                  <label htmlFor="youtube">유튜브</label>
+                  <S.RadioLabel htmlFor="youtube">유튜브</S.RadioLabel>
                 </div>
                 <div>
                   <input id="photo" type="radio" name="mainSelect" />
-                  <label htmlFor="photo">사진</label>
+                  <S.RadioLabel htmlFor="photo">사진</S.RadioLabel>
                 </div>
               </S.MainSelectInputBox>
             </S.MainSelectBox>

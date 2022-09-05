@@ -83,6 +83,10 @@ const BoardDetail = () => {
 
   const [createComment] = useMutation(CREATE_COMMENT);
 
+  const goBoardWrite = () => {
+    router.push("/boards/boardWrite");
+  };
+
   const onClickCommentSubmit = async () => {
     const result = await createComment({
       variables: {
@@ -112,7 +116,9 @@ const BoardDetail = () => {
         onModalBtn={onModalBtn}
         boardDetailDate={boardDetailDate}
         onClickCommentSubmit={onClickCommentSubmit}
+        goBoardWrite={goBoardWrite}
         data={data}
+        router={router}
       />
     </>
   );

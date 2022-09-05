@@ -5,7 +5,7 @@ import { testResponsive } from "../../../../styles/test";
 
 export const BoardDetailContainer = styled.div`
   width: 1200px;
-  margin: 200px auto;
+  margin: 100px auto;
   @media ${(props) => props.theme.tablet} {
     width: 90%;
   }

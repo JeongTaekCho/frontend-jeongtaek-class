@@ -197,7 +197,7 @@ export const FormSubmitBtn = styled.button`
   font-size: 1.6rem;
   font-weight: 500;
   color: #000;
-  background: #ffd600;
+  background: ${(props) => props.theme.mainColor};
   margin: 0 auto;
   cursor: pointer;
 `;
@@ -206,4 +206,10 @@ export const ErrorMsg = styled.span`
   font-size: 1.2rem;
   font-weight: 500;
   color: #f00;
+`;
+
+export const RadioLabel = styled.label`
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #000;
 `;
