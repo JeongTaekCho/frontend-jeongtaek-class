@@ -9,6 +9,7 @@ import {
   LIKE_DOWN,
   CREATE_COMMENT,
   FETCH_COMMENT,
+  DELETE_COMMENT,
 } from "./BoardDetail.querys";
 
 const BoardDetail = () => {
@@ -34,6 +35,29 @@ const BoardDetail = () => {
   const [comment, setComment] = useState("");
   const [password, setPassword] = useState("");
   const [commentArray, setCommentArray] = useState([]);
+  const [commentPsModal, setCommentPsModal] = useState(false);
+  const [commentDelPassword, setCommentDelPassword] = useState("");
+
+  const onChangeCommentDelPassword = (event) => {
+    setCommentDelPassword(event.target.value);
+  };
+  const onCommentPsModal = () => {
+    setCommentPsModal(true);
+  };
+  const CloseCommentPsModal = () => {
+    setCommentPsModal(false);
+  };
+  const [commentDelete] = useMutation(DELETE_COMMENT);
+
+  const commentDeleteSubmit = () => {
+    commentDelete({
+      variables: {
+        password: commentDelPassword,
+        boardCommentId: "6316115e6cf4690029959f46",
+      },
+    });
+    alert("댓글 삭제 완료");
+  };
 
   useEffect(() => {
     setLikeCount(data && data.fetchBoard.likeCount);
@@ -128,6 +152,12 @@ const BoardDetail = () => {
         router={router}
         commentResult={commentResult.data}
         commentArray={commentArray}
+        commentPsModal={commentPsModal}
+        commentDelPassword={commentDelPassword}
+        onChangeCommentDelPassword={onChangeCommentDelPassword}
+        onCommentPsModal={onCommentPsModal}
+        CloseCommentPsModal={CloseCommentPsModal}
+        commentDeleteSubmit={commentDeleteSubmit}
       />
     </>
   );

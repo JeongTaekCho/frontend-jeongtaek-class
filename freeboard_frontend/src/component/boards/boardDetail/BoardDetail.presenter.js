@@ -17,6 +17,12 @@ const BoardDetailUi = ({
   data,
   commentResult,
   commentArray,
+  commentPsModal,
+  commentDelPassword,
+  onChangeCommentDelPassword,
+  onCommentPsModal,
+  CloseCommentPsModal,
+  commentDeleteSubmit,
 }) => {
   console.log(commentResult);
   return (
@@ -171,7 +177,9 @@ const BoardDetailUi = ({
         return (
           <S.CommentViewContainer key={comment.i}>
             <S.CommentViewProfileBox>
-              <S.CommentViewProfileImg></S.CommentViewProfileImg>
+              <S.CommentProfileImgBox>
+                <S.CommentViewProfileImg></S.CommentViewProfileImg>
+              </S.CommentProfileImgBox>
               <S.CommentRatingContentBox>
                 <S.CommentNameAndRating>
                   <S.CommentViewName>{comment?.writer}</S.CommentViewName>
@@ -190,10 +198,10 @@ const BoardDetailUi = ({
                     </svg>
                   </S.CommentRatingBox>
                 </S.CommentNameAndRating>
-                <S.CommentViewContent>
-                  진짜 유익하고 좋은 정보입니다.
-                </S.CommentViewContent>
-                <S.CommentViewDate>2021.02.22</S.CommentViewDate>
+                <S.CommentViewContent>{comment?.contents}</S.CommentViewContent>
+                <S.CommentViewDate>
+                  {comment?.createdAt.slice(0, 10)}
+                </S.CommentViewDate>
               </S.CommentRatingContentBox>
             </S.CommentViewProfileBox>
             <S.CommentViewBtnBox>
@@ -211,7 +219,7 @@ const BoardDetailUi = ({
                   />
                 </svg>
               </S.DefaultBtn>
-              <S.DefaultBtn>
+              <S.DefaultBtn onClick={onCommentPsModal}>
                 <svg
                   width="14"
                   height="14"
@@ -229,6 +237,23 @@ const BoardDetailUi = ({
           </S.CommentViewContainer>
         );
       })}
+      {commentPsModal ? (
+        <S.CommentPasswordBox>
+          <S.CommentPassWordForm>
+            <S.CommentPasswordInput
+              type="password"
+              placeholder="비밀번호를 입력해주세요."
+              onChange={onChangeCommentDelPassword}
+            />
+            <S.CommentPasswordDeleteBtn onClick={commentDeleteSubmit}>
+              삭제하기
+            </S.CommentPasswordDeleteBtn>
+            <S.CommentDeleteBoxCloseBtn onClick={CloseCommentPsModal}>
+              X
+            </S.CommentDeleteBoxCloseBtn>
+          </S.CommentPassWordForm>
+        </S.CommentPasswordBox>
+      ) : null}
     </>
   );
 };

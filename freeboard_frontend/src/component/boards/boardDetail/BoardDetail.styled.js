@@ -348,3 +348,54 @@ export const CommentViewDate = styled.p`
   font-weight: 400;
   color: #bdbdbd;
 `;
+
+export const CommentProfileImgBox = styled.div`
+  // width: 10%;
+`;
+export const CommentPasswordBox = styled.div`
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+`;
+export const CommentPassWordForm = styled.div`
+  width: 450px;
+  height: 250px;
+  background: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+`;
+export const CommentPasswordInput = styled.input`
+  width: 100%;
+  height: 40px;
+  border: 1px solid #111;
+  outline: none;
+  padding: 10px;
+`;
+export const CommentPasswordDeleteBtn = styled.button`
+  width: 50%;
+  height: 40px;
+  margin: 0 auto;
+  border: 1px solid #fff;
+  background: #000;
+  font-size: 1.5rem;
+  fonr-weight: 500;
+  color: #fff;
+  cursor: pointer;
+`;
+export const CommentDeleteBoxCloseBtn = styled(DefaultBtn)`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 3rem;
+`;
