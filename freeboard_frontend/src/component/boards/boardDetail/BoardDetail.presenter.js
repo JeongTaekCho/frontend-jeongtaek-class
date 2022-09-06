@@ -1,3 +1,4 @@
+import Link from "next/link";
 import * as S from "./BoardDetail.styled";
 
 const BoardDetailUi = ({
@@ -82,7 +83,9 @@ const BoardDetailUi = ({
           </S.LikeAndUnLikeBox>
         </S.BoardDetailContentContainer>
         <S.BoardBtnContainer>
-          <S.BoardDefaultBtn>목록으로</S.BoardDefaultBtn>
+          <Link href="/boards">
+            <S.BoardDefaultBtn>목록으로</S.BoardDefaultBtn>
+          </Link>
           <S.BoardDefaultBtn>수정하기</S.BoardDefaultBtn>
           <S.BoardDefaultBtn>삭제하기</S.BoardDefaultBtn>
           <S.BoardDefaultBtn onClick={goBoardWrite}>
