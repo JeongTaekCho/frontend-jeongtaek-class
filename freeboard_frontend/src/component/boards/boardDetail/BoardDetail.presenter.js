@@ -175,7 +175,7 @@ const BoardDetailUi = ({
       </S.BoardDetailContainer>
       {commentResult?.fetchBoardComments.map((comment, i) => {
         return (
-          <S.CommentViewContainer key={comment.i}>
+          <S.CommentViewContainer key={comment._id}>
             <S.CommentViewProfileBox>
               <S.CommentProfileImgBox>
                 <S.CommentViewProfileImg></S.CommentViewProfileImg>
@@ -219,7 +219,7 @@ const BoardDetailUi = ({
                   />
                 </svg>
               </S.DefaultBtn>
-              <S.DefaultBtn onClick={onCommentPsModal}>
+              <S.DefaultBtn id={comment?._id} onClick={onCommentPsModal}>
                 <svg
                   width="14"
                   height="14"

@@ -37,26 +37,38 @@ const BoardDetail = () => {
   const [commentArray, setCommentArray] = useState([]);
   const [commentPsModal, setCommentPsModal] = useState(false);
   const [commentDelPassword, setCommentDelPassword] = useState("");
+  const [commentDelId, setCommentDelId] = useState("");
 
   const onChangeCommentDelPassword = (event) => {
     setCommentDelPassword(event.target.value);
   };
-  const onCommentPsModal = () => {
+  const onCommentPsModal = async (event) => {
     setCommentPsModal(true);
   };
+
   const CloseCommentPsModal = () => {
     setCommentPsModal(false);
   };
   const [commentDelete] = useMutation(DELETE_COMMENT);
 
-  const commentDeleteSubmit = () => {
-    commentDelete({
+  const commentDeleteSubmit = async (event) => {
+    console.log("commentId", event.target.id);
+    console.log("commendPw", commentDelPassword);
+    console.log("why.....????");
+    const result = await commentDelete({
       variables: {
         password: commentDelPassword,
-        boardCommentId: "6316115e6cf4690029959f46",
+        boardCommentId: event.target.id,
       },
+      refetchQueries: [
+        {
+          query: FETCH_COMMENT,
+        },
+      ],
     });
-    alert("댓글 삭제 완료");
+    // alert("댓글 삭제 완료");
+    console.log(result);
+    setCommentPsModal(false);
   };
 
   useEffect(() => {
@@ -65,9 +77,6 @@ const BoardDetail = () => {
   useEffect(() => {
     setDisLikeCount(data && data.fetchBoard.dislikeCount);
   }, [data]);
-  useEffect(() => {
-    setCommentArray(commentResult.data && commentResult.data.fetchBoardComment);
-  }, []);
 
   const onChangeComment = (event) => {
     const {
@@ -127,10 +136,12 @@ const BoardDetail = () => {
           rating: 0.3,
         },
       },
+      refetchQueries: [
+        {
+          query: FETCH_COMMENT,
+        },
+      ],
     });
-    setCommentArray([commentResult.data?.fetchBoardComment]);
-    alert("댓글 작성 완료");
-    router.reload();
   };
   return (
     <>
