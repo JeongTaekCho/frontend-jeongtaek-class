@@ -77,7 +77,7 @@ const BoardListUi = (data) => {
                   <S.BoardLi2>{item ? item.title : "로딩중입니다"}</S.BoardLi2>
                 </Link>
                 <S.BoardLi3>{item?.writer}</S.BoardLi3>
-                <S.BoardLi4>2022.01.01</S.BoardLi4>
+                <S.BoardLi4>{item?.createdAt.slice(0, 10)}</S.BoardLi4>
               </S.BoardUl>
             );
           })}

@@ -52,9 +52,6 @@ const BoardDetail = () => {
   const [commentDelete] = useMutation(DELETE_COMMENT);
 
   const commentDeleteSubmit = async (event) => {
-    console.log("commentId", event.target.id);
-    console.log("commendPw", commentDelPassword);
-    console.log("why.....????");
     const result = await commentDelete({
       variables: {
         password: commentDelPassword,
@@ -66,8 +63,6 @@ const BoardDetail = () => {
         },
       ],
     });
-    // alert("댓글 삭제 완료");
-    console.log(result);
     setCommentPsModal(false);
   };
 

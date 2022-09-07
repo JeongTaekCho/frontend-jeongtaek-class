@@ -7,6 +7,8 @@ const BoardWriteUI = ({
   onChangeTitle,
   onChangeContent,
   btn,
+  isEdit,
+  onClickUpdate,
 }) => {
   //자바스크립트 영역
 
@@ -16,8 +18,8 @@ const BoardWriteUI = ({
       제목 : <DefaultInput type="text" onChange={onChangeTitle} />
       <br />
       내용 : <DefaultInput type="text" onChange={onChangeContent} /> <br />
-      <BlueButton btn={btn} onClick={onClickSubmit}>
-        Graphql - API 요청하기
+      <BlueButton btn={btn} onClick={isEdit ? onClickUpdate : onClickSubmit}>
+        {isEdit ? "수정" : "등록"}하기
       </BlueButton>
     </>
   );

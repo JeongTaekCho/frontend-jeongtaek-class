@@ -1,13 +1,10 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import BoardWriteUI from "./BoardWrite.presenter";
-import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.querys";
+import { CREATE_BOARD } from "./BoardWrite.querys";
 
-const BoardWrite = ({ isEdit }) => {
+const BoardWrite = () => {
   //자바스크립트 영역
-
-  const router = useRouter();
 
   const [writer, setWriter] = useState("");
   const [title, setTitle] = useState("");
@@ -16,16 +13,26 @@ const BoardWrite = ({ isEdit }) => {
 
   const onChangeWriter = (event) => {
     setWriter(event.target.value);
+    if (event.target.value && title && content) {
+      setBtn(true);
+    }
   };
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
+    if (writer && event.target.value && content) {
+      setBtn(true);
+    }
   };
   const onChangeContent = (event) => {
     setContent(event.target.value);
+    if (writer && title && event.target.value) {
+      setBtn(true);
+    }
   };
 
+  console.log(writer);
+
   const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
 
   const onClickSubmit = async () => {
     const result = await createBoard({
@@ -37,24 +44,7 @@ const BoardWrite = ({ isEdit }) => {
       },
     });
     console.log(result);
-    setBtn(true);
-    router.push(`/08-05-board/${result.data.createBoard.number}`);
   };
-
-  const onClickUpdate = async () => {
-    // 뮤테이션 등록
-    const result = await updateBoard({
-      variables: {
-        number: Number(router.query.number),
-        writer: writer,
-        title: title,
-        contents: content,
-      },
-    });
-    // 상세페이지로 이동하기
-    router.push(`/08-05-board/${router.query.number}`);
-  };
-
   return (
     <>
       <BoardWriteUI
@@ -63,8 +53,9 @@ const BoardWrite = ({ isEdit }) => {
         onChangeTitle={onChangeTitle}
         onChangeContent={onChangeContent}
         btn={btn}
-        isEdit={isEdit}
-        onClickUpdate={onClickUpdate}
+        writer={writer}
+        title={title}
+        content={content}
       />
     </>
   );
