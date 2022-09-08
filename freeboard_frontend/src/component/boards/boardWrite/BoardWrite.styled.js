@@ -196,7 +196,7 @@ export const FormSubmitBtn = styled.button`
   outline: none;
   font-size: 1.6rem;
   font-weight: 500;
-  color: #000;
+  color: #fff;
   background: ${(props) => props.theme.mainColor};
   margin: 0 auto;
   cursor: pointer;

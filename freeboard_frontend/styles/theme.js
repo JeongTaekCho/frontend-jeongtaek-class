@@ -6,7 +6,7 @@ const viewPort = {
 const theme = {
   tablet: `(max-width : ${viewPort.tabletSize} )`,
   mobile: `(max-width : ${viewPort.mobileSize} )`,
-  mainColor: "#FFD600",
+  mainColor: "#f95621",
 };
 
 export default theme;

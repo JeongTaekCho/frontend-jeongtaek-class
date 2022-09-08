@@ -24,6 +24,7 @@ const BoardDetail = () => {
   const [disLikeCount, setDisLikeCount] = useState(0); // 싫어요 개수
   const [commentPsModal, setCommentPsModal] = useState(false); // 댓글 삭제시 비밀번호 모달
   const [commentDelPassword, setCommentDelPassword] = useState(""); // 댓글 삭제시 비밓번호
+  const [commentId, setCommentId] = useState("");
 
   // 유즈 라우터
   const router = useRouter();
@@ -69,6 +70,7 @@ const BoardDetail = () => {
   // 댓글 비밀번호 팝업 ON
   const onCommentPsModal = async (event) => {
     setCommentPsModal(true);
+    setCommentId(event.currentTarget.id);
   };
   // 댓글 비밀번호 팝업 Off
   const CloseCommentPsModal = () => {
@@ -88,7 +90,6 @@ const BoardDetail = () => {
 
   // 댓글 작성 버튼 ONCLICK
   const onClickCommentSubmit = async () => {
-    console.log(router);
     await createComment({
       variables: {
         boardId: router.query.id,
@@ -108,17 +109,26 @@ const BoardDetail = () => {
         },
       ],
     });
-    // router.reload();
+    setWriter("");
+    setComment("");
+    setPassword("");
   };
 
   // 댓글 삭제 버튼 ONCLICK
   const commentDeleteSubmit = async (event) => {
-    console.log(event);
     await commentDelete({
       variables: {
         password: commentDelPassword,
-        boardCommentId: event.target.id,
+        boardCommentId: commentId,
       },
+      refetchQueries: [
+        {
+          query: FETCH_COMMENT,
+          variables: {
+            boardId: router.query.id,
+          },
+        },
+      ],
     });
     setCommentPsModal(false);
   };
