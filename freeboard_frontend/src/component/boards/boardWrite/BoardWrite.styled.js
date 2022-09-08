@@ -5,7 +5,20 @@ export const Wrapper = styled.div`
   width: 100%;
 `;
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  width: 1200px;
+  padding: 60px 102px 100px 102px;
+  box-shadow: 0px 0px 12px gray;
+  margin: 0 auto;
+  @media ${(props) => props.theme.tablet} {
+    width: 90%;
+    padding: 40px 8.5%;
+  }
+  @media ${(props) => props.theme.mobile} {
+    width: 90%;
+    padding: 20px 8.5%;
+  }
+`;
 
 export const BoardWriteTitle = styled.h2`
   font-size: 3.6rem;

@@ -14,6 +14,7 @@ const BoardWriteUi = ({
   onEditBoard,
   data,
 }) => {
+  console.log(data);
   return (
     <>
       <S.Wrapper>
@@ -78,7 +79,7 @@ const BoardWriteUi = ({
                   onChange={onChangeinputState}
                   placeholder="00000"
                   name="zipCode"
-                  value={isEdit ? data?.fetchBoard.zipcode : null}
+                  value={isEdit ? data?.fetchBoard.boardAddress.zipcode : null}
                 />
                 <button type="button">우편번호 검색</button>
                 <S.ErrorMsg>{zipCodeError}</S.ErrorMsg>
@@ -87,9 +88,15 @@ const BoardWriteUi = ({
                 className="m1530"
                 onChange={onChangeinputState}
                 name="address"
-                value={isEdit ? data?.fetchBoard.address : null}
+                value={isEdit ? data?.fetchBoard.boardAddress.address : null}
               />
-              <S.DefaultInput onChange={onChangeinputState} name="address2" />
+              <S.DefaultInput
+                onChange={onChangeinputState}
+                name="address2"
+                value={
+                  isEdit ? data?.fetchBoard.boardAddress.addressDetail : null
+                }
+              />
               <S.ErrorMsg>{addressError}</S.ErrorMsg>
             </S.AddressWriteBox>
             <S.DefaultInputBox>
