@@ -28,8 +28,6 @@ const BoardDetail = () => {
   // 유즈 라우터
   const router = useRouter();
 
-  console.log(router);
-
   // 게시글 데이터 쿼리
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
@@ -103,7 +101,7 @@ const BoardDetail = () => {
       },
       refetchQueries: [
         {
-          query: FETCH_BOARD,
+          query: FETCH_COMMENT,
           variables: {
             boardId: router.query.id,
           },
@@ -115,6 +113,7 @@ const BoardDetail = () => {
 
   // 댓글 삭제 버튼 ONCLICK
   const commentDeleteSubmit = async (event) => {
+    console.log(event);
     await commentDelete({
       variables: {
         password: commentDelPassword,
