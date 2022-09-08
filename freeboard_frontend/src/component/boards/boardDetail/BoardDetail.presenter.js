@@ -14,18 +14,17 @@ const BoardDetailUi = ({
   onModalBtn,
   boardDetailDate,
   onClickCommentSubmit,
-  goBoardWrite,
   data,
   commentResult,
-  commentArray,
   commentPsModal,
   commentDelPassword,
   onChangeCommentDelPassword,
   onCommentPsModal,
   CloseCommentPsModal,
   commentDeleteSubmit,
+  boardDeleteSubmit,
+  goBoardEdit,
 }) => {
-  console.log(commentResult);
   return (
     <>
       <S.BoardDetailContainer>
@@ -86,10 +85,9 @@ const BoardDetailUi = ({
           <Link href="/boards">
             <S.BoardDefaultBtn>목록으로</S.BoardDefaultBtn>
           </Link>
-          <S.BoardDefaultBtn>수정하기</S.BoardDefaultBtn>
-          <S.BoardDefaultBtn>삭제하기</S.BoardDefaultBtn>
-          <S.BoardDefaultBtn onClick={goBoardWrite}>
-            게시글 작성(임시)
+          <S.BoardDefaultBtn onClick={goBoardEdit}>수정하기</S.BoardDefaultBtn>
+          <S.BoardDefaultBtn onClick={boardDeleteSubmit}>
+            삭제하기
           </S.BoardDefaultBtn>
         </S.BoardBtnContainer>
         <S.CommentTitleBox>

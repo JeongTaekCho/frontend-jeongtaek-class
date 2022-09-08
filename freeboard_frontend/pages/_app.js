@@ -2,6 +2,8 @@ import "../styles/globals.css";
 import { ApolloProvider, InMemoryCache, ApolloClient } from "@apollo/client";
 import { ThemeProvider } from "@emotion/react";
 import theme from "../styles/theme";
+import Footer from "../src/component/common/Footer";
+import Header from "../src/component/common/Header";
 
 function MyApp({ Component, pageProps }) {
   const client = new ApolloClient({
@@ -12,7 +14,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
+        <Header></Header>
         <Component {...pageProps} />
+        <Footer></Footer>
       </ThemeProvider>
     </ApolloProvider>
   );

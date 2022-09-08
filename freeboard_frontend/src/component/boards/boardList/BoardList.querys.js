@@ -26,3 +26,18 @@ export const FETCH_BOARD = gql`
     }
   }
 `;
+
+export const FETCH_BEST_BOARD = gql`
+  query {
+    fetchBoardsOfTheBest {
+      _id
+      writer
+      title
+      contents
+      likeCount
+      dislikeCount
+      images
+      createdAt
+    }
+  }
+`;

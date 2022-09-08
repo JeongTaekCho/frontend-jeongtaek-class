@@ -22,6 +22,7 @@ export const BoardGalleryItem = styled.div`
   width: 22%;
   border-radius: 30px;
   box-shadow: 0px 3px 10px gray;
+  cursor: pointer;
 `;
 export const BoardGrlleryThum = styled.div`
   width: 100%;

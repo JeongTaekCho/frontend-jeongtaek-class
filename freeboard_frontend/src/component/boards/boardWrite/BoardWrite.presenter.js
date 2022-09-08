@@ -10,12 +10,17 @@ const BoardWriteUi = ({
   zipCodeError,
   addressError,
   youtubeLinkError,
+  isEdit,
+  onEditBoard,
+  data,
 }) => {
   return (
     <>
       <S.Wrapper>
         <S.Container>
-          <S.BoardWriteTitle>게시물 등록</S.BoardWriteTitle>
+          <S.BoardWriteTitle>
+            게시물 {isEdit ? "수정" : "등록"}
+          </S.BoardWriteTitle>
           <S.BoardWriteForm>
             <S.WritePasswordBox>
               <S.HalfInputBox>
@@ -26,6 +31,7 @@ const BoardWriteUi = ({
                     placeholder="이름을 적어주세요."
                     onChange={onChangeinputState}
                     name="writer"
+                    value={isEdit ? data?.fetchBoard.writer : null}
                   />
                   <S.ErrorMsg>{writerError}</S.ErrorMsg>
                 </S.DefaultInputBox>
@@ -50,6 +56,7 @@ const BoardWriteUi = ({
                 placeholder="제목을 작성해주세요."
                 onChange={onChangeinputState}
                 name="title"
+                value={isEdit ? data?.fetchBoard.title : null}
               />
               <S.ErrorMsg>{titleError}</S.ErrorMsg>
             </S.DefaultInputBox>
@@ -60,6 +67,7 @@ const BoardWriteUi = ({
                 placeholder="내용을 작성해주세요."
                 onChange={onChangeinputState}
                 name="content"
+                value={isEdit ? data?.fetchBoard.contents : null}
               />
               <S.ErrorMsg>{contentError}</S.ErrorMsg>
             </S.TextareaBox>
@@ -70,6 +78,7 @@ const BoardWriteUi = ({
                   onChange={onChangeinputState}
                   placeholder="00000"
                   name="zipCode"
+                  value={isEdit ? data?.fetchBoard.zipcode : null}
                 />
                 <button type="button">우편번호 검색</button>
                 <S.ErrorMsg>{zipCodeError}</S.ErrorMsg>
@@ -78,6 +87,7 @@ const BoardWriteUi = ({
                 className="m1530"
                 onChange={onChangeinputState}
                 name="address"
+                value={isEdit ? data?.fetchBoard.address : null}
               />
               <S.DefaultInput onChange={onChangeinputState} name="address2" />
               <S.ErrorMsg>{addressError}</S.ErrorMsg>
@@ -88,6 +98,7 @@ const BoardWriteUi = ({
                 placeholder="링크를 복사해주세요."
                 onChange={onChangeinputState}
                 name="youtubeLink"
+                value={isEdit ? data?.fetchBoard.youtubeUrl : null}
               />
               <S.ErrorMsg>{youtubeLinkError}</S.ErrorMsg>
             </S.DefaultInputBox>
@@ -118,7 +129,9 @@ const BoardWriteUi = ({
                 </div>
               </S.MainSelectInputBox>
             </S.MainSelectBox>
-            <S.FormSubmitBtn onClick={onSubmitBoard}>등록하기</S.FormSubmitBtn>
+            <S.FormSubmitBtn onClick={isEdit ? onEditBoard : onSubmitBoard}>
+              {isEdit ? "수정" : "등록"}하기
+            </S.FormSubmitBtn>
           </S.BoardWriteForm>
         </S.Container>
       </S.Wrapper>

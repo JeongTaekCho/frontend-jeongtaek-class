@@ -73,8 +73,8 @@ export const CREATE_COMMENT = gql`
 `;
 
 export const FETCH_COMMENT = gql`
-  query fetchBoardComments($page: Int, $boardId: ID!) {
-    fetchBoardComments(page: $page, boardId: $boardId) {
+  query fetchBoardComments($boardId: ID!) {
+    fetchBoardComments(boardId: $boardId) {
       _id
       writer
       contents
@@ -88,5 +88,11 @@ export const FETCH_COMMENT = gql`
 export const DELETE_COMMENT = gql`
   mutation deleteBoardComment($password: String, $boardCommentId: ID!) {
     deleteBoardComment(password: $password, boardCommentId: $boardCommentId)
+  }
+`;
+
+export const DELETE_BOARD = gql`
+  mutation deleteBoard($boardId: ID!) {
+    deleteBoard(boardId: $boardId)
   }
 `;

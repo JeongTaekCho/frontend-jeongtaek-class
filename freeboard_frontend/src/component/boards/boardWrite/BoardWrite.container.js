@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import BoardWriteUi from "./boardWrite.presenter";
-import { CREATE_BOARD } from "./boardWrite.querys";
+import { CREATE_BOARD, EDIT_BOARD } from "./boardWrite.querys";
+import { FETCH_BOARD } from "../boardDetail/BoardDetail.querys";
 
-const BoardWrite = () => {
+const BoardWrite = ({ isEdit }) => {
   //게시판 인풋 상태관리
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
@@ -25,6 +26,13 @@ const BoardWrite = () => {
   const [youtubeLinkError, setYoutubeLinkError] = useState("");
 
   const router = useRouter();
+
+  // 게시글 데이터 쿼리
+  const { data } = useQuery(FETCH_BOARD, {
+    variables: {
+      boardId: router.query.id,
+    },
+  });
 
   //게시판 인풋 온페인지 함수
   const onChangeinputState = (event) => {
@@ -68,12 +76,14 @@ const BoardWrite = () => {
       setYoutubeLinkError("");
     }
   };
-
-  //게시글 등록 API;
+  //게시글 등록 뮤테이션
 
   const [createBoard] = useMutation(CREATE_BOARD);
 
-  //회원가입 완료 시 필수 값 체크
+  //게시글 수정 뮤테이션
+  const [updateBoard] = useMutation(EDIT_BOARD);
+
+  // 게시판등록 완료 시 필수 값 체크
   const onSubmitBoard = async (event) => {
     event.preventDefault();
 
@@ -135,6 +145,30 @@ const BoardWrite = () => {
     }
   };
 
+  // 게시판수정 완료 시 필수 값 체크
+  const onEditBoard = async (event) => {
+    console.log(router.query.id);
+    event.preventDefault();
+    await updateBoard({
+      variables: {
+        updateBoardInput: {
+          title: title,
+          contents: content,
+          youtubeUrl: youtubeLink,
+          boardAddress: {
+            zipcode: zipCode,
+            address: address,
+            addressDetail: address2,
+          },
+        },
+        boardId: router.query.id,
+        password: password,
+      },
+    });
+
+    router.push(`/boards/${router.query.id}`);
+  };
+
   return (
     <>
       <BoardWriteUi
@@ -147,6 +181,9 @@ const BoardWrite = () => {
         zipCodeError={zipCodeError}
         addressError={addressError}
         youtubeLinkError={youtubeLinkError}
+        isEdit={isEdit}
+        onEditBoard={onEditBoard}
+        data={data}
       />
     </>
   );
