@@ -1,7 +1,7 @@
-import BoardWrite from "../../../../src/component/boards/boardWrite/BoardWrite.container";
+import ProductWrite from "../../../../src/component/products/productWrite/ProductWrite.container";
 
-const BoardWritePage = () => {
-  return <BoardWrite isEdit={true} />;
+const ProductWritePage = () => {
+  return <ProductWrite isEdit={true} />;
 };
 
-export default BoardWritePage;
+export default ProductWritePage;
