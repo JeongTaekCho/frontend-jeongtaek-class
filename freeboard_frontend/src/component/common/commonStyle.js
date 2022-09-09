@@ -59,6 +59,7 @@ export const LoginMenuLi = styled.span`
   font-size: 12px;
   font-weight: 400;
   color: #111;
+  cursor: pointer;
 `;
 
 export const Navigation = styled.nav`
@@ -102,6 +103,7 @@ export const CommonMenuLi = styled.li`
   font-size: 16px;
   font-weight: 500;
   color: #111;
+  cursor: pointer;
   &:hover {
     color: ${(props) => props.theme.mainColor};
   }
@@ -116,6 +118,13 @@ export const CommonMessage = styled.button`
   font-size: 13px;
   font-weight: 400;
   color: #ddd;
+  cursor: pointer;
+  &:hover {
+    background: ${(props) => props.theme.mainColor};
+  }
+  &:hover > span {
+    color: #fff;
+  }
   span {
     color: ${(props) => props.theme.mainColor};
   }
