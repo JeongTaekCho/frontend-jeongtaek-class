@@ -24,6 +24,12 @@ const BoardDetailUi = ({
   commentDeleteSubmit,
   boardDeleteSubmit,
   goBoardEdit,
+  onCommentEdit,
+  toggleCommentEdit,
+  commentEditSubmit,
+  onChangeUdComment,
+  commentId,
+  udComment,
 }) => {
   return (
     <>
@@ -143,99 +149,126 @@ const BoardDetailUi = ({
             </S.CommentSubmitBox>
           </S.CommentTextareaBox>
         </S.CommentContainer>
-        {/* <S.CommentContainer>
-          <S.CommentHead>
-            <S.CommentInput type="text" placeholder="작성자" />
-            <S.CommentInput type="password" placeholder="비밀번호" />
-            <S.CommentStarBox>
-              <S.DefaultBtn>
-                <svg
-                  width="20"
-                  height="19"
-                  viewBox="0 0 20 19"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
-                    fill="#BDBDBD"
-                  />
-                </svg>
-              </S.DefaultBtn>
-            </S.CommentStarBox>
-          </S.CommentHead>
-          <S.CommentTextareaBox>
-            <S.CommentTextarea placeholder="수정할 댓글을 입력해주세요." />
-            <S.CommentSubmitBox>
-              <S.CommentLengthBox>10/100</S.CommentLengthBox>
-              <S.CommentModifyBtn>수정하기</S.CommentModifyBtn>
-            </S.CommentSubmitBox>
-          </S.CommentTextareaBox>
-        </S.CommentContainer> */}
-        {/* <p>{commentResult.data?.fetchBoardComments[0].contents}</p> */}
       </S.BoardDetailContainer>
       {commentResult?.fetchBoardComments.map((comment, i) => {
         return (
-          <S.CommentViewContainer key={comment._id}>
-            <S.CommentViewProfileBox>
-              <S.CommentProfileImgBox>
-                <S.CommentViewProfileImg></S.CommentViewProfileImg>
-              </S.CommentProfileImgBox>
-              <S.CommentRatingContentBox>
-                <S.CommentNameAndRating>
-                  <S.CommentViewName>{comment?.writer}</S.CommentViewName>
-                  <S.CommentRatingBox>
-                    <svg
-                      width="20"
-                      height="19"
-                      viewBox="0 0 20 19"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
-                        fill="#FFD600"
-                      />
-                    </svg>
-                  </S.CommentRatingBox>
-                </S.CommentNameAndRating>
-                <S.CommentViewContent>{comment?.contents}</S.CommentViewContent>
-                <S.CommentViewDate>
-                  {comment?.createdAt.slice(0, 10)}
-                </S.CommentViewDate>
-              </S.CommentRatingContentBox>
-            </S.CommentViewProfileBox>
-            <S.CommentViewBtnBox>
-              <S.DefaultBtn>
-                <svg
-                  width="19"
-                  height="18"
-                  viewBox="0 0 19 18"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M11.06 6.02L11.98 6.94L2.92 16H2V15.08L11.06 6.02ZM14.66 0C14.41 0 14.15 0.1 13.96 0.29L12.13 2.12L15.88 5.87L17.71 4.04C18.1 3.65 18.1 3.02 17.71 2.63L15.37 0.29C15.17 0.09 14.92 0 14.66 0ZM11.06 3.19L0 14.25V18H3.75L14.81 6.94L11.06 3.19Z"
-                    fill="#BDBDBD"
-                  />
-                </svg>
-              </S.DefaultBtn>
-              <S.DefaultBtn id={comment?._id} onClick={onCommentPsModal}>
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z"
-                    fill="#BDBDBD"
-                  />
-                </svg>
-              </S.DefaultBtn>
-            </S.CommentViewBtnBox>
-          </S.CommentViewContainer>
+          <S.CommentViewBox key={comment._id}>
+            <S.CommentViewContainer>
+              <S.CommentViewProfileBox>
+                <S.CommentProfileImgBox>
+                  <S.CommentViewProfileImg></S.CommentViewProfileImg>
+                </S.CommentProfileImgBox>
+                <S.CommentRatingContentBox>
+                  <S.CommentNameAndRating>
+                    <S.CommentViewName>{comment?.writer}</S.CommentViewName>
+                    <S.CommentRatingBox>
+                      <svg
+                        width="20"
+                        height="19"
+                        viewBox="0 0 20 19"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                          fill="#FFD600"
+                        />
+                      </svg>
+                    </S.CommentRatingBox>
+                  </S.CommentNameAndRating>
+                  <S.CommentViewContent>
+                    {comment?.contents}
+                  </S.CommentViewContent>
+                  <S.CommentViewDate>
+                    {comment?.createdAt.slice(0, 10)}
+                  </S.CommentViewDate>
+                </S.CommentRatingContentBox>
+              </S.CommentViewProfileBox>
+              <S.CommentViewBtnBox>
+                <S.DefaultBtn id={comment?._id} onClick={toggleCommentEdit}>
+                  <svg
+                    width="19"
+                    height="18"
+                    viewBox="0 0 19 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M11.06 6.02L11.98 6.94L2.92 16H2V15.08L11.06 6.02ZM14.66 0C14.41 0 14.15 0.1 13.96 0.29L12.13 2.12L15.88 5.87L17.71 4.04C18.1 3.65 18.1 3.02 17.71 2.63L15.37 0.29C15.17 0.09 14.92 0 14.66 0ZM11.06 3.19L0 14.25V18H3.75L14.81 6.94L11.06 3.19Z"
+                      fill="#BDBDBD"
+                    />
+                  </svg>
+                </S.DefaultBtn>
+                <S.DefaultBtn id={comment?._id} onClick={onCommentPsModal}>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z"
+                      fill="#BDBDBD"
+                    />
+                  </svg>
+                </S.DefaultBtn>
+              </S.CommentViewBtnBox>
+            </S.CommentViewContainer>
+            {onCommentEdit ? (
+              commentId === comment?._id ? (
+                <S.CommentContainer>
+                  <S.CommentHead>
+                    <S.CommentInput
+                      type="text"
+                      placeholder="작성자"
+                      name="writer"
+                      defaultValue={comment?.writer}
+                      disabled
+                    />
+                    <S.CommentInput
+                      type="password"
+                      placeholder="비밀번호"
+                      name="udPassword"
+                      onChange={onChangeUdComment}
+                    />
+                    <S.CommentStarBox>
+                      <S.DefaultBtn>
+                        <svg
+                          width="20"
+                          height="19"
+                          viewBox="0 0 20 19"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+                            fill="#BDBDBD"
+                          />
+                        </svg>
+                      </S.DefaultBtn>
+                    </S.CommentStarBox>
+                  </S.CommentHead>
+                  <S.CommentTextareaBox>
+                    <S.CommentTextarea
+                      placeholder="수정할 댓글을 입력해주세요."
+                      name="udComment"
+                      onChange={onChangeUdComment}
+                      maxLength="99"
+                    />
+                    <S.CommentSubmitBox>
+                      <S.CommentLengthBox>
+                        {udComment.length}/100
+                      </S.CommentLengthBox>
+                      <S.CommentModifyBtn onClick={commentEditSubmit}>
+                        수정하기
+                      </S.CommentModifyBtn>
+                    </S.CommentSubmitBox>
+                  </S.CommentTextareaBox>
+                </S.CommentContainer>
+              ) : null
+            ) : null}
+          </S.CommentViewBox>
         );
       })}
       {commentPsModal ? (

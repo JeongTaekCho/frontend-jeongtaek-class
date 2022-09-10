@@ -72,6 +72,23 @@ export const CREATE_COMMENT = gql`
   }
 `;
 
+//댓글 수정하기
+export const EDIT_COMMENT = gql`
+  mutation updateBoardComment(
+    $updateBoardCommentInput: UpdateBoardCommentInput!
+    $password: String
+    $boardCommentId: ID!
+  ) {
+    updateBoardComment(
+      updateBoardCommentInput: $updateBoardCommentInput
+      password: $password
+      boardCommentId: $boardCommentId
+    ) {
+      _id
+    }
+  }
+`;
+
 export const FETCH_COMMENT = gql`
   query fetchBoardComments($boardId: ID!) {
     fetchBoardComments(boardId: $boardId) {

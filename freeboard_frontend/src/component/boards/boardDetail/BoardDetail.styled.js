@@ -273,19 +273,19 @@ export const CommentLengthBox = styled.div`
 `;
 
 export const CommentSubmit = styled.button`
-  width:91px;
-  height 52px:;
-  border:none;
+  width: 91px;
+  height: 52px;
+  border: none;
   background: #000;
-  font-size:1.6rem;
-  font-weight:500;
-  color:#fff;
-  cursor:pointer;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
 `;
 
 export const CommentModifyBtn = styled(CommentSubmit)`
   background: ${(props) => props.theme.mainColor};
-  color: #000;
+  color: #fff;
 `;
 
 export const CommentBox = styled.div`
@@ -295,7 +295,7 @@ export const CommentBox = styled.div`
 
 export const CommentViewContainer = styled.div`
   width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto 30px;
   padding: 2rem 0;
   display: flex;
   justify-content: space-between;
@@ -400,4 +400,8 @@ export const CommentDeleteBoxCloseBtn = styled(DefaultBtn)`
   top: 15px;
   right: 15px;
   font-size: 3rem;
+`;
+export const CommentViewBox = styled.div`
+  width: 1200px;
+  margin: 0 auto;
 `;

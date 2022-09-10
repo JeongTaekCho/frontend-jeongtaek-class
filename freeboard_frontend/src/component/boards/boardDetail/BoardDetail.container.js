@@ -11,6 +11,7 @@ import {
   FETCH_COMMENT,
   DELETE_COMMENT,
   DELETE_BOARD,
+  EDIT_COMMENT,
 } from "./BoardDetail.querys";
 
 const BoardDetail = () => {
@@ -25,6 +26,18 @@ const BoardDetail = () => {
   const [commentPsModal, setCommentPsModal] = useState(false); // 댓글 삭제시 비밀번호 모달
   const [commentDelPassword, setCommentDelPassword] = useState(""); // 댓글 삭제시 비밓번호
   const [commentId, setCommentId] = useState("");
+  const [onCommentEdit, setOnCommentEdit] = useState(false);
+  const [udPassword, setUdPassword] = useState(""); // 비밀번호
+  const [udComment, setUdComment] = useState(""); // 댓글
+
+  console.log(
+    "comment",
+    udComment,
+    "password",
+    udPassword,
+    "commentId",
+    commentId
+  );
 
   // 유즈 라우터
   const router = useRouter();
@@ -67,6 +80,9 @@ const BoardDetail = () => {
   // 댓글 생성 뮤테이션
   const [createComment] = useMutation(CREATE_COMMENT);
 
+  // 댓글 수정 뮤테이션
+  const [editComment] = useMutation(EDIT_COMMENT);
+
   // 댓글 비밀번호 팝업 ON
   const onCommentPsModal = async (event) => {
     setCommentPsModal(true);
@@ -75,6 +91,12 @@ const BoardDetail = () => {
   // 댓글 비밀번호 팝업 Off
   const CloseCommentPsModal = () => {
     setCommentPsModal(false);
+  };
+
+  //댓글 수정 박스 ON/OFF
+  const toggleCommentEdit = (event) => {
+    setCommentId(event.currentTarget.id);
+    setOnCommentEdit(!onCommentEdit);
   };
 
   // 게시글 삭제 버튼 ONCLICK
@@ -112,6 +134,32 @@ const BoardDetail = () => {
     setWriter("");
     setComment("");
     setPassword("");
+  };
+
+  //댓글 수정 버튼 ONCLICK
+
+  const commentEditSubmit = async () => {
+    await editComment({
+      variables: {
+        updateBoardCommentInput: {
+          contents: udComment,
+          rating: 1,
+        },
+        password: udPassword,
+        boardCommentId: commentId,
+      },
+      refetchQueries: [
+        {
+          query: FETCH_COMMENT,
+          variables: {
+            boardId: router.query.id,
+          },
+        },
+      ],
+    });
+    setComment("");
+    setPassword("");
+    setOnCommentEdit(false);
   };
 
   // 댓글 삭제 버튼 ONCLICK
@@ -173,6 +221,19 @@ const BoardDetail = () => {
     }
   };
 
+  // 댓글수정 인풋 ONCHANGE
+  const onChangeUdComment = (event) => {
+    const {
+      target: { name, value },
+    } = event;
+
+    if (name === "udPassword") {
+      setUdPassword(value);
+    } else if (name === "udComment") {
+      setUdComment(value);
+    }
+  };
+
   // 주소 상세보기 팝업창 ON/OFF
   const onModalBtn = () => {
     setOnModal(!onModal);
@@ -212,6 +273,12 @@ const BoardDetail = () => {
         commentDeleteSubmit={commentDeleteSubmit}
         boardDeleteSubmit={boardDeleteSubmit}
         goBoardEdit={goBoardEdit}
+        onCommentEdit={onCommentEdit}
+        toggleCommentEdit={toggleCommentEdit}
+        commentEditSubmit={commentEditSubmit}
+        onChangeUdComment={onChangeUdComment}
+        commentId={commentId}
+        udComment={udComment}
       />
     </>
   );
