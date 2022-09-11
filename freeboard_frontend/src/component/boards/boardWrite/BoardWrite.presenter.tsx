@@ -13,6 +13,8 @@ interface IBoardWriteUi {
   isEdit: boolean;
   onEditBoard: any;
   data: any;
+  writeCancle: any;
+  editCancle: any;
 }
 
 const BoardWriteUi = ({
@@ -28,6 +30,8 @@ const BoardWriteUi = ({
   isEdit,
   onEditBoard,
   data,
+  writeCancle,
+  editCancle,
 }: IBoardWriteUi) => {
   console.log(data);
   return (
@@ -154,9 +158,14 @@ const BoardWriteUi = ({
                 </div>
               </S.MainSelectInputBox>
             </S.MainSelectBox>
-            <S.FormSubmitBtn onClick={isEdit ? onEditBoard : onSubmitBoard}>
-              {isEdit ? "수정" : "등록"}하기
-            </S.FormSubmitBtn>
+            <S.cancleBtnBox>
+              <S.FormSubmitBtn onClick={isEdit ? onEditBoard : onSubmitBoard}>
+                {isEdit ? "수정" : "등록"}하기
+              </S.FormSubmitBtn>
+              <S.FormCancleBtn onClick={isEdit ? editCancle : writeCancle}>
+                취소하기
+              </S.FormCancleBtn>
+            </S.cancleBtnBox>
           </S.BoardWriteForm>
         </S.Container>
       </S.Wrapper>

@@ -198,7 +198,20 @@ export const FormSubmitBtn = styled.button`
   font-weight: 500;
   color: #fff;
   background: ${(props) => props.theme.mainColor};
-  margin: 0 auto;
+  cursor: pointer;
+`;
+
+export const FormCancleBtn = styled(FormSubmitBtn)`
+  display: block;
+  width: 20rem;
+  height: 5.2rem;
+  border: none;
+  outline: none;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: ${(props) => props.theme.mainColor};
+  background: #fff;
+  border: 1px solid ${(props) => props.theme.mainColor};
   cursor: pointer;
 `;
 
@@ -212,4 +225,10 @@ export const RadioLabel = styled.label`
   font-size: 1.6rem;
   font-weight: 500;
   color: #000;
+`;
+
+export const cancleBtnBox = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 30px;
 `;

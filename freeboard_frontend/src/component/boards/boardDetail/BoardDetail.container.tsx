@@ -163,8 +163,8 @@ const BoardDetail = () => {
           },
         ],
       });
-      setComment("");
-      setPassword("");
+      setUdComment("");
+      setUdPassword("");
       setOnCommentEdit(false);
     } catch (error) {
       alert(error);

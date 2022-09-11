@@ -72,7 +72,7 @@ const BoardDetailUi = ({
             <S.DetailProfileImg></S.DetailProfileImg>
             <S.DetailWriterAndDate>
               <S.DetailWriter>{data?.fetchBoard.writer}</S.DetailWriter>
-              <S.DetailDate>Data : {boardDetailDate}</S.DetailDate>
+              <S.DetailDate>Date : {boardDetailDate}</S.DetailDate>
             </S.DetailWriterAndDate>
           </S.DetailWriterAndDateBox>
           <S.ShareAndGpsBox>

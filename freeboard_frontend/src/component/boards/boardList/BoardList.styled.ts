@@ -200,6 +200,9 @@ export const DefaultBtn = styled.button`
   border: none;
   background: none;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const BoardPage = styled.p`

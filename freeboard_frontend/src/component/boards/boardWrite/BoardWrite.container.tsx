@@ -150,10 +150,47 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
     }
   };
 
+  //게시글 등록 취소
+  const writeCancle = () => {
+    router.push("/boards");
+  };
+
+  //게시글 수정 취소
+  const editCancle = () => {
+    router.push(`/boards/${router.query.id}`);
+  };
+
   // 게시판수정 완료 시 필수 값 체크
   const onEditBoard = async (event: any) => {
-    console.log(router.query.id);
     event.preventDefault();
+
+    interface IMyVariables {
+      boardId: string;
+      password: string;
+      updateBoardInput: {
+        title: string;
+        contents: string;
+        youtubeUrl: string;
+        boardAddress: { boardAddress: string };
+      };
+    }
+
+    const myVariables: IMyVariables = {
+      boardId: router.query.id,
+      password: "",
+      updateBoardInput: {
+        boardAddress: {},
+      },
+    };
+    if (password) myVariables.password = password;
+    if (title) myVariables.updateBoardInput.title = title;
+    if (content) myVariables.updateBoardInput.contents = content;
+    if (youtubeLink) myVariables.updateBoardInput.youtubeUrl = youtubeLink;
+    if (zipCode) myVariables.updateBoardInput.boardAddress.zipcode = zipCode;
+    if (address) myVariables.updateBoardInput.boardAddress.address = address;
+    if (address2)
+      myVariables.updateBoardInput.boardAddress.addressDetail = address2;
+
     await updateBoard({
       variables: {
         updateBoardInput: {
@@ -170,7 +207,6 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
         password: password,
       },
     });
-
     router.push(`/boards/${router.query.id}`);
   };
 
@@ -189,6 +225,8 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
         isEdit={isEdit}
         onEditBoard={onEditBoard}
         data={data}
+        writeCancle={writeCancle}
+        editCancle={editCancle}
       />
     </>
   );
