@@ -139,27 +139,32 @@ const BoardDetail = () => {
   //댓글 수정 버튼 ONCLICK
 
   const commentEditSubmit = async () => {
-    await editComment({
-      variables: {
+    try {
+      const myVariables = {
+        boardCommentId: commentId,
         updateBoardCommentInput: {
-          contents: udComment,
           rating: 1,
         },
-        password: udPassword,
-        boardCommentId: commentId,
-      },
-      refetchQueries: [
-        {
-          query: FETCH_COMMENT,
-          variables: {
-            boardId: router.query.id,
+      };
+      if (udPassword) myVariables.password = udPassword;
+      if (udComment) myVariables.updateBoardCommentInput.contents = udComment;
+      await editComment({
+        variables: myVariables,
+        refetchQueries: [
+          {
+            query: FETCH_COMMENT,
+            variables: {
+              boardId: router.query.id,
+            },
           },
-        },
-      ],
-    });
-    setComment("");
-    setPassword("");
-    setOnCommentEdit(false);
+        ],
+      });
+      setComment("");
+      setPassword("");
+      setOnCommentEdit(false);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   // 댓글 삭제 버튼 ONCLICK
@@ -237,6 +242,7 @@ const BoardDetail = () => {
   // 주소 상세보기 팝업창 ON/OFF
   const onModalBtn = () => {
     setOnModal(!onModal);
+    let a = 1;
   };
 
   // 날짜 데이터 슬라이스

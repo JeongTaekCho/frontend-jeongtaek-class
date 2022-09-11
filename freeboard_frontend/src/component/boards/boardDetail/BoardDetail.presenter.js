@@ -255,6 +255,7 @@ const BoardDetailUi = ({
                       name="udComment"
                       onChange={onChangeUdComment}
                       maxLength="99"
+                      defaultValue={comment?.contents}
                     />
                     <S.CommentSubmitBox>
                       <S.CommentLengthBox>
