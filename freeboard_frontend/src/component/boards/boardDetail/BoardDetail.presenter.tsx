@@ -1,5 +1,38 @@
 import Link from "next/link";
+import { ChangeEvent } from "react";
+import { Interface } from "readline";
 import * as S from "./BoardDetail.styled";
+
+interface IBoardDetailProps {
+  onModal: boolean;
+  likeCount: number;
+  disLikeCount: number;
+  writer: string;
+  comment: string;
+  password: string;
+  onChangeComment: any;
+  onClickLikeBtn: any;
+  onClickDisLikeBtn: any;
+  onModalBtn: any;
+  boardDetailDate: string;
+  onClickCommentSubmit: () => void;
+  data: any;
+  commentResult: any;
+  commentPsModal: boolean;
+  commentDelPassword: string;
+  onChangeCommentDelPassword: any;
+  onCommentPsModal: any;
+  CloseCommentPsModal: any;
+  commentDeleteSubmit: any;
+  boardDeleteSubmit: () => void;
+  goBoardEdit: () => void;
+  onCommentEdit: boolean;
+  toggleCommentEdit: any;
+  commentEditSubmit: () => void;
+  onChangeUdComment: any;
+  commentId: string;
+  udComment: string;
+}
 
 const BoardDetailUi = ({
   onModal,
@@ -30,7 +63,7 @@ const BoardDetailUi = ({
   onChangeUdComment,
   commentId,
   udComment,
-}) => {
+}: IBoardDetailProps) => {
   return (
     <>
       <S.BoardDetailContainer>
@@ -139,7 +172,7 @@ const BoardDetailUi = ({
               name="comment"
               value={comment}
               onChange={onChangeComment}
-              maxLength="99"
+              maxLength={99}
             />
             <S.CommentSubmitBox>
               <S.CommentLengthBox>{comment.length}/100</S.CommentLengthBox>
@@ -150,7 +183,7 @@ const BoardDetailUi = ({
           </S.CommentTextareaBox>
         </S.CommentContainer>
       </S.BoardDetailContainer>
-      {commentResult?.fetchBoardComments.map((comment, i) => {
+      {commentResult?.fetchBoardComments.map((comment: any, i: number) => {
         return (
           <S.CommentViewBox key={comment._id}>
             <S.CommentViewContainer>
@@ -254,7 +287,7 @@ const BoardDetailUi = ({
                       placeholder="수정할 댓글을 입력해주세요."
                       name="udComment"
                       onChange={onChangeUdComment}
-                      maxLength="99"
+                      maxLength={99}
                       defaultValue={comment?.contents}
                     />
                     <S.CommentSubmitBox>

@@ -1,13 +1,18 @@
 import * as S from "./BoardList.styled";
 import Link from "next/link";
 
-const BoardListUi = ({ data, boardBestPost }) => {
+interface IBoardListUi {
+  data: any;
+  boardBestPost: any;
+}
+
+const BoardListUi = ({ data, boardBestPost }: IBoardListUi) => {
   return (
     <>
       <S.BoardListWrapper>
         <S.BoardBestBoardTitle>베스트 게시글</S.BoardBestBoardTitle>
         <S.BoardBestLists>
-          {boardBestPost?.data?.fetchBoardsOfTheBest.map((bestBoard) => {
+          {boardBestPost?.data?.fetchBoardsOfTheBest.map((bestBoard: any) => {
             return (
               <Link href={`/boards/${bestBoard._id}`} key={bestBoard._id}>
                 <S.BoardGalleryItem>
@@ -79,7 +84,7 @@ const BoardListUi = ({ data, boardBestPost }) => {
             <S.BoardLi3>작성자</S.BoardLi3>
             <S.BoardLi4>날짜</S.BoardLi4>
           </S.BoardUlTop>
-          {data?.fetchBoards?.map((item, index) => {
+          {data?.fetchBoards?.map((item: any, index: number) => {
             return (
               <S.BoardUl key={item._id}>
                 <S.BoardLi1>{index + 1}</S.BoardLi1>

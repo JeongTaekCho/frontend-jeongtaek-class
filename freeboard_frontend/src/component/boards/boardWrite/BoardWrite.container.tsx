@@ -1,41 +1,46 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
-import BoardWriteUi from "./boardWrite.presenter";
+import BoardWriteUi from "./BoardWrite.presenter";
 import { CREATE_BOARD, EDIT_BOARD } from "./boardWrite.querys";
 import { FETCH_BOARD } from "../boardDetail/BoardDetail.querys";
 
-const BoardWrite = ({ isEdit }) => {
+interface IBoardWrite {
+  isEdit: boolean;
+}
+
+const BoardWrite = ({ isEdit }: IBoardWrite) => {
   //게시판 인풋 상태관리
-  const [writer, setWriter] = useState("");
-  const [password, setPassword] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [zipCode, setZipCode] = useState("");
-  const [address, setAddress] = useState("");
-  const [address2, setAddress2] = useState("");
-  const [youtubeLink, setYoutubeLink] = useState("");
+  const [writer, setWriter]: (string | Function)[] = useState("");
+  const [password, setPassword]: (string | Function)[] = useState("");
+  const [title, setTitle]: (string | Function)[] = useState("");
+  const [content, setContent]: (string | Function)[] = useState("");
+  const [zipCode, setZipCode]: (string | Function)[] = useState("");
+  const [address, setAddress]: (string | Function)[] = useState("");
+  const [address2, setAddress2]: (string | Function)[] = useState("");
+  const [youtubeLink, setYoutubeLink]: (string | Function)[] = useState("");
 
   //에러메세지 상태관리
-  const [writerError, setWriterError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [titleError, setTitleError] = useState("");
-  const [contentError, setContentError] = useState("");
-  const [zipCodeError, setZipCodeError] = useState("");
-  const [addressError, setAddressError] = useState("");
-  const [youtubeLinkError, setYoutubeLinkError] = useState("");
+  const [writerError, setWriterError]: (string | Function)[] = useState("");
+  const [passwordError, setPasswordError]: (string | Function)[] = useState("");
+  const [titleError, setTitleError]: (string | Function)[] = useState("");
+  const [contentError, setContentError]: (string | Function)[] = useState("");
+  const [zipCodeError, setZipCodeError]: (string | Function)[] = useState("");
+  const [addressError, setAddressError]: (string | Function)[] = useState("");
+  const [youtubeLinkError, setYoutubeLinkError]: (string | Function)[] =
+    useState("");
 
-  const router = useRouter();
+  const router: any = useRouter();
 
   // 게시글 데이터 쿼리
-  const { data } = useQuery(FETCH_BOARD, {
+  const { data }: { data: any } = useQuery(FETCH_BOARD, {
     variables: {
       boardId: router.query.id,
     },
   });
 
   //게시판 인풋 온페인지 함수
-  const onChangeinputState = (event) => {
+  const onChangeinputState = (event: any) => {
     const {
       target: { name, value },
     } = event;
@@ -84,7 +89,7 @@ const BoardWrite = ({ isEdit }) => {
   const [updateBoard] = useMutation(EDIT_BOARD);
 
   // 게시판등록 완료 시 필수 값 체크
-  const onSubmitBoard = async (event) => {
+  const onSubmitBoard = async (event: any) => {
     event.preventDefault();
 
     try {
@@ -146,7 +151,7 @@ const BoardWrite = ({ isEdit }) => {
   };
 
   // 게시판수정 완료 시 필수 값 체크
-  const onEditBoard = async (event) => {
+  const onEditBoard = async (event: any) => {
     console.log(router.query.id);
     event.preventDefault();
     await updateBoard({

@@ -33,8 +33,8 @@ export const BoardGrlleryThum = styled.div`
   border-top-right-radius: 30px;
 `;
 export const BoardGalleryContentBox = styled.div`
-  width:100%;
-  padding : 20px; 22px;
+  width: 100%;
+  padding: 20px;
 `;
 export const BoardGalleryTitle = styled.h2`
   font-size: 18px;
@@ -133,7 +133,7 @@ export const SearchTitleBtn = styled.button`
   width: 7.83%;
   height: 52px;
   background: #000;
-  font-siez: 16px;
+  font-size: 16px;
   font-weight: 500;
   color: #fff;
   border-radius: 10px;
@@ -157,11 +157,11 @@ export const BoardUlTop = styled.ul`
   height: 52px;
   display: flex;
   align-items: center;
-  font-size:18px;
-  font-weight:500;
-  color:#000
-  border-bottom:1px solid #bdbdbd;
-  text-align:center
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+  border-bottom: 1px solid #bdbdbd;
+  text-align: center;
 `;
 export const BoardUl = styled(BoardUlTop)`
   font-size: 16px;

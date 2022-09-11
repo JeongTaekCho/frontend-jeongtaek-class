@@ -1,6 +1,6 @@
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import BoardDetailUi from "./BoardDetail.presenter";
 
 import {
@@ -17,33 +17,27 @@ import {
 const BoardDetail = () => {
   //상태관리
 
-  const [writer, setWriter] = useState(""); // 작성자
-  const [comment, setComment] = useState(""); // 댓글
-  const [password, setPassword] = useState(""); // 비밀번호
-  const [onModal, setOnModal] = useState(false); // 상세주소 모달
-  const [likeCount, setLikeCount] = useState(0); // 좋아요 개수
-  const [disLikeCount, setDisLikeCount] = useState(0); // 싫어요 개수
-  const [commentPsModal, setCommentPsModal] = useState(false); // 댓글 삭제시 비밀번호 모달
-  const [commentDelPassword, setCommentDelPassword] = useState(""); // 댓글 삭제시 비밓번호
-  const [commentId, setCommentId] = useState("");
-  const [onCommentEdit, setOnCommentEdit] = useState(false);
-  const [udPassword, setUdPassword] = useState(""); // 비밀번호
-  const [udComment, setUdComment] = useState(""); // 댓글
-
-  console.log(
-    "comment",
-    udComment,
-    "password",
-    udPassword,
-    "commentId",
-    commentId
-  );
+  const [writer, setWriter]: (string | Function)[] = useState(""); // 작성자
+  const [comment, setComment]: (string | Function)[] = useState(""); // 댓글
+  const [password, setPassword]: (string | Function)[] = useState(""); // 비밀번호
+  const [onModal, setOnModal]: (boolean | Function)[] = useState(false); // 상세주소 모달
+  const [likeCount, setLikeCount]: (number | Function)[] = useState(0); // 좋아요 개수
+  const [disLikeCount, setDisLikeCount]: (number | Function)[] = useState(0); // 싫어요 개수
+  const [commentPsModal, setCommentPsModal]: (boolean | Function)[] =
+    useState(false); // 댓글 삭제시 비밀번호 모달
+  const [commentDelPassword, setCommentDelPassword]: (string | Function)[] =
+    useState(""); // 댓글 삭제시 비밓번호
+  const [commentId, setCommentId]: (string | Function)[] = useState("");
+  const [onCommentEdit, setOnCommentEdit]: (boolean | Function)[] =
+    useState(false);
+  const [udPassword, setUdPassword]: (string | Function)[] = useState(""); // 비밀번호
+  const [udComment, setUdComment]: (string | Function)[] = useState(""); // 댓글
 
   // 유즈 라우터
-  const router = useRouter();
+  const router: NextRouter = useRouter();
 
   // 게시글 데이터 쿼리
-  const { data } = useQuery(FETCH_BOARD, {
+  const { data }: { data: any } = useQuery(FETCH_BOARD, {
     variables: {
       boardId: router.query.id,
     },
@@ -84,7 +78,7 @@ const BoardDetail = () => {
   const [editComment] = useMutation(EDIT_COMMENT);
 
   // 댓글 비밀번호 팝업 ON
-  const onCommentPsModal = async (event) => {
+  const onCommentPsModal = async (event: any) => {
     setCommentPsModal(true);
     setCommentId(event.currentTarget.id);
   };
@@ -94,7 +88,7 @@ const BoardDetail = () => {
   };
 
   //댓글 수정 박스 ON/OFF
-  const toggleCommentEdit = (event) => {
+  const toggleCommentEdit = (event: any) => {
     setCommentId(event.currentTarget.id);
     setOnCommentEdit(!onCommentEdit);
   };
@@ -140,10 +134,20 @@ const BoardDetail = () => {
 
   const commentEditSubmit = async () => {
     try {
+      interface ImyVariables {
+        boardCommentId: string;
+        password: string;
+        updateBoardCommentInput: {
+          rating: 1;
+          content: string;
+        };
+      }
       const myVariables = {
         boardCommentId: commentId,
+        password: "",
         updateBoardCommentInput: {
           rating: 1,
+          contents: udComment,
         },
       };
       if (udPassword) myVariables.password = udPassword;
@@ -168,7 +172,7 @@ const BoardDetail = () => {
   };
 
   // 댓글 삭제 버튼 ONCLICK
-  const commentDeleteSubmit = async (event) => {
+  const commentDeleteSubmit = async (event: any) => {
     await commentDelete({
       variables: {
         password: commentDelPassword,
@@ -207,12 +211,12 @@ const BoardDetail = () => {
   };
 
   // 댓글 비밀번호 ONCHANGE
-  const onChangeCommentDelPassword = (event) => {
+  const onChangeCommentDelPassword = (event: any) => {
     setCommentDelPassword(event.target.value);
   };
 
   // 댓글 인풋 ONCHANGE
-  const onChangeComment = (event) => {
+  const onChangeComment = (event: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
     } = event;
@@ -227,7 +231,7 @@ const BoardDetail = () => {
   };
 
   // 댓글수정 인풋 ONCHANGE
-  const onChangeUdComment = (event) => {
+  const onChangeUdComment = (event: any) => {
     const {
       target: { name, value },
     } = event;
