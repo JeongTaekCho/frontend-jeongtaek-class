@@ -1,6 +1,14 @@
 import * as S from "./ProductWrite.styled";
 
-const ProductWriteUi = () => {
+interface IProductWriteUi {
+  onChangeProductInput: any;
+  onSubmitProduct: any;
+}
+
+const ProductWriteUi = ({
+  onChangeProductInput,
+  onSubmitProduct,
+}: IProductWriteUi) => {
   return (
     <>
       <S.ProductWrapper>
@@ -12,7 +20,8 @@ const ProductWriteUi = () => {
               <S.DefaultInput
                 type="text"
                 placeholder="제목을 작성해주세요."
-                name="title"
+                name="name"
+                onChange={onChangeProductInput}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>
@@ -21,16 +30,17 @@ const ProductWriteUi = () => {
               <S.DefaultInput
                 type="text"
                 placeholder="한줄요약을 작성해주세요."
-                name="summary"
+                name="remarks"
+                onChange={onChangeProductInput}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>
             <S.TextareaBox>
               <p>내용</p>
               <textarea
-                type="text"
                 placeholder="내용을 작성해주세요."
-                name="content"
+                name="contents"
+                onChange={onChangeProductInput}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.TextareaBox>
@@ -40,6 +50,7 @@ const ProductWriteUi = () => {
                 type="text"
                 placeholder="판매가격을 작성해주세요."
                 name="price"
+                onChange={onChangeProductInput}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>{" "}
@@ -48,10 +59,14 @@ const ProductWriteUi = () => {
               <S.DefaultInput
                 type="text"
                 placeholder="한줄요약을 작성해주세요."
-                name="summary"
+                name="tags"
+                onChange={onChangeProductInput}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>
+            <S.ProductSubmit onClick={onSubmitProduct}>
+              등록하기
+            </S.ProductSubmit>
           </S.ProductWriteForm>
         </S.Container>
       </S.ProductWrapper>

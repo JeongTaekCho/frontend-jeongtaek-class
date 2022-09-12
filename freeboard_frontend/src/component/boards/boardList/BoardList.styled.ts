@@ -87,6 +87,7 @@ export const GalleryContentRight = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  align-items: center;
 `;
 export const CommentLikeCount = styled.p`
   font-size: 16px;

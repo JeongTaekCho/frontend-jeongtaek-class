@@ -4,7 +4,6 @@ import styled from "@emotion/styled";
 
 export const HeaderWrap = styled.div`
   width: 100%;
-  margin-bottom: 120px;
   box-shadow: 0px 1px 10px ${(props) => props.theme.mainColor};
 `;
 export const HeaderBox = styled.div`
@@ -36,6 +35,7 @@ export const IconBox = styled.div`
 `;
 
 export const MainSearchInput = styled.input`
+  width: 100%;
   padding: 14px;
   font-size: 16px;
   font-weight: 400;
@@ -107,6 +107,11 @@ export const CommonMenuLi = styled.li`
   &:hover {
     color: ${(props) => props.theme.mainColor};
   }
+`;
+
+export const CommonMessageBox = styled.div`
+  display: flex;
+  gap: 10px;
 `;
 
 export const CommonMessage = styled.button`

@@ -8,7 +8,7 @@ export const Container = styled.div`
   width: 1200px;
   padding: 60px 102px 100px 102px;
   box-shadow: 0px 0px 12px gray;
-  margin: 0 auto;
+  margin: 120px auto;
   @media ${(props) => props.theme.tablet} {
     width: 90%;
     padding: 40px 8.5%;
@@ -78,4 +78,15 @@ export const ErrorMsg = styled.span`
   font-size: 1.2rem;
   font-weight: 500;
   color: #f00;
+`;
+
+export const ProductSubmit = styled.button`
+  display: block;
+  width: 200px;
+  height: 40px;
+  background: ${(props) => props.theme.mainColor};
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  margin: 0 auto;
 `;

@@ -9,7 +9,7 @@ export const Container = styled.div`
   width: 1200px;
   padding: 60px 102px 100px 102px;
   box-shadow: 0px 0px 12px gray;
-  margin: 0 auto;
+  margin: 120px auto 0;
   @media ${(props) => props.theme.tablet} {
     width: 90%;
     padding: 40px 8.5%;

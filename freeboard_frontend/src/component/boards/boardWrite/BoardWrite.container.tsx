@@ -11,24 +11,23 @@ interface IBoardWrite {
 
 const BoardWrite = ({ isEdit }: IBoardWrite) => {
   //게시판 인풋 상태관리
-  const [writer, setWriter]: (string | Function)[] = useState("");
-  const [password, setPassword]: (string | Function)[] = useState("");
-  const [title, setTitle]: (string | Function)[] = useState("");
-  const [content, setContent]: (string | Function)[] = useState("");
-  const [zipCode, setZipCode]: (string | Function)[] = useState("");
-  const [address, setAddress]: (string | Function)[] = useState("");
-  const [address2, setAddress2]: (string | Function)[] = useState("");
-  const [youtubeLink, setYoutubeLink]: (string | Function)[] = useState("");
+  const [writer, setWriter] = useState("");
+  const [password, setPassword] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [address, setAddress] = useState("");
+  const [address2, setAddress2] = useState("");
+  const [youtubeLink, setYoutubeLink] = useState("");
 
   //에러메세지 상태관리
-  const [writerError, setWriterError]: (string | Function)[] = useState("");
-  const [passwordError, setPasswordError]: (string | Function)[] = useState("");
-  const [titleError, setTitleError]: (string | Function)[] = useState("");
-  const [contentError, setContentError]: (string | Function)[] = useState("");
-  const [zipCodeError, setZipCodeError]: (string | Function)[] = useState("");
-  const [addressError, setAddressError]: (string | Function)[] = useState("");
-  const [youtubeLinkError, setYoutubeLinkError]: (string | Function)[] =
-    useState("");
+  const [writerError, setWriterError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [titleError, setTitleError] = useState("");
+  const [contentError, setContentError] = useState("");
+  const [zipCodeError, setZipCodeError] = useState("");
+  const [addressError, setAddressError] = useState("");
+  const [youtubeLinkError, setYoutubeLinkError] = useState("");
 
   const router: any = useRouter();
 

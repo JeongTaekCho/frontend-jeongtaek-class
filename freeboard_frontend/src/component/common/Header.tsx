@@ -47,11 +47,16 @@ const Header = () => {
               <S.CommonMenuLi>상품목록3</S.CommonMenuLi>
               <S.CommonMenuLi>상품목록4</S.CommonMenuLi>
             </S.CommonMenu>
-            <S.CommonMessage>
+            <S.CommonMessageBox>
               <S.CommonMessage onClick={() => router.push("/boards")}>
                 <span>자유게시판</span>
               </S.CommonMessage>
-            </S.CommonMessage>
+              <S.CommonMessage
+                onClick={() => router.push("/products/productWrite")}
+              >
+                <span>상품등록</span>
+              </S.CommonMessage>
+            </S.CommonMessageBox>
           </S.Navigation>
         </S.HeaderBox>
       </S.HeaderWrap>
