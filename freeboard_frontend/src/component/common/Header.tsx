@@ -1,5 +1,5 @@
 import * as S from "./commonStyle";
-import Router, { useRouter } from "next/router";
+import Router, { NextRouter, useRouter } from "next/router";
 import Logo from "./svg/Logo";
 import SearchBtn from "./svg/SearchBtn";
 import Gps from "./svg/Gps";
@@ -7,7 +7,7 @@ import Heart from "./svg/Heart";
 import Basket from "./svg/Basket";
 import Hamberger from "./svg/Hamberger";
 const Header = () => {
-  const router = useRouter();
+  const router: NextRouter = useRouter();
   return (
     <>
       <S.HeaderWrap>

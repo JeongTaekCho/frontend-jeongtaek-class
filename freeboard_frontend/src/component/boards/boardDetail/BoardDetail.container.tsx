@@ -21,7 +21,7 @@ import {
   IQueryFetchBoardCommentsArgs,
   IQueryFetchBoardsArgs,
 } from "../../../commons/types/generated/types";
-import { ImyVariables } from "./boardDetail.types";
+import { ImyVariables } from "./BoardDetail.types";
 
 const BoardDetail = () => {
   //상태관리
@@ -98,7 +98,7 @@ const BoardDetail = () => {
     setCommentId(event.currentTarget.id);
   };
   // 댓글 비밀번호 팝업 Off
-  const CloseCommentPsModal = () => {
+  const closeCommentPsModal = () => {
     setCommentPsModal(false);
   };
 
@@ -125,28 +125,32 @@ const BoardDetail = () => {
     if (!writer || !comment || !password) {
       setCommentError(true);
     } else {
-      await createComment({
-        variables: {
-          boardId: router.query.id,
-          createBoardCommentInput: {
-            writer,
-            password,
-            contents: comment,
-            rating: 1,
-          },
-        },
-        refetchQueries: [
-          {
-            query: FETCH_COMMENT,
-            variables: {
-              boardId: router.query.id,
+      try {
+        await createComment({
+          variables: {
+            boardId: router.query.id,
+            createBoardCommentInput: {
+              writer,
+              password,
+              contents: comment,
+              rating: 1,
             },
           },
-        ],
-      });
-      setWriter("");
-      setComment("");
-      setPassword("");
+          refetchQueries: [
+            {
+              query: FETCH_COMMENT,
+              variables: {
+                boardId: router.query.id,
+              },
+            },
+          ],
+        });
+        setWriter("");
+        setComment("");
+        setPassword("");
+      } catch (error: any) {
+        alert(error);
+      }
     }
   };
 
@@ -176,62 +180,74 @@ const BoardDetail = () => {
       setUdComment("");
       setUdPassword("");
       setOnCommentEdit(false);
-    } catch (error) {
+    } catch (error: any) {
       alert(error);
     }
   };
 
   // 댓글 삭제 버튼 ONCLICK
   const commentDeleteSubmit = async () => {
-    await commentDelete({
-      variables: {
-        password: commentDelPassword,
-        boardCommentId: commentId,
-      },
-      refetchQueries: [
-        {
-          query: FETCH_COMMENT,
-          variables: {
-            boardId: router.query.id,
-          },
+    try {
+      await commentDelete({
+        variables: {
+          password: commentDelPassword,
+          boardCommentId: commentId,
         },
-      ],
-    });
-    setCommentPsModal(false);
+        refetchQueries: [
+          {
+            query: FETCH_COMMENT,
+            variables: {
+              boardId: router.query.id,
+            },
+          },
+        ],
+      });
+      setCommentPsModal(false);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   // 좋아요 버튼 ONCLICK
   const onClickLikeBtn = () => {
-    likeUpApi({
-      variables: {
-        boardId: router.query.id,
-      },
-      refetchQueries: [
-        {
-          query: FETCH_BOARD,
-          variables: {
-            boardId: router.query.id,
-          },
+    try {
+      likeUpApi({
+        variables: {
+          boardId: router.query.id,
         },
-      ],
-    });
+        refetchQueries: [
+          {
+            query: FETCH_BOARD,
+            variables: {
+              boardId: router.query.id,
+            },
+          },
+        ],
+      });
+    } catch (error: any) {
+      alert(error);
+    }
   };
 
   // 싫어요 버튼 ONCLICK
   const onClickDisLikeBtn = () => {
-    disLikeUpApi({
-      variables: {
-        boardId: router.query.id,
-      },
-      refetchQueries: [
-        {
-          query: FETCH_BOARD,
-          variables: {
-            boardId: router.query.id,
-          },
+    try {
+      disLikeUpApi({
+        variables: {
+          boardId: router.query.id,
         },
-      ],
-    });
+        refetchQueries: [
+          {
+            query: FETCH_BOARD,
+            variables: {
+              boardId: router.query.id,
+            },
+          },
+        ],
+      });
+    } catch (error: any) {
+      alert(error);
+    }
   };
 
   // 댓글 비밀번호 ONCHANGE
@@ -240,7 +256,9 @@ const BoardDetail = () => {
   };
 
   // 댓글 인풋 ONCHANGE
-  const onChangeComment = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeComment = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const {
       target: { name, value },
     } = event;
@@ -255,7 +273,9 @@ const BoardDetail = () => {
   };
 
   // 댓글수정 인풋 ONCHANGE
-  const onChangeUdComment = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeUdComment = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const {
       target: { name, value },
     } = event;
@@ -274,7 +294,7 @@ const BoardDetail = () => {
   };
 
   // 날짜 데이터 슬라이스
-  const boardDetailDate = data?.fetchBoard.createdAt.slice(0, 10);
+  const boardDetailDate: string = data?.fetchBoard.createdAt.slice(0, 10);
 
   // 게시글 수정페이지로 이동
 
@@ -301,7 +321,7 @@ const BoardDetail = () => {
         commentDelPassword={commentDelPassword}
         onChangeCommentDelPassword={onChangeCommentDelPassword}
         onCommentPsModal={onCommentPsModal}
-        CloseCommentPsModal={CloseCommentPsModal}
+        closeCommentPsModal={closeCommentPsModal}
         commentDeleteSubmit={commentDeleteSubmit}
         boardDeleteSubmit={boardDeleteSubmit}
         goBoardEdit={goBoardEdit}

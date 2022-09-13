@@ -1,10 +1,6 @@
 import * as S from "./BoardList.styled";
 import Link from "next/link";
-
-interface IBoardListUi {
-  data: any;
-  boardBestPost: any;
-}
+import { IBoardListUi } from "./BoardList.types";
 
 const BoardListUi = ({ data, boardBestPost }: IBoardListUi) => {
   return (

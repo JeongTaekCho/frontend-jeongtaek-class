@@ -1,13 +1,11 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
+import { ChangeEvent, MouseEvent, useState } from "react";
+import { NextRouter, useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
 import BoardWriteUi from "./BoardWrite.presenter";
-import { CREATE_BOARD, EDIT_BOARD } from "./boardWrite.querys";
+import { CREATE_BOARD, EDIT_BOARD } from "./BoardWrite.querys";
 import { FETCH_BOARD } from "../boardDetail/BoardDetail.querys";
-
-interface IBoardWrite {
-  isEdit: boolean;
-}
+import { IBoardWrite, IMyVariables } from "./BoardWrite.types";
+import { IMutation, IQuery } from "../../../commons/types/generated/types";
 
 const BoardWrite = ({ isEdit }: IBoardWrite) => {
   //게시판 인풋 상태관리
@@ -29,17 +27,19 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
   const [addressError, setAddressError] = useState("");
   const [youtubeLinkError, setYoutubeLinkError] = useState("");
 
-  const router: any = useRouter();
+  const router: NextRouter = useRouter();
 
   // 게시글 데이터 쿼리
-  const { data }: { data: any } = useQuery(FETCH_BOARD, {
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">>(FETCH_BOARD, {
     variables: {
       boardId: router.query.id,
     },
   });
 
   //게시판 인풋 온페인지 함수
-  const onChangeinputState = (event: any) => {
+  const onChangeinputState = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const {
       target: { name, value },
     } = event;
@@ -63,8 +63,6 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
       setYoutubeLink(value);
     }
 
-    console.log(zipCode);
-
     // 인풋에 값 넣었을 때 에러메세지 지우기
     if (name === "writer" && value !== "") {
       setWriterError("");
@@ -84,13 +82,14 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
   };
   //게시글 등록 뮤테이션
 
-  const [createBoard] = useMutation(CREATE_BOARD);
+  const [createBoard] =
+    useMutation<Pick<IMutation, "createBoard">>(CREATE_BOARD);
 
   //게시글 수정 뮤테이션
-  const [updateBoard] = useMutation(EDIT_BOARD);
+  const [updateBoard] = useMutation<Pick<IMutation, "updateBoard">>(EDIT_BOARD);
 
   // 게시판등록 완료 시 필수 값 체크
-  const onSubmitBoard = async (event: any) => {
+  const onSubmitBoard = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     try {
@@ -144,9 +143,9 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
         youtubeLink
       ) {
         alert("게시글 등록이 완료 되었습니다.");
-        router.push(`/boards/${data.createBoard._id}`);
+        router.push(`/boards/${data?.createBoard._id}`);
       }
-    } catch (error) {
+    } catch (error: any) {
       alert(error);
     }
   };
@@ -162,26 +161,12 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
   };
 
   // 게시판수정 완료 시 필수 값 체크
-  const onEditBoard = async (event: any) => {
+  const onEditBoard = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    interface IMyVariables {
-      boardId: string;
-      password?: string;
-      updateBoardInput: {
-        title?: string;
-        contents?: string;
-        youtubeUrl?: string;
-        boardAddress: {
-          zipcode?: string;
-          address?: string;
-          addressDetail?: string;
-        };
-      };
-    }
     try {
       const myVariables: IMyVariables = {
-        boardId: router.query.id,
+        boardId: String(router.query.id),
         updateBoardInput: {
           boardAddress: {},
         },
@@ -195,7 +180,6 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
       if (address2)
         myVariables.updateBoardInput.boardAddress.addressDetail = address2;
 
-      console.log("myVariables", myVariables);
       const result = await updateBoard({
         variables: myVariables,
       });

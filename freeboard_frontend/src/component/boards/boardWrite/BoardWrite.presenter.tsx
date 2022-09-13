@@ -1,21 +1,5 @@
 import * as S from "./BoardWrite.styled";
-
-interface IBoardWriteUi {
-  onChangeinputState: any;
-  onSubmitBoard: any;
-  writerError: string;
-  passwordError: string;
-  titleError: string;
-  contentError: string;
-  zipCodeError: string;
-  addressError: string;
-  youtubeLinkError: string;
-  isEdit: boolean;
-  onEditBoard: any;
-  data: any;
-  writeCancle: any;
-  editCancle: any;
-}
+import { IBoardWriteUi } from "./BoardWrite.types";
 
 const BoardWriteUi = ({
   onChangeinputState,
@@ -33,7 +17,6 @@ const BoardWriteUi = ({
   writeCancle,
   editCancle,
 }: IBoardWriteUi) => {
-  console.log(data);
   return (
     <>
       <S.Wrapper>

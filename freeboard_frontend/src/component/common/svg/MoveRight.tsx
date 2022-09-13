@@ -8,12 +8,7 @@ const MoveRightBtn = styled(DefaultBtn)`
 const MoveRight = () => {
   return (
     <MoveRightBtn>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="60"
-        height="60"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60">
         <defs>
           <filter
             x="-14%"
@@ -62,8 +57,8 @@ const MoveRight = () => {
         </defs>
         <g fill="none" fill-rule="evenodd">
           <g transform="matrix(-1 0 0 1 55 5)">
-            <use fill="#000" filter="url(#a)" xlink:href="#b" />
-            <use fill="#FFF" xlink:href="#b" />
+            <use fill="#000" filter="url(#a)" />
+            <use fill="#FFF" />
           </g>
           <path
             d="M32.715 38.699a1 1 0 0 1-1.319.098l-.095-.082-8-7.817a1 1 0 0 1-.108-1.306l.08-.096 7.723-8.182a1 1 0 0 1 1.535 1.276l-.08.096-7.049 7.469 7.297 7.13a1 1 0 0 1 .098 1.319l-.082.095z"

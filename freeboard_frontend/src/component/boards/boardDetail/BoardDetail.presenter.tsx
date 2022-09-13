@@ -1,6 +1,6 @@
 import Link from "next/link";
 import * as S from "./BoardDetail.styled";
-import { IBoardDetailProps } from "./boardDetail.types";
+import { IBoardDetailProps } from "./BoardDetail.types";
 
 const BoardDetailUi = ({
   onModal,
@@ -19,7 +19,7 @@ const BoardDetailUi = ({
   commentDelPassword,
   onChangeCommentDelPassword,
   onCommentPsModal,
-  CloseCommentPsModal,
+  closeCommentPsModal,
   commentDeleteSubmit,
   boardDeleteSubmit,
   goBoardEdit,
@@ -288,7 +288,7 @@ const BoardDetailUi = ({
             <S.CommentPasswordDeleteBtn onClick={commentDeleteSubmit}>
               삭제하기
             </S.CommentPasswordDeleteBtn>
-            <S.CommentDeleteBoxCloseBtn onClick={CloseCommentPsModal}>
+            <S.CommentDeleteBoxCloseBtn onClick={closeCommentPsModal}>
               X
             </S.CommentDeleteBoxCloseBtn>
           </S.CommentPassWordForm>
