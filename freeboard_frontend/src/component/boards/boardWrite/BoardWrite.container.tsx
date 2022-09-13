@@ -63,6 +63,8 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
       setYoutubeLink(value);
     }
 
+    console.log(zipCode);
+
     // 인풋에 값 넣었을 때 에러메세지 지우기
     if (name === "writer" && value !== "") {
       setWriterError("");
@@ -165,48 +167,43 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
 
     interface IMyVariables {
       boardId: string;
-      password: string;
+      password?: string;
       updateBoardInput: {
-        title: string;
-        contents: string;
-        youtubeUrl: string;
-        boardAddress: { boardAddress: string };
+        title?: string;
+        contents?: string;
+        youtubeUrl?: string;
+        boardAddress: {
+          zipcode?: string;
+          address?: string;
+          addressDetail?: string;
+        };
       };
     }
-
-    const myVariables: IMyVariables = {
-      boardId: router.query.id,
-      password: "",
-      updateBoardInput: {
-        boardAddress: {},
-      },
-    };
-    if (password) myVariables.password = password;
-    if (title) myVariables.updateBoardInput.title = title;
-    if (content) myVariables.updateBoardInput.contents = content;
-    if (youtubeLink) myVariables.updateBoardInput.youtubeUrl = youtubeLink;
-    if (zipCode) myVariables.updateBoardInput.boardAddress.zipcode = zipCode;
-    if (address) myVariables.updateBoardInput.boardAddress.address = address;
-    if (address2)
-      myVariables.updateBoardInput.boardAddress.addressDetail = address2;
-
-    await updateBoard({
-      variables: {
-        updateBoardInput: {
-          title: title,
-          contents: content,
-          youtubeUrl: youtubeLink,
-          boardAddress: {
-            zipcode: zipCode,
-            address: address,
-            addressDetail: address2,
-          },
-        },
+    try {
+      const myVariables: IMyVariables = {
         boardId: router.query.id,
-        password: password,
-      },
-    });
-    router.push(`/boards/${router.query.id}`);
+        updateBoardInput: {
+          boardAddress: {},
+        },
+      };
+      if (password) myVariables.password = password;
+      if (title) myVariables.updateBoardInput.title = title;
+      if (content) myVariables.updateBoardInput.contents = content;
+      if (youtubeLink) myVariables.updateBoardInput.youtubeUrl = youtubeLink;
+      if (zipCode) myVariables.updateBoardInput.boardAddress.zipcode = zipCode;
+      if (address) myVariables.updateBoardInput.boardAddress.address = address;
+      if (address2)
+        myVariables.updateBoardInput.boardAddress.addressDetail = address2;
+
+      console.log("myVariables", myVariables);
+      const result = await updateBoard({
+        variables: myVariables,
+      });
+      console.log(result);
+      router.push(`/boards/${router.query.id}`);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (

@@ -1,6 +1,6 @@
 import { NextRouter, useRouter } from "next/router";
 import { useQuery, useMutation } from "@apollo/client";
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, useEffect, ChangeEvent, MouseEvent } from "react";
 import BoardDetailUi from "./BoardDetail.presenter";
 
 import {
@@ -13,72 +13,87 @@ import {
   DELETE_BOARD,
   EDIT_COMMENT,
 } from "./BoardDetail.querys";
+import {
+  IMutation,
+  IMutationDeleteBoardArgs,
+  IQuery,
+  IQueryFetchBoardArgs,
+  IQueryFetchBoardCommentsArgs,
+  IQueryFetchBoardsArgs,
+} from "../../../commons/types/generated/types";
+import { ImyVariables } from "./boardDetail.types";
 
 const BoardDetail = () => {
   //상태관리
 
-  const [writer, setWriter]: (string | Function)[] = useState(""); // 작성자
-  const [comment, setComment]: (string | Function)[] = useState(""); // 댓글
-  const [password, setPassword]: (string | Function)[] = useState(""); // 비밀번호
-  const [onModal, setOnModal]: (boolean | Function)[] = useState(false); // 상세주소 모달
-  const [likeCount, setLikeCount]: (number | Function)[] = useState(0); // 좋아요 개수
-  const [disLikeCount, setDisLikeCount]: (number | Function)[] = useState(0); // 싫어요 개수
-  const [commentPsModal, setCommentPsModal]: (boolean | Function)[] =
-    useState(false); // 댓글 삭제시 비밀번호 모달
-  const [commentDelPassword, setCommentDelPassword]: (string | Function)[] =
-    useState(""); // 댓글 삭제시 비밓번호
-  const [commentId, setCommentId]: (string | Function)[] = useState("");
-  const [onCommentEdit, setOnCommentEdit]: (boolean | Function)[] =
-    useState(false);
-  const [udPassword, setUdPassword]: (string | Function)[] = useState(""); // 비밀번호
-  const [udComment, setUdComment]: (string | Function)[] = useState(""); // 댓글
+  const [writer, setWriter] = useState(""); // 작성자
+  const [comment, setComment] = useState(""); // 댓글
+  const [password, setPassword] = useState(""); // 비밀번호
+  const [onModal, setOnModal] = useState(false); // 상세주소 모달
+  const [commentPsModal, setCommentPsModal] = useState(false); // 댓글 삭제시 비밀번호 모달
+  const [commentDelPassword, setCommentDelPassword] = useState(""); // 댓글 삭제시 비밓번호
+  const [commentId, setCommentId] = useState("");
+  const [onCommentEdit, setOnCommentEdit] = useState(false);
+  const [udPassword, setUdPassword] = useState(""); // 비밀번호
+  const [udComment, setUdComment] = useState(""); // 댓글
+  const [commentError, setCommentError] = useState(false);
 
   // 유즈 라우터
   const router: NextRouter = useRouter();
 
+  useEffect(() => {
+    if (writer && comment && password) {
+      setCommentError(false);
+    }
+  }, [writer, comment, password]);
+
   // 게시글 데이터 쿼리
-  const { data }: { data: any } = useQuery(FETCH_BOARD, {
-    variables: {
-      boardId: router.query.id,
-    },
-  });
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
+    FETCH_BOARD,
+    {
+      variables: {
+        boardId: String(router.query.id),
+      },
+    }
+  );
 
   // 댓글 데이터 쿼리
-  const commentResult = useQuery(FETCH_COMMENT, {
+  const commentResult = useQuery<
+    Pick<IQuery, "fetchBoardComments">,
+    IQueryFetchBoardCommentsArgs
+  >(FETCH_COMMENT, {
     variables: {
-      boardId: router.query.id,
+      boardId: String(router.query.id),
     },
   });
 
   // 좋아요 싫어요 카운트 변경시 유즈이펙트
-  useEffect(() => {
-    setLikeCount(data && data.fetchBoard.likeCount);
-  }, [data]);
-
-  useEffect(() => {
-    setDisLikeCount(data && data.fetchBoard.dislikeCount);
-  }, [data]);
 
   // 게시글 삭제 뮤테이션
-  const [deleteBoard] = useMutation(DELETE_BOARD);
+  const [deleteBoard] =
+    useMutation<Pick<IMutation, "deleteBoard">>(DELETE_BOARD);
 
   // 댓글 삭제 뮤테이션
-  const [commentDelete] = useMutation(DELETE_COMMENT);
+  const [commentDelete] =
+    useMutation<Pick<IMutation, "deleteBoardComment">>(DELETE_COMMENT);
 
   // 좋아요 개수 업 뮤테이션
-  const [likeUpApi] = useMutation(LIKE_UP);
+  const [likeUpApi] = useMutation<Pick<IMutation, "likeBoard">>(LIKE_UP);
 
   // 싫어요 개수 업 뮤테이션
-  const [disLikeUpApi] = useMutation(LIKE_DOWN);
+  const [disLikeUpApi] =
+    useMutation<Pick<IMutation, "dislikeBoard">>(LIKE_DOWN);
 
   // 댓글 생성 뮤테이션
-  const [createComment] = useMutation(CREATE_COMMENT);
+  const [createComment] =
+    useMutation<Pick<IMutation, "createBoardComment">>(CREATE_COMMENT);
 
   // 댓글 수정 뮤테이션
-  const [editComment] = useMutation(EDIT_COMMENT);
+  const [editComment] =
+    useMutation<Pick<IMutation, "updateBoardComment">>(EDIT_COMMENT);
 
   // 댓글 비밀번호 팝업 ON
-  const onCommentPsModal = async (event: any) => {
+  const onCommentPsModal = async (event: MouseEvent<HTMLButtonElement>) => {
     setCommentPsModal(true);
     setCommentId(event.currentTarget.id);
   };
@@ -88,7 +103,7 @@ const BoardDetail = () => {
   };
 
   //댓글 수정 박스 ON/OFF
-  const toggleCommentEdit = (event: any) => {
+  const toggleCommentEdit = (event: MouseEvent<HTMLButtonElement>) => {
     setCommentId(event.currentTarget.id);
     setOnCommentEdit(!onCommentEdit);
   };
@@ -105,49 +120,44 @@ const BoardDetail = () => {
   };
 
   // 댓글 작성 버튼 ONCLICK
+
   const onClickCommentSubmit = async () => {
-    await createComment({
-      variables: {
-        boardId: router.query.id,
-        createBoardCommentInput: {
-          writer,
-          password,
-          contents: comment,
-          rating: 1,
-        },
-      },
-      refetchQueries: [
-        {
-          query: FETCH_COMMENT,
-          variables: {
-            boardId: router.query.id,
+    if (!writer || !comment || !password) {
+      setCommentError(true);
+    } else {
+      await createComment({
+        variables: {
+          boardId: router.query.id,
+          createBoardCommentInput: {
+            writer,
+            password,
+            contents: comment,
+            rating: 1,
           },
         },
-      ],
-    });
-    setWriter("");
-    setComment("");
-    setPassword("");
+        refetchQueries: [
+          {
+            query: FETCH_COMMENT,
+            variables: {
+              boardId: router.query.id,
+            },
+          },
+        ],
+      });
+      setWriter("");
+      setComment("");
+      setPassword("");
+    }
   };
 
   //댓글 수정 버튼 ONCLICK
 
   const commentEditSubmit = async () => {
     try {
-      interface ImyVariables {
-        boardCommentId: string;
-        password: string;
-        updateBoardCommentInput: {
-          rating: 1;
-          content: string;
-        };
-      }
-      const myVariables = {
+      const myVariables: ImyVariables = {
         boardCommentId: commentId,
-        password: "",
         updateBoardCommentInput: {
           rating: 1,
-          contents: udComment,
         },
       };
       if (udPassword) myVariables.password = udPassword;
@@ -172,7 +182,7 @@ const BoardDetail = () => {
   };
 
   // 댓글 삭제 버튼 ONCLICK
-  const commentDeleteSubmit = async (event: any) => {
+  const commentDeleteSubmit = async () => {
     await commentDelete({
       variables: {
         password: commentDelPassword,
@@ -196,8 +206,15 @@ const BoardDetail = () => {
       variables: {
         boardId: router.query.id,
       },
+      refetchQueries: [
+        {
+          query: FETCH_BOARD,
+          variables: {
+            boardId: router.query.id,
+          },
+        },
+      ],
     });
-    setLikeCount(likeCount + 1);
   };
 
   // 싫어요 버튼 ONCLICK
@@ -206,12 +223,19 @@ const BoardDetail = () => {
       variables: {
         boardId: router.query.id,
       },
+      refetchQueries: [
+        {
+          query: FETCH_BOARD,
+          variables: {
+            boardId: router.query.id,
+          },
+        },
+      ],
     });
-    setDisLikeCount(disLikeCount + 1);
   };
 
   // 댓글 비밀번호 ONCHANGE
-  const onChangeCommentDelPassword = (event: any) => {
+  const onChangeCommentDelPassword = (event: ChangeEvent<HTMLInputElement>) => {
     setCommentDelPassword(event.target.value);
   };
 
@@ -231,7 +255,7 @@ const BoardDetail = () => {
   };
 
   // 댓글수정 인풋 ONCHANGE
-  const onChangeUdComment = (event: any) => {
+  const onChangeUdComment = (event: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
     } = event;
@@ -262,8 +286,6 @@ const BoardDetail = () => {
     <>
       <BoardDetailUi
         onModal={onModal}
-        likeCount={likeCount}
-        disLikeCount={disLikeCount}
         writer={writer}
         comment={comment}
         password={password}
@@ -289,6 +311,7 @@ const BoardDetail = () => {
         onChangeUdComment={onChangeUdComment}
         commentId={commentId}
         udComment={udComment}
+        commentError={commentError}
       />
     </>
   );

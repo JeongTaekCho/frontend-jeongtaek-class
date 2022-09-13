@@ -98,7 +98,7 @@ const BoardWriteUi = ({
                   placeholder="00000"
                   name="zipCode"
                   defaultValue={
-                    isEdit ? data?.fetchBoard.boardAddress.zipcode : null
+                    isEdit ? data?.fetchBoard?.boardAddress?.zipcode : null
                   }
                 />
                 <button type="button">우편번호 검색</button>
@@ -109,14 +109,14 @@ const BoardWriteUi = ({
                 onChange={onChangeinputState}
                 name="address"
                 defaultValue={
-                  isEdit ? data?.fetchBoard.boardAddress.address : null
+                  isEdit ? data?.fetchBoard?.boardAddress?.address : null
                 }
               />
               <S.DefaultInput
                 onChange={onChangeinputState}
                 name="address2"
                 defaultValue={
-                  isEdit ? data?.fetchBoard.boardAddress.addressDetail : null
+                  isEdit ? data?.fetchBoard?.boardAddress?.addressDetail : null
                 }
               />
               <S.ErrorMsg>{addressError}</S.ErrorMsg>

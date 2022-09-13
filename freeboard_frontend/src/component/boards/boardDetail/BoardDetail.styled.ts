@@ -244,8 +244,15 @@ export const CommentStarBox = styled.div`
 export const CommentTextareaBox = styled.div`
   width: 100%;
   border: 1px solid #bdbdbd;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 `;
+
+export const CommentErrorText = styled.p`
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #f00;
+`;
+
 export const CommentTextarea = styled.textarea`
   width: 100%;
   height: 10.8rem;

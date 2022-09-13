@@ -1,43 +1,9 @@
 import Link from "next/link";
-import { ChangeEvent } from "react";
-import { Interface } from "readline";
 import * as S from "./BoardDetail.styled";
-
-interface IBoardDetailProps {
-  onModal: boolean;
-  likeCount: number;
-  disLikeCount: number;
-  writer: string;
-  comment: string;
-  password: string;
-  onChangeComment: any;
-  onClickLikeBtn: any;
-  onClickDisLikeBtn: any;
-  onModalBtn: any;
-  boardDetailDate: string;
-  onClickCommentSubmit: () => void;
-  data: any;
-  commentResult: any;
-  commentPsModal: boolean;
-  commentDelPassword: string;
-  onChangeCommentDelPassword: any;
-  onCommentPsModal: any;
-  CloseCommentPsModal: any;
-  commentDeleteSubmit: any;
-  boardDeleteSubmit: () => void;
-  goBoardEdit: () => void;
-  onCommentEdit: boolean;
-  toggleCommentEdit: any;
-  commentEditSubmit: () => void;
-  onChangeUdComment: any;
-  commentId: string;
-  udComment: string;
-}
+import { IBoardDetailProps } from "./boardDetail.types";
 
 const BoardDetailUi = ({
   onModal,
-  likeCount,
-  disLikeCount,
   writer,
   comment,
   password,
@@ -63,6 +29,7 @@ const BoardDetailUi = ({
   onChangeUdComment,
   commentId,
   udComment,
+  commentError,
 }: IBoardDetailProps) => {
   return (
     <>
@@ -107,7 +74,9 @@ const BoardDetailUi = ({
                 <img src="/board/likeBtn.png" />
               </S.DefaultBtn>
 
-              <S.LikeText style={{ color: "#FFD600" }}>{likeCount}</S.LikeText>
+              <S.LikeText style={{ color: "#FFD600" }}>
+                {data?.fetchBoard.likeCount}
+              </S.LikeText>
             </S.LikeAndUnLIkeContainer>
             <S.LikeAndUnLIkeContainer>
               <S.DefaultBtn onClick={onClickDisLikeBtn}>
@@ -115,7 +84,7 @@ const BoardDetailUi = ({
               </S.DefaultBtn>
 
               <S.LikeText style={{ color: "#828282" }}>
-                {disLikeCount}
+                {data?.fetchBoard.dislikeCount}
               </S.LikeText>
             </S.LikeAndUnLIkeContainer>
           </S.LikeAndUnLikeBox>
@@ -182,6 +151,9 @@ const BoardDetailUi = ({
             </S.CommentSubmitBox>
           </S.CommentTextareaBox>
         </S.CommentContainer>
+        <S.CommentErrorText>
+          {commentError ? "빈값을 입력해주세요." : null}
+        </S.CommentErrorText>
       </S.BoardDetailContainer>
       {commentResult?.fetchBoardComments.map((comment: any, i: number) => {
         return (
