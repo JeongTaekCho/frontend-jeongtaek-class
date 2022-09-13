@@ -8,3 +8,12 @@
 // 입출력 예
 // s	return
 // "Zbcdefg"	"gfedcbZ"
+
+function solution(s) {
+  const arr = [];
+
+  for (let i = 0; i < s.length; i++) {
+    arr.push(s[i]);
+  }
+  return arr.sort((a, b) => (a > b ? -1 : 1)).join("");
+}
