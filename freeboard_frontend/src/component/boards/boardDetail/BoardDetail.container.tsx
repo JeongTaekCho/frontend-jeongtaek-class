@@ -122,7 +122,7 @@ const BoardDetail = () => {
         },
       });
       alert("게시글 삭제가 완료되었습니다.");
-      router.push(`/boards`);
+      await router.push(`/boards`);
     } catch (error) {
       if (error instanceof Error) alert(error);
     }
@@ -169,12 +169,15 @@ const BoardDetail = () => {
     try {
       const myVariables: ImyVariables = {
         boardCommentId: commentId,
-        updateBoardCommentInput: {},
       };
+      if (udComment || isEditRateValue) {
+        myVariables.updateBoardCommentInput = {};
+        if (udComment) myVariables.updateBoardCommentInput.contents = udComment;
+        if (isEditRateValue)
+          myVariables.updateBoardCommentInput.rating = isEditRateValue;
+      }
       if (udPassword) myVariables.password = udPassword;
-      if (udComment) myVariables.updateBoardCommentInput.contents = udComment;
-      if (udComment)
-        myVariables.updateBoardCommentInput.rating = isEditRateValue;
+
       await editComment({
         variables: myVariables,
         refetchQueries: [
@@ -306,8 +309,8 @@ const BoardDetail = () => {
 
   // 게시글 수정페이지로 이동
 
-  const goBoardEdit = () => {
-    router.push(`/boards/${router.query.id}/edit`);
+  const goBoardEdit = async () => {
+    await router.push(`/boards/${String(router.query.id)}/edit`);
   };
 
   return (

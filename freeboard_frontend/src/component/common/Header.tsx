@@ -1,6 +1,6 @@
 import * as S from "./commonStyle";
-import Router, { NextRouter, useRouter } from "next/router";
-import Logo from "./svg/Logo";
+import { NextRouter, useRouter } from "next/router";
+// import Logo from "./svg/Logo";
 import SearchBtn from "./svg/SearchBtn";
 import Gps from "./svg/Gps";
 import Heart from "./svg/Heart";
@@ -8,19 +8,23 @@ import Basket from "./svg/Basket";
 import Hamberger from "./svg/Hamberger";
 const Header = () => {
   const router: NextRouter = useRouter();
-  const goLogin = () => {
-    router.push("/login");
+  const goLogin = async () => {
+    await router.push("/login");
   };
-  const goRegister = () => {
-    router.push("/register");
+  const goRegister = async () => {
+    await router.push("/register");
+  };
+
+  const goHome = async () => {
+    await router.push("/");
   };
   return (
     <>
       <S.HeaderWrap>
         <S.HeaderBox>
           <S.HeaderContainer>
-            <S.LogoBox>
-              <Logo />
+            <S.LogoBox onClick={goHome}>
+              <img src="/etc/mainLogo.png" />
             </S.LogoBox>
             <S.SearchBox>
               <S.MainSearchInput
@@ -54,11 +58,15 @@ const Header = () => {
               <S.CommonMenuLi>상품목록4</S.CommonMenuLi>
             </S.CommonMenu>
             <S.CommonMessageBox>
-              <S.CommonMessage onClick={() => router.push("/boards")}>
+              <S.CommonMessage
+                onClick={async () => await router.push("/boards")}
+              >
                 <span>자유게시판</span>
               </S.CommonMessage>
               <S.CommonMessage
-                onClick={() => router.push("/products/productWrite")}
+                onClick={async () =>
+                  await router.push("/products/productWrite")
+                }
               >
                 <span>상품등록</span>
               </S.CommonMessage>

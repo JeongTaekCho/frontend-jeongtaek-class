@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-//게시글 정보 받아오기
+// 게시글 정보 받아오기
 export const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
     fetchBoard(boardId: $boardId) {
@@ -41,21 +41,21 @@ export const FETCH_BOARD = gql`
   }
 `;
 
-//좋아요 개수 업!
+// 좋아요 개수 업!
 export const LIKE_UP = gql`
   mutation likeBoard($boardId: ID!) {
     likeBoard(boardId: $boardId)
   }
 `;
 
-//싫어요 개수 업!
+// 싫어요 개수 업!
 export const LIKE_DOWN = gql`
   mutation dislikeBoard($boardId: ID!) {
     dislikeBoard(boardId: $boardId)
   }
 `;
 
-//댓글 작성하기
+// 댓글 작성하기
 export const CREATE_COMMENT = gql`
   mutation createBoardComment(
     $createBoardCommentInput: CreateBoardCommentInput!
@@ -72,7 +72,7 @@ export const CREATE_COMMENT = gql`
   }
 `;
 
-//댓글 수정하기
+// 댓글 수정하기
 export const EDIT_COMMENT = gql`
   mutation updateBoardComment(
     $updateBoardCommentInput: UpdateBoardCommentInput!

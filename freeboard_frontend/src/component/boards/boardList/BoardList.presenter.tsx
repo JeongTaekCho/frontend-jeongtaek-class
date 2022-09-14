@@ -1,8 +1,11 @@
 import * as S from "./BoardList.styled";
 import Link from "next/link";
 import { IBoardListUi } from "./BoardList.types";
+import { DatePicker, Space } from "antd";
+import "antd/dist/antd.css";
 
 const BoardListUi = ({ data, boardBestPost }: IBoardListUi) => {
+  const { RangePicker } = DatePicker;
   return (
     <>
       <S.BoardListWrapper>
@@ -10,7 +13,10 @@ const BoardListUi = ({ data, boardBestPost }: IBoardListUi) => {
         <S.BoardBestLists>
           {boardBestPost?.fetchBoardsOfTheBest.map((bestBoard: any) => {
             return (
-              <Link href={`/boards/${bestBoard._id}`} key={bestBoard._id}>
+              <Link
+                href={`/boards/${String(bestBoard._id)}`}
+                key={bestBoard._id}
+              >
                 <S.BoardGalleryItem>
                   <S.BoardGrlleryThum></S.BoardGrlleryThum>
                   <S.BoardGalleryContentBox>
@@ -58,19 +64,9 @@ const BoardListUi = ({ data, boardBestPost }: IBoardListUi) => {
           <S.SearchTitleBox>
             <S.SearchTitle type="text" placeholder="제목을 검색해주세요." />
           </S.SearchTitleBox>
-          <S.dataPickerContainer>
-            <S.DataFickerInput
-              type="text"
-              placeholder="YYYY.MM.DD"
-              maxLength={10}
-            />
-            ~
-            <S.DataFickerInput
-              type="text"
-              placeholder="YYYY.MM.DD"
-              maxLength={10}
-            />
-          </S.dataPickerContainer>
+          <Space direction="vertical" size={12}>
+            <RangePicker />
+          </Space>
           <S.SearchTitleBtn>검색하기</S.SearchTitleBtn>
         </S.SearchContainer>
         <S.BoardListContainer>
@@ -84,7 +80,7 @@ const BoardListUi = ({ data, boardBestPost }: IBoardListUi) => {
             return (
               <S.BoardUl key={item._id}>
                 <S.BoardLi1>{index + 1}</S.BoardLi1>
-                <Link href={`/boards/${item._id}`}>
+                <Link href={`/boards/${String(item._id)}`}>
                   <S.BoardLi2>{item ? item.title : "로딩중입니다"}</S.BoardLi2>
                 </Link>
                 <S.BoardLi3>{item?.writer}</S.BoardLi3>

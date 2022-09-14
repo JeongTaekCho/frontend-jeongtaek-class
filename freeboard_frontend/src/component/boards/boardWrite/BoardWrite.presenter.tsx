@@ -34,7 +34,7 @@ const BoardWriteUi = ({
                     placeholder="이름을 적어주세요."
                     onChange={onChangeinputState}
                     name="writer"
-                    value={isEdit ? String(data?.fetchBoard.writer) : null}
+                    value={isEdit ? String(data?.fetchBoard.writer) : ""}
                   />
                   <S.ErrorMsg>{writerError}</S.ErrorMsg>
                 </S.DefaultInputBox>
@@ -81,7 +81,9 @@ const BoardWriteUi = ({
                   placeholder="00000"
                   name="zipCode"
                   defaultValue={
-                    isEdit && String(data?.fetchBoard?.boardAddress?.zipcode)
+                    isEdit
+                      ? String(data?.fetchBoard?.boardAddress?.zipcode)
+                      : ""
                   }
                 />
                 <button type="button">우편번호 검색</button>
@@ -92,15 +94,16 @@ const BoardWriteUi = ({
                 onChange={onChangeinputState}
                 name="address"
                 defaultValue={
-                  isEdit && String(data?.fetchBoard?.boardAddress?.address)
+                  isEdit ? String(data?.fetchBoard?.boardAddress?.address) : ""
                 }
               />
               <S.DefaultInput
                 onChange={onChangeinputState}
                 name="address2"
                 defaultValue={
-                  isEdit &&
-                  String(data?.fetchBoard?.boardAddress?.addressDetail)
+                  isEdit
+                    ? String(data?.fetchBoard?.boardAddress?.addressDetail)
+                    : ""
                 }
               />
               <S.ErrorMsg>{addressError}</S.ErrorMsg>
@@ -111,7 +114,7 @@ const BoardWriteUi = ({
                 placeholder="링크를 복사해주세요."
                 onChange={onChangeinputState}
                 name="youtubeLink"
-                defaultValue={isEdit && String(data?.fetchBoard.youtubeUrl)}
+                defaultValue={isEdit ? String(data?.fetchBoard.youtubeUrl) : ""}
               />
               <S.ErrorMsg>{youtubeLinkError}</S.ErrorMsg>
             </S.DefaultInputBox>

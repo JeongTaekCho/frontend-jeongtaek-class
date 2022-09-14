@@ -73,7 +73,14 @@ const BoardDetailUi = ({
           <S.DetailImage>추후 이미지로 바꿀 예정</S.DetailImage>
           <S.DetailContentBox>{data?.fetchBoard.contents}</S.DetailContentBox>
           <S.IframeContainer>
-            <ReactPlayer url={String(data?.fetchBoard.youtubeUrl)} />
+            <ReactPlayer
+              url={String(data?.fetchBoard.youtubeUrl)}
+              playing
+              controls
+              muted
+              width={720}
+              height={480}
+            />
           </S.IframeContainer>
           <S.LikeAndUnLikeBox>
             <S.LikeAndUnLIkeContainer>

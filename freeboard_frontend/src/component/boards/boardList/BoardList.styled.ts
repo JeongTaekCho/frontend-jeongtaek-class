@@ -99,6 +99,7 @@ export const SearchContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 40px;
+  align-items: center;
 `;
 export const SearchTitleBox = styled.div`
   width: 64.66%;
@@ -138,6 +139,7 @@ export const SearchTitleBtn = styled.button`
   font-weight: 500;
   color: #fff;
   border-radius: 10px;
+  cursor: pointer;
 `;
 
 export const DataFickerInput = styled.input`

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-//HEADER
+// HEADER
 
 export const HeaderWrap = styled.div`
   width: 100%;
@@ -12,16 +12,24 @@ export const HeaderBox = styled.div`
 `;
 export const HeaderContainer = styled.div`
   width: 100%;
-  height: 100px;
+  height: 110px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   position: relative;
-  padding-top: 36px;
+  padding-top: 20px;
 `;
 
-export const LogoBox = styled.div``;
+export const LogoBox = styled.div`
+  width: 115px;
+  height: 85px;
+  cursor: pointer;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
 export const SearchBox = styled.div`
   width: 30%;
   height: 48px;
@@ -135,7 +143,7 @@ export const CommonMessage = styled.button`
   }
 `;
 
-//FOOTER
+// FOOTER
 
 export const FooterWrap = styled.div`
   width: 100%;

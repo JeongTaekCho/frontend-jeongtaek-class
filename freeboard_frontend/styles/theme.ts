@@ -14,8 +14,8 @@ export interface ITheme {
   mainColor: string;
 }
 const theme: ITheme = {
-  tablet: `(max-width : ${viewPort.tabletSize} )`,
-  mobile: `(max-width : ${viewPort.mobileSize} )`,
+  tablet: `(max-width : ${String(viewPort.tabletSize)} )`,
+  mobile: `(max-width : ${String(viewPort.mobileSize)} )`,
   mainColor: "#f95621",
 };
 

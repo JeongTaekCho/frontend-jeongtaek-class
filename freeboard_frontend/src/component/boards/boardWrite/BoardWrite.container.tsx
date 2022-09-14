@@ -8,7 +8,7 @@ import { IBoardWrite, IMyVariables } from "./BoardWrite.types";
 import { IMutation, IQuery } from "../../../commons/types/generated/types";
 
 const BoardWrite = ({ isEdit }: IBoardWrite) => {
-  //게시판 인풋 상태관리
+  // 게시판 인풋 상태관리
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
@@ -18,7 +18,7 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
   const [address2, setAddress2] = useState("");
   const [youtubeLink, setYoutubeLink] = useState("");
 
-  //에러메세지 상태관리
+  // 에러메세지 상태관리
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [titleError, setTitleError] = useState("");
@@ -36,7 +36,7 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
     },
   });
 
-  //게시판 인풋 온페인지 함수
+  // 게시판 인풋 온페인지 함수
   const onChangeinputState = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -44,7 +44,7 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
       target: { name, value },
     } = event;
 
-    //인풋 상태 값 저장
+    // 인풋 상태 값 저장
     if (name === "writer") {
       setWriter(value);
     } else if (name === "password") {
@@ -80,12 +80,12 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
       setYoutubeLinkError("");
     }
   };
-  //게시글 등록 뮤테이션
+  // 게시글 등록 뮤테이션
 
   const [createBoard] =
     useMutation<Pick<IMutation, "createBoard">>(CREATE_BOARD);
 
-  //게시글 수정 뮤테이션
+  // 게시글 수정 뮤테이션
   const [updateBoard] = useMutation<Pick<IMutation, "updateBoard">>(EDIT_BOARD);
 
   // 게시판등록 완료 시 필수 값 체크
@@ -143,21 +143,21 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
         youtubeLink
       ) {
         alert("게시글 등록이 완료 되었습니다.");
-        router.push(`/boards/${data?.createBoard._id}`);
+        await router.push(`/boards/${String(data?.createBoard._id)}`);
       }
     } catch (error: any) {
       alert(error);
     }
   };
 
-  //게시글 등록 취소
-  const writeCancle = () => {
-    router.push("/boards");
+  // 게시글 등록 취소
+  const writeCancle = async () => {
+    await router.push("/boards");
   };
 
-  //게시글 수정 취소
-  const editCancle = () => {
-    router.push(`/boards/${router.query.id}`);
+  // 게시글 수정 취소
+  const editCancle = async () => {
+    await router.push(`/boards/${String(router.query.id)}`);
   };
 
   // 게시판수정 완료 시 필수 값 체크
@@ -187,7 +187,7 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
         variables: myVariables,
       });
       console.log(result);
-      router.push(`/boards/${router.query.id}`);
+      await router.push(`/boards/${String(router.query.id)}`);
     } catch (error) {
       alert(error);
     }

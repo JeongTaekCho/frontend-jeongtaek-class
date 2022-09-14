@@ -4,8 +4,8 @@ import { IQuery } from "../../../commons/types/generated/types";
 export interface ImyVariables {
   boardCommentId: string;
   password?: string;
-  updateBoardCommentInput: {
-    rating: number;
+  updateBoardCommentInput?: {
+    rating?: number;
     contents?: string;
   };
 }

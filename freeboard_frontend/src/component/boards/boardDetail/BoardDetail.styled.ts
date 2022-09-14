@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 export const BoardDetailContainer = styled.div`
   width: 1200px;
   margin: 100px auto;
-  @media ${(props) => props.theme.tablet} {
+  @media ${(props: any) => props.theme.tablet} {
     width: 90%;
   }
   @media (max-1199px) {
@@ -97,7 +97,7 @@ export const BoardDetailContentContainer = styled.div`
   padding: 80px 10.2rem;
   box-shadow: 0px 0px 1.2rem gray;
   margin: 6.4rem auto 0;
-  @media ${(props) => props.theme.tablet} {
+  @media ${(props: any) => props.theme.tablet} {
     padding: 4rem 5.1rem;
   }
 `;
@@ -118,7 +118,7 @@ export const DetailImage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media ${(props) => props.theme.tablet} {
+  @media ${(props: any) => props.theme.tablet} {
     height: 40rem;
   }
 `;
@@ -130,20 +130,20 @@ export const DetailContentBox = styled.div`
   word-break: break-all;
   line-height: 1.6;
   margin-bottom: 120px;
-  @media ${(props) => props.theme.tablet} {
+  @media ${(props: any) => props.theme.tablet} {
     margin-bottom: 6rem;
   }
 `;
 export const IframeContainer = styled.div`
-  width: 486px;
-  height: 240px;
+  width: 720px;
+  height: 480px;
   background: #ddd;
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto 160px;
-  @media ${(props) => props.theme.tablet} {
+  @media ${(props: any) => props.theme.tablet} {
     width: 100%;
     height: 44rem;
     margin-bottom: 12rem;
@@ -215,7 +215,7 @@ export const CommentHead = styled.div`
   align-items: center;
   gap: 44px;
   margin-bottom: 20px;
-  @media ${(props) => props.theme.mobile} {
+  @media ${(props: any) => props.theme.mobile} {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
@@ -233,7 +233,7 @@ export const CommentInput = styled.input`
   font-size: 1.6rem;
   font-weight: 500;
   color: #828282;
-  @media ${(props) => props.theme.mobile} {
+  @media ${(props: any) => props.theme.mobile} {
     width: 100%;
   }
 `;
@@ -293,7 +293,7 @@ export const CommentSubmit = styled.button`
 `;
 
 export const CommentModifyBtn = styled(CommentSubmit)`
-  background: ${(props) => props.theme.mainColor};
+  background: ${(props: any) => props.theme.mainColor};
   color: #fff;
 `;
 
@@ -310,7 +310,7 @@ export const CommentViewContainer = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   border-bottom: 1px solid #bdbdbd;
-  @media ${(props) => props.theme.tablet} {
+  @media ${(props: any) => props.theme.tablet} {
     width: 90%;
   }
 `;

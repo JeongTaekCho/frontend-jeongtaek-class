@@ -10,14 +10,14 @@ const Basket = () => {
         height="36"
         viewBox="0 0 36 36"
       >
-        <g fill="none" fill-rule="evenodd">
+        <g fill="none" fillRule="evenodd">
           <path d="M36 36H0V0h36z" />
           <g
             transform="translate(5.164 6.547)"
             stroke="#333"
-            stroke-linecap="square"
-            stroke-linejoin="round"
-            stroke-width="1.7"
+            strokeLinecap="square"
+            strokeLinejoin="round"
+            strokeWidth="1.7"
           >
             <path d="m25.68 3.66-2.72 11.57H7.37L4.66 3.66z" />
             <circle cx="20.52" cy="20.78" r="2.14" />

@@ -50,7 +50,7 @@ const MoveLeft = () => {
           </filter>
           <circle id="b" cx="25" cy="25" r="25" />
         </defs>
-        <g fill="none" fill-rule="evenodd">
+        <g fill="none" fillRule="evenodd">
           <g transform="matrix(-1 0 0 1 55 5)">
             <use fill="#000" filter="url(#a)" />
             <use fill="#FFF" />
@@ -58,7 +58,7 @@ const MoveLeft = () => {
           <path
             d="M32.715 38.699a1 1 0 0 1-1.319.098l-.095-.082-8-7.817a1 1 0 0 1-.108-1.306l.08-.096 7.723-8.182a1 1 0 0 1 1.535 1.276l-.08.096-7.049 7.469 7.297 7.13a1 1 0 0 1 .098 1.319l-.082.095z"
             fill="#333"
-            fill-rule="nonzero"
+            fillRule="nonzero"
           />
         </g>
       </svg>
