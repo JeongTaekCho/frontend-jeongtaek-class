@@ -167,18 +167,21 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
     try {
       const myVariables: IMyVariables = {
         boardId: String(router.query.id),
-        updateBoardInput: {
-          boardAddress: {},
-        },
+        updateBoardInput: {},
       };
+      if (zipCode || address || address2) {
+        myVariables.updateBoardInput.boardAddress = {};
+        if (zipCode)
+          myVariables.updateBoardInput.boardAddress.zipcode = zipCode;
+        if (address)
+          myVariables.updateBoardInput.boardAddress.address = address;
+        if (address2)
+          myVariables.updateBoardInput.boardAddress.addressDetail = address2;
+      }
       if (password) myVariables.password = password;
       if (title) myVariables.updateBoardInput.title = title;
       if (content) myVariables.updateBoardInput.contents = content;
       if (youtubeLink) myVariables.updateBoardInput.youtubeUrl = youtubeLink;
-      if (zipCode) myVariables.updateBoardInput.boardAddress.zipcode = zipCode;
-      if (address) myVariables.updateBoardInput.boardAddress.address = address;
-      if (address2)
-        myVariables.updateBoardInput.boardAddress.addressDetail = address2;
 
       const result = await updateBoard({
         variables: myVariables,

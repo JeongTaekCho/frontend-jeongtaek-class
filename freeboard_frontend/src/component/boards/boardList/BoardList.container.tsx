@@ -6,7 +6,7 @@ import { IQuery } from "../../../commons/types/generated/types";
 const BoardList = () => {
   const { data } = useQuery<Pick<IQuery, "fetchBoards">>(FETCH_BOARD);
 
-  const boardBestPost =
+  const { data: boardBestPost } =
     useQuery<Pick<IQuery, "fetchBoardsOfTheBest">>(FETCH_BEST_BOARD);
 
   return (

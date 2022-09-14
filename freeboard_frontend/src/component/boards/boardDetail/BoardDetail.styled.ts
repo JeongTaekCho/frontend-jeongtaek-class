@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { testResponsive } from "../../../../styles/test";
 
 // 게시판 상세페이지 //
 
@@ -49,7 +48,7 @@ export const DetailDate = styled.p`
 export const ShareAndGpsBox = styled.div`
   display: flex;
   gap: 23px;
-  align-item: center;
+  align-items: center;
   position: relative;
 `;
 
@@ -199,7 +198,7 @@ export const CommentTitleBox = styled.div`
 
 export const CommentTitle = styled.p`
   font-size: 1.8rem;
-  fonr-weight: 500;
+  font-weight: 500;
   color: #000;
 `;
 
@@ -398,7 +397,7 @@ export const CommentPasswordDeleteBtn = styled.button`
   border: 1px solid #fff;
   background: #000;
   font-size: 1.5rem;
-  fonr-weight: 500;
+  font-weight: 500;
   color: #fff;
   cursor: pointer;
 `;

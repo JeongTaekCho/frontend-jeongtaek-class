@@ -1,4 +1,5 @@
 import { ChangeEvent, MouseEvent } from "react";
+import { IQuery } from "../../../commons/types/generated/types";
 
 export interface ImyVariables {
   boardCommentId: string;
@@ -22,8 +23,8 @@ export interface IBoardDetailProps {
   onModalBtn: () => void;
   boardDetailDate: string;
   onClickCommentSubmit: () => void;
-  data: any;
-  commentResult: any;
+  data?: Pick<IQuery, "fetchBoard">;
+  commentResult?: Pick<IQuery, "fetchBoardComments">;
   commentPsModal: boolean;
   commentDelPassword: string;
   onChangeCommentDelPassword: (event: ChangeEvent<HTMLInputElement>) => void;

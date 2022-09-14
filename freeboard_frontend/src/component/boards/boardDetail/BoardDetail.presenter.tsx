@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { IQuery } from "../../../commons/types/generated/types";
 import * as S from "./BoardDetail.styled";
 import { IBoardDetailProps } from "./BoardDetail.types";
 
@@ -52,10 +53,10 @@ const BoardDetailUi = ({
             {onModal ? (
               <S.DetailAddressBox>
                 <S.DetailAddressText>
-                  {data?.fetchBoard.boardAddress.address}
+                  {data?.fetchBoard.boardAddress?.address}
                 </S.DetailAddressText>
                 <S.DetailAddressText>
-                  {data?.fetchBoard.boardAddress.addressDetail}
+                  {data?.fetchBoard.boardAddress?.addressDetail}
                 </S.DetailAddressText>
               </S.DetailAddressBox>
             ) : null}
@@ -66,7 +67,7 @@ const BoardDetailUi = ({
           <S.DetailImage>추후 이미지로 바꿀 예정</S.DetailImage>
           <S.DetailContentBox>{data?.fetchBoard.contents}</S.DetailContentBox>
           <S.IframeContainer>
-            <iframe src={data?.fetchBoard.youtubeUrl}></iframe>
+            <iframe src={String(data?.fetchBoard.youtubeUrl)}></iframe>
           </S.IframeContainer>
           <S.LikeAndUnLikeBox>
             <S.LikeAndUnLIkeContainer>

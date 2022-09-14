@@ -8,6 +8,12 @@ import Basket from "./svg/Basket";
 import Hamberger from "./svg/Hamberger";
 const Header = () => {
   const router: NextRouter = useRouter();
+  const goLogin = () => {
+    router.push("/login");
+  };
+  const goRegister = () => {
+    router.push("/register");
+  };
   return (
     <>
       <S.HeaderWrap>
@@ -29,9 +35,9 @@ const Header = () => {
               <Basket />
             </S.IconBox>
             <S.LoginMenu>
-              <S.LoginMenuLi>회원가입</S.LoginMenuLi>
+              <S.LoginMenuLi onClick={goRegister}>회원가입</S.LoginMenuLi>
               <S.LoginMenuLi>|</S.LoginMenuLi>
-              <S.LoginMenuLi>로그인</S.LoginMenuLi>
+              <S.LoginMenuLi onClick={goLogin}>로그인</S.LoginMenuLi>
               <S.LoginMenuLi>|</S.LoginMenuLi>
               <S.LoginMenuLi>고객센터</S.LoginMenuLi>
             </S.LoginMenu>

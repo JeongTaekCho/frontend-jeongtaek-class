@@ -8,7 +8,7 @@ const BoardListUi = ({ data, boardBestPost }: IBoardListUi) => {
       <S.BoardListWrapper>
         <S.BoardBestBoardTitle>베스트 게시글</S.BoardBestBoardTitle>
         <S.BoardBestLists>
-          {boardBestPost?.data?.fetchBoardsOfTheBest.map((bestBoard: any) => {
+          {boardBestPost?.fetchBoardsOfTheBest.map((bestBoard: any) => {
             return (
               <Link href={`/boards/${bestBoard._id}`} key={bestBoard._id}>
                 <S.BoardGalleryItem>

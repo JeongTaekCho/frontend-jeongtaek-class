@@ -1,4 +1,6 @@
+import { IQuery } from "../../../commons/types/generated/types";
+
 export interface IBoardListUi {
-  data: any;
-  boardBestPost: any;
+  data?: Pick<IQuery, "fetchBoards">;
+  boardBestPost?: Pick<IQuery, "fetchBoardsOfTheBest">;
 }

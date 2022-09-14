@@ -1,4 +1,5 @@
 import { ChangeEvent, MouseEvent } from "react";
+import { IQuery } from "../../../commons/types/generated/types";
 
 export interface IBoardWrite {
   isEdit?: boolean;
@@ -11,7 +12,7 @@ export interface IMyVariables {
     title?: string;
     contents?: string;
     youtubeUrl?: string;
-    boardAddress: {
+    boardAddress?: {
       zipcode?: string;
       address?: string;
       addressDetail?: string;
@@ -33,7 +34,7 @@ export interface IBoardWriteUi {
   youtubeLinkError: string;
   isEdit?: boolean;
   onEditBoard: (event: MouseEvent<HTMLButtonElement>) => void;
-  data: any;
+  data?: Pick<IQuery, "fetchBoard">;
   writeCancle: () => void;
   editCancle: () => void;
 }
