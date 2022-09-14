@@ -8,8 +8,6 @@ export const BoardDetailContainer = styled.div`
   @media ${(props: any) => props.theme.tablet} {
     width: 90%;
   }
-  @media (max-1199px) {
-  }
 `;
 
 export const BoardDetailTitleContainer = styled.div`

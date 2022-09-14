@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { ITheme } from "../../../../styles/theme";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -10,11 +9,11 @@ export const Container = styled.div`
   padding: 60px 102px 100px 102px;
   box-shadow: 0px 0px 12px gray;
   margin: 120px auto 0;
-  @media ${(props: ITheme) => props.tablet} {
+  @media ${(props: any) => props.theme.tablet} {
     width: 90%;
     padding: 40px 8.5%;
   }
-  @media ${(props: ITheme) => props.mobile} {
+  @media ${(props: any) => props.theme.mobile} {
     width: 90%;
     padding: 20px 8.5%;
   }
@@ -36,14 +35,14 @@ export const WritePasswordBox = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  @media ${(props: ITheme) => props.tablet} {
+  @media ${(props: any) => props.theme.tablet} {
     flex-direction: column;
   }
 `;
 
 export const HalfInputBox = styled.div`
   width: 48.6%;
-  @media ${(props: ITheme) => props.tablet} {
+  @media ${(props: any) => props.theme.tablet} {
     width: 100%;
   }
 `;
@@ -86,7 +85,7 @@ export const TextareaBox = styled(DefaultInputBox)`
     resize: none;
     font-size: 1.6rem;
     font-weight: 500;
-    @media ${(props: ITheme) => props.tablet} {
+    @media ${(props: any) => props.theme.tablet} {
       height: 40rem;
     }
   }
@@ -117,18 +116,18 @@ export const AddressNumInputBox = styled.div`
     font-weight: 500;
     color: #fff;
     cursor: pointer;
-    @media ${(props: ITheme) => props.mobile} {
+    @media ${(props: any) => props.theme.mobile} {
       width: 100%;
     }
   }
-  @media ${(props: ITheme) => props.mobile} {
+  @media ${(props: any) => props.theme.mobile} {
     flex-direction: column;
   }
 `;
 
 export const AddressNumInput = styled(DefaultInput)`
   width: 80px;
-  @media ${(props: ITheme) => props.mobile} {
+  @media ${(props: any) => props.theme.mobile} {
     width: 100%;
   }
 `;
@@ -146,14 +145,14 @@ export const PhotoClipBox = styled(DefaultInputBox)`
     border: none;
     outline: none;
     cursor: pointer;
-    @media ${(props: ITheme) => props.mobile} {
+    @media ${(props: any) => props.theme.mobile} {
       width: 30%;
       height: 0;
       padding-bottom: 28%;
       position: relative;
     }
     span {
-      @media ${(props: ITheme) => props.mobile} {
+      @media ${(props: any) => props.theme.mobile} {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -167,7 +166,7 @@ export const PhotoClipBtnBox = styled.div`
   width: 282px;
   display: flex;
   justify-content: space-between;
-  @media ${(props: ITheme) => props.mobile} {
+  @media ${(props: any) => props.theme.mobile} {
     width: 100%;
   }
 `;
@@ -197,7 +196,7 @@ export const FormSubmitBtn = styled.button`
   font-size: 1.6rem;
   font-weight: 500;
   color: #fff;
-  background: ${(props: ITheme) => props.mainColor};
+  background: ${(props: any) => props.theme.mainColor};
   cursor: pointer;
 `;
 
@@ -209,9 +208,9 @@ export const FormCancleBtn = styled(FormSubmitBtn)`
   outline: none;
   font-size: 1.6rem;
   font-weight: 500;
-  color: ${(props: ITheme) => props.mainColor};
+  color: ${(props: any) => props.theme.mainColor};
   background: #fff;
-  border: 1px solid ${(props: ITheme) => props.mainColor};
+  border: 1px solid ${(props: any) => props.theme.mainColor};
   cursor: pointer;
 `;
 
