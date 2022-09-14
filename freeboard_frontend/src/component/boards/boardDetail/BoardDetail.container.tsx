@@ -148,8 +148,8 @@ const BoardDetail = () => {
         setWriter("");
         setComment("");
         setPassword("");
-      } catch (error: any) {
-        alert(error);
+      } catch (error) {
+        if (error instanceof Error) alert(error);
       }
     }
   };

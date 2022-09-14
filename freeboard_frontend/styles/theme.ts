@@ -1,4 +1,4 @@
-interface IViewPort {
+export interface IViewPort {
   tabletSize: String;
   mobileSize: String;
 }
@@ -8,7 +8,7 @@ const viewPort: IViewPort = {
   mobileSize: "767px",
 };
 
-interface ITheme {
+export interface ITheme {
   tablet: string;
   mobile: string;
   mainColor: string;
