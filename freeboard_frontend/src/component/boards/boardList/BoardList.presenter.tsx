@@ -4,7 +4,12 @@ import { IBoardListUi } from "./BoardList.types";
 import { DatePicker, Space } from "antd";
 import "antd/dist/antd.css";
 
-const BoardListUi = ({ data, boardBestPost }: IBoardListUi) => {
+const BoardListUi = ({
+  data,
+  boardBestPost,
+  searchData,
+  onChangeSearchData,
+}: IBoardListUi) => {
   const { RangePicker } = DatePicker;
   return (
     <>
@@ -62,7 +67,11 @@ const BoardListUi = ({ data, boardBestPost }: IBoardListUi) => {
         </S.BoardBestLists>
         <S.SearchContainer>
           <S.SearchTitleBox>
-            <S.SearchTitle type="text" placeholder="제목을 검색해주세요." />
+            <S.SearchTitle
+              type="text"
+              placeholder="제목을 검색해주세요."
+              onChange={onChangeSearchData}
+            />
           </S.SearchTitleBox>
           <Space direction="vertical" size={12}>
             <RangePicker />
@@ -76,18 +85,24 @@ const BoardListUi = ({ data, boardBestPost }: IBoardListUi) => {
             <S.BoardLi3>작성자</S.BoardLi3>
             <S.BoardLi4>날짜</S.BoardLi4>
           </S.BoardUlTop>
-          {data?.fetchBoards?.map((item: any, index: number) => {
-            return (
-              <S.BoardUl key={item._id}>
-                <S.BoardLi1>{index + 1}</S.BoardLi1>
-                <Link href={`/boards/${String(item._id)}`}>
-                  <S.BoardLi2>{item ? item.title : "로딩중입니다"}</S.BoardLi2>
-                </Link>
-                <S.BoardLi3>{item?.writer}</S.BoardLi3>
-                <S.BoardLi4>{item?.createdAt.slice(0, 10)}</S.BoardLi4>
-              </S.BoardUl>
-            );
-          })}
+          {data?.fetchBoards
+            ?.filter((item) => {
+              return item?.title.includes(searchData);
+            })
+            .map((item: any, index: number) => {
+              return (
+                <S.BoardUl key={item._id}>
+                  <S.BoardLi1>{index + 1}</S.BoardLi1>
+                  <Link href={`/boards/${String(item._id)}`}>
+                    <S.BoardLi2>
+                      {item ? item.title : "로딩중입니다"}
+                    </S.BoardLi2>
+                  </Link>
+                  <S.BoardLi3>{item?.writer}</S.BoardLi3>
+                  <S.BoardLi4>{item?.createdAt.slice(0, 10)}</S.BoardLi4>
+                </S.BoardUl>
+              );
+            })}
         </S.BoardListContainer>
         <S.BoardFooterContainer>
           <div></div>

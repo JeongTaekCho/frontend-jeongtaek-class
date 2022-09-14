@@ -157,6 +157,7 @@ const BoardDetail = () => {
         setWriter("");
         setComment("");
         setPassword("");
+        setCommentRateValue(0);
       } catch (error) {
         if (error instanceof Error) alert(error);
       }
