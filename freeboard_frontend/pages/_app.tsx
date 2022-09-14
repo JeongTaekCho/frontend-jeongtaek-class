@@ -4,7 +4,6 @@ import { ThemeProvider } from "@emotion/react";
 import theme from "../styles/theme";
 import Footer from "../src/component/common/Footer";
 import Header from "../src/component/common/Header";
-import { Interface } from "readline";
 import { AppProps } from "next/app";
 
 function MyApp({ Component, pageProps }: AppProps) {

@@ -5,7 +5,7 @@ export interface ImyVariables {
   boardCommentId: string;
   password?: string;
   updateBoardCommentInput: {
-    rating: 1;
+    rating: number;
     contents?: string;
   };
 }
@@ -42,4 +42,8 @@ export interface IBoardDetailProps {
   commentId: string;
   udComment: string;
   commentError: boolean;
+  commentRateValue: number;
+  isEditRateValue: number;
+  onChangeCommentRate: (value: number) => void;
+  onChangeUpdateCommentRate: (value: number) => void;
 }

@@ -194,6 +194,9 @@ export const CommentTitleBox = styled.div`
   display: flex;
   gap: 14px;
   margin-bottom: 4.2rem;
+  img {
+    margin-top: 3px;
+  }
 `;
 
 export const CommentTitle = styled.p`

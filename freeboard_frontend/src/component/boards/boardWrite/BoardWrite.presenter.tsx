@@ -34,7 +34,7 @@ const BoardWriteUi = ({
                     placeholder="이름을 적어주세요."
                     onChange={onChangeinputState}
                     name="writer"
-                    value={isEdit ? String(data?.fetchBoard.writer) : undefined}
+                    value={isEdit ? String(data?.fetchBoard.writer) : null}
                   />
                   <S.ErrorMsg>{writerError}</S.ErrorMsg>
                 </S.DefaultInputBox>
@@ -80,7 +80,9 @@ const BoardWriteUi = ({
                   onChange={onChangeinputState}
                   placeholder="00000"
                   name="zipCode"
-                  defaultValue={String(data?.fetchBoard?.boardAddress?.zipcode)}
+                  defaultValue={
+                    isEdit && String(data?.fetchBoard?.boardAddress?.zipcode)
+                  }
                 />
                 <button type="button">우편번호 검색</button>
                 <S.ErrorMsg>{zipCodeError}</S.ErrorMsg>
@@ -89,14 +91,17 @@ const BoardWriteUi = ({
                 className="m1530"
                 onChange={onChangeinputState}
                 name="address"
-                defaultValue={String(data?.fetchBoard?.boardAddress?.address)}
+                defaultValue={
+                  isEdit && String(data?.fetchBoard?.boardAddress?.address)
+                }
               />
               <S.DefaultInput
                 onChange={onChangeinputState}
                 name="address2"
-                defaultValue={String(
-                  data?.fetchBoard?.boardAddress?.addressDetail
-                )}
+                defaultValue={
+                  isEdit &&
+                  String(data?.fetchBoard?.boardAddress?.addressDetail)
+                }
               />
               <S.ErrorMsg>{addressError}</S.ErrorMsg>
             </S.AddressWriteBox>
@@ -106,7 +111,7 @@ const BoardWriteUi = ({
                 placeholder="링크를 복사해주세요."
                 onChange={onChangeinputState}
                 name="youtubeLink"
-                defaultValue={String(data?.fetchBoard.youtubeUrl)}
+                defaultValue={isEdit && String(data?.fetchBoard.youtubeUrl)}
               />
               <S.ErrorMsg>{youtubeLinkError}</S.ErrorMsg>
             </S.DefaultInputBox>

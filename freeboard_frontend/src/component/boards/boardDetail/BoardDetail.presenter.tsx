@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { IQuery } from "../../../commons/types/generated/types";
 import * as S from "./BoardDetail.styled";
 import { IBoardDetailProps } from "./BoardDetail.types";
+import { Rate } from "antd";
+import "antd/dist/antd.css";
+import ReactPlayer from "react-player/youtube";
 
 const BoardDetailUi = ({
   onModal,
@@ -31,6 +33,10 @@ const BoardDetailUi = ({
   commentId,
   udComment,
   commentError,
+  commentRateValue,
+  onChangeCommentRate,
+  isEditRateValue,
+  onChangeUpdateCommentRate,
 }: IBoardDetailProps) => {
   return (
     <>
@@ -67,7 +73,7 @@ const BoardDetailUi = ({
           <S.DetailImage>추후 이미지로 바꿀 예정</S.DetailImage>
           <S.DetailContentBox>{data?.fetchBoard.contents}</S.DetailContentBox>
           <S.IframeContainer>
-            <iframe src={String(data?.fetchBoard.youtubeUrl)}></iframe>
+            <ReactPlayer url={String(data?.fetchBoard.youtubeUrl)} />
           </S.IframeContainer>
           <S.LikeAndUnLikeBox>
             <S.LikeAndUnLIkeContainer>
@@ -100,7 +106,9 @@ const BoardDetailUi = ({
           </S.BoardDefaultBtn>
         </S.BoardBtnContainer>
         <S.CommentTitleBox>
-          <img src="/board/commentTitle.png" />
+          <div>
+            <img src="/board/commentTitle.png" />
+          </div>
           <S.CommentTitle>댓글</S.CommentTitle>
         </S.CommentTitleBox>
         <S.CommentContainer>
@@ -120,20 +128,12 @@ const BoardDetailUi = ({
               onChange={onChangeComment}
             />
             <S.CommentStarBox>
-              <S.DefaultBtn>
-                <svg
-                  width="20"
-                  height="19"
-                  viewBox="0 0 20 19"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
-                    fill="#BDBDBD"
-                  />
-                </svg>
-              </S.DefaultBtn>
+              <Rate
+                allowHalf
+                defaultValue={0}
+                value={commentRateValue}
+                onChange={onChangeCommentRate}
+              />
             </S.CommentStarBox>
           </S.CommentHead>
           <S.CommentTextareaBox>
@@ -168,18 +168,7 @@ const BoardDetailUi = ({
                   <S.CommentNameAndRating>
                     <S.CommentViewName>{comment?.writer}</S.CommentViewName>
                     <S.CommentRatingBox>
-                      <svg
-                        width="20"
-                        height="19"
-                        viewBox="0 0 20 19"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
-                          fill="#FFD600"
-                        />
-                      </svg>
+                      <Rate allowHalf value={comment?.rating} disabled />
                     </S.CommentRatingBox>
                   </S.CommentNameAndRating>
                   <S.CommentViewContent>
@@ -239,20 +228,11 @@ const BoardDetailUi = ({
                       onChange={onChangeUdComment}
                     />
                     <S.CommentStarBox>
-                      <S.DefaultBtn>
-                        <svg
-                          width="20"
-                          height="19"
-                          viewBox="0 0 20 19"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
-                            fill="#BDBDBD"
-                          />
-                        </svg>
-                      </S.DefaultBtn>
+                      <Rate
+                        allowHalf
+                        defaultValue={comment?.rating}
+                        onChange={onChangeUpdateCommentRate}
+                      />
                     </S.CommentStarBox>
                   </S.CommentHead>
                   <S.CommentTextareaBox>

@@ -15,16 +15,14 @@ import {
 } from "./BoardDetail.querys";
 import {
   IMutation,
-  IMutationDeleteBoardArgs,
   IQuery,
   IQueryFetchBoardArgs,
   IQueryFetchBoardCommentsArgs,
-  IQueryFetchBoardsArgs,
 } from "../../../commons/types/generated/types";
 import { ImyVariables } from "./BoardDetail.types";
 
 const BoardDetail = () => {
-  //상태관리
+  // 상태관리
 
   const [writer, setWriter] = useState(""); // 작성자
   const [comment, setComment] = useState(""); // 댓글
@@ -37,6 +35,8 @@ const BoardDetail = () => {
   const [udPassword, setUdPassword] = useState(""); // 비밀번호
   const [udComment, setUdComment] = useState(""); // 댓글
   const [commentError, setCommentError] = useState(false);
+  const [commentRateValue, setCommentRateValue] = useState(0);
+  const [isEditRateValue, setIsEditCommentRateValue] = useState(0);
 
   // 유즈 라우터
   const router: NextRouter = useRouter();
@@ -67,7 +67,12 @@ const BoardDetail = () => {
     },
   });
 
-  // 좋아요 싫어요 카운트 변경시 유즈이펙트
+  const onChangeCommentRate = (event: number) => {
+    setCommentRateValue(event);
+  };
+  const onChangeUpdateCommentRate = (event: number) => {
+    setIsEditCommentRateValue(event);
+  };
 
   // 게시글 삭제 뮤테이션
   const [deleteBoard] =
@@ -102,7 +107,7 @@ const BoardDetail = () => {
     setCommentPsModal(false);
   };
 
-  //댓글 수정 박스 ON/OFF
+  // 댓글 수정 박스 ON/OFF
   const toggleCommentEdit = (event: MouseEvent<HTMLButtonElement>) => {
     setCommentId(event.currentTarget.id);
     setOnCommentEdit(!onCommentEdit);
@@ -110,13 +115,17 @@ const BoardDetail = () => {
 
   // 게시글 삭제 버튼 ONCLICK
   const boardDeleteSubmit = async () => {
-    deleteBoard({
-      variables: {
-        boardId: router.query.id,
-      },
-    });
-    alert("게시글 삭제가 완료되었습니다.");
-    router.push(`/boards`);
+    try {
+      await deleteBoard({
+        variables: {
+          boardId: router.query.id,
+        },
+      });
+      alert("게시글 삭제가 완료되었습니다.");
+      router.push(`/boards`);
+    } catch (error) {
+      if (error instanceof Error) alert(error);
+    }
   };
 
   // 댓글 작성 버튼 ONCLICK
@@ -133,7 +142,7 @@ const BoardDetail = () => {
               writer,
               password,
               contents: comment,
-              rating: 1,
+              rating: commentRateValue,
             },
           },
           refetchQueries: [
@@ -154,18 +163,18 @@ const BoardDetail = () => {
     }
   };
 
-  //댓글 수정 버튼 ONCLICK
+  // 댓글 수정 버튼 ONCLICK
 
   const commentEditSubmit = async () => {
     try {
       const myVariables: ImyVariables = {
         boardCommentId: commentId,
-        updateBoardCommentInput: {
-          rating: 1,
-        },
+        updateBoardCommentInput: {},
       };
       if (udPassword) myVariables.password = udPassword;
       if (udComment) myVariables.updateBoardCommentInput.contents = udComment;
+      if (udComment)
+        myVariables.updateBoardCommentInput.rating = isEditRateValue;
       await editComment({
         variables: myVariables,
         refetchQueries: [
@@ -209,9 +218,9 @@ const BoardDetail = () => {
   };
 
   // 좋아요 버튼 ONCLICK
-  const onClickLikeBtn = () => {
+  const onClickLikeBtn = async () => {
     try {
-      likeUpApi({
+      await likeUpApi({
         variables: {
           boardId: router.query.id,
         },
@@ -230,9 +239,9 @@ const BoardDetail = () => {
   };
 
   // 싫어요 버튼 ONCLICK
-  const onClickDisLikeBtn = () => {
+  const onClickDisLikeBtn = async () => {
     try {
-      disLikeUpApi({
+      await disLikeUpApi({
         variables: {
           boardId: router.query.id,
         },
@@ -290,7 +299,6 @@ const BoardDetail = () => {
   // 주소 상세보기 팝업창 ON/OFF
   const onModalBtn = () => {
     setOnModal(!onModal);
-    let a = 1;
   };
 
   // 날짜 데이터 슬라이스
@@ -332,6 +340,10 @@ const BoardDetail = () => {
         commentId={commentId}
         udComment={udComment}
         commentError={commentError}
+        commentRateValue={commentRateValue}
+        onChangeCommentRate={onChangeCommentRate}
+        isEditRateValue={isEditRateValue}
+        onChangeUpdateCommentRate={onChangeUpdateCommentRate}
       />
     </>
   );
