@@ -1,5 +1,4 @@
 import * as S from "./mainStyle";
-import MoveLeft from "../src/component/common/svg/MoveLeft";
 
 const Home = () => {
   return (

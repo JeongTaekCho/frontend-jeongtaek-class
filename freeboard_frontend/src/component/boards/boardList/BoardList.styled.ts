@@ -165,6 +165,7 @@ export const BoardUlTop = styled.ul`
   color: #000;
   border-bottom: 1px solid #bdbdbd;
   text-align: center;
+  margin: 0;
 `;
 export const BoardUl = styled(BoardUlTop)`
   font-size: 16px;
