@@ -52,10 +52,10 @@ export const ShareAndGpsBox = styled.div`
 
 export const DetailAddressBox = styled.div`
   width: 37.6rem;
-  height: 6.4rem;
+  height: 9.4rem;
   background: rgba(0, 0, 0, 0.6);
   position: absolute;
-  top: -6.5rem;
+  top: -9.5rem;
   right: 10px;
   display: flex;
   flex-direction: column;

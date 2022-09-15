@@ -1,5 +1,8 @@
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 import * as S from "./BoardWrite.styled";
 import { IBoardWriteUi } from "./BoardWrite.types";
+import "antd/dist/antd.css";
 
 const BoardWriteUi = ({
   onChangeinputState,
@@ -16,6 +19,12 @@ const BoardWriteUi = ({
   data,
   writeCancle,
   editCancle,
+  isModalOpen,
+  ToggleAddressModal,
+  handleComplete,
+  addressObj,
+  zipCode,
+  address,
 }: IBoardWriteUi) => {
   return (
     <>
@@ -34,7 +43,7 @@ const BoardWriteUi = ({
                     placeholder="이름을 적어주세요."
                     onChange={onChangeinputState}
                     name="writer"
-                    value={isEdit ? String(data?.fetchBoard.writer) : ""}
+                    defaultValue={isEdit ? String(data?.fetchBoard.writer) : ""}
                   />
                   <S.ErrorMsg>{writerError}</S.ErrorMsg>
                 </S.DefaultInputBox>
@@ -80,13 +89,16 @@ const BoardWriteUi = ({
                   onChange={onChangeinputState}
                   placeholder="00000"
                   name="zipCode"
+                  value={zipCode}
                   defaultValue={
                     isEdit
                       ? String(data?.fetchBoard?.boardAddress?.zipcode)
                       : ""
                   }
                 />
-                <button type="button">우편번호 검색</button>
+                <button type="button" onClick={ToggleAddressModal}>
+                  우편번호 검색
+                </button>
                 <S.ErrorMsg>{zipCodeError}</S.ErrorMsg>
               </S.AddressNumInputBox>
               <S.DefaultInput
@@ -96,6 +108,7 @@ const BoardWriteUi = ({
                 defaultValue={
                   isEdit ? String(data?.fetchBoard?.boardAddress?.address) : ""
                 }
+                value={address}
               />
               <S.DefaultInput
                 onChange={onChangeinputState}
@@ -105,6 +118,7 @@ const BoardWriteUi = ({
                     ? String(data?.fetchBoard?.boardAddress?.addressDetail)
                     : ""
                 }
+                // value={addressObj?.buildingName}
               />
               <S.ErrorMsg>{addressError}</S.ErrorMsg>
             </S.AddressWriteBox>
@@ -156,6 +170,15 @@ const BoardWriteUi = ({
           </S.BoardWriteForm>
         </S.Container>
       </S.Wrapper>
+      {isModalOpen && (
+        <Modal
+          title="Basic Modal"
+          open={isModalOpen}
+          onCancel={ToggleAddressModal}
+        >
+          <DaumPostcodeEmbed onComplete={handleComplete} />
+        </Modal>
+      )}
     </>
   );
 };

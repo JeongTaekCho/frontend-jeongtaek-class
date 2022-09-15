@@ -16,7 +16,7 @@ const BoardListUi = ({
       <S.BoardListWrapper>
         <S.BoardBestBoardTitle>베스트 게시글</S.BoardBestBoardTitle>
         <S.BoardBestLists>
-          {boardBestPost?.fetchBoardsOfTheBest.map((bestBoard: any) => {
+          {boardBestPost?.fetchBoardsOfTheBest.map((bestBoard) => {
             return (
               <Link
                 href={`/boards/${String(bestBoard._id)}`}
@@ -89,7 +89,7 @@ const BoardListUi = ({
             ?.filter((item) => {
               return item?.title.includes(searchData);
             })
-            .map((item: any, index: number) => {
+            .map((item, index) => {
               return (
                 <S.BoardUl key={item._id}>
                   <S.BoardLi1>{index + 1}</S.BoardLi1>

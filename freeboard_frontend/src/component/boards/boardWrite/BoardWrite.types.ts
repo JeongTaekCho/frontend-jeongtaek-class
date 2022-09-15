@@ -20,6 +20,14 @@ export interface IMyVariables {
   };
 }
 
+export interface IAddress {
+  address?: string;
+  buildingName?: string;
+  zonecode?: string;
+  prevState: undefined;
+  jibunAddress?: string;
+}
+
 export interface IBoardWriteUi {
   onChangeinputState: (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -37,4 +45,10 @@ export interface IBoardWriteUi {
   data?: Pick<IQuery, "fetchBoard">;
   writeCancle: () => void;
   editCancle: () => void;
+  isModalOpen: boolean;
+  ToggleAddressModal: () => void;
+  handleComplete: (event: IAddress) => void;
+  addressObj?: IAddress;
+  zipCode: string;
+  address: string;
 }

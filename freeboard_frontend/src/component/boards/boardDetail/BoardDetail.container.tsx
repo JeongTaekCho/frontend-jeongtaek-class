@@ -193,8 +193,8 @@ const BoardDetail = () => {
       setUdComment("");
       setUdPassword("");
       setOnCommentEdit(false);
-    } catch (error: any) {
-      alert(error);
+    } catch (error) {
+      if (error instanceof Error) alert(error);
     }
   };
 
@@ -217,7 +217,7 @@ const BoardDetail = () => {
       });
       setCommentPsModal(false);
     } catch (error) {
-      alert(error);
+      if (error instanceof Error) alert(error);
     }
   };
 
@@ -237,8 +237,8 @@ const BoardDetail = () => {
           },
         ],
       });
-    } catch (error: any) {
-      alert(error);
+    } catch (error) {
+      if (error instanceof Error) alert(error);
     }
   };
 
@@ -258,8 +258,8 @@ const BoardDetail = () => {
           },
         ],
       });
-    } catch (error: any) {
-      alert(error);
+    } catch (error) {
+      if (error instanceof Error) alert(error);
     }
   };
 

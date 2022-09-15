@@ -1,7 +1,7 @@
 import Link from "next/link";
 import * as S from "./BoardDetail.styled";
 import { IBoardDetailProps } from "./BoardDetail.types";
-import { Rate } from "antd";
+import { Modal, Rate } from "antd";
 import "antd/dist/antd.css";
 import ReactPlayer from "react-player/youtube";
 
@@ -163,7 +163,7 @@ const BoardDetailUi = ({
           {commentError ? "빈값을 입력해주세요." : null}
         </S.CommentErrorText>
       </S.BoardDetailContainer>
-      {commentResult?.fetchBoardComments.map((comment: any, i: number) => {
+      {commentResult?.fetchBoardComments.map((comment) => {
         return (
           <S.CommentViewBox key={comment._id}>
             <S.CommentViewContainer>
@@ -225,7 +225,7 @@ const BoardDetailUi = ({
                       type="text"
                       placeholder="작성자"
                       name="writer"
-                      defaultValue={comment?.writer}
+                      defaultValue={String(comment?.writer)}
                       disabled
                     />
                     <S.CommentInput
@@ -266,22 +266,32 @@ const BoardDetailUi = ({
         );
       })}
       {commentPsModal ? (
-        <S.CommentPasswordBox>
-          <S.CommentPassWordForm>
-            <S.CommentPasswordInput
-              type="password"
-              placeholder="비밀번호를 입력해주세요."
-              onChange={onChangeCommentDelPassword}
-            />
-            <S.CommentPasswordDeleteBtn onClick={commentDeleteSubmit}>
-              삭제하기
-            </S.CommentPasswordDeleteBtn>
-            <S.CommentDeleteBoxCloseBtn onClick={closeCommentPsModal}>
-              X
-            </S.CommentDeleteBoxCloseBtn>
-          </S.CommentPassWordForm>
-        </S.CommentPasswordBox>
-      ) : null}
+        <Modal
+          title="Basic Modal"
+          open={onCommentPsModal}
+          // onOk={handleOk}
+          // onCancel={handleCancel}
+        >
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
+      ) : // <S.CommentPasswordBox>
+      //   <S.CommentPassWordForm>
+      //     <S.CommentPasswordInput
+      //       type="password"
+      //       placeholder="비밀번호를 입력해주세요."
+      //       onChange={onChangeCommentDelPassword}
+      //     />
+      //     <S.CommentPasswordDeleteBtn onClick={commentDeleteSubmit}>
+      //       삭제하기
+      //     </S.CommentPasswordDeleteBtn>
+      //     <S.CommentDeleteBoxCloseBtn onClick={closeCommentPsModal}>
+      //       X
+      //     </S.CommentDeleteBoxCloseBtn>
+      //   </S.CommentPassWordForm>
+      // </S.CommentPasswordBox>
+      null}
     </>
   );
 };

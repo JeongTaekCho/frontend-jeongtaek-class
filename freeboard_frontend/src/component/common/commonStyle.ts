@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 
 export const HeaderWrap = styled.div`
   width: 100%;
-  box-shadow: 0px 1px 10px ${(props) => props.theme.mainColor};
+  box-shadow: 0px 1px 10px ${(props: any) => props.theme.mainColor};
 `;
 export const HeaderBox = styled.div`
   width: 1200px;
@@ -35,7 +35,7 @@ export const SearchBox = styled.div`
   height: 48px;
   display: flex;
   justify-content: space-between;
-  border: 1px solid ${(props) => props.theme.mainColor};
+  border: 1px solid ${(props: any) => props.theme.mainColor};
 `;
 export const IconBox = styled.div`
   display: flex;
@@ -88,7 +88,7 @@ export const CategoryMenu = styled.button`
   background: none;
   cursor: pointer;
   &:hover > span {
-    color: ${(props) => props.theme.mainColor};
+    color: ${(props: any) => props.theme.mainColor};
   }
 `;
 
@@ -113,7 +113,7 @@ export const CommonMenuLi = styled.li`
   color: #111;
   cursor: pointer;
   &:hover {
-    color: ${(props) => props.theme.mainColor};
+    color: ${(props: any) => props.theme.mainColor};
   }
 `;
 
@@ -125,7 +125,7 @@ export const CommonMessageBox = styled.div`
 export const CommonMessage = styled.button`
   width: 120px;
   height: 32px;
-  border: 1px solid ${(props) => props.theme.mainColor};
+  border: 1px solid ${(props: any) => props.theme.mainColor};
   background: none;
   border-radius: 15px;
   font-size: 13px;
@@ -133,13 +133,13 @@ export const CommonMessage = styled.button`
   color: #ddd;
   cursor: pointer;
   &:hover {
-    background: ${(props) => props.theme.mainColor};
+    background: ${(props: any) => props.theme.mainColor};
   }
   &:hover > span {
     color: #fff;
   }
   span {
-    color: ${(props) => props.theme.mainColor};
+    color: ${(props: any) => props.theme.mainColor};
   }
 `;
 
