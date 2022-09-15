@@ -268,30 +268,17 @@ const BoardDetailUi = ({
       {commentPsModal ? (
         <Modal
           title="Basic Modal"
-          open={onCommentPsModal}
-          // onOk={handleOk}
-          // onCancel={handleCancel}
+          open={commentPsModal}
+          onOk={commentDeleteSubmit}
+          onCancel={closeCommentPsModal}
         >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+          <S.CommentPasswordInput
+            type="password"
+            placeholder="비밀번호를 입력해주세요."
+            onChange={onChangeCommentDelPassword}
+          />
         </Modal>
-      ) : // <S.CommentPasswordBox>
-      //   <S.CommentPassWordForm>
-      //     <S.CommentPasswordInput
-      //       type="password"
-      //       placeholder="비밀번호를 입력해주세요."
-      //       onChange={onChangeCommentDelPassword}
-      //     />
-      //     <S.CommentPasswordDeleteBtn onClick={commentDeleteSubmit}>
-      //       삭제하기
-      //     </S.CommentPasswordDeleteBtn>
-      //     <S.CommentDeleteBoxCloseBtn onClick={closeCommentPsModal}>
-      //       X
-      //     </S.CommentDeleteBoxCloseBtn>
-      //   </S.CommentPassWordForm>
-      // </S.CommentPasswordBox>
-      null}
+      ) : null}
     </>
   );
 };

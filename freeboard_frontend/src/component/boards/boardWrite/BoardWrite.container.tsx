@@ -6,6 +6,7 @@ import { CREATE_BOARD, EDIT_BOARD } from "./BoardWrite.querys";
 import { FETCH_BOARD } from "../boardDetail/BoardDetail.querys";
 import { IAddress, IBoardWrite, IMyVariables } from "./BoardWrite.types";
 import { IMutation, IQuery } from "../../../commons/types/generated/types";
+import { errorModal, successModal } from "../../common/modal/modal-function";
 
 const BoardWrite = ({ isEdit }: IBoardWrite) => {
   // 게시판 인풋 상태관리
@@ -29,7 +30,6 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
 
   // 주소
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [addressObj, setAddressObj] = useState();
 
   const router: NextRouter = useRouter();
 
@@ -147,21 +147,23 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
         address2 &&
         youtubeLink
       ) {
-        alert("게시글 등록이 완료 되었습니다.");
+        successModal("게시글 등록이 완료 되었습니다.");
         await router.push(`/boards/${String(data?.createBoard._id)}`);
       }
     } catch (error) {
-      if (error instanceof Error) console.log(error);
+      if (error instanceof Error) errorModal(error.message);
     }
   };
 
   // 게시글 등록 취소
   const writeCancle = async () => {
+    successModal("게시글 작성을 취소하였습니다.");
     await router.push("/boards");
   };
 
   // 게시글 수정 취소
   const editCancle = async () => {
+    successModal("게시글 수정을 취소하였습니다.");
     await router.push(`/boards/${String(router.query.id)}`);
   };
 
@@ -188,13 +190,13 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
       if (content) myVariables.updateBoardInput.contents = content;
       if (youtubeLink) myVariables.updateBoardInput.youtubeUrl = youtubeLink;
 
-      const result = await updateBoard({
+      await updateBoard({
         variables: myVariables,
       });
-      console.log(result);
+      successModal("게시글 수정을 완료하였습니다.");
       await router.push(`/boards/${String(router.query.id)}`);
     } catch (error) {
-      alert(error);
+      if (error instanceof Error) errorModal(error.message);
     }
   };
 
@@ -204,7 +206,7 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
 
   const handleComplete = (address: IAddress) => {
     setIsModalOpen((prev) => !prev);
-    console.log(address); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    console.log(address);
     setZipCode(address.zonecode);
     setAddress(`${address.address} ${address.jibunAddress}`);
   };
@@ -229,7 +231,6 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
         isModalOpen={isModalOpen}
         ToggleAddressModal={ToggleAddressModal}
         handleComplete={handleComplete}
-        addressObj={addressObj}
         zipCode={zipCode}
         address={address}
       />

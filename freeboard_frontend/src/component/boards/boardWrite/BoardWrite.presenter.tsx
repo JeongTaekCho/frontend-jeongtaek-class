@@ -22,10 +22,10 @@ const BoardWriteUi = ({
   isModalOpen,
   ToggleAddressModal,
   handleComplete,
-  addressObj,
   zipCode,
   address,
 }: IBoardWriteUi) => {
+  console.log(data);
   return (
     <>
       <S.Wrapper>
@@ -43,7 +43,7 @@ const BoardWriteUi = ({
                     placeholder="이름을 적어주세요."
                     onChange={onChangeinputState}
                     name="writer"
-                    defaultValue={isEdit ? String(data?.fetchBoard.writer) : ""}
+                    defaultValue={data?.fetchBoard.writer}
                   />
                   <S.ErrorMsg>{writerError}</S.ErrorMsg>
                 </S.DefaultInputBox>
@@ -68,7 +68,7 @@ const BoardWriteUi = ({
                 placeholder="제목을 작성해주세요."
                 onChange={onChangeinputState}
                 name="title"
-                defaultValue={data?.fetchBoard.title}
+                defaultValue={data?.fetchBoard?.title}
               />
               <S.ErrorMsg>{titleError}</S.ErrorMsg>
             </S.DefaultInputBox>
@@ -78,7 +78,7 @@ const BoardWriteUi = ({
                 placeholder="내용을 작성해주세요."
                 onChange={onChangeinputState}
                 name="content"
-                defaultValue={data?.fetchBoard.contents}
+                defaultValue={data?.fetchBoard?.contents}
               />
               <S.ErrorMsg>{contentError}</S.ErrorMsg>
             </S.TextareaBox>
@@ -89,12 +89,10 @@ const BoardWriteUi = ({
                   onChange={onChangeinputState}
                   placeholder="00000"
                   name="zipCode"
-                  value={zipCode}
-                  defaultValue={
-                    isEdit
-                      ? String(data?.fetchBoard?.boardAddress?.zipcode)
-                      : ""
+                  value={
+                    isEdit ? data?.fetchBoard.boardAddress?.zipcode : zipCode
                   }
+                  disabled
                 />
                 <button type="button" onClick={ToggleAddressModal}>
                   우편번호 검색
@@ -105,20 +103,15 @@ const BoardWriteUi = ({
                 className="m1530"
                 onChange={onChangeinputState}
                 name="address"
-                defaultValue={
-                  isEdit ? String(data?.fetchBoard?.boardAddress?.address) : ""
+                value={
+                  isEdit ? data?.fetchBoard.boardAddress?.address : address
                 }
-                value={address}
+                disabled
               />
               <S.DefaultInput
                 onChange={onChangeinputState}
                 name="address2"
-                defaultValue={
-                  isEdit
-                    ? String(data?.fetchBoard?.boardAddress?.addressDetail)
-                    : ""
-                }
-                // value={addressObj?.buildingName}
+                defaultValue={data?.fetchBoard?.boardAddress?.addressDetail}
               />
               <S.ErrorMsg>{addressError}</S.ErrorMsg>
             </S.AddressWriteBox>
@@ -128,7 +121,7 @@ const BoardWriteUi = ({
                 placeholder="링크를 복사해주세요."
                 onChange={onChangeinputState}
                 name="youtubeLink"
-                defaultValue={isEdit ? String(data?.fetchBoard.youtubeUrl) : ""}
+                defaultValue={data?.fetchBoard?.youtubeUrl}
               />
               <S.ErrorMsg>{youtubeLinkError}</S.ErrorMsg>
             </S.DefaultInputBox>
@@ -172,7 +165,7 @@ const BoardWriteUi = ({
       </S.Wrapper>
       {isModalOpen && (
         <Modal
-          title="Basic Modal"
+          title="대한민국의 모든 주소를 찾아주는 신기한 도구!!"
           open={isModalOpen}
           onCancel={ToggleAddressModal}
         >

@@ -20,6 +20,7 @@ import {
   IQueryFetchBoardCommentsArgs,
 } from "../../../commons/types/generated/types";
 import { ImyVariables } from "./BoardDetail.types";
+import { errorModal, successModal } from "../../common/modal/modal-function";
 
 const BoardDetail = () => {
   // 상태관리
@@ -121,10 +122,10 @@ const BoardDetail = () => {
           boardId: router.query.id,
         },
       });
-      alert("게시글 삭제가 완료되었습니다.");
+      successModal("게시글을 삭제하였습니다.");
       await router.push(`/boards`);
     } catch (error) {
-      if (error instanceof Error) alert(error);
+      if (error instanceof Error) errorModal(error.message);
     }
   };
 
@@ -158,8 +159,9 @@ const BoardDetail = () => {
         setComment("");
         setPassword("");
         setCommentRateValue(0);
+        successModal("댓글을 작성하였습니다.");
       } catch (error) {
-        if (error instanceof Error) alert(error);
+        if (error instanceof Error) errorModal(error.message);
       }
     }
   };
@@ -193,8 +195,9 @@ const BoardDetail = () => {
       setUdComment("");
       setUdPassword("");
       setOnCommentEdit(false);
+      successModal("댓글을 수정하였습니다.");
     } catch (error) {
-      if (error instanceof Error) alert(error);
+      if (error instanceof Error) errorModal(error.message);
     }
   };
 
@@ -215,9 +218,12 @@ const BoardDetail = () => {
           },
         ],
       });
+      successModal("댓글을 삭제하였습니다.");
       setCommentPsModal(false);
     } catch (error) {
-      if (error instanceof Error) alert(error);
+      if (error instanceof Error) {
+        errorModal(error.message);
+      }
     }
   };
 
