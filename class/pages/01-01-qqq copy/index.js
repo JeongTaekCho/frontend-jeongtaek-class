@@ -1,3 +1,5 @@
+import styled from "@emotion/styled";
+
 export default function Qqq() {
   const Test = styled.div`
     width: 100px;
