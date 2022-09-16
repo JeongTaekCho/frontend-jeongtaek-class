@@ -1,4 +1,5 @@
 import { ChangeEvent, MouseEvent } from "react";
+import { Address } from "react-daum-postcode";
 import { IQuery } from "../../../commons/types/generated/types";
 
 export interface IBoardWrite {
@@ -20,14 +21,6 @@ export interface IMyVariables {
   };
 }
 
-export interface IAddress {
-  address?: string;
-  buildingName?: string;
-  zonecode?: string;
-  prevState: undefined;
-  jibunAddress?: string;
-}
-
 export interface IBoardWriteUi {
   onChangeinputState: (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -42,13 +35,12 @@ export interface IBoardWriteUi {
   youtubeLinkError: string;
   isEdit?: boolean;
   onEditBoard: (event: MouseEvent<HTMLButtonElement>) => void;
-  data?: Pick<IQuery, "fetchBoard">;
+  data: Pick<IQuery, "fetchBoard"> | undefined;
   writeCancle: () => void;
   editCancle: () => void;
   isModalOpen: boolean;
   ToggleAddressModal: () => void;
-  handleComplete: (event: IAddress) => void;
-  addressObj?: IAddress;
+  handleComplete: (event: Address) => void;
   zipCode: string;
   address: string;
 }

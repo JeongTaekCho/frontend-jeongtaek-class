@@ -36,7 +36,7 @@ const BoardDetail = () => {
   const [udPassword, setUdPassword] = useState(""); // 비밀번호
   const [udComment, setUdComment] = useState(""); // 댓글
   const [commentError, setCommentError] = useState(false);
-  const [commentRateValue, setCommentRateValue] = useState(0);
+  const [commentRateValue, setCommentRateValue] = useState(3);
   const [isEditRateValue, setIsEditCommentRateValue] = useState(0);
 
   // 유즈 라우터

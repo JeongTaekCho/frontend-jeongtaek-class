@@ -43,7 +43,11 @@ const BoardWriteUi = ({
                     placeholder="이름을 적어주세요."
                     onChange={onChangeinputState}
                     name="writer"
-                    defaultValue={data?.fetchBoard.writer}
+                    defaultValue={
+                      data?.fetchBoard.writer
+                        ? String(data?.fetchBoard.writer)
+                        : ""
+                    }
                   />
                   <S.ErrorMsg>{writerError}</S.ErrorMsg>
                 </S.DefaultInputBox>
@@ -86,11 +90,15 @@ const BoardWriteUi = ({
               <p>주소</p>
               <S.AddressNumInputBox>
                 <S.AddressNumInput
-                  onChange={onChangeinputState}
                   placeholder="00000"
                   name="zipCode"
                   value={
-                    isEdit ? data?.fetchBoard.boardAddress?.zipcode : zipCode
+                    (isEdit &&
+                      data?.fetchBoard.boardAddress?.zipcode &&
+                      address) ??
+                    !isEdit
+                      ? zipCode
+                      : String(data?.fetchBoard.boardAddress?.zipcode)
                   }
                   disabled
                 />
@@ -101,17 +109,25 @@ const BoardWriteUi = ({
               </S.AddressNumInputBox>
               <S.DefaultInput
                 className="m1530"
-                onChange={onChangeinputState}
                 name="address"
                 value={
-                  isEdit ? data?.fetchBoard.boardAddress?.address : address
+                  (isEdit &&
+                    data?.fetchBoard.boardAddress?.address &&
+                    address) ??
+                  !isEdit
+                    ? address
+                    : String(data?.fetchBoard.boardAddress?.address)
                 }
                 disabled
               />
               <S.DefaultInput
                 onChange={onChangeinputState}
                 name="address2"
-                defaultValue={data?.fetchBoard?.boardAddress?.addressDetail}
+                defaultValue={
+                  data?.fetchBoard?.boardAddress?.addressDetail
+                    ? String(data?.fetchBoard?.boardAddress?.addressDetail)
+                    : ""
+                }
               />
               <S.ErrorMsg>{addressError}</S.ErrorMsg>
             </S.AddressWriteBox>
@@ -121,7 +137,11 @@ const BoardWriteUi = ({
                 placeholder="링크를 복사해주세요."
                 onChange={onChangeinputState}
                 name="youtubeLink"
-                defaultValue={data?.fetchBoard?.youtubeUrl}
+                defaultValue={
+                  data?.fetchBoard?.youtubeUrl
+                    ? String(data?.fetchBoard?.youtubeUrl)
+                    : ""
+                }
               />
               <S.ErrorMsg>{youtubeLinkError}</S.ErrorMsg>
             </S.DefaultInputBox>

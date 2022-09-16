@@ -4,9 +4,10 @@ import { useMutation, useQuery } from "@apollo/client";
 import BoardWriteUi from "./BoardWrite.presenter";
 import { CREATE_BOARD, EDIT_BOARD } from "./BoardWrite.querys";
 import { FETCH_BOARD } from "../boardDetail/BoardDetail.querys";
-import { IAddress, IBoardWrite, IMyVariables } from "./BoardWrite.types";
+import { IBoardWrite, IMyVariables } from "./BoardWrite.types";
 import { IMutation, IQuery } from "../../../commons/types/generated/types";
 import { errorModal, successModal } from "../../common/modal/modal-function";
+import { Address } from "react-daum-postcode";
 
 const BoardWrite = ({ isEdit }: IBoardWrite) => {
   // 게시판 인풋 상태관리
@@ -204,7 +205,7 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
     setIsModalOpen((prev) => !prev);
   };
 
-  const handleComplete = (address: IAddress) => {
+  const handleComplete = (address: Address) => {
     setIsModalOpen((prev) => !prev);
     console.log(address);
     setZipCode(address.zonecode);
