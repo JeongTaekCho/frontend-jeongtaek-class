@@ -20,6 +20,7 @@ export const BoardDetailTitleContainer = styled.div`
 export const DetailWriterAndDateBox = styled.div`
   display: flex;
   gap: 1.7rem;
+  align-items: center;
 `;
 export const DetailProfileImg = styled.div`
   width: 47px;

@@ -1,5 +1,5 @@
-import * as S from "./commonStyle";
-import Logo from "./svg/Logo";
+import * as S from "../../../../commons/commonStyle";
+import Logo from "../../svg/Logo";
 
 const Footer = () => {
   return (

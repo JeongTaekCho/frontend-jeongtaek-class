@@ -2,14 +2,15 @@ import styled from "@emotion/styled";
 
 export const SlideBox = styled.div`
   width: 100%;
-  height: 370px;
-  background: url("https://img-cf.kurly.com/cdn-cgi/image/format=auto/banner/main/pc/img/5a5ecfbd-6615-4593-955f-2725c82134d7");
   font-size: 30px;
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 80px;
+  img {
+    width: 100%;
+  }
 `;
 
 export const MainContainer = styled.div`

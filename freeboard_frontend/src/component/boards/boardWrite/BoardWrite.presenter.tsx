@@ -93,12 +93,14 @@ const BoardWriteUi = ({
                   placeholder="00000"
                   name="zipCode"
                   value={
-                    (isEdit &&
-                      data?.fetchBoard.boardAddress?.zipcode &&
-                      address) ??
-                    !isEdit
-                      ? zipCode
-                      : String(data?.fetchBoard.boardAddress?.zipcode)
+                    // (isEdit &&
+                    //   data?.fetchBoard.boardAddress?.zipcode &&
+                    //   address) ??
+                    // !isEdit
+                    //   ? zipCode
+                    //   : String(data?.fetchBoard.boardAddress?.zipcode)
+
+                    (address || data?.fetchBoard.boardAddress?.zipcode) ?? ""
                   }
                   disabled
                 />

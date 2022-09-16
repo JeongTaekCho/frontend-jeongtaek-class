@@ -1,11 +1,11 @@
-import * as S from "./commonStyle";
+import * as S from "../../../../commons/commonStyle";
 import { NextRouter, useRouter } from "next/router";
 // import Logo from "./svg/Logo";
-import SearchBtn from "./svg/SearchBtn";
-import Gps from "./svg/Gps";
-import Heart from "./svg/Heart";
-import Basket from "./svg/Basket";
-import Hamberger from "./svg/Hamberger";
+import SearchBtn from "../../svg/SearchBtn";
+import Gps from "../../svg/Gps";
+import Heart from "../../svg/Heart";
+import Basket from "../../svg/Basket";
+import Hamberger from "../../svg/Hamberger";
 const Header = () => {
   const router: NextRouter = useRouter();
   const goLogin = async () => {
