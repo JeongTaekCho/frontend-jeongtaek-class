@@ -1,16 +1,11 @@
 import "../styles/globals.css";
 import { ApolloProvider, InMemoryCache, ApolloClient } from "@apollo/client";
-import { css, ThemeProvider, Global } from "@emotion/react";
+import { ThemeProvider, Global } from "@emotion/react";
 import theme from "../styles/theme";
 import Footer from "../src/component/common/Footer";
 import Header from "../src/component/common/Header";
 import { AppProps } from "next/app";
-
-const GlobalStyle = css`
-  p {
-    margin-bottom: 0;
-  }
-`;
+import { GlobalStyles } from "../src/commons/globalStyles";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
@@ -21,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
-        <Global styles={GlobalStyle} />
+        <Global styles={GlobalStyles} />
         <Header></Header>
         <Component {...pageProps} />
         <Footer></Footer>
