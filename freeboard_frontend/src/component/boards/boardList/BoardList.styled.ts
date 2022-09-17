@@ -23,6 +23,10 @@ export const BoardGalleryItem = styled.div`
   border-radius: 30px;
   box-shadow: 0px 3px 10px gray;
   cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+    transition: ease-in-out 0.2s;
+  }
 `;
 export const BoardGrlleryThum = styled.div`
   width: 100%;
@@ -173,16 +177,26 @@ export const BoardUl = styled(BoardUlTop)`
   color: #4f4f4f;
   text-align: center;
   border-top: 1px solid #bdbdbd;
+  &:hover {
+    background-color: #ff00d1;
+    transition: ease-in-out 0.2s;
+    li {
+      color: #fff;
+      /* font-weight: 500; */
+    }
+  }
 `;
 export const BoardLi1 = styled.li`
   width: 9.5%;
 `;
 export const BoardLi2 = styled.li`
   width: 62.9%;
+  height: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   cursor: pointer;
+  line-height: 50px;
 `;
 export const BoardLi3 = styled.li`
   width: 10.83%;
@@ -221,7 +235,7 @@ export const BoardWriteBtn = styled.button`
   cursor: pointer;
   background: none;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #000;
   display: flex;

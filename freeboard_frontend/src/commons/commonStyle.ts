@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 
 export const HeaderWrap = styled.div`
   width: 100%;
-  box-shadow: 0px 1px 10px ${(props: any) => props.theme.mainColor};
+  box-shadow: 0px 1px 7px #ef9f84;
 `;
 export const HeaderBox = styled.div`
   width: 1200px;

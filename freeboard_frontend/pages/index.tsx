@@ -23,7 +23,7 @@ const Home = () => {
     appendDots: (dots: any) => (
       <div
         style={{
-          backgroundColor: "#f9562180",
+          backgroundColor: "#eee",
           padding: "10px",
           bottom: "35px",
         }}
