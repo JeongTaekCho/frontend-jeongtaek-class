@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const RegisterContainer = styled.div`
+export const RegisterContainer = styled.form`
   width: 640px;
   margin: 0 auto;
   padding: 50px 0 60px;
@@ -100,7 +100,7 @@ export const SelectGenderBox = styled.div`
 export const SelectGenderContainer = styled.div``;
 
 export const DefaultCheckBox = styled.input`
-  /* display: none; */
+  display: none;
 `;
 export const GenderCheckBox = styled.div`
   width: 24px;
@@ -135,4 +135,45 @@ export const GenderCheckBoxLabel = styled.label`
   font-weight: 400;
   color: #111;
   cursor: pointer;
+`;
+
+export const BirthdayBox = styled.div`
+  width: 100%;
+  height: 46px;
+  border: 1px solid #ddd;
+  padding: 0 15px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+`;
+
+export const BirthdayInput = styled.input`
+  width: 31.5%;
+  height: 100%;
+  text-align: center;
+  outline: none;
+  background: none;
+  border: none;
+`;
+
+export const RegisterBtn = styled.input`
+  display: block;
+  width: 240px;
+  height: 56px;
+  border: none;
+  background-color: ${(props: any) => props.theme.mainColor};
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  margin: 20px auto 0;
+  cursor: pointer;
+`;
+
+export const AddressInput = styled(InputContentInput)`
+  margin-bottom: 15px;
+  &:disabled {
+    background-color: rgba(250, 250, 250);
+  }
 `;

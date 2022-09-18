@@ -51,7 +51,7 @@ export const LoginBtn = styled.button`
   width: 100%;
   height: 54px;
   border: none;
-  background: #5f0080;
+  background: ${(props: any) => props.theme.mainColor};
   font-size: 16px;
   font-weight: 500;
   color: #fff;
@@ -61,7 +61,7 @@ export const LoginBtn = styled.button`
 
 export const JoinBtn = styled(LoginBtn)`
   background: #fff;
-  border: 1px solid #5f0080;
-  color: #5f0080;
+  border: 1px solid ${(props: any) => props.theme.mainColor};
+  color: ${(props: any) => props.theme.mainColor};
   margin-bottom: 0;
 `;

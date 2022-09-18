@@ -112,6 +112,11 @@ const RegisterUi = ({
                 </S.InputTitleLabel>
               </S.InputTitleBox>
               <S.InputContentBox>
+                <S.AddressInput type="text" disabled />
+                <S.AddressInput
+                  type="text"
+                  placeholder="상세주소를 입력해주세요."
+                />
                 <S.InputAddressFindBtn>주소 검색</S.InputAddressFindBtn>
                 <S.InputAddressText>
                   배송지에 따라 상품 정보가 달라질 수 있습니다.
@@ -191,11 +196,23 @@ const RegisterUi = ({
               <S.InputTitleBox>
                 <S.InputTitleLabel htmlFor="">생년월일</S.InputTitleLabel>
               </S.InputTitleBox>
-              <S.InputContentBox></S.InputContentBox>
-              <S.InputConfirmBox></S.InputConfirmBox>
+              <S.InputContentBox>
+                <S.BirthdayBox>
+                  <S.BirthdayInput
+                    type="text"
+                    placeholder="YYYY"
+                    maxLength={4}
+                  />
+                  /
+                  <S.BirthdayInput type="text" placeholder="MM" maxLength={2} />
+                  /
+                  <S.BirthdayInput type="text" placeholder="DD" maxLength={2} />
+                </S.BirthdayBox>
+              </S.InputContentBox>
             </S.InputDefaultBox>
           </S.InputContainer>
         </S.LineContainer>
+        <S.RegisterBtn type="submit" value={"회원가입"} />
       </S.RegisterContainer>
     </>
   );
