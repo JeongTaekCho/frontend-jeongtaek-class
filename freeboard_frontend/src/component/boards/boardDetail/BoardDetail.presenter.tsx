@@ -267,7 +267,6 @@ const BoardDetailUi = ({
                             : comment?.contents.length
                         } /100`}
                       </S.CommentLengthBox>
-                      1
                       <S.CommentModifyBtn onClick={commentEditSubmit}>
                         수정하기
                       </S.CommentModifyBtn>

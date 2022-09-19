@@ -170,6 +170,10 @@ const BoardDetail = () => {
 
   const commentEditSubmit = async () => {
     try {
+      if (!udComment && !isEditRateValue) {
+        errorModal("수정사항이 없습니다.");
+        return;
+      }
       const myVariables: ImyVariables = {
         boardCommentId: commentId,
       };
