@@ -14,6 +14,6 @@ export const globalStyles = css`
 
   html,
   body {
-    font-family: "sci-font";
+    /* font-family: "sci-font"; */
   }
 `;

@@ -19,7 +19,7 @@ const staticRoutedPage = () => {
   return (
     <>
       {data?.fetchBoards.map((el, index) => (
-        <div>
+        <div key={el._id}>
           <span>NO. {el.number}</span> &nbsp;&nbsp;
           <span>작성자: {el.writer}</span>&nbsp;&nbsp;
           <span>제목: {el.title}</span>&nbsp;&nbsp;

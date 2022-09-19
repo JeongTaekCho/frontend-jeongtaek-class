@@ -137,7 +137,7 @@ const RegisterUi = ({
                       id="male"
                       onChange={CheckBoxOnChange}
                       name="gender"
-                      checked={maleChecked === true}
+                      checked={maleChecked}
                     />
 
                     <S.GenderCheckBoxLabel htmlFor="male">
@@ -157,7 +157,7 @@ const RegisterUi = ({
                       id="female"
                       onChange={CheckBoxOnChange}
                       name="gender"
-                      checked={femaleChecked === true}
+                      checked={femaleChecked}
                     />
 
                     <S.GenderCheckBoxLabel htmlFor="female">
@@ -178,7 +178,7 @@ const RegisterUi = ({
                         id="noSelect"
                         onChange={CheckBoxOnChange}
                         name="gender"
-                        checked={noChecked === true}
+                        checked={noChecked}
                       />
                       <S.GenderCheckBox>
                         {noChecked ? (

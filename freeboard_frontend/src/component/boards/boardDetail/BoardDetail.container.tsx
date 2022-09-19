@@ -177,12 +177,10 @@ const BoardDetail = () => {
       const myVariables: ImyVariables = {
         boardCommentId: commentId,
       };
-      if (udComment || isEditRateValue) {
-        myVariables.updateBoardCommentInput = {};
-        if (udComment) myVariables.updateBoardCommentInput.contents = udComment;
-        if (isEditRateValue)
-          myVariables.updateBoardCommentInput.rating = isEditRateValue;
-      }
+      myVariables.updateBoardCommentInput = {};
+      if (udComment) myVariables.updateBoardCommentInput.contents = udComment;
+      if (isEditRateValue)
+        myVariables.updateBoardCommentInput.rating = isEditRateValue;
       if (udPassword) myVariables.password = udPassword;
 
       await editComment({

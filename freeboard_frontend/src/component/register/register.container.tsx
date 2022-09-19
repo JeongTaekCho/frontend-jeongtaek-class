@@ -13,18 +13,18 @@ const Register = () => {
 
     if (id === "male" && checked === true) {
       setMaleChecked(true);
-    } else if (id === "male" && checked === false) {
-      setMaleChecked(false);
+      setFemaleChecked(false);
+      setNoChecked(false);
     }
     if (id === "female" && checked === true) {
+      setMaleChecked(false);
       setFemaleChecked(true);
-    } else if (id === "female" && checked === false) {
-      setFemaleChecked(false);
+      setNoChecked(false);
     }
     if (id === "noSelect" && checked === true) {
+      setMaleChecked(false);
+      setFemaleChecked(false);
       setNoChecked(true);
-    } else if (id === "noSelect" && checked === false) {
-      setNoChecked(false);
     }
     console.log(maleChecked, femaleChecked, noChecked);
     console.log(event);

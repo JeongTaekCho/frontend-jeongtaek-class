@@ -6,7 +6,7 @@ interface IChildren {
 
 export default function ApolloSetting(props: IChildren) {
   const client = new ApolloClient({
-    uri: "http://example.codebootcamp.co.kr/graphql",
+    uri: "http://backend09.codebootcamp.co.kr/graphql",
     cache: new InMemoryCache(), // 나중에 할거
   });
 

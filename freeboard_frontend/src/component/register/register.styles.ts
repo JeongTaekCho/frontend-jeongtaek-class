@@ -100,7 +100,7 @@ export const SelectGenderBox = styled.div`
 export const SelectGenderContainer = styled.div``;
 
 export const DefaultCheckBox = styled.input`
-  display: none;
+  /* display: none; */
 `;
 export const GenderCheckBox = styled.div`
   width: 24px;

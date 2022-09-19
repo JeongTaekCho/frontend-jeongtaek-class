@@ -178,7 +178,7 @@ export const BoardUl = styled(BoardUlTop)`
   text-align: center;
   border-top: 1px solid #bdbdbd;
   &:hover {
-    background-color: pink;
+    background-color: #ea55261a;
     transition: ease-in-out 0.2s;
     li {
       color: #333;
