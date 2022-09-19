@@ -1,8 +1,18 @@
 import { gql } from "@apollo/client";
 
 export const FETCH_BOARD = gql`
-  query {
-    fetchBoards {
+  query (
+    $endDate: DateTime
+    $startDate: DateTime
+    $search: String
+    $page: Int
+  ) {
+    fetchBoards(
+      page: $page
+      startDate: $startDate
+      endDate: $endDate
+      search: $search
+    ) {
       _id
       writer
       title

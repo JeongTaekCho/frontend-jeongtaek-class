@@ -3,13 +3,20 @@ import Link from "next/link";
 import { IBoardListUi } from "./BoardList.types";
 import { DatePicker, Space } from "antd";
 import "antd/dist/antd.css";
+import Pagination from "../../common/pagination/pagination.container";
+import moment from "moment";
+import "moment/locale/zh-cn";
+import locale from "antd/es/locale/zh_CN";
 
 const BoardListUi = ({
   data,
   boardBestPost,
   searchData,
   onChangeSearchData,
-}: IBoardListUi) => {
+  refetch,
+  onClickSearchBoard,
+}: // onChangeDate,
+IBoardListUi) => {
   const { RangePicker } = DatePicker;
   return (
     <>
@@ -76,7 +83,9 @@ const BoardListUi = ({
           <Space direction="vertical" size={12}>
             <RangePicker />
           </Space>
-          <S.SearchTitleBtn>검색하기</S.SearchTitleBtn>
+          <S.SearchTitleBtn onClick={onClickSearchBoard}>
+            검색하기
+          </S.SearchTitleBtn>
         </S.SearchContainer>
         <S.BoardListContainer>
           <S.BoardUlTop>
@@ -85,7 +94,7 @@ const BoardListUi = ({
             <S.BoardLi3>작성자</S.BoardLi3>
             <S.BoardLi4>날짜</S.BoardLi4>
           </S.BoardUlTop>
-          {data?.fetchBoards
+          {/* {data?.fetchBoards
             ?.filter((item) => {
               return item?.title.includes(searchData);
             })
@@ -102,42 +111,23 @@ const BoardListUi = ({
                   <S.BoardLi4>{item?.createdAt.slice(0, 10)}</S.BoardLi4>
                 </S.BoardUl>
               );
-            })}
+            })} */}
+          {data?.fetchBoards.map((item, index) => {
+            return (
+              <S.BoardUl key={item._id}>
+                <S.BoardLi1>{index + 1}</S.BoardLi1>
+                <Link href={`/boards/${String(item._id)}`}>
+                  <S.BoardLi2>{item ? item.title : "로딩중입니다"}</S.BoardLi2>
+                </Link>
+                <S.BoardLi3>{item?.writer}</S.BoardLi3>
+                <S.BoardLi4>{item?.createdAt.slice(0, 10)}</S.BoardLi4>
+              </S.BoardUl>
+            );
+          })}
         </S.BoardListContainer>
         <S.BoardFooterContainer>
           <div></div>
-          <S.BoardPageBox>
-            <S.DefaultBtn>
-              <svg
-                width="8"
-                height="12"
-                viewBox="0 0 8 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7.41 1.41L6 0L0 6L6 12L7.41 10.59L2.83 6L7.41 1.41Z"
-                  fill="black"
-                />
-              </svg>
-            </S.DefaultBtn>
-            <S.BoardPage>1</S.BoardPage>
-            <S.BoardPage>2</S.BoardPage>
-            <S.DefaultBtn>
-              <svg
-                width="8"
-                height="12"
-                viewBox="0 0 8 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2.00003 0L0.590027 1.41L5.17003 6L0.590027 10.59L2.00003 12L8.00003 6L2.00003 0Z"
-                  fill="black"
-                />
-              </svg>
-            </S.DefaultBtn>
-          </S.BoardPageBox>
+          <Pagination refetch={refetch} />
           <Link href={"/boards/boardWrite"}>
             <S.BoardWriteBtn>
               <img src="/board/boardWriteBtn.png" />

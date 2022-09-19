@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 import { IQuery } from "../../../commons/types/generated/types";
 
 export interface IBoardListUi {
@@ -6,4 +6,6 @@ export interface IBoardListUi {
   boardBestPost?: Pick<IQuery, "fetchBoardsOfTheBest">;
   onChangeSearchData: (event: ChangeEvent<HTMLInputElement>) => void;
   searchData: string;
+  refetch: () => void;
+  onClickSearchBoard: (event: MouseEvent<HTMLButtonElement>) => void;
 }

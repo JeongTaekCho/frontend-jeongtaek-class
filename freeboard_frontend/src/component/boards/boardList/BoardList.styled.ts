@@ -210,10 +210,7 @@ export const BoardFooterContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-export const BoardPageBox = styled.div`
-  display: flex;
-  gap: 28px;
-`;
+
 export const DefaultBtn = styled.button`
   border: none;
   background: none;
@@ -223,11 +220,6 @@ export const DefaultBtn = styled.button`
   align-items: center;
 `;
 
-export const BoardPage = styled.p`
-  font-size: 16px;
-  font-weight: 400;
-  color: #4f4f4f;
-`;
 export const BoardWriteBtn = styled.button`
   width: 171px;
   height: 52px;
