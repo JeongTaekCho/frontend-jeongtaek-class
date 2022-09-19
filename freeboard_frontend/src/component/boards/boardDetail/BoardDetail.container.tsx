@@ -320,6 +320,12 @@ const BoardDetail = () => {
     await router.push(`/boards/${String(router.query.id)}/edit`);
   };
 
+  const autoClick = async () => {
+    for (let i = 0; i < 10000; i++) {
+      await onClickLikeBtn();
+    }
+  };
+
   return (
     <>
       <BoardDetailUi
@@ -354,6 +360,7 @@ const BoardDetail = () => {
         onChangeCommentRate={onChangeCommentRate}
         isEditRateValue={isEditRateValue}
         onChangeUpdateCommentRate={onChangeUpdateCommentRate}
+        autoClick={autoClick}
       />
     </>
   );

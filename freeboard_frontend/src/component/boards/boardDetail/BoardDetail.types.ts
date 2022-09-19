@@ -46,4 +46,5 @@ export interface IBoardDetailProps {
   isEditRateValue: number;
   onChangeCommentRate: (value: number) => void;
   onChangeUpdateCommentRate: (value: number) => void;
+  autoClick: () => void;
 }

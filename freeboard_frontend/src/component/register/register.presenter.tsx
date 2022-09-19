@@ -1,3 +1,4 @@
+import AgreeCheckBox from "../common/svg/AgreeCheckBox";
 import * as S from "./register.styles";
 import { IRegisterUi } from "./register.types";
 
@@ -212,6 +213,19 @@ const RegisterUi = ({
             </S.InputDefaultBox>
           </S.InputContainer>
         </S.LineContainer>
+        <S.AgreeBox>
+          <S.AgreeLeftBox>
+            이용약관동의 <span>*</span>
+          </S.AgreeLeftBox>
+          <S.AgreeRightBox>
+            <S.AgreeAllCheckBox>
+              <S.defaultAgreeCheckBox>
+                <AgreeCheckBox />
+              </S.defaultAgreeCheckBox>
+              <S.AgreeAllCheckText>전체 동의합니다.</S.AgreeAllCheckText>
+            </S.AgreeAllCheckBox>
+          </S.AgreeRightBox>
+        </S.AgreeBox>
         <S.RegisterBtn type="submit" value={"회원가입"} />
       </S.RegisterContainer>
     </>

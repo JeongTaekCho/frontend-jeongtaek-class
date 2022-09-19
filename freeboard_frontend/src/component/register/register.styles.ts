@@ -177,3 +177,41 @@ export const AddressInput = styled(InputContentInput)`
     background-color: rgba(250, 250, 250);
   }
 `;
+
+export const AgreeBox = styled.div`
+  width: 100%;
+  padding: 10px 0 10px 20px;
+  display: flex;
+`;
+
+export const AgreeLeftBox = styled.div`
+  width: 21.875%;
+  padding-top: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  span {
+    font-size: 11px;
+    color: red;
+  }
+`;
+
+export const AgreeRightBox = styled.div`
+  width: 78.125%;
+`;
+
+export const defaultAgreeCheckBox = styled.div`
+  display: flex;
+  gap: 12px;
+`;
+
+export const AgreeAllCheckBox = styled.div`
+  padding-top: 12px;
+  display: flex;
+  gap: 12px;
+`;
+
+export const AgreeAllCheckText = styled.p`
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+`;

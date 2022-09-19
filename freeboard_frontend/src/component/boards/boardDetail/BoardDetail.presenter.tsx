@@ -37,6 +37,7 @@ const BoardDetailUi = ({
   onChangeCommentRate,
   isEditRateValue,
   onChangeUpdateCommentRate,
+  autoClick,
 }: IBoardDetailProps) => {
   return (
     <>
@@ -87,7 +88,6 @@ const BoardDetailUi = ({
               <S.DefaultBtn onClick={onClickLikeBtn}>
                 <img src="/board/likeBtn.png" />
               </S.DefaultBtn>
-
               <S.LikeText style={{ color: "#FFD600" }}>
                 {data?.fetchBoard.likeCount}
               </S.LikeText>
@@ -99,6 +99,15 @@ const BoardDetailUi = ({
 
               <S.LikeText style={{ color: "#828282" }}>
                 {data?.fetchBoard.dislikeCount}
+              </S.LikeText>
+            </S.LikeAndUnLIkeContainer>
+            <S.LikeAndUnLIkeContainer>
+              <S.DefaultBtn onClick={autoClick}>
+                <img src="/board/likeBtn.png" />
+              </S.DefaultBtn>
+
+              <S.LikeText style={{ color: "#828282" }}>
+                좋아요 10000개 찍기
               </S.LikeText>
             </S.LikeAndUnLIkeContainer>
           </S.LikeAndUnLikeBox>
