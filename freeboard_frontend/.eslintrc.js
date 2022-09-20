@@ -19,5 +19,6 @@ module.exports = {
     "@typescript-eslint/triple-slash-reference": "off",
     "@typescript-eslint/restrict-plus-operands": "off",
     "@typescript-eslint/no-unnecessary-boolean-literal-compare": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
   },
 };

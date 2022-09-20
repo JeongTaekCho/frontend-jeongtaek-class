@@ -20,23 +20,14 @@ const BoardList = () => {
   };
 
   const onChangeDate = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(
-      new Intl.DateTimeFormat("ko-KR").format(new Date(event[0]._d)),
-      new Intl.DateTimeFormat("ko-KR").format(new Date(event[1]._d))
-    );
     setStartDate(
       new Intl.DateTimeFormat("ko-KR").format(new Date(event[0]._d))
     );
     setEndDate(new Intl.DateTimeFormat("ko-KR").format(new Date(event[1]._d)));
   };
-  console.log(startDate, endDate);
 
   const onChangeSearchData = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchData(event.target.value);
-  };
-
-  const searchRefetch = () => {
-    refetch({});
   };
 
   const { data: boardBestPost } =

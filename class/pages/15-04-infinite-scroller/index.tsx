@@ -3,7 +3,6 @@ import {
   IQuery,
   IQueryFetchBoardsArgs,
 } from "../../src/commons/types/generated/types";
-import InfiniteScroll from "react-infinite-scroller";
 
 const FETCH_BOARDS = gql`
   query fetchBoards($page: Int) {
@@ -43,23 +42,12 @@ export default function StaticRoutedPage() {
 
   return (
     <>
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={onLoadMore}
-        hasMore={true}
-        loader={
-          <div className="loader" key={0}>
-            Loading ...
-          </div>
-        }
-      >
-        {data?.fetchBoards.map((el) => (
-          <div key={el._id}>
-            <span style={{ margin: "10px" }}>{el.writer}</span>
-            <span style={{ margin: "10px" }}>{el.title}</span>
-          </div>
-        )) ?? <div></div>}
-      </InfiniteScroll>
+      {data?.fetchBoards.map((el) => (
+        <div key={el._id}>
+          <span style={{ margin: "10px" }}>{el.writer}</span>
+          <span style={{ margin: "10px" }}>{el.title}</span>
+        </div>
+      )) ?? <div></div>}
     </>
   );
 }

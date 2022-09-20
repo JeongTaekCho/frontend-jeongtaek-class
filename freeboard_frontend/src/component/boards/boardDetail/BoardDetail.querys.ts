@@ -41,6 +41,19 @@ export const FETCH_BOARD = gql`
   }
 `;
 
+export const FETCH_COMMENT = gql`
+  query fetchBoardComments($boardId: ID!, $page: Int) {
+    fetchBoardComments(boardId: $boardId, page: $page) {
+      _id
+      writer
+      contents
+      rating
+      createdAt
+      deletedAt
+    }
+  }
+`;
+
 // 좋아요 개수 업!
 export const LIKE_UP = gql`
   mutation likeBoard($boardId: ID!) {
@@ -69,42 +82,6 @@ export const CREATE_COMMENT = gql`
       writer
       contents
     }
-  }
-`;
-
-// 댓글 수정하기
-export const EDIT_COMMENT = gql`
-  mutation updateBoardComment(
-    $updateBoardCommentInput: UpdateBoardCommentInput!
-    $password: String
-    $boardCommentId: ID!
-  ) {
-    updateBoardComment(
-      updateBoardCommentInput: $updateBoardCommentInput
-      password: $password
-      boardCommentId: $boardCommentId
-    ) {
-      _id
-    }
-  }
-`;
-
-export const FETCH_COMMENT = gql`
-  query fetchBoardComments($boardId: ID!) {
-    fetchBoardComments(boardId: $boardId) {
-      _id
-      writer
-      contents
-      rating
-      createdAt
-      deletedAt
-    }
-  }
-`;
-
-export const DELETE_COMMENT = gql`
-  mutation deleteBoardComment($password: String, $boardCommentId: ID!) {
-    deleteBoardComment(password: $password, boardCommentId: $boardCommentId)
   }
 `;
 

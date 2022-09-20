@@ -4,9 +4,7 @@ import { IBoardListUi } from "./BoardList.types";
 import { DatePicker, Space } from "antd";
 import "antd/dist/antd.css";
 import Pagination from "../../common/pagination/pagination.container";
-import moment from "moment";
 import "moment/locale/zh-cn";
-import locale from "antd/es/locale/zh_CN";
 
 const BoardListUi = ({
   data,
@@ -112,6 +110,7 @@ const BoardListUi = ({
                 </S.BoardUl>
               );
             })} */}
+
           {data?.fetchBoards.map((item, index) => {
             return (
               <S.BoardUl key={item._id}>
