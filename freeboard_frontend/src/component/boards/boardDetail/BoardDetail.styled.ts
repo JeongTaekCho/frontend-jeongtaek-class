@@ -332,6 +332,7 @@ export const CommentViewProfileBox = styled.div`
 `;
 export const CommentNameAndRating = styled.div`
   display: flex;
+  align-items: flex-end;
   gap: 1.6rem;
   margin-bottom: 4px;
 `;
