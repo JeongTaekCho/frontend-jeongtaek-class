@@ -8,4 +8,5 @@ export interface IBoardListUi {
   searchData: string;
   refetch: () => void;
   onClickSearchBoard: (event: MouseEvent<HTMLButtonElement>) => void;
+  onChangeDate: (event: ChangeEvent<HTMLInputElement>) => void;
 }

@@ -98,7 +98,7 @@ export const CommentLikeCount = styled.p`
   font-weight: 400;
   color: #000;
 `;
-export const SearchContainer = styled.div`
+export const SearchContainer = styled.form`
   width: 100%;
   display: flex;
   justify-content: space-between;

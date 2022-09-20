@@ -15,8 +15,8 @@ const BoardListUi = ({
   onChangeSearchData,
   refetch,
   onClickSearchBoard,
-}: // onChangeDate,
-IBoardListUi) => {
+  onChangeDate,
+}: IBoardListUi) => {
   const { RangePicker } = DatePicker;
   return (
     <>
@@ -81,7 +81,7 @@ IBoardListUi) => {
             />
           </S.SearchTitleBox>
           <Space direction="vertical" size={12}>
-            <RangePicker />
+            <RangePicker onChange={onChangeDate} />
           </Space>
           <S.SearchTitleBtn onClick={onClickSearchBoard}>
             검색하기
