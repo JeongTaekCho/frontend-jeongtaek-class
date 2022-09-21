@@ -19,8 +19,7 @@ const CommentItem = ({ comment }: IComment) => {
   const [onCommentEdit, setOnCommentEdit] = useState(false);
   const [udPassword, setUdPassword] = useState(""); // 비밀번호
   const [udComment, setUdComment] = useState(""); // 댓글
-
-  const [isEditRateValue, setIsEditCommentRateValue] = useState(0);
+  const [isEditRateValue, setIsEditCommentRateValue] = useState(0); // 레이팅
 
   const router = useRouter();
 
@@ -44,7 +43,7 @@ const CommentItem = ({ comment }: IComment) => {
 
   // 댓글 수정 박스 ON/OFF
   const toggleCommentEdit = (event: MouseEvent<HTMLButtonElement>) => {
-    //     setCommentId(event.currentTarget.id);
+    setCommentId(event.currentTarget.id);
     setOnCommentEdit((prev) => !prev);
   };
 
@@ -134,6 +133,7 @@ const CommentItem = ({ comment }: IComment) => {
       }
     }
   };
+
   return (
     <CommentItemUi
       isEditRateValue={isEditRateValue}

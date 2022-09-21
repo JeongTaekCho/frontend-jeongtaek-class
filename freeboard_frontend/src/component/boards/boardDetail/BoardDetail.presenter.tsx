@@ -29,6 +29,7 @@ const BoardDetailUi = ({
   infiniteFun,
 }: IBoardDetailProps) => {
   console.log(commentResult);
+
   return (
     <>
       <S.BoardDetailContainer>
@@ -160,22 +161,18 @@ const BoardDetailUi = ({
           {commentError ? "빈값을 입력해주세요." : null}
         </S.CommentErrorText>
       </S.BoardDetailContainer>
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={infiniteFun}
-        hasMore={true}
-        loader={
-          <div className="loader" key={0}>
-            Loading ...
-          </div>
-        }
-      >
-        <div>
+      <S.CommentListBox>
+        <InfiniteScroll
+          useWindow={false}
+          pageStart={1}
+          loadMore={infiniteFun}
+          hasMore={true}
+        >
           {commentResult?.fetchBoardComments.map((comment) => {
             return <CommentItem key={comment._id} comment={comment} />;
           })}
-        </div>
-      </InfiniteScroll>
+        </InfiniteScroll>
+      </S.CommentListBox>
     </>
   );
 };

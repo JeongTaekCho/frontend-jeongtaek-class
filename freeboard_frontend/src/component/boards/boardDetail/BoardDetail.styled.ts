@@ -308,7 +308,6 @@ export const CommentViewContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  border-bottom: 1px solid #bdbdbd;
   @media ${(props: any) => props.theme.tablet} {
     width: 90%;
   }
@@ -413,4 +412,28 @@ export const CommentDeleteBoxCloseBtn = styled(DefaultBtn)`
 export const CommentViewBox = styled.div`
   width: 1200px;
   margin: 0 auto;
+`;
+
+export const CommentListBox = styled.div`
+  width: 88%;
+  height: 600px;
+  overflow-y: auto;
+  margin: 0 auto;
+  &::-webkit-scrollbar {
+    width: 15px;
+    /* border: 1px solid #111; */
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    visibility: hidden;
+  }
+  &:hover::-webkit-scrollbarm,
+  &:hover::-webkit-scrollbar-thumb {
+    transition: ease-in-out 0.2s;
+    visibility: visible;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #f95621;
+    border-radius: 10px;
+    visibility: hidden;
+  }
 `;

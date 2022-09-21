@@ -4,7 +4,9 @@ import "antd/dist/antd.css";
 import { ICommentItem } from "./commentList.types";
 
 const CommentItemUi = ({
+  isEditRateValue,
   onChangeUpdateCommentRate,
+  commentId,
   udComment,
   onCommentEdit,
   toggleCommentEdit,
@@ -12,6 +14,7 @@ const CommentItemUi = ({
   onChangeUdComment,
   comment,
   commentPsModal,
+  commentDelPassword,
   onChangeCommentDelPassword,
   onCommentPsModal,
   closeCommentPsModal,
