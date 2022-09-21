@@ -11,11 +11,11 @@ interface ILayoutProps {
 const Layout = (props: ILayoutProps) => {
   const HIDDEN_HEADERS = ["/12-03-modal-alert"];
   const router = useRouter();
-  console.log(router);
+  // console.log(router);
 
   const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath);
 
-  console.log(isHiddenHeader);
+  // console.log(isHiddenHeader);
 
   return (
     <>

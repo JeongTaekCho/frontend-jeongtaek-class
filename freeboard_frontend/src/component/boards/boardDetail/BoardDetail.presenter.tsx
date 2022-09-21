@@ -153,7 +153,9 @@ const BoardDetailUi = ({
             />
             <S.CommentSubmitBox>
               <S.CommentLengthBox>{comment.length}/100</S.CommentLengthBox>
-              <S.CommentSubmit onClick={infiniteFun}>등록하기</S.CommentSubmit>
+              <S.CommentSubmit onClick={onClickCommentSubmit}>
+                등록하기
+              </S.CommentSubmit>
             </S.CommentSubmitBox>
           </S.CommentTextareaBox>
         </S.CommentContainer>
@@ -161,18 +163,20 @@ const BoardDetailUi = ({
           {commentError ? "빈값을 입력해주세요." : null}
         </S.CommentErrorText>
       </S.BoardDetailContainer>
-      <S.CommentListBox>
-        <InfiniteScroll
-          useWindow={false}
-          pageStart={1}
-          loadMore={infiniteFun}
-          hasMore={true}
-        >
-          {commentResult?.fetchBoardComments.map((comment) => {
-            return <CommentItem key={comment._id} comment={comment} />;
-          })}
-        </InfiniteScroll>
-      </S.CommentListBox>
+      {/* <S.CommentListBox> */}
+
+      <InfiniteScroll
+        useWindow={true}
+        pageStart={0}
+        loadMore={infiniteFun}
+        hasMore={true}
+      >
+        {commentResult?.fetchBoardComments.map((comment) => {
+          return <CommentItem key={comment._id} comment={comment} />;
+        })}
+      </InfiniteScroll>
+
+      {/* </S.CommentListBox> */}
     </>
   );
 };

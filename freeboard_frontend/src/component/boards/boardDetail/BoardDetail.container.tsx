@@ -61,10 +61,10 @@ const BoardDetail = () => {
 
   // 무한 스크롤
 
-  const infiniteFun = async () => {
+  const infiniteFun = () => {
     console.log("dd");
     if (commentResult === undefined) return;
-    await fetchMore({
+    void fetchMore({
       variables: {
         page: Math.ceil(commentResult.fetchBoardComments.length / 10) + 1,
       },
