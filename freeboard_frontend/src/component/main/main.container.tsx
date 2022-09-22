@@ -13,7 +13,7 @@ const MainHome = () => {
 
   const [productData, setProductData] = useState();
 
-  // let productDataArr = [];
+  let productDataArr = [];
 
   useEffect(() => {
     const fetchCoupangData = async () => {
@@ -27,15 +27,15 @@ const MainHome = () => {
 
   const productFirstPage = productData?.slice(0, 48);
   const productBestItem = productData?.slice(77, 85);
-  // productDataArr[0] = productData?.slice(48, 96);
-  // productDataArr[1] = productData?.slice(96, 144);
-  // productDataArr[2] = productData?.slice(144, 192);
-  // productDataArr[3] = productData?.slice(192, 240);
-  // productDataArr[4] = productData?.slice(240, 288);
-  // productDataArr[5] = productData?.slice(288, 336);
-  // productDataArr[6] = productData?.slice(336, 384);
-  // productDataArr[7] = productData?.slice(384, 432);
-  // productDataArr[8] = productData?.slice(432, 480);
+  productDataArr[0] = productData?.slice(48, 96);
+  productDataArr[1] = productData?.slice(96, 144);
+  productDataArr[2] = productData?.slice(144, 192);
+  productDataArr[3] = productData?.slice(192, 240);
+  productDataArr[4] = productData?.slice(240, 288);
+  productDataArr[5] = productData?.slice(288, 336);
+  productDataArr[6] = productData?.slice(336, 384);
+  productDataArr[7] = productData?.slice(384, 432);
+  productDataArr[8] = productData?.slice(432, 480);
 
   const settings = {
     dots: true,
@@ -68,6 +68,7 @@ const MainHome = () => {
       settings={settings}
       productFirstPage={productFirstPage}
       productBestItem={productBestItem}
+      productData={productData}
     />
   );
 };

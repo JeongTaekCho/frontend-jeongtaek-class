@@ -33,6 +33,8 @@ const BoardList = () => {
   const { data: boardBestPost } =
     useQuery<Pick<IQuery, "fetchBoardsOfTheBest">>(FETCH_BEST_BOARD);
 
+  console.log(searchData, startDate, endDate);
+
   return (
     <>
       <BoardListUi

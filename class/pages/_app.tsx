@@ -5,6 +5,7 @@ import ApolloSetting from "../src/components/commons/apollo";
 import { Global } from "@emotion/react";
 import { globalStyles } from "../src/commons/styles/global-styles";
 
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloSetting>

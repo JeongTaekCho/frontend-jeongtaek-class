@@ -10,6 +10,7 @@ const MainHomeUi = ({
   settings,
   productFirstPage,
   productBestItem,
+  productData,
 }: IMainHomeUi) => {
   return (
     <>
@@ -52,7 +53,7 @@ const MainHomeUi = ({
           </S.MainItemContainer>
           <S.MainContentTitle>직거래 마켓</S.MainContentTitle>
           <S.MainItemContainer>
-            {productFirstPage?.map((item: any) => {
+            {productData?.map((item: any) => {
               return (
                 <S.MainItemBox key={item._id}>
                   <S.MainItemBg
