@@ -416,8 +416,7 @@ export const CommentViewBox = styled.div`
 
 export const CommentListBox = styled.div`
   width: 88%;
-  /* height: auto; */
-  background-color: beige;
+  height: 600px;
   overflow: auto;
   margin: 0 auto;
   &::-webkit-scrollbar {

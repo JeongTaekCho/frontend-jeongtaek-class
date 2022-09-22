@@ -37,6 +37,7 @@ export const MainItemContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 15px;
+  margin-bottom: 80px;
 `;
 
 export const MainItemBox = styled.div`
