@@ -60,6 +60,7 @@ export const GlobalStyles = css`
     font-weight: 900;
     font-size: 10px;
     overflow-x: hidden;
+    height: auto !important;
   }
 
   a {
