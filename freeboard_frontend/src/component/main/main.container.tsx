@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import MainHomeUi from "./main.presenter";
-
+const API_KEY = "632c0931b7fd7e127ffadfe1";
 const MainHome = () => {
   const mainBannerUrl = [
     "https://product-image.kurly.com/cdn-cgi/image/format=auto/banner/main/pc/img/3960691f-c0de-45f1-a73c-b33255cb9678.jpg",
@@ -13,29 +13,16 @@ const MainHome = () => {
 
   const [productData, setProductData] = useState();
 
-  let productDataArr = [];
-
   useEffect(() => {
     const fetchCoupangData = async () => {
       const result = await axios.get(
-        "http://dev-one.duckdns.org:3000/products"
+        `http://dev-one.duckdns.org:3000/products?api_key=${API_KEY}&page=3`
       );
       setProductData(result.data);
+      console.log(result);
     };
     void fetchCoupangData();
   }, []);
-
-  const productFirstPage = productData?.slice(0, 48);
-  const productBestItem = productData?.slice(77, 85);
-  productDataArr[0] = productData?.slice(48, 96);
-  productDataArr[1] = productData?.slice(96, 144);
-  productDataArr[2] = productData?.slice(144, 192);
-  productDataArr[3] = productData?.slice(192, 240);
-  productDataArr[4] = productData?.slice(240, 288);
-  productDataArr[5] = productData?.slice(288, 336);
-  productDataArr[6] = productData?.slice(336, 384);
-  productDataArr[7] = productData?.slice(384, 432);
-  productDataArr[8] = productData?.slice(432, 480);
 
   const settings = {
     dots: true,
@@ -66,8 +53,7 @@ const MainHome = () => {
     <MainHomeUi
       mainBannerUrl={mainBannerUrl}
       settings={settings}
-      productFirstPage={productFirstPage}
-      productBestItem={productBestItem}
+      productData={productData}
       productData={productData}
     />
   );

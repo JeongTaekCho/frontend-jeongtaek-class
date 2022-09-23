@@ -32,8 +32,8 @@ export const MainContentTitle = styled.h2`
 
 export const MainItemContainer = styled.div`
   width: 100%;
-  height: 1000px;
-  overflow-y: auto;
+  /* height: 1000px; */
+  /* overflow-y: auto; */
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
