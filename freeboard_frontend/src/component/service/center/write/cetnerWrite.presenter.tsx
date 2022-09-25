@@ -1,6 +1,6 @@
 import * as S from "./centerWrite.style";
 
-const CenterWriteUi = () => {
+const CenterWriteUi = ({ onChangeInput, onChangeTextarea, submitWrite }) => {
   return (
     <S.CenterListWrap>
       <S.CenterListContainer>
@@ -14,6 +14,8 @@ const CenterWriteUi = () => {
               <S.CenterWriteDefaultInput
                 type="text"
                 placeholder="작성자를 입력해주세요."
+                name="writer"
+                onChange={onChangeInput}
               />
             </S.CenterWriteInputBox>
           </S.CenterWriteInputContainer>
@@ -25,6 +27,8 @@ const CenterWriteUi = () => {
               <S.CenterWriteDefaultInput
                 type="text"
                 placeholder="제목을 입력해주세요."
+                name="title"
+                onChange={onChangeInput}
               />
             </S.CenterWriteInputBox>
           </S.CenterWriteInputContainer>
@@ -34,13 +38,18 @@ const CenterWriteUi = () => {
             </S.CenterWriteInputTitle>
             <S.CenterWriteInputBox>
               <S.CenterWriteTextAreaBox>
-                <S.CenterWriteDefaultTextArea placeholder="내용을 입력해주세요." />
+                <S.CenterWriteDefaultTextArea
+                  placeholder="내용을 입력해주세요."
+                  onChange={onChangeTextarea}
+                />
                 <S.CenterWriteFile type="file" />
               </S.CenterWriteTextAreaBox>
             </S.CenterWriteInputBox>
           </S.CenterWriteInputContainer>
         </S.CenterWriteContent>
-        <S.CenterWriteSubmit>등록하기</S.CenterWriteSubmit>
+        <S.CenterWriteSubmit onClick={submitWrite}>
+          등록하기
+        </S.CenterWriteSubmit>
       </S.CenterListContainer>
     </S.CenterListWrap>
   );

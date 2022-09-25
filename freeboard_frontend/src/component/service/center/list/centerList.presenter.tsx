@@ -2,7 +2,7 @@ import * as S from "./centerList.styles";
 import { ICenterListUi } from "./centerList.types";
 import Link from "next/link";
 
-const CenterListUi = ({ goCenterWrite }: ICenterListUi) => {
+const CenterListUi = ({ goCenterWrite, data }: ICenterListUi) => {
   return (
     <>
       <S.CenterListWrap>
@@ -14,14 +14,18 @@ const CenterListUi = ({ goCenterWrite }: ICenterListUi) => {
               <S.CenterListLi2>작성일</S.CenterListLi2>
               <S.CenterListLi2>답변상태</S.CenterListLi2>
             </S.CenterListHead>
-            <S.CenterListBody>
-              <Link href={`/service/center/detail/1`}>
-                <S.CenterListLeft>제목이 한줄로 들어갑니다...</S.CenterListLeft>
-              </Link>
+            {data?.map((el, index) => {
+              return (
+                <S.CenterListBody key={index}>
+                  <Link href={`/service/center/detail/1`}>
+                    <S.CenterListLeft>{el.title}</S.CenterListLeft>
+                  </Link>
 
-              <S.CenterListLi2>2022.01.01</S.CenterListLi2>
-              <S.CenterListLi2>답변대기</S.CenterListLi2>
-            </S.CenterListBody>
+                  <S.CenterListLi2>2022.01.01</S.CenterListLi2>
+                  <S.CenterListLi2>답변대기</S.CenterListLi2>
+                </S.CenterListBody>
+              );
+            })}
           </S.CenterListContent>
           <S.CenterListBtnContainer>
             <S.CenterWriteBtn onClick={goCenterWrite}>
