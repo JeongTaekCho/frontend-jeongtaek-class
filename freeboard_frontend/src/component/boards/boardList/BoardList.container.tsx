@@ -10,9 +10,9 @@ const BoardList = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const onClickSearchBoard = (event: MouseEvent<HTMLButtonElement>) => {
+  const onClickSearchBoard = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    refetch({
+    await refetch({
       startDate,
       endDate,
       search: searchData,

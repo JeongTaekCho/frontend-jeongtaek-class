@@ -18,6 +18,10 @@ const Header = () => {
   const goHome = async () => {
     await router.push("/");
   };
+
+  const goCenter = async () => {
+    await router.push("/service/center");
+  };
   return (
     <>
       <S.HeaderWrap>
@@ -43,7 +47,7 @@ const Header = () => {
               <S.LoginMenuLi>|</S.LoginMenuLi>
               <S.LoginMenuLi onClick={goLogin}>로그인</S.LoginMenuLi>
               <S.LoginMenuLi>|</S.LoginMenuLi>
-              <S.LoginMenuLi>고객센터</S.LoginMenuLi>
+              <S.LoginMenuLi onClick={goCenter}>고객센터</S.LoginMenuLi>
             </S.LoginMenu>
           </S.HeaderContainer>
           <S.Navigation>
