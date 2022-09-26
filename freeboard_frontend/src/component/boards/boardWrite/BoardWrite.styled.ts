@@ -150,6 +150,10 @@ export const FileLabel = styled.label`
   background: #bdbdbd;
   border: none;
   outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
   cursor: pointer;
   background-size: cover;
   background-repeat: no-repeat;

@@ -31,7 +31,7 @@ const BoardListUi = ({
                 <S.BoardGalleryItem>
                   <S.BoardGrlleryThum
                     style={{
-                      background: `url(https://storage.googleapis.com/${bestBoard.images})`,
+                      backgroundImage: `url(https://storage.googleapis.com/${bestBoard.images})`,
                       backgroundSize: "cover",
                     }}
                   ></S.BoardGrlleryThum>

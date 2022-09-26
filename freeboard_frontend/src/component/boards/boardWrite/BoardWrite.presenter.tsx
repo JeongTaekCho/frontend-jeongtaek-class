@@ -152,12 +152,18 @@ const BoardWriteUi = ({
               <p>사진 첨부</p>
               <S.PhotoClipBtnBox>
                 <S.FileInput id="file" type="file" onChange={onChangeFile} />
-                <S.FileLabel
-                  style={{
-                    background: `url(https://storage.googleapis.com/${fileUrl})`,
-                  }}
-                  htmlFor="file"
-                ></S.FileLabel>
+                {fileUrl ? (
+                  <S.FileLabel
+                    style={{
+                      backgroundImage: `url(https://storage.googleapis.com/${fileUrl})`,
+                      backgroundSize: "cover",
+                      backgroundColor: "none",
+                    }}
+                    htmlFor="file"
+                  ></S.FileLabel>
+                ) : (
+                  <S.FileLabel htmlFor="file">+</S.FileLabel>
+                )}
               </S.PhotoClipBtnBox>
             </S.PhotoClipBox>
             <S.MainSelectBox>
