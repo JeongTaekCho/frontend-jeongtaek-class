@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
+import { IserviceData } from "./centerDetail.types";
 
-const CenterDetailUi = ({ serviceData }) => {
+const CenterDetailUi = ({ serviceData }: IserviceData) => {
   const router = useRouter();
   return (
     <>
-      {serviceData.map((el) => {
+      {serviceData.map((el: any) => {
         if (el.id === router.query.id) {
           return (
             <>

@@ -1,6 +1,10 @@
 import * as S from "./centerWrite.style";
 
-const CenterWriteUi = ({ onChangeInput, onChangeTextarea, submitWrite }) => {
+const CenterWriteUi = ({
+  onChangeInput,
+  onChangeTextarea,
+  submitWrite,
+}: any) => {
   return (
     <S.CenterListWrap>
       <S.CenterListContainer>
