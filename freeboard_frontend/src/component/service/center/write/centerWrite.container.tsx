@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import CenterWriteUi from "./cetnerWrite.presenter";
 import { collection, addDoc, getFirestore } from "firebase/firestore";
-import { fireBaseApp } from "../../../../../pages/_app";
+
+import { v4 as uuidv4 } from "uuid";
+import { fireBaseApp } from "../../../../commons/libraries/firebase";
+import { getDate } from "../../../../commons/libraries/utils";
+import { useRouter } from "next/router";
 
 const CenterWrite = () => {
   const [writer, setWriter] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
 
-  const onChangeInput = (event) => {
+  const router = useRouter();
+
+  const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
     } = event;
@@ -20,11 +26,11 @@ const CenterWrite = () => {
     }
   };
 
-  const onChangeTextarea = (event) => {
+  const onChangeTextarea = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
   };
 
-  const submitWrite = async () => {
+  const submitWrite = async (event: MouseEvent<HTMLButtonElement>) => {
     const serviceCenter = await collection(
       getFirestore(fireBaseApp),
       "service-center"
@@ -33,9 +39,11 @@ const CenterWrite = () => {
       writer,
       title,
       contents,
-      createdAt: new Date(),
-      id: Math.random(),
+      createdAt: getDate(new Date()),
+      id: uuidv4(),
     });
+
+    void router.push(`/service/center`);
   };
 
   return (

@@ -10,18 +10,20 @@ const CenterListUi = ({ goCenterWrite, data }: ICenterListUi) => {
           <S.CenterListTitle>1:1 문의</S.CenterListTitle>
           <S.CenterListContent>
             <S.CenterListHead>
+              <S.CenterListNum>No.</S.CenterListNum>
               <S.CenterListLi>제목</S.CenterListLi>
               <S.CenterListLi2>작성일</S.CenterListLi2>
               <S.CenterListLi2>답변상태</S.CenterListLi2>
             </S.CenterListHead>
-            {data.map((el, index) => {
+            {data.map((el: any, index: number) => {
               return (
                 <S.CenterListBody key={index}>
-                  <Link href={`/service/center/detail/1`}>
+                  <S.CenterListNum>{index + 1}</S.CenterListNum>
+                  <Link href={`/service/center/detail/${el.id}`}>
                     <S.CenterListLeft>{el.title}</S.CenterListLeft>
                   </Link>
 
-                  <S.CenterListLi2>2022.01.01</S.CenterListLi2>
+                  <S.CenterListLi2>{el.createdAt}</S.CenterListLi2>
                   <S.CenterListLi2>답변대기</S.CenterListLi2>
                 </S.CenterListBody>
               );

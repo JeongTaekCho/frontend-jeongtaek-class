@@ -32,13 +32,17 @@ export const CenterListHead = styled.ul`
   border-bottom: 1px solid #333;
 `;
 export const CenterListLi = styled.li`
-  width: 70%;
+  width: 60%;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 `;
+export const CenterListNum = styled.li`
+  width: 10%;
+`;
 
 export const CenterListLeft = styled(CenterListLi)`
+  cursor: pointer;
   text-align: left;
   padding: 0 20px;
 `;

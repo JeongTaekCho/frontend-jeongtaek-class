@@ -1,9 +1,20 @@
-const CenterDetailUi = () => {
+import { useRouter } from "next/router";
+
+const CenterDetailUi = ({ serviceData }) => {
+  const router = useRouter();
   return (
     <>
-      <div>작성자 : </div>
-      <div>제목 : </div>
-      <div>내용 : </div>
+      {serviceData.map((el) => {
+        if (el.id === router.query.id) {
+          return (
+            <>
+              <div>작성자 : {el.writer} </div>
+              <div>제목 : {el.title}</div>
+              <div>내용 : {el.contents}</div>
+            </>
+          );
+        }
+      })}
     </>
   );
 };
