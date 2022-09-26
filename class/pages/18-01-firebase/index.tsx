@@ -4,7 +4,7 @@ import {
   getDocs,
   getFirestore,
 } from "firebase/firestore/lite";
-import { firebaseApp } from "../_app";
+import { firebaseApp } from "../../src/commons/libraries/firebase";
 
 const FireBasePage = () => {
   const onClickSubmit = async () => {

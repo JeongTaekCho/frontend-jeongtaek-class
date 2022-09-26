@@ -14,7 +14,7 @@ const CenterListUi = ({ goCenterWrite, data }: ICenterListUi) => {
               <S.CenterListLi2>작성일</S.CenterListLi2>
               <S.CenterListLi2>답변상태</S.CenterListLi2>
             </S.CenterListHead>
-            {data?.map((el, index) => {
+            {data.map((el, index) => {
               return (
                 <S.CenterListBody key={index}>
                   <Link href={`/service/center/detail/1`}>

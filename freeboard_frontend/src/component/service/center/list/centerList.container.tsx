@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import CenterListUi from "./centerList.presenter";
-import fireBaseApp from "../../../../../pages/_app";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { fireBaseApp } from "../../../../commons/libraries/firebase";
 
 const CenterList = () => {
   const router = useRouter();
