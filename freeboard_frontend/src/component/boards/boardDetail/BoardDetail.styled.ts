@@ -108,18 +108,9 @@ export const BoardDetailTitle = styled.h2`
   margin-bottom: 4rem;
 `;
 
-export const DetailImage = styled.div`
-  width: 100%;
-  height: 480px;
-  background: #ddd;
-  color: #fff;
+export const DetailImage = styled.img`
+  max-width: 100%;
   margin-bottom: 4rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media ${(props: any) => props.theme.tablet} {
-    height: 40rem;
-  }
 `;
 
 export const DetailContentBox = styled.div`

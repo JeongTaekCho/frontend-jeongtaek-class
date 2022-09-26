@@ -19,6 +19,7 @@ export interface IMyVariables {
       addressDetail?: string;
     };
   };
+  images: [string];
 }
 
 export interface IBoardWriteUi {
@@ -43,4 +44,6 @@ export interface IBoardWriteUi {
   handleComplete: (event: Address) => void;
   zipCode: string;
   address: string;
+  onChangeFile: (event: ChangeEvent<HTMLInputElement>) => void;
+  fileUrl: string;
 }

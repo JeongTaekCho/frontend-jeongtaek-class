@@ -2,7 +2,7 @@ import { ChangeEvent, MouseEvent, useState } from "react";
 import { NextRouter, useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
 import BoardWriteUi from "./BoardWrite.presenter";
-import { CREATE_BOARD, EDIT_BOARD } from "./BoardWrite.querys";
+import { CREATE_BOARD, EDIT_BOARD, UPLOAD_FILE } from "./BoardWrite.querys";
 import { FETCH_BOARD } from "../boardDetail/BoardDetail.querys";
 import { IBoardWrite, IMyVariables } from "./BoardWrite.types";
 import { IMutation, IQuery } from "../../../commons/types/generated/types";
@@ -31,6 +31,8 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
 
   // 주소
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [fileUrl, setFileUrl] = useState("");
 
   const router: NextRouter = useRouter();
 
@@ -94,6 +96,9 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
   // 게시글 수정 뮤테이션
   const [updateBoard] = useMutation<Pick<IMutation, "updateBoard">>(EDIT_BOARD);
 
+  // 업로드 파일 뮤테이션
+  const [uploadFile] = useMutation<Pick<IMutation, "uploadFile">>(UPLOAD_FILE);
+
   // 게시판등록 완료 시 필수 값 체크
   const onSubmitBoard = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -112,7 +117,7 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
               address,
               addressDetail: address2,
             },
-            images: [],
+            images: [fileUrl],
           },
         },
       });
@@ -190,6 +195,7 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
       if (title) myVariables.updateBoardInput.title = title;
       if (content) myVariables.updateBoardInput.contents = content;
       if (youtubeLink) myVariables.updateBoardInput.youtubeUrl = youtubeLink;
+      if (fileUrl) myVariables.updateBoardInput.images = [fileUrl];
 
       await updateBoard({
         variables: myVariables,
@@ -211,6 +217,21 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
     setZipCode(address.zonecode);
     setAddress(`${address.address} ${address.jibunAddress}`);
   };
+
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.currentTarget.files?.[0];
+
+    const result = await uploadFile({
+      variables: {
+        file: file,
+      },
+    });
+    if (result.data !== undefined && result.data !== null) {
+      setFileUrl(result.data.uploadFile.url);
+    }
+  };
+
+  console.log(fileUrl);
 
   return (
     <>
@@ -234,6 +255,8 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
         handleComplete={handleComplete}
         zipCode={zipCode}
         address={address}
+        onChangeFile={onChangeFile}
+        fileUrl={fileUrl}
       />
     </>
   );

@@ -15,6 +15,7 @@ const BoardListUi = ({
   onClickSearchBoard,
   onChangeDate,
 }: IBoardListUi) => {
+  console.log(boardBestPost);
   const { RangePicker } = DatePicker;
   return (
     <>
@@ -28,7 +29,12 @@ const BoardListUi = ({
                 key={bestBoard._id}
               >
                 <S.BoardGalleryItem>
-                  <S.BoardGrlleryThum></S.BoardGrlleryThum>
+                  <S.BoardGrlleryThum
+                    style={{
+                      background: `url(https://storage.googleapis.com/${bestBoard.images})`,
+                      backgroundSize: "cover",
+                    }}
+                  ></S.BoardGrlleryThum>
                   <S.BoardGalleryContentBox>
                     <S.BoardGalleryTitle>{bestBoard.title}</S.BoardGalleryTitle>
                     <S.BoardGalleryInfoBox>

@@ -62,7 +62,9 @@ const BoardDetailUi = ({
         </S.BoardDetailTitleContainer>
         <S.BoardDetailContentContainer>
           <S.BoardDetailTitle>{data?.fetchBoard.title}</S.BoardDetailTitle>
-          <S.DetailImage>추후 이미지로 바꿀 예정</S.DetailImage>
+          <S.DetailImage
+            src={`https://storage.googleapis.com/${data?.fetchBoard.images}`}
+          />
           <S.DetailContentBox>{data?.fetchBoard.contents}</S.DetailContentBox>
           <S.IframeContainer>
             <ReactPlayer

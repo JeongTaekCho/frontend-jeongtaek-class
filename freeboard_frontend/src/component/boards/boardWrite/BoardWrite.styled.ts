@@ -138,27 +138,26 @@ export const PhotoClipBox = styled(DefaultInputBox)`
   & p {
     margin-bottom: 20px;
   }
-  button {
-    width: 78px;
-    height: 78px;
-    background: #bdbdbd;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    @media ${(props: any) => props.theme.mobile} {
-      width: 30%;
-      height: 0;
-      padding-bottom: 28%;
-      position: relative;
-    }
-    span {
-      @media ${(props: any) => props.theme.mobile} {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-    }
+`;
+
+export const FileInput = styled.input`
+  display: none;
+`;
+
+export const FileLabel = styled.label`
+  width: 78px;
+  height: 78px;
+  background: #bdbdbd;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-size: cover;
+  background-repeat: no-repeat;
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 `;
 

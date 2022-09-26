@@ -24,8 +24,9 @@ const BoardWriteUi = ({
   handleComplete,
   zipCode,
   address,
+  onChangeFile,
+  fileUrl,
 }: IBoardWriteUi) => {
-  console.log(data);
   return (
     <>
       <S.Wrapper>
@@ -150,15 +151,13 @@ const BoardWriteUi = ({
             <S.PhotoClipBox>
               <p>사진 첨부</p>
               <S.PhotoClipBtnBox>
-                <button>
-                  <span>+</span>
-                </button>
-                <button>
-                  <span>+</span>
-                </button>
-                <button>
-                  <span>+</span>
-                </button>
+                <S.FileInput id="file" type="file" onChange={onChangeFile} />
+                <S.FileLabel
+                  style={{
+                    background: `url(https://storage.googleapis.com/${fileUrl})`,
+                  }}
+                  htmlFor="file"
+                ></S.FileLabel>
               </S.PhotoClipBtnBox>
             </S.PhotoClipBox>
             <S.MainSelectBox>

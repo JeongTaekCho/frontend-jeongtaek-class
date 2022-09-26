@@ -30,8 +30,7 @@ export const BoardGalleryItem = styled.div`
 `;
 export const BoardGrlleryThum = styled.div`
   width: 100%;
-  padding-bottom: 40%;
-  background: url("/board/ggamjang.png") no-repeat;
+  padding-bottom: 45%;
   background-size: cover;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
