@@ -152,7 +152,7 @@ const BoardWriteUi = ({
               <p>사진 첨부</p>
               <S.PhotoClipBtnBox>
                 <S.FileInput id="file" type="file" onChange={onChangeFile} />
-                {fileUrl ? (
+                {fileUrl || data?.fetchBoard?.images ? (
                   <S.FileLabel
                     style={{
                       backgroundImage: `url(https://storage.googleapis.com/${fileUrl})`,

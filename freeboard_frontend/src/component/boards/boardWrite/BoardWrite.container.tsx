@@ -223,7 +223,7 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
 
     const result = await uploadFile({
       variables: {
-        file: file,
+        file,
       },
     });
     if (result.data !== undefined && result.data !== null) {

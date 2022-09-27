@@ -18,8 +18,8 @@ export interface IMyVariables {
       address?: string;
       addressDetail?: string;
     };
+    images?: string[];
   };
-  images: [string];
 }
 
 export interface IBoardWriteUi {
