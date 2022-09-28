@@ -14,3 +14,20 @@
 
 // 입출력 예 #2
 // 자연수 2와 5의 최대공약수는 1, 최소공배수는 10이므로 [1, 10]을 리턴해야 합니다.
+
+function solution(n, m) {
+  //   const biggest = Math.max(n, m); // 두 수중 더 큰 수 찾기
+  //   let max = 0;
+  //   for (let i = 1; i <= m; i++) {
+  //     if (n % i === 0 && m % i === 0) max = i;
+  //   }
+  //   //최소공배수 구하기
+  //   let min = 0; // 공배수 중 제일 작은 수 저장
+  //   for (let i = biggest; i <= n * m; i += biggest) {
+  //     if (i % Math.min(n, m) === 0) {
+  //       min = i;
+  //       break;
+  //     }
+  //   }
+  //   return [max, min];
+}
