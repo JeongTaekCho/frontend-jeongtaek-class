@@ -1,15 +1,15 @@
+import { isCompositeType } from "graphql";
 import { MouseEvent, useState } from "react";
 import PaginationUi from "./pagination.presetner";
 import { IPaginationRefetch } from "./pagination.types";
-import { FETCH_BOARDS_COUNTS } from "./pagination.querys";
-import { useQuery } from "@apollo/client";
-import { IQuery } from "../../../commons/types/generated/types";
 
-const Pagination = ({ refetch, pageNum, setPageNum }: IPaginationRefetch) => {
+const Pagination = ({
+  refetch,
+  pageNum,
+  setPageNum,
+  boardCounts,
+}: IPaginationRefetch) => {
   const [startPage, setStartPage] = useState(1);
-
-  const { data: boardCounts } =
-    useQuery<Pick<IQuery, "fetchBoardsCount">>(FETCH_BOARDS_COUNTS);
 
   const lastPage = Math.ceil(Number(boardCounts?.fetchBoardsCount) / 10);
 

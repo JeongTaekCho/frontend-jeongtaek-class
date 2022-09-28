@@ -33,6 +33,8 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [fileUrl, setFileUrl] = useState("");
+  const [fileUrl2, setFileUrl2] = useState("");
+  const [fileUrl3, setFileUrl3] = useState("");
 
   const router: NextRouter = useRouter();
 

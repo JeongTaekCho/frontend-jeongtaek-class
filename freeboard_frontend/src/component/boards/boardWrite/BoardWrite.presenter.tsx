@@ -151,7 +151,7 @@ const BoardWriteUi = ({
             <S.PhotoClipBox>
               <p>사진 첨부</p>
               <S.PhotoClipBtnBox>
-                <S.FileInput id="file" type="file" onChange={onChangeFile} />
+                <S.FileInput id="file01" type="file" onChange={onChangeFile} />
                 {fileUrl || data?.fetchBoard?.images ? (
                   <S.FileLabel
                     style={{
@@ -159,10 +159,40 @@ const BoardWriteUi = ({
                       backgroundSize: "cover",
                       backgroundColor: "none",
                     }}
-                    htmlFor="file"
+                    htmlFor="file01"
                   ></S.FileLabel>
                 ) : (
-                  <S.FileLabel htmlFor="file">+</S.FileLabel>
+                  <S.FileLabel htmlFor="file01">+</S.FileLabel>
+                )}
+              </S.PhotoClipBtnBox>
+              <S.PhotoClipBtnBox>
+                <S.FileInput id="file02" type="file" onChange={onChangeFile} />
+                {fileUrl || data?.fetchBoard?.images ? (
+                  <S.FileLabel
+                    style={{
+                      backgroundImage: `url(https://storage.googleapis.com/${fileUrl})`,
+                      backgroundSize: "cover",
+                      backgroundColor: "none",
+                    }}
+                    htmlFor="file02"
+                  ></S.FileLabel>
+                ) : (
+                  <S.FileLabel htmlFor="file02">+</S.FileLabel>
+                )}
+              </S.PhotoClipBtnBox>
+              <S.PhotoClipBtnBox>
+                <S.FileInput id="file03" type="file" onChange={onChangeFile} />
+                {fileUrl || data?.fetchBoard?.images ? (
+                  <S.FileLabel
+                    style={{
+                      backgroundImage: `url(https://storage.googleapis.com/${fileUrl})`,
+                      backgroundSize: "cover",
+                      backgroundColor: "none",
+                    }}
+                    htmlFor="file03"
+                  ></S.FileLabel>
+                ) : (
+                  <S.FileLabel htmlFor="file03">+</S.FileLabel>
                 )}
               </S.PhotoClipBtnBox>
             </S.PhotoClipBox>

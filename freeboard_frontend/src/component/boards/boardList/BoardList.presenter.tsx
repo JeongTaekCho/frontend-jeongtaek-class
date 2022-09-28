@@ -18,8 +18,8 @@ const BoardListUi = ({
   keyword,
   pageNum,
   setPageNum,
+  boardCounts,
 }: IBoardListUi) => {
-  console.log(boardBestPost);
   const { RangePicker } = DatePicker;
   return (
     <>
@@ -156,6 +156,7 @@ const BoardListUi = ({
             refetch={refetch}
             pageNum={pageNum}
             setPageNum={setPageNum}
+            boardCounts={boardCounts}
           />
           <Link href={"/boards/boardWrite"}>
             <S.BoardWriteBtn>

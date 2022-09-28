@@ -50,7 +50,6 @@ const staticRoutedPage = () => {
     // setSearchData(event.target.value);
 
     getDebounce(event.target.value);
-    console.log(event.target.value);
   };
   const onClickSearch = async () => {
     await refetch({ search: searchData, page: 1 });

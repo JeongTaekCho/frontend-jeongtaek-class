@@ -32,6 +32,7 @@ const PaginationUi = ({
             id={String(index + startPage)}
             onClick={onClickPage}
             className={index === pageNum ? "on" : ""}
+            key={index}
           >
             {index + startPage}
           </S.BoardPage>
