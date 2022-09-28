@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from "react";
 import { IQuery } from "../../../commons/types/generated/types";
 
 export interface IBoardListUi {
@@ -9,4 +9,7 @@ export interface IBoardListUi {
   refetch: () => void;
   onClickSearchBoard: (event: MouseEvent<HTMLButtonElement>) => void;
   onChangeDate: (event: ChangeEvent<HTMLInputElement>) => void;
+  keyword: string;
+  pageNum: number;
+  setPageNum: Dispatch<SetStateAction<number>>;
 }

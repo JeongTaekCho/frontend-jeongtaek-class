@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import { Dispatch, MouseEvent, SetStateAction } from "react";
 
 export interface IPagination {
   startPage: number;
@@ -10,5 +10,7 @@ export interface IPagination {
 }
 
 export interface IPaginationRefetch {
-  refetch: () => void;
+  refetch: (value: any) => void;
+  pageNum: number;
+  setPageNum: Dispatch<SetStateAction<number>>;
 }

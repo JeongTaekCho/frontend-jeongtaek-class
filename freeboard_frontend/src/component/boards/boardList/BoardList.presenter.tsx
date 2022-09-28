@@ -5,6 +5,7 @@ import { DatePicker, Space } from "antd";
 import "antd/dist/antd.css";
 import Pagination from "../../common/pagination/pagination.container";
 import "moment/locale/zh-cn";
+import { uuidv4 } from "@firebase/util";
 
 const BoardListUi = ({
   data,
@@ -14,6 +15,9 @@ const BoardListUi = ({
   refetch,
   onClickSearchBoard,
   onChangeDate,
+  keyword,
+  pageNum,
+  setPageNum,
 }: IBoardListUi) => {
   console.log(boardBestPost);
   const { RangePicker } = DatePicker;
@@ -122,7 +126,23 @@ const BoardListUi = ({
               <S.BoardUl key={item._id}>
                 <S.BoardLi1>{index + 1}</S.BoardLi1>
                 <Link href={`/boards/${String(item._id)}`}>
-                  <S.BoardLi2>{item ? item.title : "로딩중입니다"}</S.BoardLi2>
+                  <S.BoardLi2>
+                    {item
+                      ? item.title
+                          .replaceAll(keyword, `#as${keyword}#as`)
+                          .split("#as")
+                          .map((el) => (
+                            <span
+                              key={uuidv4()}
+                              style={{
+                                color: keyword === el ? "#f95621" : "#000",
+                              }}
+                            >
+                              {el}
+                            </span>
+                          ))
+                      : "로딩중입니다"}
+                  </S.BoardLi2>
                 </Link>
                 <S.BoardLi3>{item?.writer}</S.BoardLi3>
                 <S.BoardLi4>{item?.createdAt.slice(0, 10)}</S.BoardLi4>
@@ -132,7 +152,11 @@ const BoardListUi = ({
         </S.BoardListContainer>
         <S.BoardFooterContainer>
           <div></div>
-          <Pagination refetch={refetch} />
+          <Pagination
+            refetch={refetch}
+            pageNum={pageNum}
+            setPageNum={setPageNum}
+          />
           <Link href={"/boards/boardWrite"}>
             <S.BoardWriteBtn>
               <img src="/board/boardWriteBtn.png" />

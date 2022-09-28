@@ -1,13 +1,12 @@
 import { MouseEvent, useState } from "react";
 import PaginationUi from "./pagination.presetner";
-import { IPagination, IPaginationRefetch } from "./pagination.types";
+import { IPaginationRefetch } from "./pagination.types";
 import { FETCH_BOARDS_COUNTS } from "./pagination.querys";
 import { useQuery } from "@apollo/client";
 import { IQuery } from "../../../commons/types/generated/types";
 
-const Pagination = ({ refetch }: IPaginationRefetch) => {
+const Pagination = ({ refetch, pageNum, setPageNum }: IPaginationRefetch) => {
   const [startPage, setStartPage] = useState(1);
-  const [pageNum, setPageNum] = useState(0);
 
   const { data: boardCounts } =
     useQuery<Pick<IQuery, "fetchBoardsCount">>(FETCH_BOARDS_COUNTS);
