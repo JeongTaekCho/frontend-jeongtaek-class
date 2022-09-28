@@ -7,7 +7,7 @@ import _ from "lodash";
 import { FETCH_BOARDS_COUNTS } from "../../common/pagination/pagination.querys";
 
 const BoardList = () => {
-  const [searchData, setSearchData] = useState("");
+  // const [searchData, setSearchData] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [keyword, setKeyword] = useState("");
@@ -37,7 +37,7 @@ const BoardList = () => {
     setEndDate(new Intl.DateTimeFormat("ko-KR").format(new Date(event[1]._d)));
   };
 
-  const searchGet = _.debounce((value) => {
+  const getdebouncing = _.debounce((value) => {
     void refetch({
       page: 1,
       search: value,
@@ -47,11 +47,11 @@ const BoardList = () => {
     });
     setKeyword(value);
     setPageNum(0);
+    console.log(value);
   }, 500);
 
   const onChangeSearchData = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchData(event.target.value);
-    searchGet(event.target.value);
+    getdebouncing(event.target.value);
   };
 
   return (
@@ -60,7 +60,7 @@ const BoardList = () => {
         data={data}
         boardBestPost={boardBestPost}
         onChangeSearchData={onChangeSearchData}
-        searchData={searchData}
+        // searchData={searchData}
         refetch={refetch}
         onClickSearchBoard={onClickSearchBoard}
         onChangeDate={onChangeDate}

@@ -12,4 +12,5 @@ export interface IBoardListUi {
   keyword: string;
   pageNum: number;
   setPageNum: Dispatch<SetStateAction<number>>;
+  boardCounts?: Pick<IQuery, "fetchBoardsCount">;
 }

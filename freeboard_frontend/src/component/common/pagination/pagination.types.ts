@@ -1,4 +1,5 @@
 import { Dispatch, MouseEvent, SetStateAction } from "react";
+import { IQuery } from "../../../commons/types/generated/types";
 
 export interface IPagination {
   startPage: number;
@@ -13,4 +14,5 @@ export interface IPaginationRefetch {
   refetch: (value: any) => void;
   pageNum: number;
   setPageNum: Dispatch<SetStateAction<number>>;
+  boardCounts: Pick<IQuery, "fetchBoardsCount">;
 }

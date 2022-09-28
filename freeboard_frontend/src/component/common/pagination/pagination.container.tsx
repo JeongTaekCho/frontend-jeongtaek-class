@@ -1,4 +1,3 @@
-import { isCompositeType } from "graphql";
 import { MouseEvent, useState } from "react";
 import PaginationUi from "./pagination.presetner";
 import { IPaginationRefetch } from "./pagination.types";
