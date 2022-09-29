@@ -1,3 +1,5 @@
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 import AgreeCheckBox from "../common/svg/AgreeCheckBox";
 import * as S from "./register.styles";
 import { IRegisterUi } from "./register.types";
@@ -7,6 +9,11 @@ const RegisterUi = ({
   maleChecked,
   femaleChecked,
   noChecked,
+  onChangeJoinInput,
+  isModalOpen,
+  ToggleAddressModal,
+  handleComplete,
+  joinAdressInput,
 }: IRegisterUi) => {
   return (
     <>
@@ -27,6 +34,8 @@ const RegisterUi = ({
                 <S.InputContentInput
                   type="text"
                   placeholder="아이디를 입력해주세요."
+                  name="joinId"
+                  onChange={onChangeJoinInput}
                 />
               </S.InputContentBox>
               <S.InputConfirmBox>
@@ -43,6 +52,8 @@ const RegisterUi = ({
                 <S.InputContentInput
                   type="password"
                   placeholder="비밀번호를 입력해주세요."
+                  name="joinPw"
+                  onChange={onChangeJoinInput}
                 />
               </S.InputContentBox>
             </S.InputDefaultBox>
@@ -56,6 +67,8 @@ const RegisterUi = ({
                 <S.InputContentInput
                   type="text"
                   placeholder="비밀번호를 한번 더 입력해주세요."
+                  name="joinPw2"
+                  onChange={onChangeJoinInput}
                 />
               </S.InputContentBox>
             </S.InputDefaultBox>
@@ -69,6 +82,8 @@ const RegisterUi = ({
                 <S.InputContentInput
                   type="text"
                   placeholder="이름을 입력해주세요."
+                  name="joinName"
+                  onChange={onChangeJoinInput}
                 />
               </S.InputContentBox>
             </S.InputDefaultBox>
@@ -82,6 +97,8 @@ const RegisterUi = ({
                 <S.InputContentInput
                   type="text"
                   placeholder="예: cjt3591@gmail.com"
+                  name="joinEmail"
+                  onChange={onChangeJoinInput}
                 />
               </S.InputContentBox>
               <S.InputConfirmBox>
@@ -98,6 +115,8 @@ const RegisterUi = ({
                 <S.InputContentInput
                   type="text"
                   placeholder="숫자만 인력해주세요."
+                  name="joinPhone"
+                  onChange={onChangeJoinInput}
                 />
               </S.InputContentBox>
               <S.InputConfirmBox>
@@ -113,12 +132,21 @@ const RegisterUi = ({
                 </S.InputTitleLabel>
               </S.InputTitleBox>
               <S.InputContentBox>
-                <S.AddressInput type="text" disabled />
+                <S.AddressInput
+                  type="text"
+                  disabled
+                  name="joinAdress"
+                  value={joinAdressInput}
+                />
                 <S.AddressInput
                   type="text"
                   placeholder="상세주소를 입력해주세요."
+                  name="joinAdressDetail"
+                  onChange={onChangeJoinInput}
                 />
-                <S.InputAddressFindBtn>주소 검색</S.InputAddressFindBtn>
+                <S.InputAddressFindBtn onClick={ToggleAddressModal}>
+                  주소 검색
+                </S.InputAddressFindBtn>
                 <S.InputAddressText>
                   배송지에 따라 상품 정보가 달라질 수 있습니다.
                 </S.InputAddressText>
@@ -203,11 +231,25 @@ const RegisterUi = ({
                     type="text"
                     placeholder="YYYY"
                     maxLength={4}
+                    name="joinBirth1"
+                    onChange={onChangeJoinInput}
                   />
                   /
-                  <S.BirthdayInput type="text" placeholder="MM" maxLength={2} />
+                  <S.BirthdayInput
+                    type="text"
+                    placeholder="MM"
+                    maxLength={2}
+                    name="joinBirth2"
+                    onChange={onChangeJoinInput}
+                  />
                   /
-                  <S.BirthdayInput type="text" placeholder="DD" maxLength={2} />
+                  <S.BirthdayInput
+                    type="text"
+                    placeholder="DD"
+                    maxLength={2}
+                    name="joinBirth3"
+                    onChange={onChangeJoinInput}
+                  />
                 </S.BirthdayBox>
               </S.InputContentBox>
             </S.InputDefaultBox>
@@ -228,6 +270,15 @@ const RegisterUi = ({
         </S.AgreeBox>
         <S.RegisterBtn type="submit" value={"회원가입"} />
       </S.RegisterContainer>
+      {isModalOpen && (
+        <Modal
+          title="대한민국의 모든 주소를 찾아주는 신기한 도구!!"
+          open={isModalOpen}
+          onCancel={ToggleAddressModal}
+        >
+          <DaumPostcodeEmbed onComplete={handleComplete} />
+        </Modal>
+      )}
     </>
   );
 };

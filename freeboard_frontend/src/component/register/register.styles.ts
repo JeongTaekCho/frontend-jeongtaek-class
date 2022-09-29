@@ -27,6 +27,9 @@ export const MostText = styled.p`
   span {
     color: red;
   }
+  padding-bottom: 15px;
+  border-bottom: 1px solid #111;
+  margin-bottom: 5px;
 `;
 
 export const InputContainer = styled.div`

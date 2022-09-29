@@ -215,7 +215,6 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
 
   const handleComplete = (address: Address) => {
     setIsModalOpen((prev) => !prev);
-    console.log(address);
     setZipCode(address.zonecode);
     setAddress(`${address.address} ${address.jibunAddress}`);
   };

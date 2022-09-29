@@ -65,3 +65,10 @@ export const JoinBtn = styled(LoginBtn)`
   color: ${(props: any) => props.theme.mainColor};
   margin-bottom: 0;
 `;
+
+export const loginError = styled.p`
+  font-size: 12px;
+  font-weight: 500;
+  color: red;
+  margin: 0 0 4px;
+`;
