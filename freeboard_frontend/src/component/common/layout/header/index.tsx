@@ -22,6 +22,7 @@ const Header = () => {
   const goCenter = async () => {
     await router.push("/service/center");
   };
+
   return (
     <>
       <S.HeaderWrap>
