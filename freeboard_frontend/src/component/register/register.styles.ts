@@ -103,7 +103,7 @@ export const SelectGenderBox = styled.div`
 export const SelectGenderContainer = styled.div``;
 
 export const DefaultCheckBox = styled.input`
-  display: none;
+  /* display: none; */
 `;
 export const GenderCheckBox = styled.div`
   width: 24px;
@@ -213,8 +213,19 @@ export const AgreeAllCheckBox = styled.div`
   gap: 12px;
 `;
 
-export const AgreeAllCheckText = styled.p`
+export const AgreeAllCheckText = styled.label`
   font-size: 18px;
   font-weight: 500;
   color: #333;
+  cursor: pointer;
+`;
+
+export const AgreeCheckText = styled.label`
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  cursor: pointer;
+  span {
+    color: #999;
+  }
 `;

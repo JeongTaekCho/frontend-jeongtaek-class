@@ -16,7 +16,7 @@ const Register = () => {
   const [joinPhoneInput, setJoinPhoneInput] = useState("");
   const [joinAdressInput, setJoinAdressInput] = useState("");
   const [joinAdressDetailInput, setJoinAdressDetailInput] = useState("");
-  // const [joinGenderInput, setJoinGenderInput] = useState("");
+  const [joinGenderInput, setJoinGenderInput] = useState("");
   const [joinBirthInput1, setJoinBirth1Input] = useState("");
   const [joinBirthInput2, setJoinBirth2Input] = useState("");
   const [joinBirthInput3, setJoinBirth3Input] = useState("");
@@ -24,7 +24,7 @@ const Register = () => {
   // 주소
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const ToggleAddressModal = (event: MouseEvent<HTMLButtonElement>) => {
+  const ToggleAddressModal = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
     setIsModalOpen((prev) => !prev);
   };
@@ -80,23 +80,26 @@ const Register = () => {
 
   const CheckBoxOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const {
-      target: { id, checked },
+      target: { id, checked, value },
     } = event;
 
     if (id === "male" && checked === true) {
       setMaleChecked(true);
       setFemaleChecked(false);
       setNoChecked(false);
+      setJoinGenderInput(value);
     }
     if (id === "female" && checked === true) {
       setMaleChecked(false);
       setFemaleChecked(true);
       setNoChecked(false);
+      setJoinGenderInput(value);
     }
     if (id === "noSelect" && checked === true) {
       setMaleChecked(false);
       setFemaleChecked(false);
       setNoChecked(true);
+      setJoinGenderInput(value);
     }
   };
 

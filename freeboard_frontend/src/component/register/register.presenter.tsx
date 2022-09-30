@@ -36,6 +36,7 @@ const RegisterUi = ({
                   placeholder="아이디를 입력해주세요."
                   name="joinId"
                   onChange={onChangeJoinInput}
+                  maxLength={30}
                 />
               </S.InputContentBox>
               <S.InputConfirmBox>
@@ -84,6 +85,7 @@ const RegisterUi = ({
                   placeholder="이름을 입력해주세요."
                   name="joinName"
                   onChange={onChangeJoinInput}
+                  maxLength={51}
                 />
               </S.InputContentBox>
             </S.InputDefaultBox>
@@ -117,6 +119,7 @@ const RegisterUi = ({
                   placeholder="숫자만 인력해주세요."
                   name="joinPhone"
                   onChange={onChangeJoinInput}
+                  maxLength={11}
                 />
               </S.InputContentBox>
               <S.InputConfirmBox>
@@ -166,6 +169,7 @@ const RegisterUi = ({
                       onChange={CheckBoxOnChange}
                       name="gender"
                       checked={maleChecked}
+                      value="male"
                     />
 
                     <S.GenderCheckBoxLabel htmlFor="male">
@@ -186,6 +190,7 @@ const RegisterUi = ({
                       onChange={CheckBoxOnChange}
                       name="gender"
                       checked={femaleChecked}
+                      value="female"
                     />
 
                     <S.GenderCheckBoxLabel htmlFor="female">
@@ -207,6 +212,7 @@ const RegisterUi = ({
                         onChange={CheckBoxOnChange}
                         name="gender"
                         checked={noChecked}
+                        value="noCheck"
                       />
                       <S.GenderCheckBox>
                         {noChecked ? (
@@ -262,9 +268,48 @@ const RegisterUi = ({
           <S.AgreeRightBox>
             <S.AgreeAllCheckBox>
               <S.defaultAgreeCheckBox>
+                <S.DefaultCheckBox type="checkbox" id="allCheck" />
                 <AgreeCheckBox />
               </S.defaultAgreeCheckBox>
-              <S.AgreeAllCheckText>전체 동의합니다.</S.AgreeAllCheckText>
+              <S.AgreeAllCheckText htmlFor="allCheck">
+                전체 동의합니다.
+              </S.AgreeAllCheckText>
+            </S.AgreeAllCheckBox>
+            <S.AgreeAllCheckBox>
+              <S.defaultAgreeCheckBox>
+                <S.DefaultCheckBox type="checkbox" id="esTos" />
+                <AgreeCheckBox />
+              </S.defaultAgreeCheckBox>
+              <S.AgreeCheckText htmlFor="esTos">
+                이용약관 동의 <span>(필수)</span>
+              </S.AgreeCheckText>
+            </S.AgreeAllCheckBox>
+            <S.AgreeAllCheckBox>
+              <S.defaultAgreeCheckBox>
+                <S.DefaultCheckBox type="checkbox" id="esInfoAgree" />
+                <AgreeCheckBox />
+              </S.defaultAgreeCheckBox>
+              <S.AgreeCheckText htmlFor="esInfoAgree">
+                개인정보 수집∙이용 동의 <span>(필수)</span>
+              </S.AgreeCheckText>
+            </S.AgreeAllCheckBox>
+            <S.AgreeAllCheckBox>
+              <S.defaultAgreeCheckBox>
+                <S.DefaultCheckBox type="checkbox" id="infoAgree" />
+                <AgreeCheckBox />
+              </S.defaultAgreeCheckBox>
+              <S.AgreeCheckText htmlFor="infoAgree">
+                개인정보 수집∙이용 동의 <span>(선택)</span>
+              </S.AgreeCheckText>
+            </S.AgreeAllCheckBox>
+            <S.AgreeAllCheckBox>
+              <S.defaultAgreeCheckBox>
+                <S.DefaultCheckBox type="checkbox" id="agecheck" />
+                <AgreeCheckBox />
+              </S.defaultAgreeCheckBox>
+              <S.AgreeCheckText htmlFor="agecheck">
+                본인은 만 14세 이상입니다. <span>(선택)</span>
+              </S.AgreeCheckText>
             </S.AgreeAllCheckBox>
           </S.AgreeRightBox>
         </S.AgreeBox>
