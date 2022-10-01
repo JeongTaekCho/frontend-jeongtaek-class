@@ -1,4 +1,4 @@
-import CenterDetail from "../../../../../src/component/service/center/detail/centerDetail.container copy 2";
+import CenterDetail from "../../../../../src/component/service/center/detail/centerDetail.container";
 
 const CenterDetailPage = () => {
   return <CenterDetail />;

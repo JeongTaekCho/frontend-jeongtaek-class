@@ -79,7 +79,7 @@ export const CenterWriteBtn = styled.button`
   height: 42px;
   border-radius: 0px;
   color: rgb(255, 255, 255);
-  background-color: rgb(95, 0, 128);
+  background-color: #f95621;
   border: 0px none;
   cursor: pointer;
 `;

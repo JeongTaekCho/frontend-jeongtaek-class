@@ -4,19 +4,23 @@ import { AppProps } from "next/app";
 import { GlobalStyles } from "../src/commons/globalStyles";
 import ApolloSetting from "../src/commons/apolloClient/apollo";
 import Layout from "../src/component/common/layout";
+import { RecoilRoot } from "recoil";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ApolloSetting>
-      <ThemeProvider theme={theme}>
-        <Layout>
-          <>
-            <Global styles={GlobalStyles} />
-            <Component {...pageProps} />
-          </>
-        </Layout>
-      </ThemeProvider>
-    </ApolloSetting>
+    <RecoilRoot>
+      {" "}
+      <ApolloSetting>
+        <ThemeProvider theme={theme}>
+          <Layout>
+            <>
+              <Global styles={GlobalStyles} />
+              <Component {...pageProps} />
+            </>
+          </Layout>
+        </ThemeProvider>
+      </ApolloSetting>
+    </RecoilRoot>
   );
 }
 

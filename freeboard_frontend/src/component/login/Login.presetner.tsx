@@ -22,7 +22,7 @@ const LoginUi = ({
           {loginIdError && <S.loginError>아이디를 입력해주세요.</S.loginError>}
 
           <S.LoginDefaultInput
-            type="text"
+            type="password"
             placeholder="비밀번호를 입력해주세요"
             name="loginPw"
             onChange={onChangeLoginInput}

@@ -63,6 +63,10 @@ export const LoginMenu = styled.div`
   right: 0;
 `;
 
+export const LogoutMenu = styled(LoginMenu)`
+  width: 315px;
+`;
+
 export const LoginMenuLi = styled.span`
   font-size: 12px;
   font-weight: 400;

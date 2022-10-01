@@ -159,7 +159,7 @@ export const BirthdayInput = styled.input`
   border: none;
 `;
 
-export const RegisterBtn = styled.input`
+export const RegisterBtn = styled.button`
   display: block;
   width: 240px;
   height: 56px;

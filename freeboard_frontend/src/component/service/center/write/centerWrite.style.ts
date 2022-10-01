@@ -83,12 +83,20 @@ export const CenterWriteDefaultTextArea = styled.textarea`
 `;
 
 export const CenterWriteFile = styled.input`
+  display: none;
+`;
+
+export const CenterFileBtn = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 72px;
   height: 72px;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 6px;
   cursor: pointer;
   margin: 12px 0;
+  color: rgb(221, 221, 221);
 `;
 
 export const CenterWriteSubmit = styled.button`
@@ -102,7 +110,7 @@ export const CenterWriteSubmit = styled.button`
   line-height: 20px;
   color: white;
   cursor: pointer;
-  background-color: rgb(221, 221, 221);
+  background-color: #f95621;
   font-weight: 500;
   border: none;
   border-radius: 3px;

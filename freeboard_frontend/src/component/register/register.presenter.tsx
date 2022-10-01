@@ -1,6 +1,6 @@
 import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
-import AgreeCheckBox from "../common/svg/AgreeCheckBox";
+// import AgreeCheckBox from "../common/svg/AgreeCheckBox";
 import * as S from "./register.styles";
 import { IRegisterUi } from "./register.types";
 
@@ -14,6 +14,7 @@ const RegisterUi = ({
   ToggleAddressModal,
   handleComplete,
   joinAdressInput,
+  onClickRegister,
 }: IRegisterUi) => {
   return (
     <>
@@ -89,7 +90,7 @@ const RegisterUi = ({
                 />
               </S.InputContentBox>
             </S.InputDefaultBox>
-            <S.InputDefaultBox>
+            {/* <S.InputDefaultBox>
               <S.InputTitleBox>
                 <S.InputTitleLabel htmlFor="">
                   이메일 <span>*</span>
@@ -258,10 +259,10 @@ const RegisterUi = ({
                   />
                 </S.BirthdayBox>
               </S.InputContentBox>
-            </S.InputDefaultBox>
+            </S.InputDefaultBox> */}
           </S.InputContainer>
         </S.LineContainer>
-        <S.AgreeBox>
+        {/* <S.AgreeBox>
           <S.AgreeLeftBox>
             이용약관동의 <span>*</span>
           </S.AgreeLeftBox>
@@ -312,8 +313,11 @@ const RegisterUi = ({
               </S.AgreeCheckText>
             </S.AgreeAllCheckBox>
           </S.AgreeRightBox>
-        </S.AgreeBox>
-        <S.RegisterBtn type="submit" value={"회원가입"} />
+        </S.AgreeBox> */}
+
+        <S.RegisterBtn type="button" onClick={onClickRegister}>
+          회원가입
+        </S.RegisterBtn>
       </S.RegisterContainer>
       {isModalOpen && (
         <Modal

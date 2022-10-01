@@ -11,4 +11,5 @@ export interface IRegisterUi {
   ToggleAddressModal: (event: MouseEvent<HTMLElement>) => void;
   handleComplete: (address: Address) => void;
   joinAdressInput: string;
+  onClickRegister: (event: MouseEvent<HTMLButtonElement>) => void;
 }

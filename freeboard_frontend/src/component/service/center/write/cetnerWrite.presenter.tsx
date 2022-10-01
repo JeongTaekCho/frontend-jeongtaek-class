@@ -46,7 +46,8 @@ const CenterWriteUi = ({
                   placeholder="내용을 입력해주세요."
                   onChange={onChangeTextarea}
                 />
-                <S.CenterWriteFile type="file" />
+                <S.CenterWriteFile type="file" id="centerFile" />
+                <S.CenterFileBtn htmlFor="centerFile">+</S.CenterFileBtn>
               </S.CenterWriteTextAreaBox>
             </S.CenterWriteInputBox>
           </S.CenterWriteInputContainer>

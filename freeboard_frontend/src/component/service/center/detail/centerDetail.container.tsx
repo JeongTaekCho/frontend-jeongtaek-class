@@ -4,12 +4,15 @@ import {
   getDocs,
   getFirestore,
 } from "firebase/firestore";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { fireBaseApp } from "../../../../commons/libraries/firebase";
 import CenterDetailUi from "./centerDetail.presenter";
 
 const CenterDetail = () => {
   const [serviceData, setServiceData] = useState<DocumentData>([]);
+
+  const router = useRouter();
 
   useEffect(() => {
     const getCenterData = async () => {
@@ -24,9 +27,13 @@ const CenterDetail = () => {
     void getCenterData();
   }, []);
 
-  console.log(serviceData);
+  const goDetailList = () => {
+    void router.push("/service/center");
+  };
 
-  return <CenterDetailUi serviceData={serviceData} />;
+  return (
+    <CenterDetailUi serviceData={serviceData} goDetailList={goDetailList} />
+  );
 };
 
 export default CenterDetail;
