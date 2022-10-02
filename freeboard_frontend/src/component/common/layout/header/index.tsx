@@ -9,6 +9,12 @@ import Hamberger from "../../svg/Hamberger";
 import { gql, useQuery } from "@apollo/client";
 import { IQuery } from "../../../../commons/types/generated/types";
 import { successModal } from "../../modal/modal-function";
+import {
+  accessTokenData,
+  facebookUserData,
+  googleUserData,
+} from "../../../../store";
+import { useRecoilState } from "recoil";
 
 const FETCH_USER_LOGGED_IN = gql`
   query {
@@ -32,7 +38,9 @@ const FETCH_USER_LOGGED_IN = gql`
 // `;
 
 const Header = () => {
-  // const [, setAccessToken] = useRecoilState(accessTokenData);
+  const [accesstoken, setAccessToken] = useRecoilState(accessTokenData);
+  const [googleUser, setGoogleUser] = useRecoilState(googleUserData);
+  const [facebookUser, setFacebookUser] = useRecoilState(facebookUserData);
 
   const { data: userData } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
@@ -64,6 +72,8 @@ const Header = () => {
     successModal("로그아웃 되었습니다.");
   };
 
+  console.log(googleUser);
+
   return (
     <>
       <S.HeaderWrap>
@@ -84,9 +94,10 @@ const Header = () => {
               <Heart />
               <Basket />
             </S.IconBox>
-            {userData?.fetchUserLoggedIn ? (
+            {facebookUser ? (
               <S.LogoutMenu>
-                {userData?.fetchUserLoggedIn.name}
+                {/* {accesstoken?.fetchUserLoggedIn.name} */}
+                {facebookUser?.displayName}
                 <S.LoginMenuLi>|</S.LoginMenuLi>
                 <S.LoginMenuLi onClick={goLogin}>마이페이지</S.LoginMenuLi>
                 <S.LoginMenuLi>|</S.LoginMenuLi>

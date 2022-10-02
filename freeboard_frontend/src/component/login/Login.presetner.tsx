@@ -7,6 +7,7 @@ const LoginUi = ({
   onClickLogin,
   loginIdError,
   loginPwError,
+  onClickSocialLogin,
 }: ILoginUi) => {
   return (
     <>
@@ -38,6 +39,12 @@ const LoginUi = ({
           </S.LoginFindContainer>
           <S.LoginBtn onClick={onClickLogin}>로그인</S.LoginBtn>
           <S.JoinBtn onClick={goRegister}>회원가입</S.JoinBtn>
+          <S.GoogleLogin id="google" onClick={onClickSocialLogin}>
+            <span>Connect with Google</span>
+          </S.GoogleLogin>
+          <S.FacebookLogin id="facebook" onClick={onClickSocialLogin}>
+            <span>Connect with Facebook</span>
+          </S.FacebookLogin>
         </S.LoginForm>
       </S.LoginContainer>
     </>

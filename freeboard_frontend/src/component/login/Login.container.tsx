@@ -4,13 +4,19 @@ import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { USER_LOGIN } from "./Login.queries";
 import { useRecoilState } from "recoil";
-import { accessTokenData } from "../../store";
+import { accessTokenData, facebookUserData, googleUserData } from "../../store";
 import {
   IMutation,
   IMutationLoginUserArgs,
 } from "../../commons/types/generated/types";
 import { errorModal, successModal } from "../common/modal/modal-function";
 import "antd/dist/antd.css";
+import {
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth } from "../../commons/libraries/firebase";
 
 const Login = () => {
   const [loginId, setLoginId] = useState("");
@@ -18,7 +24,9 @@ const Login = () => {
   const [loginIdError, setLoginIdError] = useState(false);
   const [loginPwError, setLoginPwError] = useState(false);
 
-  const [, setAccessToken] = useRecoilState(accessTokenData);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenData);
+  const [googleUser, setGoogleUser] = useRecoilState(googleUserData);
+  const [facebookUser, setFacebookUser] = useRecoilState(facebookUserData);
 
   const router: NextRouter = useRouter();
 
@@ -41,6 +49,26 @@ const Login = () => {
     } else if (name === "loginPw") {
       setLoginPw(value);
     }
+  };
+
+  const googleProvider = new GoogleAuthProvider();
+  const facebookProvider = new FacebookAuthProvider();
+
+  const onClickSocialLogin = async (event) => {
+    event.preventDefault();
+    if (event.currentTarget.id === "google") {
+      const result = await signInWithPopup(auth, googleProvider);
+      setAccessToken(result._tokenResponse.idToken);
+      setGoogleUser(result.user);
+    } else if (event.currentTarget.id === "facebook") {
+      const result = await signInWithPopup(auth, facebookProvider);
+      setAccessToken(result._tokenResponse.idToken);
+      setFacebookUser(result.user);
+      console.log(result);
+      console.log(event.currentTarget.id);
+    }
+
+    // void router.push("/");
   };
 
   const [loginUser] = useMutation<
@@ -89,6 +117,7 @@ const Login = () => {
       onClickLogin={onClickLogin}
       loginIdError={loginIdError}
       loginPwError={loginPwError}
+      onClickSocialLogin={onClickSocialLogin}
     />
   );
 };

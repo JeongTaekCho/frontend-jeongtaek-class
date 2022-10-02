@@ -3,12 +3,10 @@ import CenterWriteUi from "./cetnerWrite.presenter";
 import { collection, addDoc, getFirestore } from "firebase/firestore";
 
 import { v4 as uuidv4 } from "uuid";
-import {
-  fireBaseApp,
-  fireBaseStroage,
-} from "../../../../commons/libraries/firebase";
+import { fireBaseApp, storage } from "../../../../commons/libraries/firebase";
 import { getDate } from "../../../../commons/libraries/utils";
 import { useRouter } from "next/router";
+import { ref, uploadBytes } from "firebase/storage";
 
 const CenterWrite = () => {
   const [writer, setWriter] = useState("");
@@ -30,6 +28,10 @@ const CenterWrite = () => {
     }
   };
 
+  const onChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
+    setFile(event.target.files[0]);
+  };
+
   const onChangeTextarea = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
   };
@@ -47,9 +49,9 @@ const CenterWrite = () => {
       createdAt: getDate(new Date()),
     });
 
-    const fileRef = fireBaseStroage.ref("images/");
-    const imagesRef = fileRef.child("dd");
-    // const uploadFile = imagesRef.put(file);
+    const fileRef = ref(storage, file.name);
+    const imagesRef = ref(storage, `images/${file.name}`);
+    uploadBytes(fileRef, file);
 
     void router.push(`/service/center`);
   };
@@ -59,6 +61,7 @@ const CenterWrite = () => {
       onChangeInput={onChangeInput}
       onChangeTextarea={onChangeTextarea}
       submitWrite={submitWrite}
+      onChangeFile={onChangeFile}
     />
   );
 };
