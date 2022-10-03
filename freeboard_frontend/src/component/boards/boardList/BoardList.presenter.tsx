@@ -6,6 +6,7 @@ import "antd/dist/antd.css";
 import Pagination from "../../common/pagination/pagination.container";
 import "moment/locale/zh-cn";
 import { uuidv4 } from "@firebase/util";
+import { getDate } from "../../../commons/libraries/utils";
 
 const BoardListUi = ({
   data,
@@ -35,7 +36,10 @@ const BoardListUi = ({
                 <S.BoardGalleryItem>
                   <S.BoardGrlleryThum
                     style={{
-                      backgroundImage: `url(https://storage.googleapis.com/${bestBoard.images?.[0]})`,
+                      backgroundImage: `url(https://storage.googleapis.com/${bestBoard.images?.[0]?.replaceAll(
+                        " ",
+                        "%20"
+                      )})`,
                       backgroundSize: "cover",
                     }}
                   ></S.BoardGrlleryThum>
@@ -145,7 +149,7 @@ const BoardListUi = ({
                   </S.BoardLi2>
                 </Link>
                 <S.BoardLi3>{item?.writer}</S.BoardLi3>
-                <S.BoardLi4>{item?.createdAt.slice(0, 10)}</S.BoardLi4>
+                <S.BoardLi4>{getDate(new Date(item?.createdAt))}</S.BoardLi4>
               </S.BoardUl>
             );
           })}

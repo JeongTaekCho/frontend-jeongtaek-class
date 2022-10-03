@@ -28,7 +28,7 @@ const BoardDetailUi = ({
   commentResult,
   infiniteFun,
 }: IBoardDetailProps) => {
-  console.log(commentResult);
+  console.log(data?.fetchBoard.images);
 
   return (
     <>
@@ -36,10 +36,13 @@ const BoardDetailUi = ({
         <S.BoardDetailTitleContainer>
           <S.DetailWriterAndDateBox>
             <S.DetailProfileImg></S.DetailProfileImg>
-            <S.DetailWriterAndDate>
-              <S.DetailWriter>{data?.fetchBoard.writer}</S.DetailWriter>
-              <S.DetailDate>Date : {boardDetailDate}</S.DetailDate>
-            </S.DetailWriterAndDate>
+            <S.DetailTitleAndDate>
+              <S.BoardDetailTitle>{data?.fetchBoard.title}</S.BoardDetailTitle>
+              <S.DetailWriterAndDate>
+                <S.BoardWriter>{data?.fetchBoard.writer}</S.BoardWriter>
+                <S.DetailDate>Date : {boardDetailDate}</S.DetailDate>
+              </S.DetailWriterAndDate>
+            </S.DetailTitleAndDate>
           </S.DetailWriterAndDateBox>
           <S.ShareAndGpsBox>
             <S.DefaultBtn>
@@ -61,10 +64,19 @@ const BoardDetailUi = ({
           </S.ShareAndGpsBox>
         </S.BoardDetailTitleContainer>
         <S.BoardDetailContentContainer>
-          <S.BoardDetailTitle>{data?.fetchBoard.title}</S.BoardDetailTitle>
-          <S.DetailImage
-            src={`https://storage.googleapis.com/${data?.fetchBoard.images}`}
-          />
+          {/* <S.BoardDetailTitle>{data?.fetchBoard.title}</S.BoardDetailTitle> */}
+          {console.log(data?.fetchBoard.images)}
+          {data?.fetchBoard.images.map((image, index) => {
+            return (
+              <S.DetailImage
+                src={`https://storage.googleapis.com/${image.replaceAll(
+                  " ",
+                  "%20"
+                )}`}
+                key={index}
+              />
+            );
+          })}
           <S.DetailContentBox>{data?.fetchBoard.contents}</S.DetailContentBox>
           <S.IframeContainer>
             <ReactPlayer

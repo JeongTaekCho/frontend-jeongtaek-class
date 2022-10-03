@@ -1,6 +1,7 @@
 import * as S from "./centerList.styles";
 import { ICenterListUi } from "./centerList.types";
 import Link from "next/link";
+import { getDate } from "../../../../commons/libraries/utils";
 
 const CenterListUi = ({ goCenterWrite, data }: ICenterListUi) => {
   return (
@@ -23,7 +24,9 @@ const CenterListUi = ({ goCenterWrite, data }: ICenterListUi) => {
                     <S.CenterListLeft>{el.title}</S.CenterListLeft>
                   </Link>
 
-                  <S.CenterListLi2>{el.createdAt}</S.CenterListLi2>
+                  <S.CenterListLi2>
+                    {getDate(new Date(el.createdAt))}
+                  </S.CenterListLi2>
                   <S.CenterListLi2>답변대기</S.CenterListLi2>
                 </S.CenterListBody>
               );

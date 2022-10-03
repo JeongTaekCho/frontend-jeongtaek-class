@@ -4,18 +4,14 @@ import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { USER_LOGIN } from "./Login.queries";
 import { useRecoilState } from "recoil";
-import { accessTokenData, facebookUserData, googleUserData } from "../../store";
+import { accessTokenData, googleUserData } from "../../store";
 import {
   IMutation,
   IMutationLoginUserArgs,
 } from "../../commons/types/generated/types";
 import { errorModal, successModal } from "../common/modal/modal-function";
 import "antd/dist/antd.css";
-import {
-  FacebookAuthProvider,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../commons/libraries/firebase";
 
 const Login = () => {
@@ -26,7 +22,6 @@ const Login = () => {
 
   const [accessToken, setAccessToken] = useRecoilState(accessTokenData);
   const [googleUser, setGoogleUser] = useRecoilState(googleUserData);
-  const [facebookUser, setFacebookUser] = useRecoilState(facebookUserData);
 
   const router: NextRouter = useRouter();
 
@@ -52,23 +47,13 @@ const Login = () => {
   };
 
   const googleProvider = new GoogleAuthProvider();
-  const facebookProvider = new FacebookAuthProvider();
 
-  const onClickSocialLogin = async (event) => {
+  const onClickSocialLogin = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    if (event.currentTarget.id === "google") {
-      const result = await signInWithPopup(auth, googleProvider);
-      setAccessToken(result._tokenResponse.idToken);
-      setGoogleUser(result.user);
-    } else if (event.currentTarget.id === "facebook") {
-      const result = await signInWithPopup(auth, facebookProvider);
-      setAccessToken(result._tokenResponse.idToken);
-      setFacebookUser(result.user);
-      console.log(result);
-      console.log(event.currentTarget.id);
-    }
-
-    // void router.push("/");
+    const result = await signInWithPopup(auth, googleProvider);
+    setAccessToken(result._tokenResponse.idToken);
+    setGoogleUser(result.user);
+    void router.push("/");
   };
 
   const [loginUser] = useMutation<

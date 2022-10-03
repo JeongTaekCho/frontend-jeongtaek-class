@@ -6,4 +6,5 @@ export interface ILoginUi {
   onClickLogin: (event: MouseEvent<HTMLButtonElement>) => void;
   loginIdError: boolean;
   loginPwError: boolean;
+  onClickSocialLogin: (event: MouseEvent<HTMLButtonElement>) => void;
 }

@@ -166,7 +166,6 @@ export const FileLabel = styled.label`
 `;
 
 export const PhotoClipBtnBox = styled.div`
-  width: 282px;
   display: flex;
   justify-content: space-between;
   @media ${(props: any) => props.theme.mobile} {
@@ -233,4 +232,9 @@ export const cancleBtnBox = styled.div`
   display: flex;
   justify-content: center;
   gap: 30px;
+`;
+
+export const PhotoContainer = styled.div`
+  display: flex;
+  gap: 10px;
 `;

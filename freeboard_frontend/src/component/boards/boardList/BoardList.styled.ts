@@ -199,6 +199,9 @@ export const BoardLi2 = styled.li`
 `;
 export const BoardLi3 = styled.li`
   width: 10.83%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 export const BoardLi4 = styled.li`
   width: 13.33%;

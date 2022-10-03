@@ -3,6 +3,7 @@ import DaumPostcodeEmbed from "react-daum-postcode";
 import * as S from "./BoardWrite.styled";
 import { IBoardWriteUi } from "./BoardWrite.types";
 import "antd/dist/antd.css";
+import { useEffect } from "react";
 
 const BoardWriteUi = ({
   onChangeinputState,
@@ -25,7 +26,11 @@ const BoardWriteUi = ({
   zipCode,
   address,
   onChangeFile,
+  onChangeFile2,
+  onChangeFile3,
   fileUrl,
+  fileUrl2,
+  fileUrl3,
 }: IBoardWriteUi) => {
   return (
     <>
@@ -150,51 +155,73 @@ const BoardWriteUi = ({
             </S.DefaultInputBox>
             <S.PhotoClipBox>
               <p>사진 첨부</p>
-              <S.PhotoClipBtnBox>
-                <S.FileInput id="file01" type="file" onChange={onChangeFile} />
-                {fileUrl || data?.fetchBoard?.images ? (
-                  <S.FileLabel
-                    style={{
-                      backgroundImage: `url(https://storage.googleapis.com/${fileUrl})`,
-                      backgroundSize: "cover",
-                      backgroundColor: "none",
-                    }}
-                    htmlFor="file01"
-                  ></S.FileLabel>
-                ) : (
-                  <S.FileLabel htmlFor="file01">+</S.FileLabel>
-                )}
-              </S.PhotoClipBtnBox>
-              <S.PhotoClipBtnBox>
-                <S.FileInput id="file02" type="file" onChange={onChangeFile} />
-                {fileUrl || data?.fetchBoard?.images ? (
-                  <S.FileLabel
-                    style={{
-                      backgroundImage: `url(https://storage.googleapis.com/${fileUrl})`,
-                      backgroundSize: "cover",
-                      backgroundColor: "none",
-                    }}
-                    htmlFor="file02"
-                  ></S.FileLabel>
-                ) : (
-                  <S.FileLabel htmlFor="file02">+</S.FileLabel>
-                )}
-              </S.PhotoClipBtnBox>
-              <S.PhotoClipBtnBox>
-                <S.FileInput id="file03" type="file" onChange={onChangeFile} />
-                {fileUrl || data?.fetchBoard?.images ? (
-                  <S.FileLabel
-                    style={{
-                      backgroundImage: `url(https://storage.googleapis.com/${fileUrl})`,
-                      backgroundSize: "cover",
-                      backgroundColor: "none",
-                    }}
-                    htmlFor="file03"
-                  ></S.FileLabel>
-                ) : (
-                  <S.FileLabel htmlFor="file03">+</S.FileLabel>
-                )}
-              </S.PhotoClipBtnBox>
+              <S.PhotoContainer>
+                {" "}
+                <S.PhotoClipBtnBox>
+                  <S.FileInput
+                    id="file01"
+                    type="file"
+                    onChange={onChangeFile}
+                  />
+                  {fileUrl || data?.fetchBoard?.images ? (
+                    <S.FileLabel
+                      style={{
+                        backgroundImage: fileUrl
+                          ? `url(https://storage.googleapis.com/${fileUrl})`
+                          : `url(https://storage.googleapis.com/${data?.fetchBoard?.images[0]})`,
+                        backgroundSize: "cover",
+                        backgroundColor: "#fff",
+                      }}
+                      htmlFor="file01"
+                    ></S.FileLabel>
+                  ) : (
+                    <S.FileLabel htmlFor="file01">+</S.FileLabel>
+                  )}
+                </S.PhotoClipBtnBox>
+                <S.PhotoClipBtnBox>
+                  <S.FileInput
+                    id="file02"
+                    type="file"
+                    onChange={onChangeFile2}
+                  />
+                  {fileUrl2 || data?.fetchBoard?.images ? (
+                    <S.FileLabel
+                      style={{
+                        backgroundImage: fileUrl2
+                          ? `url(https://storage.googleapis.com/${fileUrl2})`
+                          : `url(https://storage.googleapis.com/${data?.fetchBoard?.images[1]})`,
+                        backgroundSize: "cover",
+                        backgroundColor: "#fff",
+                      }}
+                      htmlFor="file02"
+                    ></S.FileLabel>
+                  ) : (
+                    <S.FileLabel htmlFor="file02">+</S.FileLabel>
+                  )}
+                </S.PhotoClipBtnBox>
+                <S.PhotoClipBtnBox>
+                  <S.FileInput
+                    id="file03"
+                    type="file"
+                    onChange={onChangeFile3}
+                  />
+                  {fileUrl3 || data?.fetchBoard?.images ? (
+                    <S.FileLabel
+                      style={{
+                        backgroundImage: fileUrl3
+                          ? `url(https://storage.googleapis.com/${fileUrl3})`
+                          : `url(https://storage.googleapis.com/${data?.fetchBoard?.images[2]})`,
+
+                        backgroundSize: "cover",
+                        backgroundColor: "#fff",
+                      }}
+                      htmlFor="file03"
+                    ></S.FileLabel>
+                  ) : (
+                    <S.FileLabel htmlFor="file03">+</S.FileLabel>
+                  )}
+                </S.PhotoClipBtnBox>
+              </S.PhotoContainer>
             </S.PhotoClipBox>
             <S.MainSelectBox>
               <p>메인 설정</p>

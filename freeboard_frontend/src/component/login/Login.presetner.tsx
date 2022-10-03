@@ -42,9 +42,6 @@ const LoginUi = ({
           <S.GoogleLogin id="google" onClick={onClickSocialLogin}>
             <span>Connect with Google</span>
           </S.GoogleLogin>
-          <S.FacebookLogin id="facebook" onClick={onClickSocialLogin}>
-            <span>Connect with Facebook</span>
-          </S.FacebookLogin>
         </S.LoginForm>
       </S.LoginContainer>
     </>

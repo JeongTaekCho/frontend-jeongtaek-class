@@ -28,18 +28,32 @@ export const DetailProfileImg = styled.div`
   border-radius: 50%;
   background: #bdbdbd;
 `;
-export const DetailWriterAndDate = styled.div`
+export const DetailTitleAndDate = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
-export const DetailWriter = styled.p`
+export const BoardDetailTitle = styled.h2`
   font-size: 2.4rem;
   font-weight: 500;
   color: #000;
+  margin: 0;
 `;
-export const DetailDate = styled.p`
+
+export const DetailWriterAndDate = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-end;
+`;
+
+export const BoardWriter = styled.span`
   font-size: 1.6rem;
+  font-weight: 500;
+`;
+
+export const DetailDate = styled.p`
+  font-size: 1.4rem;
   font-weight: 400;
   color: #828282;
 `;
@@ -101,12 +115,12 @@ export const BoardDetailContentContainer = styled.div`
   }
 `;
 
-export const BoardDetailTitle = styled.h2`
-  font-size: 3.6rem;
-  font-weight: 700;
-  color: #000;
-  margin-bottom: 4rem;
-`;
+// export const BoardDetailTitle = styled.h2`
+//   font-size: 3.6rem;
+//   font-weight: 700;
+//   color: #000;
+//   margin-bottom: 4rem;
+// `;
 
 export const DetailImage = styled.img`
   max-width: 100%;

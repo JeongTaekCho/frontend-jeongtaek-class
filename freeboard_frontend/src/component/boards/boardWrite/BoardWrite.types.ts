@@ -45,5 +45,9 @@ export interface IBoardWriteUi {
   zipCode: string;
   address: string;
   onChangeFile: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFile2: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFile3: (event: ChangeEvent<HTMLInputElement>) => void;
   fileUrl: string;
+  fileUrl2: string;
+  fileUrl3: string;
 }

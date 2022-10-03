@@ -37,7 +37,7 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
   const [fileUrl3, setFileUrl3] = useState("");
 
   const router: NextRouter = useRouter();
-
+  console.log(fileUrl2, fileUrl3);
   // 게시글 데이터 쿼리
   const { data } = useQuery<Pick<IQuery, "fetchBoard">>(FETCH_BOARD, {
     variables: {
@@ -119,7 +119,7 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
               address,
               addressDetail: address2,
             },
-            images: [fileUrl],
+            images: [fileUrl, fileUrl2, fileUrl3],
           },
         },
       });
@@ -198,6 +198,16 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
       if (content) myVariables.updateBoardInput.contents = content;
       if (youtubeLink) myVariables.updateBoardInput.youtubeUrl = youtubeLink;
       if (fileUrl) myVariables.updateBoardInput.images = [fileUrl];
+      if (fileUrl2)
+        myVariables.updateBoardInput.images = [
+          ...myVariables.updateBoardInput.images,
+          fileUrl2,
+        ];
+      if (fileUrl3)
+        myVariables.updateBoardInput.images = [
+          ...myVariables.updateBoardInput.images,
+          fileUrl3,
+        ];
 
       await updateBoard({
         variables: myVariables,
@@ -228,7 +238,31 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
       },
     });
     if (result.data !== undefined && result.data !== null) {
-      setFileUrl(result.data.uploadFile.url);
+      setFileUrl(result.data.uploadFile.url.replaceAll(" ", "%20"));
+    }
+  };
+  const onChangeFile2 = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.currentTarget.files?.[0];
+
+    const result = await uploadFile({
+      variables: {
+        file,
+      },
+    });
+    if (result.data !== undefined && result.data !== null) {
+      setFileUrl2(result.data.uploadFile.url.replaceAll(" ", "%20"));
+    }
+  };
+  const onChangeFile3 = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.currentTarget.files?.[0];
+
+    const result = await uploadFile({
+      variables: {
+        file,
+      },
+    });
+    if (result.data !== undefined && result.data !== null) {
+      setFileUrl3(result.data.uploadFile.url.replaceAll(" ", "%20"));
     }
   };
 
@@ -257,7 +291,11 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
         zipCode={zipCode}
         address={address}
         onChangeFile={onChangeFile}
+        onChangeFile2={onChangeFile2}
+        onChangeFile3={onChangeFile3}
         fileUrl={fileUrl}
+        fileUrl2={fileUrl2}
+        fileUrl3={fileUrl3}
       />
     </>
   );
