@@ -53,7 +53,7 @@ export const MainSearchInput = styled.input`
 `;
 
 export const LoginMenu = styled.div`
-  width: 280px;
+  gap: 10px;
   height: 35px;
   display: flex;
   justify-content: space-between;
@@ -63,9 +63,7 @@ export const LoginMenu = styled.div`
   right: 0;
 `;
 
-export const LogoutMenu = styled(LoginMenu)`
-  width: 315px;
-`;
+export const LogoutMenu = styled(LoginMenu)``;
 
 export const LoginMenuLi = styled.span`
   font-size: 12px;

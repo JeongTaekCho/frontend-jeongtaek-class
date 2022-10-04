@@ -26,6 +26,7 @@ const MainHomeUi = ({
         <S.MainContentTitle>가장 많이팔린 상품</S.MainContentTitle>
         <S.MainItemContainer>
           {productData?.map((item: any) => {
+            console.log(item);
             return (
               <S.MainItemBox key={item._id}>
                 <S.MainItemBg
@@ -36,7 +37,7 @@ const MainHomeUi = ({
                 <S.ItemInfoBox>
                   <S.ItemName>{item.title}</S.ItemName>
                   <S.ItemPrice>
-                    {item.basePrice}
+                    {item.salePrice}
                     <span>원 ~</span>
                   </S.ItemPrice>
                   <S.ItemShippingInfo>무료배송</S.ItemShippingInfo>
