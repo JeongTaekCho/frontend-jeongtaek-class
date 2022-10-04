@@ -45,6 +45,8 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
     },
   });
 
+  console.log(data?.fetchBoard.images);
+
   // 게시판 인풋 온페인지 함수
   const onChangeinputState = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -197,15 +199,11 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
       if (title) myVariables.updateBoardInput.title = title;
       if (content) myVariables.updateBoardInput.contents = content;
       if (youtubeLink) myVariables.updateBoardInput.youtubeUrl = youtubeLink;
-      if (fileUrl) myVariables.updateBoardInput.images = [fileUrl];
-      if (fileUrl2)
+      if (fileUrl || fileUrl2 || fileUrl3)
         myVariables.updateBoardInput.images = [
-          ...myVariables.updateBoardInput.images,
+          ...data?.fetchBoard.images,
+          fileUrl,
           fileUrl2,
-        ];
-      if (fileUrl3)
-        myVariables.updateBoardInput.images = [
-          ...myVariables.updateBoardInput.images,
           fileUrl3,
         ];
 

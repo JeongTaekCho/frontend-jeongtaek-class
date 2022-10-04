@@ -59,8 +59,10 @@ export const CenterListBody = styled.ul`
   color: #888;
   padding: 20px 0;
   display: flex;
-  border-top: 2px solid #333;
   border-bottom: 1px solid #333;
+  &:nth-child(2) {
+    border-top: 1px solid #333;
+  }
 `;
 
 export const CenterListBtnContainer = styled.div`
