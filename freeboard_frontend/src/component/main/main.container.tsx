@@ -19,10 +19,11 @@ const MainHome = () => {
         `http://dev-one.duckdns.org:3000/products?api_key=${API_KEY}&page=3`
       );
       setProductData(result.data);
-      console.log(result);
     };
     void fetchCoupangData();
   }, []);
+
+  console.log(productData);
 
   const settings = {
     dots: true,
@@ -53,7 +54,6 @@ const MainHome = () => {
     <MainHomeUi
       mainBannerUrl={mainBannerUrl}
       settings={settings}
-      productData={productData}
       productData={productData}
     />
   );

@@ -3,23 +3,27 @@ import { useState } from "react";
 import ProductDetailUi from "./ProductDetail.presenter";
 
 const ProductDetail = () => {
-  // 상태관리
+  const [itemCount, setItemCount] = useState(1);
 
-  const [writer, setWriter] = useState(""); // 작성자
-  const [comment, setComment] = useState(""); // 댓글
-  const [password, setPassword] = useState(""); // 비밀번호
-  const [onModal, setOnModal] = useState(false); // 상세주소 모달
-  const [likeCount, setLikeCount] = useState(0); // 좋아요 개수
-  const [disLikeCount, setDisLikeCount] = useState(0); // 싫어요 개수
-  const [commentPsModal, setCommentPsModal] = useState(false); // 댓글 삭제시 비밀번호 모달
-  const [commentDelPassword, setCommentDelPassword] = useState(""); // 댓글 삭제시 비밓번호
+  const onClickCount = (event) => {
+    const {
+      target: { name },
+    } = event;
+    if (name === "minus") {
+      setItemCount((prev) => prev - 1);
+      if (itemCount < 1) setItemCount(0);
+    }
+    if (name === "plus") {
+      setItemCount((prev) => prev + 1);
+    }
+  };
 
   // 유즈 라우터
-  const router = useRouter();
+  //   const router = useRouter();
 
   return (
     <>
-      <ProductDetailUi />
+      <ProductDetailUi itemCount={itemCount} onClickCount={onClickCount} />
     </>
   );
 };
