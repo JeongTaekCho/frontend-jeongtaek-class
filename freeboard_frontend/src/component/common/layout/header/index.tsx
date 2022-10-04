@@ -104,6 +104,8 @@ const Header = () => {
                 <S.LoginMenuLi>|</S.LoginMenuLi>
                 <S.LoginMenuLi onClick={goLogin}>로그인</S.LoginMenuLi>
                 <S.LoginMenuLi>|</S.LoginMenuLi>
+                <S.LoginMenuLi onClick={logout}>장바구니(비회원)</S.LoginMenuLi>
+                <S.LoginMenuLi>|</S.LoginMenuLi>
                 <S.LoginMenuLi onClick={goCenter}>고객센터</S.LoginMenuLi>
               </S.LoginMenu>
             )}
