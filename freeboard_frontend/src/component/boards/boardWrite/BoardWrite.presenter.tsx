@@ -166,9 +166,8 @@ const BoardWriteUi = ({
                   {fileUrl || data?.fetchBoard?.images ? (
                     <S.FileLabel
                       style={{
-                        backgroundImage: fileUrl
-                          ? `url(https://storage.googleapis.com/${fileUrl})`
-                          : `url(https://storage.googleapis.com/${data?.fetchBoard?.images[0]})`,
+                        backgroundImage: `url(https://storage.googleapis.com/${fileUrl})
+                         `,
                         backgroundSize: "cover",
                         backgroundColor: "#fff",
                       }}
@@ -187,9 +186,7 @@ const BoardWriteUi = ({
                   {fileUrl2 || data?.fetchBoard?.images ? (
                     <S.FileLabel
                       style={{
-                        backgroundImage: fileUrl2
-                          ? `url(https://storage.googleapis.com/${fileUrl2})`
-                          : `url(https://storage.googleapis.com/${data?.fetchBoard?.images[1]})`,
+                        backgroundImage: `url(https://storage.googleapis.com/${fileUrl2})`,
                         backgroundSize: "cover",
                         backgroundColor: "#fff",
                       }}
@@ -208,10 +205,7 @@ const BoardWriteUi = ({
                   {fileUrl3 || data?.fetchBoard?.images ? (
                     <S.FileLabel
                       style={{
-                        backgroundImage: fileUrl3
-                          ? `url(https://storage.googleapis.com/${fileUrl3})`
-                          : `url(https://storage.googleapis.com/${data?.fetchBoard?.images[2]})`,
-
+                        backgroundImage: `url(https://storage.googleapis.com/${fileUrl3})`,
                         backgroundSize: "cover",
                         backgroundColor: "#fff",
                       }}

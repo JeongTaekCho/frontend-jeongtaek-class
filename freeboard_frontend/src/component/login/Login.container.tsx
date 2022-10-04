@@ -20,8 +20,8 @@ const Login = () => {
   const [loginIdError, setLoginIdError] = useState(false);
   const [loginPwError, setLoginPwError] = useState(false);
 
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenData);
-  const [googleUser, setGoogleUser] = useRecoilState(googleUserData);
+  const [, setAccessToken] = useRecoilState(accessTokenData);
+  const [, setGoogleUser] = useRecoilState(googleUserData);
 
   const router: NextRouter = useRouter();
 
@@ -80,6 +80,8 @@ const Login = () => {
         });
         if (result.data === null && result === undefined) return;
         const accessToken = result?.data?.loginUser.accessToken;
+
+        localStorage.setItem("accessToken", accessToken);
 
         setAccessToken(String(accessToken));
         successModal("로그인 성공!!");

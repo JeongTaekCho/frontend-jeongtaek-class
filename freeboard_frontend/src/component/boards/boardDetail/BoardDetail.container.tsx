@@ -40,14 +40,20 @@ const BoardDetail = () => {
   }, [writer, comment, password]);
 
   // 게시글 데이터 쿼리
-  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
-    FETCH_BOARD,
-    {
-      variables: {
-        boardId: String(router.query.id),
-      },
-    }
-  );
+  const { data, refetch } = useQuery<
+    Pick<IQuery, "fetchBoard">,
+    IQueryFetchBoardArgs
+  >(FETCH_BOARD, {
+    variables: {
+      boardId: String(router.query.id),
+    },
+  });
+
+  useEffect(() => {
+    void refetch({
+      boardId: String(router.query.id),
+    });
+  }, [data]);
 
   // 댓글 데이터 쿼리
   const { data: commentResult, fetchMore } = useQuery<
@@ -62,7 +68,6 @@ const BoardDetail = () => {
   // 무한 스크롤
 
   const infiniteFun = () => {
-    console.log("dd");
     if (commentResult === undefined) return;
     void fetchMore({
       variables: {

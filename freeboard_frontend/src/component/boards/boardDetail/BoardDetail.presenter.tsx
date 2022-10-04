@@ -28,8 +28,6 @@ const BoardDetailUi = ({
   commentResult,
   infiniteFun,
 }: IBoardDetailProps) => {
-  console.log(data?.fetchBoard.images);
-
   return (
     <>
       <S.BoardDetailContainer>
@@ -65,7 +63,6 @@ const BoardDetailUi = ({
         </S.BoardDetailTitleContainer>
         <S.BoardDetailContentContainer>
           {/* <S.BoardDetailTitle>{data?.fetchBoard.title}</S.BoardDetailTitle> */}
-          {console.log(data?.fetchBoard.images)}
           {data?.fetchBoard.images.map((image, index) => {
             return (
               <S.DetailImage
@@ -177,7 +174,6 @@ const BoardDetailUi = ({
           {commentError ? "빈값을 입력해주세요." : null}
         </S.CommentErrorText>
       </S.BoardDetailContainer>
-      {/* <S.CommentListBox> */}
       <InfiniteScroll
         useWindow={true}
         pageStart={0}
@@ -188,7 +184,6 @@ const BoardDetailUi = ({
           return <CommentItem key={comment._id} comment={comment} />;
         })}
       </InfiniteScroll>
-      {/* </S.CommentListBox> */}
     </>
   );
 };

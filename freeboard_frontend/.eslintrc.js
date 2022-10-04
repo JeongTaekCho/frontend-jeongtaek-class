@@ -20,5 +20,6 @@ module.exports = {
     "@typescript-eslint/restrict-plus-operands": "off",
     "@typescript-eslint/no-unnecessary-boolean-literal-compare": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
+    "react/display-name": "off",
   },
 };

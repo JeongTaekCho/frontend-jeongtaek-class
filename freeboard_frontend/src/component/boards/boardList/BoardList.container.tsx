@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { FETCH_BOARD, FETCH_BEST_BOARD } from "./BoardList.querys";
 import BoardListUi from "./BoardList.presenter";
 import { IQuery } from "../../../commons/types/generated/types";
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import _ from "lodash";
 import { FETCH_BOARDS_COUNTS } from "../../common/pagination/pagination.querys";
 
@@ -15,7 +15,11 @@ const BoardList = () => {
 
   const { data, refetch } = useQuery<Pick<IQuery, "fetchBoards">>(FETCH_BOARD);
 
-  const { data: boardBestPost } =
+  useEffect(() => {
+    void bestRefetch();
+  }, [data]);
+
+  const { data: boardBestPost, refetch: bestRefetch } =
     useQuery<Pick<IQuery, "fetchBoardsOfTheBest">>(FETCH_BEST_BOARD);
 
   const { data: boardCounts, refetch: countRefetch } =

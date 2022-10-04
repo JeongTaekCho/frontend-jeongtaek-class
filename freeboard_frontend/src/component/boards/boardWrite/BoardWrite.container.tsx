@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { NextRouter, useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
 import BoardWriteUi from "./BoardWrite.presenter";
@@ -37,15 +37,24 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
   const [fileUrl3, setFileUrl3] = useState("");
 
   const router: NextRouter = useRouter();
-  console.log(fileUrl2, fileUrl3);
   // 게시글 데이터 쿼리
-  const { data } = useQuery<Pick<IQuery, "fetchBoard">>(FETCH_BOARD, {
+  const { data, refetch } = useQuery<Pick<IQuery, "fetchBoard">>(FETCH_BOARD, {
     variables: {
       boardId: router.query.id,
     },
   });
 
-  console.log(data?.fetchBoard.images);
+  useEffect(() => {
+    if (data?.fetchBoard.images?.[0]) {
+      setFileUrl(data?.fetchBoard.images?.[0]);
+    }
+    if (data?.fetchBoard.images?.[1]) {
+      setFileUrl2(data?.fetchBoard.images?.[1]);
+    }
+    if (data?.fetchBoard.images?.[2]) {
+      setFileUrl3(data?.fetchBoard.images?.[2]);
+    }
+  }, [data]);
 
   // 게시판 인풋 온페인지 함수
   const onChangeinputState = (
@@ -200,12 +209,7 @@ const BoardWrite = ({ isEdit }: IBoardWrite) => {
       if (content) myVariables.updateBoardInput.contents = content;
       if (youtubeLink) myVariables.updateBoardInput.youtubeUrl = youtubeLink;
       if (fileUrl || fileUrl2 || fileUrl3)
-        myVariables.updateBoardInput.images = [
-          ...data?.fetchBoard.images,
-          fileUrl,
-          fileUrl2,
-          fileUrl3,
-        ];
+        myVariables.updateBoardInput.images = [fileUrl, fileUrl2, fileUrl3];
 
       await updateBoard({
         variables: myVariables,

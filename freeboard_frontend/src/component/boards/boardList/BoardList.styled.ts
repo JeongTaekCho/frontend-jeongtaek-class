@@ -56,6 +56,7 @@ export const BoardGalleryInfoBox = styled.div`
   justify-content: space-between;
 `;
 export const GalleryContentLeft = styled.div`
+  width: 85%;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -78,9 +79,13 @@ export const GalleryNameAndImg = styled.div`
   gap: 6px;
 `;
 export const GalleryName = styled.p`
+  width: 85%;
   font-size: 16px;
   font-weight: 400;
   color: #000;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 export const GalleryDate = styled.p`
   font-size: 12px;

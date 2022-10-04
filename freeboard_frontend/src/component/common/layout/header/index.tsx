@@ -61,6 +61,7 @@ const Header = () => {
   const logout = async () => {
     // setAccessToken("");
     // await logoutUser();
+    localStorage.removeItem("accessToken");
     router.reload();
     // await logoutUser();
     successModal("로그아웃 되었습니다.");
