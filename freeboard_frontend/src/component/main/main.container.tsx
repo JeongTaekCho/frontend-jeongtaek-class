@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { productDatas } from "../../store";
 import MainHomeUi from "./main.presenter";
 const API_KEY = "632c0931b7fd7e127ffadfe1";
 const MainHome = () => {
@@ -11,7 +13,7 @@ const MainHome = () => {
     "https://product-image.kurly.com/cdn-cgi/image/format=auto/banner/main/pc/img/ce068035-2ccc-45c4-8864-8f0afea34b0f.jpg",
   ];
 
-  const [productData, setProductData] = useState();
+  const [productData, setProductData] = useRecoilState(productDatas);
 
   useEffect(() => {
     const fetchCoupangData = async () => {

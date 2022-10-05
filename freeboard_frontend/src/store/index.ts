@@ -13,3 +13,7 @@ export const facebookUserData = atom({
   key: "facebookUserData",
   default: "",
 });
+export const productDatas = atom({
+  key: "productDatas",
+  default: [],
+});

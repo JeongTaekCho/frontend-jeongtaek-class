@@ -24,7 +24,6 @@ export const ProductImg = styled.div`
   height: 552px;
   background-size: cover;
   background-position: center;
-  background: url(https://img-cf.kurly.com/shop/data/goods/1625031532799l0.jpg);
 `;
 
 export const ProductRightBox = styled.div`
@@ -65,7 +64,7 @@ export const ProductPrice = styled.p`
 export const EventMsg = styled.p`
   font-size: 14px;
   font-weight: 400;
-  color: rgb(95, 0, 128);
+  color: #f95621;
   margin-bottom: 15px;
 `;
 

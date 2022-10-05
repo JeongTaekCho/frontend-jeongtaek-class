@@ -1,20 +1,30 @@
+import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { productDatas } from "../../../store";
 import * as S from "./ProductDetail.styled";
 
 const ProductDetailUi = ({ itemCount, onClickCount }) => {
+  const [productData, setProductData] = useRecoilState(productDatas);
+  const router = useRouter();
+
+  const result = productData.filter((item) => item._id === router.query.id);
+  const itemPrice = Number((result[0]?.salePrice).replace(",", ""));
   return (
     <>
       <S.ProductDetailWrapper>
         <S.ProductContainer>
           <S.ProductInfoBox>
             <S.ProductImgBox>
-              <S.ProductImg></S.ProductImg>
+              <S.ProductImg
+                style={{ backgroundImage: `url(${result[0]?.img})` }}
+              ></S.ProductImg>
             </S.ProductImgBox>
             <S.ProductRightBox>
               <S.ProductSmTitle>샛별배송</S.ProductSmTitle>
-              <S.ProductTitle>상품이름이 들어갑니다.</S.ProductTitle>
-              <S.ProductSubTitle>고소한 가득한 과자</S.ProductSubTitle>
+              <S.ProductTitle>{result[0]?.title}</S.ProductTitle>
+              <S.ProductSubTitle>서브제목</S.ProductSubTitle>
               <S.ProductPrice>
-                <span>3,880</span>원
+                <span>{result[0]?.salePrice}</span>원
               </S.ProductPrice>
               <S.EventMsg>로그인 후,적립 혜택이 제공됩니다.</S.EventMsg>
               <S.ProductInfoContainer>
@@ -31,7 +41,9 @@ const ProductDetailUi = ({ itemCount, onClickCount }) => {
                 <S.ProductInfoUl>
                   <S.ProductInfoLeft>판매자</S.ProductInfoLeft>
                   <S.ProductInfoRight>
-                    <S.ProductInfoRightText1>컬리</S.ProductInfoRightText1>
+                    <S.ProductInfoRightText1>
+                      {result[0]?.seller}
+                    </S.ProductInfoRightText1>
                   </S.ProductInfoRight>
                 </S.ProductInfoUl>
                 <S.ProductInfoUl>
@@ -48,14 +60,14 @@ const ProductDetailUi = ({ itemCount, onClickCount }) => {
                 <S.ProductInfoUl>
                   <S.ProductInfoLeft>판매단위</S.ProductInfoLeft>
                   <S.ProductInfoRight>
-                    <S.ProductInfoRightText1>1팩</S.ProductInfoRightText1>
+                    <S.ProductInfoRightText1>예정</S.ProductInfoRightText1>
                   </S.ProductInfoRight>
                 </S.ProductInfoUl>
                 <S.ProductInfoUl>
                   <S.ProductInfoLeft>중량/용량</S.ProductInfoLeft>
                   <S.ProductInfoRight>
                     <S.ProductInfoRightText1>
-                      9g X 30봉입
+                      제목 확인 바랍니다.
                     </S.ProductInfoRightText1>
                   </S.ProductInfoRight>
                 </S.ProductInfoUl>
@@ -94,7 +106,13 @@ const ProductDetailUi = ({ itemCount, onClickCount }) => {
                 <S.ProductPriceContainer>
                   <S.ProductPriceDiv>
                     <S.ProductPriceText>
-                      총 상품금액 : <span>3,880원</span>
+                      <span>
+                        {String(itemPrice * itemCount).replace(
+                          /\B(?=(\d{3})+(?!\d))/g,
+                          ","
+                        )}
+                        원
+                      </span>
                     </S.ProductPriceText>
                   </S.ProductPriceDiv>
                 </S.ProductPriceContainer>
