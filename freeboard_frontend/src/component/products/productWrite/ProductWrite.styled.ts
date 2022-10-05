@@ -90,3 +90,77 @@ export const ProductSubmit = styled.button`
   cursor: pointer;
   margin: 0 auto;
 `;
+
+export const PorductImgBox = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  margin-bottom: 60px;
+`;
+
+export const ProductImgBack = styled.label`
+  width: 200px;
+  height: 200px;
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+`;
+
+export const ProductFile = styled.input`
+  display: none;
+`;
+
+export const ProductAddressBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+`;
+
+export const MapApiBox = styled.div``;
+export const Ptitle = styled.h3`
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  margin-bottom: 16px;
+`;
+
+export const MapContainer = styled.div`
+  width: 384px;
+  height: 252px;
+  background-color: #ddd;
+`;
+
+export const AddressInfoBox = styled.div`
+  width: 56%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const GpsInfoBox = styled.div`
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 40px;
+`;
+
+export const GpsInput = styled.input`
+  width: 108px;
+  height: 52px;
+  border: 1px solid #bdbdbd;
+  outline: none;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #4f4f4f;
+`;
+
+export const ProductAddressContainer = styled.div``;

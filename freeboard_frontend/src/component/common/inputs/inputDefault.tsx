@@ -24,6 +24,7 @@ const InputDefault = (props: IProps) => {
       type={props.type}
       placeholder={props.placeholder}
       {...props.register}
+      style={props.style}
     />
   );
 };
