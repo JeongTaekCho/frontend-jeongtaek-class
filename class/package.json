@@ -13,6 +13,7 @@
     "@apollo/client": "^3.6.9",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
+    "@hookform/resolvers": "^2.9.8",
     "@material-ui/core": "^4.12.4",
     "@types/uuid": "^8.3.4",
     "antd": "^4.22.8",
@@ -25,9 +26,11 @@
     "react": "17.0.2",
     "react-daum-postcode": "^3.1.1",
     "react-dom": "17.0.2",
+    "react-hook-form": "^7.36.1",
     "react-infinite-scroller": "^1.2.6",
     "recoil": "^0.7.5",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.12.0",
