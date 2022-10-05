@@ -1,37 +1,33 @@
+import InputDefault from "../../common/inputs/inputDefault";
 import * as S from "./ProductWrite.styled";
-
-interface IProductWriteUi {
-  onChangeProductInput: any;
-  onSubmitProduct: any;
-}
+import { IProductWriteUi } from "./ProductWrite.types";
 
 const ProductWriteUi = ({
-  onChangeProductInput,
   onSubmitProduct,
+  register,
+  handleSubmit,
 }: IProductWriteUi) => {
   return (
     <>
       <S.ProductWrapper>
         <S.Container>
           <S.ProductWriteTitle>상품 등록하기</S.ProductWriteTitle>
-          <S.ProductWriteForm>
+          <S.ProductWriteForm onSubmit={handleSubmit(onSubmitProduct)}>
             <S.DefaultInputBox>
               <p>제목</p>
-              <S.DefaultInput
+              <InputDefault
                 type="text"
                 placeholder="제목을 작성해주세요."
-                name="name"
-                onChange={onChangeProductInput}
+                register={register("name")}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>
             <S.DefaultInputBox>
               <p>한줄요약</p>
-              <S.DefaultInput
+              <InputDefault
                 type="text"
                 placeholder="한줄요약을 작성해주세요."
-                name="remarks"
-                onChange={onChangeProductInput}
+                register={register("remarks")}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>
@@ -39,34 +35,29 @@ const ProductWriteUi = ({
               <p>내용</p>
               <textarea
                 placeholder="내용을 작성해주세요."
-                name="contents"
-                onChange={onChangeProductInput}
+                {...register("contents")}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.TextareaBox>
             <S.DefaultInputBox>
               <p>판매가격</p>
-              <S.DefaultInput
+              <InputDefault
                 type="text"
                 placeholder="판매가격을 작성해주세요."
-                name="price"
-                onChange={onChangeProductInput}
+                register={register("price")}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>{" "}
             <S.DefaultInputBox>
               <p>태그입력</p>
-              <S.DefaultInput
+              <InputDefault
                 type="text"
                 placeholder="한줄요약을 작성해주세요."
-                name="tags"
-                onChange={onChangeProductInput}
+                register={register("tags")}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>
-            <S.ProductSubmit onClick={onSubmitProduct}>
-              등록하기
-            </S.ProductSubmit>
+            <S.ProductSubmit type="submit">등록하기</S.ProductSubmit>
           </S.ProductWriteForm>
         </S.Container>
       </S.ProductWrapper>
