@@ -23,7 +23,7 @@ const ProductWriteUi = ({
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>
             <S.DefaultInputBox>
-              <p>한줄요약</p>
+              <p>상품 한줄요약</p>
               <InputDefault
                 type="text"
                 placeholder="한줄요약을 작성해주세요."
@@ -52,7 +52,7 @@ const ProductWriteUi = ({
               <p>태그입력</p>
               <InputDefault
                 type="text"
-                placeholder="한줄요약을 작성해주세요."
+                placeholder="태그를 작성해주세요."
                 register={register("tags")}
               />
               <S.ErrorMsg></S.ErrorMsg>
