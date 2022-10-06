@@ -3,7 +3,7 @@ import ProductWriteUi from "./ProductWrite.presenter";
 import { CREATE_PRODUCT } from "./ProductWrite.querys";
 import { useMutation } from "@apollo/client";
 import { FieldValues, useForm, UseFormRegister } from "react-hook-form";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { UPLOAD_FILE } from "../../boards/boardWrite/BoardWrite.querys";
 
 const ProductWrite = () => {
@@ -18,6 +18,7 @@ const ProductWrite = () => {
 
   const onSubmitProduct = async (data: UseFormRegister<FieldValues>) => {
     data.price = Number(data.price);
+    data.images = fileUrl;
     await createProduct({
       variables: {
         createUseditemInput: data,
@@ -27,17 +28,19 @@ const ProductWrite = () => {
     void router.push("/");
   };
 
-  const onChangeFile = (index) => async (event) => {
-    const file = event.target.files?.[index];
-    const result = await uploadFile({
-      variables: {
-        file,
-      },
-    });
-    setFileUrl((fileUrl[index] = result.data.uploadFile.url));
-  };
-
-  console.log(fileUrl);
+  const onChangeFile =
+    (index) => async (event: ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      const result = await uploadFile({
+        variables: {
+          file,
+        },
+      });
+      const urlArray = [...fileUrl];
+      urlArray[Number(event.target.title)] = result.data.uploadFile.url;
+      setFileUrl(urlArray);
+      console.log(urlArray);
+    };
 
   return (
     <>

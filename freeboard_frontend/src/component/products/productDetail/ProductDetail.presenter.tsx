@@ -3,12 +3,14 @@ import { useRecoilState } from "recoil";
 import { productDatas } from "../../../store";
 import * as S from "./ProductDetail.styled";
 
-const ProductDetailUi = ({ itemCount, onClickCount }) => {
+const ProductDetailUi = ({ itemCount, onClickCount, productInfo }) => {
   const [productData] = useRecoilState(productDatas);
   const router = useRouter();
 
   const result = productData.filter((item) => item._id === router.query.id);
-  const itemPrice = Number((result[0]?.salePrice).replace(",", ""));
+  const itemPrice = Number(result[0]?.salePrice);
+  // .replace(",", "")
+  console.log(productInfo);
   return (
     <>
       <S.ProductDetailWrapper>
@@ -16,17 +18,41 @@ const ProductDetailUi = ({ itemCount, onClickCount }) => {
           <S.ProductInfoBox>
             <S.ProductImgBox>
               <S.ProductImg
-                style={{ backgroundImage: `url(${result[0]?.img})` }}
+                style={{
+                  backgroundImage: productInfo
+                    ? productInfo.fetchUseditem.images[0] ||
+                      `url(https://storage.googleapis.com/${productInfo.fetchUseditem.images[0]})`
+                    : `url(${result[0]?.img})`,
+                }}
               ></S.ProductImg>
             </S.ProductImgBox>
             <S.ProductRightBox>
               <S.ProductSmTitle>샛별배송</S.ProductSmTitle>
-              <S.ProductTitle>{result[0]?.title}</S.ProductTitle>
+              <S.ProductTitle>
+                {productInfo
+                  ? productInfo.fetchUseditem.name
+                  : result[0]?.title}
+              </S.ProductTitle>
               <S.ProductSubTitle>서브제목</S.ProductSubTitle>
               <S.ProductPrice>
-                <span>{result[0]?.salePrice}</span>원
+                <span>
+                  {productInfo
+                    ? String(productInfo.fetchUseditem.price).replace(
+                        /\B(?=(\d{3})+(?!\d))/g,
+                        ","
+                      )
+                    : result[0]?.salePrice}
+                </span>
+                원
               </S.ProductPrice>
-              <S.EventMsg>로그인 후,적립 혜택이 제공됩니다.</S.EventMsg>
+              <S.EventMsg>
+                {productInfo
+                  ? productInfo.fetchUseditem.remarks
+                  : "로그인 후,적립 혜택이 제공됩니다."}
+              </S.EventMsg>
+              <S.EventMsg>
+                {productInfo ? productInfo.fetchUseditem.tags : ""}
+              </S.EventMsg>
               <S.ProductInfoContainer>
                 <S.ProductInfoUl>
                   <S.ProductInfoLeft>배송</S.ProductInfoLeft>
@@ -42,7 +68,9 @@ const ProductDetailUi = ({ itemCount, onClickCount }) => {
                   <S.ProductInfoLeft>판매자</S.ProductInfoLeft>
                   <S.ProductInfoRight>
                     <S.ProductInfoRightText1>
-                      {result[0]?.seller}
+                      {productInfo
+                        ? productInfo.fetchUseditem.seller.name
+                        : result[0]?.seller}
                     </S.ProductInfoRightText1>
                   </S.ProductInfoRight>
                 </S.ProductInfoUl>
@@ -71,7 +99,7 @@ const ProductDetailUi = ({ itemCount, onClickCount }) => {
                     </S.ProductInfoRightText1>
                   </S.ProductInfoRight>
                 </S.ProductInfoUl>
-                <S.ProductInfoUl>
+                {/* <S.ProductInfoUl>
                   <S.ProductInfoLeft>원산지</S.ProductInfoLeft>
                   <S.ProductInfoRight>
                     <S.ProductInfoRightText1>
@@ -86,9 +114,9 @@ const ProductDetailUi = ({ itemCount, onClickCount }) => {
                       돼지고기, 대두 함유
                     </S.ProductInfoRightText1>
                   </S.ProductInfoRight>
-                </S.ProductInfoUl>
+                </S.ProductInfoUl> */}
                 <S.ProductInfoUl>
-                  <S.ProductInfoLeft>구매수향</S.ProductInfoLeft>
+                  <S.ProductInfoLeft>구매수량</S.ProductInfoLeft>
                   <S.ProductInfoRight>
                     <S.ProductCountBox>
                       <S.ProductCountBtn name="minus" onClick={onClickCount}>
@@ -107,10 +135,15 @@ const ProductDetailUi = ({ itemCount, onClickCount }) => {
                   <S.ProductPriceDiv>
                     <S.ProductPriceText>
                       <span>
-                        {String(itemPrice * itemCount).replace(
-                          /\B(?=(\d{3})+(?!\d))/g,
-                          ","
-                        )}
+                        {productInfo
+                          ? String(
+                              Number(productInfo.fetchUseditem.price) *
+                                itemCount
+                            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                          : String(itemPrice * itemCount).replace(
+                              /\B(?=(\d{3})+(?!\d))/g,
+                              ","
+                            )}
                         원
                       </span>
                     </S.ProductPriceText>
@@ -118,6 +151,7 @@ const ProductDetailUi = ({ itemCount, onClickCount }) => {
                 </S.ProductPriceContainer>
               </S.ProductPriceInfoBox>
               <S.ProductBasketBtnContainer>
+                <S.ProductBuyBtn>구매하기</S.ProductBuyBtn>
                 <S.ProductBasketBtn>장바구니 담기</S.ProductBasketBtn>
               </S.ProductBasketBtnContainer>
             </S.ProductRightBox>

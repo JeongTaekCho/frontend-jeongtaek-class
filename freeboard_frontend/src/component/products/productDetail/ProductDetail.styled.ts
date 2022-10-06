@@ -157,16 +157,28 @@ export const ProductPriceText = styled.p`
 export const ProductBasketBtnContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
   margin-top: 15px;
 `;
-export const ProductBasketBtn = styled.button`
-  width: 80%;
+export const ProductBuyBtn = styled.button`
+  width: 60%;
   height: 56px;
   background-color: #f95621;
   font-size: 16px;
   font-weight: 500;
   color: #fff;
   border: none;
+  cursor: pointer;
+`;
+export const ProductBasketBtn = styled.button`
+  width: 60%;
+  height: 56px;
+  background-color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  color: #f95621;
+  border: 1px solid #f95621;
   cursor: pointer;
 `;

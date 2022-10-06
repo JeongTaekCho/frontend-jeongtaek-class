@@ -99,10 +99,13 @@ const ProductWriteUi = ({
               {new Array(3).fill(1).map((_, index) => {
                 return (
                   <div key={index}>
-                    <S.ProductImgBack htmlFor="file">+</S.ProductImgBack>
+                    <S.ProductImgBack htmlFor={`file${index + 1}`}>
+                      +
+                    </S.ProductImgBack>
                     <S.ProductFile
-                      id="file"
+                      id={`file${index + 1}`}
                       type="file"
+                      title={index}
                       onChange={onChangeFile(index)}
                     />
                   </div>
