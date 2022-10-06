@@ -4,7 +4,7 @@ import { productDatas } from "../../../store";
 import * as S from "./ProductDetail.styled";
 
 const ProductDetailUi = ({ itemCount, onClickCount }) => {
-  const [productData, setProductData] = useRecoilState(productDatas);
+  const [productData] = useRecoilState(productDatas);
   const router = useRouter();
 
   const result = productData.filter((item) => item._id === router.query.id);

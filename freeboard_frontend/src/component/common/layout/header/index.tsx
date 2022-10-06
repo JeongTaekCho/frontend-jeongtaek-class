@@ -58,6 +58,10 @@ const Header = () => {
     await router.push("/service/center");
   };
 
+  const goProduct = async () => {
+    await router.push("/products");
+  };
+
   const logout = async () => {
     // setAccessToken("");
     // await logoutUser();
@@ -116,7 +120,7 @@ const Header = () => {
               <S.CategoryText>카테고리</S.CategoryText>
             </S.CategoryMenu>
             <S.CommonMenu>
-              <S.CommonMenuLi>상품목록1</S.CommonMenuLi>
+              <S.CommonMenuLi onClick={goProduct}>상품목록1</S.CommonMenuLi>
               <S.CommonMenuLi>상품목록2</S.CommonMenuLi>
               <S.CommonMenuLi>상품목록3</S.CommonMenuLi>
               <S.CommonMenuLi>상품목록4</S.CommonMenuLi>

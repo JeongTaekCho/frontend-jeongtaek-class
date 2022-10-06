@@ -85,12 +85,12 @@ const ProductWriteUi = ({
                   <S.Ptitle>주소</S.Ptitle>
                   <InputDefault
                     type="text"
-                    register={register("address")}
+                    register={register("useditemAddress.address")}
                     style={{ marginBottom: "15px" }}
                   />
                   <InputDefault
                     type="text"
-                    register={register("addressDetail")}
+                    register={register("useditemAddress.addressDetail")}
                   />
                 </S.ProductAddressContainer>
               </S.AddressInfoBox>

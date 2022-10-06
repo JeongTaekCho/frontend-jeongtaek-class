@@ -30,7 +30,10 @@ const MainHomeUi = ({
           <S.MainItemContainer>
             {productData?.map((item: any) => {
               return (
-                <Link href={`/products/${item._id}`} key={item._id}>
+                <Link
+                  href={`/products/coupangDetail/${item._id}`}
+                  key={item._id}
+                >
                   <S.MainItemBox>
                     <S.MainItemBg
                       style={{
