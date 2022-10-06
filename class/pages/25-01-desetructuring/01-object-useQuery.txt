@@ -1,0 +1,39 @@
+const aaa = {
+    name : "조정택",
+    age : "23"
+}
+undefined
+const {name} = aaa
+undefined
+name
+'조정택'
+function useQuery(aaa){
+    
+    
+}
+undefined
+function useQuery(aaa){
+    
+    ///aaa(ex, FETCH_BOARDS)를 통해서 Backend에 api 요청함!!
+
+    return {
+
+        data : {fetchBoard : {
+
+            writer : "철수",
+            age : 3
+        }},
+        loading: false,
+        refetch: () => {
+            console.log("refetch가 실행됩니다.")
+        }        
+    }
+    
+}
+undefined
+useQuery("test")
+{data: {…}, loading: false, refetch: ƒ}data: fetchBoard: {writer: '철수', age: 3}[[Prototype]]: Objectloading: falserefetch: () => {             console.log("refetch가 실행됩니다.")         }[[Prototype]]: Object
+const {data} = useQuery("asd")
+undefined
+data.fetchBoard.writer
+'철수'

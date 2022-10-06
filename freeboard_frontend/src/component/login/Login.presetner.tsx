@@ -33,12 +33,16 @@ const LoginUi = ({
           )}
 
           <S.LoginFindContainer>
-            <S.LoginFindButton>아이디 찾기</S.LoginFindButton>
+            <S.LoginFindButton type="button">아이디 찾기</S.LoginFindButton>
             <S.LoginFindSpan>|</S.LoginFindSpan>
-            <S.LoginFindButton>비밀번호 찾기</S.LoginFindButton>
+            <S.LoginFindButton type="button">비밀번호 찾기</S.LoginFindButton>
           </S.LoginFindContainer>
-          <S.LoginBtn onClick={onClickLogin}>로그인</S.LoginBtn>
-          <S.JoinBtn onClick={goRegister}>회원가입</S.JoinBtn>
+          <S.LoginBtn type="submit" onClick={onClickLogin}>
+            로그인
+          </S.LoginBtn>
+          <S.JoinBtn type="button" onClick={goRegister}>
+            회원가입
+          </S.JoinBtn>
           <S.GoogleLogin id="google" onClick={onClickSocialLogin}>
             <span>Connect with Google</span>
           </S.GoogleLogin>

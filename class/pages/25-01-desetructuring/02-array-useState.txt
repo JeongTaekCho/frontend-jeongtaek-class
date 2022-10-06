@@ -1,0 +1,49 @@
+function useState(aaa){
+
+    const myState = aaa.  // aaa를 사용해서 state의 초기값 설정
+
+    const mySetState = (bbb) => {
+
+    // 1.bbb를 사용해서 myState 변경하기
+        console.log(myState + "에서" + bbb + "로  State를 변경하겠습니다!!")
+    // 2.해당 컴포넌트를 리렌터링 시키기!
+        console.log("변경된"  + bbb + "를 사용해서 컴포넌트를 리렌더링 하겠습니다.")
+        
+        
+    }
+
+    return [myState, mySetState]
+    
+}
+
+
+
+function useState(aaa){
+
+    const myState = aaa // aaa를 사용해서 state의 초기값 설정
+
+    const mySetState = (bbb) => {
+        console.log(`${myState}에서 ${bbb}로 state를 변경하겠습니다!!`)    // 1. bbb로 myState 변경하기
+        console.log(`변경된 ${bbb}를 사용해서 컴포넌트를 리렌더링 하겠습니다!!`) // 2. 해당 컴포넌트를 리렌더링 시키기!!!(render함수)
+    }
+
+    return [myState, mySetState]
+}
+
+undefined
+const [count, setCount] = useState(10)
+undefined
+count
+10
+setCount(20)
+VM4159:6 10에서 20로 state를 변경하겠습니다!!
+VM4159:7 변경된 20를 사용해서 컴포넌트를 리렌더링 하겠습니다!!
+undefined
+const qqq = useState("철수")
+undefined
+qqq[0]
+'철수'
+qqq[1]("훈이")
+VM4159:6 철수에서 훈이로 state를 변경하겠습니다!!
+VM4159:7 변경된 훈이를 사용해서 컴포넌트를 리렌더링 하겠습니다!!
+undefined

@@ -6,6 +6,7 @@ const ProductWriteUi = ({
   onSubmitProduct,
   register,
   handleSubmit,
+  onChangeFile,
 }: IProductWriteUi) => {
   return (
     <>
@@ -95,8 +96,18 @@ const ProductWriteUi = ({
               </S.AddressInfoBox>
             </S.ProductAddressBox>
             <S.PorductImgBox>
-              <S.ProductImgBack htmlFor="file">+</S.ProductImgBack>
-              <S.ProductFile id="file" type="file" />
+              {new Array(3).fill(1).map((_, index) => {
+                return (
+                  <div key={index}>
+                    <S.ProductImgBack htmlFor="file">+</S.ProductImgBack>
+                    <S.ProductFile
+                      id="file"
+                      type="file"
+                      onChange={onChangeFile(index)}
+                    />
+                  </div>
+                );
+              })}
             </S.PorductImgBox>
             <S.ProductSubmit type="submit">등록하기</S.ProductSubmit>
           </S.ProductWriteForm>
