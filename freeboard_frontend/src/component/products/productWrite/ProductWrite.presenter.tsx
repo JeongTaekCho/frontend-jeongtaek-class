@@ -61,7 +61,7 @@ const ProductWriteUi = ({
             <S.ProductAddressBox>
               <S.MapApiBox>
                 <S.Ptitle>거래위치</S.Ptitle>
-                <S.MapContainer></S.MapContainer>
+                <S.MapContainer id="map"></S.MapContainer>
               </S.MapApiBox>
               <S.AddressInfoBox>
                 <S.Ptitle>GPS</S.Ptitle>
