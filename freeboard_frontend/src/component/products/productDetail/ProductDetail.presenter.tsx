@@ -1,7 +1,12 @@
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { productDatas } from "../../../store";
 import * as S from "./ProductDetail.styled";
+
+declare const window: typeof globalThis & {
+  kakao: any;
+};
 
 const ProductDetailUi = ({ itemCount, onClickCount, productInfo }) => {
   const [productData] = useRecoilState(productDatas);
@@ -9,8 +14,44 @@ const ProductDetailUi = ({ itemCount, onClickCount, productInfo }) => {
 
   const result = productData.filter((item) => item._id === router.query.id);
   const itemPrice = Number(result[0]?.salePrice);
-  // .replace(",", "")
+
+  const productLat = productInfo?.fetchUseditem.useditemAddress.lat;
+  const productLng = productInfo?.fetchUseditem.useditemAddress.lng;
+
   console.log(productInfo);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src =
+      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=67ff797434525aa2bbca4bf944af63c8";
+    document.head.appendChild(script);
+
+    script.onload = () => {
+      window.kakao.maps.load(function () {
+        const mapContainer = document.getElementById("map"); // 지도를 표시할 div
+        const mapOption = {
+          center: new window.kakao.maps.LatLng(productLat, productLng), // 지도의 중심좌표
+          level: 3, // 지도의 확대 레벨
+        };
+        // v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
+        const map = new window.kakao.maps.Map(mapContainer, mapOption);
+
+        const markerPosition = new window.kakao.maps.LatLng(
+          productLat,
+          productLng
+        );
+
+        // 마커를 생성합니다
+        const marker = new window.kakao.maps.Marker({
+          position: markerPosition,
+        });
+
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
+      });
+    };
+  }, []);
+
   return (
     <>
       <S.ProductDetailWrapper>
@@ -20,9 +61,8 @@ const ProductDetailUi = ({ itemCount, onClickCount, productInfo }) => {
               <S.ProductImg
                 style={{
                   backgroundImage: productInfo
-                    ? productInfo.fetchUseditem.images[0] ||
-                      `url(https://storage.googleapis.com/${productInfo.fetchUseditem.images[0]})`
-                    : `url(${result[0]?.img})`,
+                    ? `url(https://storage.googleapis.com/${productInfo.fetchUseditem.images[0]})`
+                    : ``,
                 }}
               ></S.ProductImg>
             </S.ProductImgBox>
@@ -150,6 +190,25 @@ const ProductDetailUi = ({ itemCount, onClickCount, productInfo }) => {
                   </S.ProductPriceDiv>
                 </S.ProductPriceContainer>
               </S.ProductPriceInfoBox>
+              <S.ProductAddressBox>
+                <S.ProductMapContainer id="map"></S.ProductMapContainer>
+                <S.ProductInfoContainer>
+                  <S.ProductInfoUl>
+                    <S.ProductInfoLeft>주소</S.ProductInfoLeft>
+                    <S.ProductInfoRight>
+                      <S.ProductInfoRightText1>
+                        {productInfo?.fetchUseditem.useditemAddress.address}
+                      </S.ProductInfoRightText1>
+                      <S.ProductInfoRightText2>
+                        {
+                          productInfo?.fetchUseditem.useditemAddress
+                            .addressDetail
+                        }
+                      </S.ProductInfoRightText2>
+                    </S.ProductInfoRight>
+                  </S.ProductInfoUl>
+                </S.ProductInfoContainer>
+              </S.ProductAddressBox>
               <S.ProductBasketBtnContainer>
                 <S.ProductBuyBtn>구매하기</S.ProductBuyBtn>
                 <S.ProductBasketBtn>장바구니 담기</S.ProductBasketBtn>

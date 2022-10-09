@@ -17,6 +17,8 @@ const ProductWriteUi = ({
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
 
+  console.log(typeof lat);
+
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
@@ -192,7 +194,7 @@ const ProductWriteUi = ({
                   <S.GpsInput
                     type="text"
                     placeholder="위도(LAT)"
-                    value={Number(lat)}
+                    // value={lat}
                     {...register("useditemAddress.lat")}
                   />
                   <svg
@@ -210,7 +212,7 @@ const ProductWriteUi = ({
                   <S.GpsInput
                     type="text"
                     placeholder="경도(LNG)"
-                    value={Number(lng)}
+                    // value={lng}
                     {...register("useditemAddress.lng")}
                   />
                 </S.GpsInfoBox>

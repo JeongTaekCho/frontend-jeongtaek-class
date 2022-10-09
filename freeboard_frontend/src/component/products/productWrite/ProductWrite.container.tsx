@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import ProductWriteUi from "./ProductWrite.presenter";
 import { CREATE_PRODUCT } from "./ProductWrite.querys";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { FieldValues, useForm, UseFormRegister } from "react-hook-form";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { UPLOAD_FILE } from "../../boards/boardWrite/BoardWrite.querys";
-import { FETCH_PRODUCT } from "../productDetail/ProductDetail.querys";
+import { successModal } from "../../common/modal/modal-function";
 
 const ProductWrite = () => {
   const [fileUrl, setFileUrl] = useState(["", "", ""]);
@@ -13,13 +13,6 @@ const ProductWrite = () => {
   const { register, handleSubmit } = useForm();
 
   const router = useRouter();
-  // const { data: productData } = useQuery(FETCH_PRODUCT, {
-  //   variables: {
-  //     useditemId: router.query.productId,
-  //   },
-  // });
-
-  // useEffect(() => {}, [productData]);
 
   const [createProduct] = useMutation(CREATE_PRODUCT);
   const [uploadFile] = useMutation(UPLOAD_FILE);
@@ -35,7 +28,7 @@ const ProductWrite = () => {
         createUseditemInput: data,
       },
     });
-    alert("성공");
+    successModal("상품등록에 성공하였습니다.");
     void router.push("/");
   };
 

@@ -182,3 +182,12 @@ export const ProductBasketBtn = styled.button`
   border: 1px solid #f95621;
   cursor: pointer;
 `;
+
+export const ProductAddressBox = styled.div`
+  width: 100%;
+`;
+
+export const ProductMapContainer = styled.div`
+  width: 100%;
+  height: 492px;
+`;

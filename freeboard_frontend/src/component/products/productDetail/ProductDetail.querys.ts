@@ -14,7 +14,7 @@ export const FETCH_PRODUCT = gql`
       useditemAddress {
         _id
         zipcode
-        useditemAddress
+        address
         addressDetail
         lat
         lng
