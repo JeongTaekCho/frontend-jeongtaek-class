@@ -17,3 +17,7 @@ export const productDatas = atom({
   key: "productDatas",
   default: [],
 });
+export const productCommentDatas = atom({
+  key: "productCommentDatas",
+  default: [],
+});

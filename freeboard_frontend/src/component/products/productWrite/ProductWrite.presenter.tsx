@@ -194,7 +194,7 @@ const ProductWriteUi = ({
                   <S.GpsInput
                     type="text"
                     placeholder="위도(LAT)"
-                    // value={lat}
+                    value={lat}
                     {...register("useditemAddress.lat")}
                   />
                   <svg
@@ -212,7 +212,7 @@ const ProductWriteUi = ({
                   <S.GpsInput
                     type="text"
                     placeholder="경도(LNG)"
-                    // value={lng}
+                    value={lng}
                     {...register("useditemAddress.lng")}
                   />
                 </S.GpsInfoBox>

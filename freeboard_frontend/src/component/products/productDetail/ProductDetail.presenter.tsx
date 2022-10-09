@@ -3,12 +3,22 @@ import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { productDatas } from "../../../store";
 import * as S from "./ProductDetail.styled";
+import * as A from "../../boards/boardDetail/BoardDetail.styled";
+import ProductCommentAnswer from "../comment/comment.container";
+import CommentAnswer from "../comment-answer/comment-answer.container";
 
 declare const window: typeof globalThis & {
   kakao: any;
 };
 
-const ProductDetailUi = ({ itemCount, onClickCount, productInfo }) => {
+const ProductDetailUi = ({
+  itemCount,
+  onClickCount,
+  productInfo,
+  onChangeComment,
+  onClickQuestionSubmit,
+  comment,
+}) => {
   const [productData] = useRecoilState(productDatas);
   const router = useRouter();
 
@@ -215,6 +225,31 @@ const ProductDetailUi = ({ itemCount, onClickCount, productInfo }) => {
               </S.ProductBasketBtnContainer>
             </S.ProductRightBox>
           </S.ProductInfoBox>
+
+          <A.CommentTitleBox>
+            <div>
+              <img src="/board/commentTitle.png" />
+            </div>
+            <A.CommentTitle>댓글</A.CommentTitle>
+          </A.CommentTitleBox>
+          <A.CommentContainer>
+            <A.CommentTextareaBox>
+              <A.CommentTextarea
+                placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다. 입력해주세요."
+                name="comment"
+                maxLength={99}
+                onChange={onChangeComment}
+                value={comment}
+              />
+              <A.CommentSubmitBox>
+                <A.CommentLengthBox>{comment.length}/100</A.CommentLengthBox>
+                <A.CommentSubmit onClick={onClickQuestionSubmit}>
+                  등록하기
+                </A.CommentSubmit>
+              </A.CommentSubmitBox>
+            </A.CommentTextareaBox>
+          </A.CommentContainer>
+          <ProductCommentAnswer />
         </S.ProductContainer>
       </S.ProductDetailWrapper>
     </>

@@ -32,3 +32,48 @@ export const FETCH_PRODUCT = gql`
     }
   }
 `;
+
+export const FETCH_PRODUCT_COMMENT = gql`
+  query fetchUseditemQuestions($useditemId: ID!) {
+    fetchUseditemQuestions(useditemId: $useditemId) {
+      _id
+      contents
+      createdAt
+      user {
+        _id
+        email
+        name
+        picture
+        createdAt
+      }
+    }
+  }
+`;
+
+export const CREATE_QUESTION = gql`
+  mutation createUseditemQuestion(
+    $createUseditemQuestionInput: CreateUseditemQuestionInput!
+    $useditemId: ID!
+  ) {
+    createUseditemQuestion(
+      createUseditemQuestionInput: $createUseditemQuestionInput
+      useditemId: $useditemId
+    ) {
+      _id
+    }
+  }
+`;
+
+export const CREATE_QUESTION_ANSWER = gql`
+  mutation createUseditemQuestionAnswer(
+    $createUseditemQuestionAnswerInput: CreateUseditemQuestionAnswerInput!
+    $useditemQuestionId: ID!
+  ) {
+    createUseditemQuestionAnswer(
+      createUseditemQuestionAnswerInput: $createUseditemQuestionAnswerInput
+      useditemQuestionId: $useditemQuestionId
+    ) {
+      _id
+    }
+  }
+`;
