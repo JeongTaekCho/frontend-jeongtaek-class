@@ -11,15 +11,15 @@ export const FETCH_PRODUCT = gql`
       tags
       images
       pickedCount
-      # useditemAddress {
-      #   _id
-      #   zipcode
-      #   useditemAddress
-      #   addressDetail
-      #   lat
-      #   lng
-      #   createdAt
-      # }
+      useditemAddress {
+        _id
+        zipcode
+        useditemAddress
+        addressDetail
+        lat
+        lng
+        createdAt
+      }
       seller {
         _id
         email
