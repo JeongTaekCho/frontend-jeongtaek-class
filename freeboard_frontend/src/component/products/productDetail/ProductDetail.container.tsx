@@ -9,15 +9,12 @@ import {
   FETCH_PRODUCT_COMMENT,
 } from "./ProductDetail.querys";
 import "antd/dist/antd.css";
-import { useRecoilState } from "recoil";
-import { productCommentDatas } from "../../../store";
 
 const ProductDetail = () => {
   // 유즈 라우터
   const router = useRouter();
   const [itemCount, setItemCount] = useState(1);
   const [comment, setComment] = useState("");
-  const [, setProductCommentData] = useRecoilState(productCommentDatas);
 
   const { data: productInfo } = useQuery(FETCH_PRODUCT, {
     variables: {
@@ -25,15 +22,22 @@ const ProductDetail = () => {
     },
   });
 
+  useEffect(() => {
+    const saveProduct = localStorage.getItem("todayProduct");
+    if (saveProduct === null) {
+      localStorage.setItem("todayProduct", JSON.stringify([productInfo]));
+    } else {
+      const parseProduct = JSON.parse(saveProduct);
+      parseProduct.push(productInfo);
+      localStorage.setItem("todayProduct", JSON.stringify(parseProduct));
+    }
+  }, [productInfo]);
+
   const { data: productComments } = useQuery(FETCH_PRODUCT_COMMENT, {
     variables: {
       useditemId: router.query.productId,
     },
   });
-
-  useEffect(() => {
-    setProductCommentData(productComments);
-  }, [productComments]);
 
   const onChangeComment = (event) => {
     setComment(event.target.value);
@@ -94,6 +98,7 @@ const ProductDetail = () => {
         onChangeComment={onChangeComment}
         onClickQuestionSubmit={onClickQuestionSubmit}
         comment={comment}
+        productComments={productComments}
       />
     </>
   );

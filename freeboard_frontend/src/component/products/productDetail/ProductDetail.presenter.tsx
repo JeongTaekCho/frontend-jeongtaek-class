@@ -5,7 +5,6 @@ import { productDatas } from "../../../store";
 import * as S from "./ProductDetail.styled";
 import * as A from "../../boards/boardDetail/BoardDetail.styled";
 import ProductCommentAnswer from "../comment/comment.container";
-import CommentAnswer from "../comment-answer/comment-answer.container";
 
 declare const window: typeof globalThis & {
   kakao: any;
@@ -18,6 +17,7 @@ const ProductDetailUi = ({
   onChangeComment,
   onClickQuestionSubmit,
   comment,
+  productComments,
 }) => {
   const [productData] = useRecoilState(productDatas);
   const router = useRouter();
@@ -27,8 +27,6 @@ const ProductDetailUi = ({
 
   const productLat = productInfo?.fetchUseditem.useditemAddress.lat;
   const productLng = productInfo?.fetchUseditem.useditemAddress.lng;
-
-  console.log(productInfo);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -249,7 +247,9 @@ const ProductDetailUi = ({
               </A.CommentSubmitBox>
             </A.CommentTextareaBox>
           </A.CommentContainer>
-          <ProductCommentAnswer />
+          {productComments?.fetchUseditemQuestions?.map((comment) => {
+            return <ProductCommentAnswer key={comment._id} comment={comment} />;
+          })}
         </S.ProductContainer>
       </S.ProductDetailWrapper>
     </>

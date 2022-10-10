@@ -4,12 +4,13 @@ export const CommentAnswerBox = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  padding: 26px 0;
 `;
 export const CommentAnswerContainer = styled.div`
   width: 95%;
   display: flex;
   gap: 26px;
+  border-bottom: 1px solid #bdbdbd;
+  padding: 26px 0;
 `;
 export const CommentAnswerContentBox = styled.div`
   width: 100%;
@@ -23,7 +24,6 @@ export const CommentAnswerTextarea = styled.textarea`
   padding: 20px;
   border: none;
   outline: none;
-
   font-size: 16px;
   font-weight: 400;
   color: #111;
@@ -64,6 +64,7 @@ export const CommentAnswerTextBox = styled.div`
   width: 100%;
   display: flex;
   gap: 16px;
+  position: relative;
 `;
 export const MyImgBox = styled.div`
   width: 40px;
@@ -83,4 +84,24 @@ export const CommentCon = styled.p`
   font-weight: 400;
   color: #4f4f4f;
   margin-bottom: 20px;
+`;
+
+export const CommentDate = styled.p`
+  font-size: 12px;
+  font-weight: 400;
+  color: #bdbdbd;
+`;
+
+export const AnswerBtn = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
+`;
+
+export const CommentBtnBox = styled.div`
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 `;

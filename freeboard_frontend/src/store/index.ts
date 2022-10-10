@@ -21,3 +21,7 @@ export const productCommentDatas = atom({
   key: "productCommentDatas",
   default: [],
 });
+export const commentAnswerId = atom({
+  key: "commentAnswerId",
+  default: "",
+});

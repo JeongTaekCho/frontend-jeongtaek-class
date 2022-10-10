@@ -14,6 +14,16 @@ const MainHome = () => {
   ];
 
   const [productData, setProductData] = useRecoilState(productDatas);
+  const [todayProductList, setTodayProductList] = useState([]);
+
+  useEffect(() => {
+    if (localStorage.getItem("todayProduct") !== null) {
+      const productParseData = JSON.parse(localStorage.getItem("todayProduct"));
+      const newArr = productParseData.filter((el, index) => el !== null);
+      const setArr = [...new Set(newArr.map(JSON.stringify))].map(JSON.parse);
+      setTodayProductList(setArr);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchCoupangData = async () => {
@@ -24,8 +34,6 @@ const MainHome = () => {
     };
     void fetchCoupangData();
   }, []);
-
-  console.log(productData);
 
   const settings = {
     dots: true,
@@ -44,7 +52,6 @@ const MainHome = () => {
         }}
       >
         <ul style={{ margin: "0px" }}>
-          {" "}
           {dots}
           <li></li>
         </ul>
@@ -57,6 +64,7 @@ const MainHome = () => {
       mainBannerUrl={mainBannerUrl}
       settings={settings}
       productData={productData}
+      todayProductList={todayProductList}
     />
   );
 };
