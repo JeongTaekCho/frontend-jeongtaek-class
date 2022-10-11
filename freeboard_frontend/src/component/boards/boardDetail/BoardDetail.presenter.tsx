@@ -6,6 +6,7 @@ import "antd/dist/antd.css";
 import ReactPlayer from "react-player/youtube";
 import CommentItem from "../commentList/commentList.container";
 import InfiniteScroll from "react-infinite-scroller";
+import DOMPurify from "dompurify";
 
 const BoardDetailUi = ({
   onModal,
@@ -74,7 +75,15 @@ const BoardDetailUi = ({
               />
             );
           })}
-          <S.DetailContentBox>{data?.fetchBoard.contents}</S.DetailContentBox>
+          {process.browser ? (
+            <S.DetailContentBox
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(String(data?.fetchBoard.contents)),
+              }}
+            ></S.DetailContentBox>
+          ) : (
+            <S.DetailContentBox></S.DetailContentBox>
+          )}
           <S.IframeContainer>
             <ReactPlayer
               url={String(data?.fetchBoard.youtubeUrl)}

@@ -5,8 +5,6 @@ import { FETCH_USED_ITEM } from "./ProductList.querys";
 const ProductList = () => {
   const { data: productList, fetchMore } = useQuery(FETCH_USED_ITEM);
 
-  console.log(productList);
-
   const infiniteFun = () => {
     if (productList === undefined) return;
     void fetchMore({

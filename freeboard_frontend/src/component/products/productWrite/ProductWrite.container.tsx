@@ -6,11 +6,13 @@ import { FieldValues, useForm, UseFormRegister } from "react-hook-form";
 import { ChangeEvent, useState } from "react";
 import { UPLOAD_FILE } from "../../boards/boardWrite/BoardWrite.querys";
 import { successModal } from "../../common/modal/modal-function";
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
 
 const ProductWrite = () => {
   const [fileUrl, setFileUrl] = useState(["", "", ""]);
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
 
   const router = useRouter();
 
@@ -31,6 +33,12 @@ const ProductWrite = () => {
     successModal("상품등록에 성공하였습니다.");
     void router.push("/");
   };
+
+  const onChangeQuill = (value: string) => {
+    setValue("contents", value);
+  };
+
+  const ReactQuill = dynamic(import("react-quill"));
 
   const onChangeFile =
     (index) => async (event: ChangeEvent<HTMLInputElement>) => {
@@ -54,6 +62,8 @@ const ProductWrite = () => {
         handleSubmit={handleSubmit}
         onChangeFile={onChangeFile}
         fileUrl={fileUrl}
+        ReactQuill={ReactQuill}
+        onChangeQuill={onChangeQuill}
       />
     </>
   );

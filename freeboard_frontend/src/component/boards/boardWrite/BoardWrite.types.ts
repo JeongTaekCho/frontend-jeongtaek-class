@@ -1,5 +1,6 @@
 import { ChangeEvent, MouseEvent } from "react";
 import { Address } from "react-daum-postcode";
+import { UseFormRegisterReturn } from "react-hook-form";
 import { IQuery } from "../../../commons/types/generated/types";
 
 export interface IBoardWrite {
@@ -50,4 +51,8 @@ export interface IBoardWriteUi {
   fileUrl: string;
   fileUrl2: string;
   fileUrl3: string;
+  ReactQuill: any;
+  onChangeQuill: (value: string) => void;
+  register: UseFormRegisterReturn;
+  handleSubmit: UseFormRegisterReturn;
 }

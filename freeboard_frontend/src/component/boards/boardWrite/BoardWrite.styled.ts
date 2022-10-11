@@ -95,9 +95,11 @@ export const AddressWriteBox = styled(DefaultInputBox)`
   height: auto;
   justify-content: flex-start;
   margin-bottom: 3.7rem;
+
   & p {
     margin-bottom: 2rem;
   }
+
   & .m1530 {
     margin: 1.6rem 0 3rem;
   }

@@ -4,8 +4,6 @@ import * as S from "../../main/main.styles";
 import * as A from "./ProductList.styled";
 
 const ProductListUi = ({ productList, infiniteFun }) => {
-  console.log(productList);
-
   return (
     <>
       <A.ProductListWrapper>

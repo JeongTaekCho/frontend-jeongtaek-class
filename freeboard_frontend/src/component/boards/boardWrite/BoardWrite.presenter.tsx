@@ -3,7 +3,6 @@ import DaumPostcodeEmbed from "react-daum-postcode";
 import * as S from "./BoardWrite.styled";
 import { IBoardWriteUi } from "./BoardWrite.types";
 import "antd/dist/antd.css";
-import { useEffect } from "react";
 
 const BoardWriteUi = ({
   onChangeinputState,
@@ -31,6 +30,10 @@ const BoardWriteUi = ({
   fileUrl,
   fileUrl2,
   fileUrl3,
+  ReactQuill,
+  onChangeQuill,
+  register,
+  handleSubmit,
 }: IBoardWriteUi) => {
   return (
     <>
@@ -39,7 +42,11 @@ const BoardWriteUi = ({
           <S.BoardWriteTitle>
             게시물 {isEdit ? "수정" : "등록"}
           </S.BoardWriteTitle>
-          <S.BoardWriteForm>
+          <S.BoardWriteForm
+            onSubmit={
+              isEdit ? handleSubmit(onEditBoard) : handleSubmit(onSubmitBoard)
+            }
+          >
             <S.WritePasswordBox>
               <S.HalfInputBox>
                 <S.DefaultInputBox>
@@ -47,13 +54,12 @@ const BoardWriteUi = ({
                   <S.DefaultInput
                     type="text"
                     placeholder="이름을 적어주세요."
-                    onChange={onChangeinputState}
-                    name="writer"
                     defaultValue={
                       data?.fetchBoard.writer
                         ? String(data?.fetchBoard.writer)
                         : ""
                     }
+                    {...register("writer")}
                   />
                   <S.ErrorMsg>{writerError}</S.ErrorMsg>
                 </S.DefaultInputBox>
@@ -64,8 +70,7 @@ const BoardWriteUi = ({
                   <S.DefaultInput
                     type="password"
                     placeholder="비밀번호를 입력해주세요."
-                    onChange={onChangeinputState}
-                    name="password"
+                    {...register("password")}
                   />
                   <S.ErrorMsg>{passwordError}</S.ErrorMsg>
                 </S.DefaultInputBox>
@@ -76,19 +81,18 @@ const BoardWriteUi = ({
               <S.DefaultInput
                 type="text"
                 placeholder="제목을 작성해주세요."
-                onChange={onChangeinputState}
-                name="title"
                 defaultValue={data?.fetchBoard?.title}
+                {...register("title")}
               />
               <S.ErrorMsg>{titleError}</S.ErrorMsg>
             </S.DefaultInputBox>
             <S.TextareaBox>
               <p>내용</p>
-              <textarea
+              <ReactQuill
                 placeholder="내용을 작성해주세요."
-                onChange={onChangeinputState}
-                name="content"
+                onChange={onChangeQuill}
                 defaultValue={data?.fetchBoard?.contents}
+                style={{ height: "400px", marginBottom: "30px" }}
               />
               <S.ErrorMsg>{contentError}</S.ErrorMsg>
             </S.TextareaBox>
@@ -99,14 +103,7 @@ const BoardWriteUi = ({
                   placeholder="00000"
                   name="zipCode"
                   value={
-                    // (isEdit &&
-                    //   data?.fetchBoard.boardAddress?.zipcode &&
-                    //   address) ??
-                    // !isEdit
-                    //   ? zipCode
-                    //   : String(data?.fetchBoard.boardAddress?.zipcode)
-
-                    (address || data?.fetchBoard.boardAddress?.zipcode) ?? ""
+                    (zipCode || data?.fetchBoard.boardAddress?.zipcode) ?? ""
                   }
                   disabled
                 />
@@ -136,6 +133,7 @@ const BoardWriteUi = ({
                     ? String(data?.fetchBoard?.boardAddress?.addressDetail)
                     : ""
                 }
+                {...register("boardAddress.addressDetail")}
               />
               <S.ErrorMsg>{addressError}</S.ErrorMsg>
             </S.AddressWriteBox>
@@ -143,13 +141,12 @@ const BoardWriteUi = ({
               <p>유튜브</p>
               <S.DefaultInput
                 placeholder="링크를 복사해주세요."
-                onChange={onChangeinputState}
-                name="youtubeLink"
                 defaultValue={
                   data?.fetchBoard?.youtubeUrl
                     ? String(data?.fetchBoard?.youtubeUrl)
                     : ""
                 }
+                {...register("youtubeUrl")}
               />
               <S.ErrorMsg>{youtubeLinkError}</S.ErrorMsg>
             </S.DefaultInputBox>
@@ -231,10 +228,13 @@ const BoardWriteUi = ({
               </S.MainSelectInputBox>
             </S.MainSelectBox>
             <S.cancleBtnBox>
-              <S.FormSubmitBtn onClick={isEdit ? onEditBoard : onSubmitBoard}>
+              <S.FormSubmitBtn type="submit">
                 {isEdit ? "수정" : "등록"}하기
               </S.FormSubmitBtn>
-              <S.FormCancleBtn onClick={isEdit ? editCancle : writeCancle}>
+              <S.FormCancleBtn
+                type="button"
+                onClick={isEdit ? editCancle : writeCancle}
+              >
                 취소하기
               </S.FormCancleBtn>
             </S.cancleBtnBox>

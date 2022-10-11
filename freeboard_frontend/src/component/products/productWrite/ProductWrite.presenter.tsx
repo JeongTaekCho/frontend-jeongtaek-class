@@ -13,6 +13,8 @@ const ProductWriteUi = ({
   handleSubmit,
   onChangeFile,
   fileUrl,
+  ReactQuill,
+  onChangeQuill,
 }: IProductWriteUi) => {
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
@@ -159,9 +161,10 @@ const ProductWriteUi = ({
             </S.DefaultInputBox>
             <S.TextareaBox>
               <p>내용</p>
-              <textarea
+              <ReactQuill
                 placeholder="내용을 작성해주세요."
-                {...register("contents")}
+                onChange={onChangeQuill}
+                style={{ height: "400px", marginBottom: "30px" }}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.TextareaBox>
