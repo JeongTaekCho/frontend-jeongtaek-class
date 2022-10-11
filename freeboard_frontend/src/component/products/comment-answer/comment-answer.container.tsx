@@ -12,6 +12,7 @@ const CommentAnswer = ({ isAnswerActive }) => {
   const [isPwModal, setIsPwModal] = useState(false);
   const [commentId, setCommentId] = useRecoilState(commentAnswerId);
   const [answerId, setAnswerId] = useState("");
+  const [isActive, setIsActive] = useState(false);
 
   const onChangeCommentAnswer = (event) => {
     setCommentAnswer(event.target.value);
@@ -33,6 +34,10 @@ const CommentAnswer = ({ isAnswerActive }) => {
   };
   const onClickPwClose = () => {
     setIsPwModal(false);
+  };
+
+  const onClickUpdateAnswer = () => {
+    setIsActive((prev) => !prev);
   };
 
   // 답글 등록
@@ -99,6 +104,8 @@ const CommentAnswer = ({ isAnswerActive }) => {
       isPwModal={isPwModal}
       onClickPwOpen={onClickPwOpen}
       onClickPwClose={onClickPwClose}
+      isActive={isActive}
+      onClickUpdateAnswer={onClickUpdateAnswer}
     />
   );
 };

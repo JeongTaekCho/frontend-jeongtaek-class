@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import ProductWriteUi from "./ProductWrite.presenter";
 import { CREATE_PRODUCT } from "./ProductWrite.querys";
 import { useMutation } from "@apollo/client";
-import { FieldValues, useForm, UseFormRegister } from "react-hook-form";
+import { useForm, UseFormRegisterReturn } from "react-hook-form";
 import { ChangeEvent, useState } from "react";
 import { UPLOAD_FILE } from "../../boards/boardWrite/BoardWrite.querys";
 import { successModal } from "../../common/modal/modal-function";
@@ -19,8 +19,7 @@ const ProductWrite = () => {
   const [createProduct] = useMutation(CREATE_PRODUCT);
   const [uploadFile] = useMutation(UPLOAD_FILE);
 
-  const onSubmitProduct = async (data: UseFormRegister<FieldValues>) => {
-    console.log(data);
+  const onSubmitProduct = async (data: UseFormRegisterReturn) => {
     data.price = Number(data.price);
     data.useditemAddress.lat = Number(data.useditemAddress.lat);
     data.useditemAddress.lng = Number(data.useditemAddress.lng);
