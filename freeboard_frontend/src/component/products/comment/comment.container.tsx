@@ -11,14 +11,12 @@ const ProductComment = ({ comment }) => {
   const [isPwModal, setIsPwModal] = useState(false);
   const [commentId, setCommentId] = useRecoilState(commentAnswerId);
 
-  const onClickAnswerToggle = (commentId) => () => {
-    setIsActive((prev) => !prev);
-    setCommentId(commentId);
-  };
-  const onClickViewAnswer = (commentId) => (event) => {
-    setCommentId(commentId);
+  // 답글 부분 보여주는 이벤트
+  const onClickViewAnswer = (commentId) => () => {
+    setCommentId(commentId); // 글로벌 스테이트 코멘트아이디 저장
     setIsAnswerActive((prev) => !prev);
   };
+
   const onClickPwModalOpen = (commentId) => () => {
     setIsPwModal(true);
     setCommentId(commentId);
@@ -29,7 +27,8 @@ const ProductComment = ({ comment }) => {
 
   const [deleteQuestion] = useMutation(DELETE_QUESTION);
 
-  const onClickDeleteQuestion = (commentId) => async () => {
+  // 댓글 삭제
+  const onClickDeleteQuestion = async () => {
     try {
       await deleteQuestion({
         variables: {
@@ -53,7 +52,6 @@ const ProductComment = ({ comment }) => {
 
   return (
     <ProductCommentUi
-      onClickAnswerToggle={onClickAnswerToggle}
       comment={comment}
       isAnswerActive={isAnswerActive}
       onClickViewAnswer={onClickViewAnswer}

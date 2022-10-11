@@ -10,7 +10,6 @@ const ProductCommentUi = ({
   isAnswerActive,
   onClickViewAnswer,
   isPwModal,
-  onClickPwModalToggle,
   onClickDeleteQuestion,
   onClickPwModalOpen,
   onClickPwModalClose,
@@ -82,9 +81,11 @@ const ProductCommentUi = ({
       <Modal
         title="댓글 삭제"
         open={isPwModal}
-        onOk={onClickDeleteQuestion(comment._id)}
+        onOk={onClickDeleteQuestion}
         onCancel={onClickPwModalClose}
-      ></Modal>
+      >
+        <p>댓글을 삭제 하시겠습니까?</p>
+      </Modal>
     </S.CommentAnswerBox>
   );
 };

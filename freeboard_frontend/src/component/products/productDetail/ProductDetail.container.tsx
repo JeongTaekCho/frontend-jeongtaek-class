@@ -46,6 +46,7 @@ const ProductDetail = () => {
 
   const [createQuestion] = useMutation(CREATE_QUESTION);
 
+  // 댓글 달기
   const onClickQuestionSubmit = async () => {
     try {
       if (comment) {

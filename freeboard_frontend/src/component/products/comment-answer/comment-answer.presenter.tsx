@@ -120,7 +120,9 @@ const CommentAnswerUi = ({
                   open={isPwModal}
                   onOk={onClickCommentAnswerDelete}
                   onCancel={onClickPwClose}
-                ></Modal>
+                >
+                  <p>댓글을 삭제 하시겠습니까?</p>
+                </Modal>
               </S.CommentAnswerBox>
             );
           })}

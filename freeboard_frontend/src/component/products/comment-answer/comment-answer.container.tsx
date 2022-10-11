@@ -35,6 +35,7 @@ const CommentAnswer = ({ isAnswerActive }) => {
     setIsPwModal(false);
   };
 
+  // 답글 등록
   const onClickCommentAnswerBtn = async () => {
     try {
       if (commentAnswer) {
