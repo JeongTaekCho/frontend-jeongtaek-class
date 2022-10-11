@@ -9,8 +9,9 @@ import Hamberger from "../../svg/Hamberger";
 import { gql, useQuery } from "@apollo/client";
 import { IQuery } from "../../../../commons/types/generated/types";
 import { successModal } from "../../modal/modal-function";
-import { accessTokenData, googleUserData } from "../../../../store";
+import { accessTokenData, googleUserData, userInfo } from "../../../../store";
 import { useRecoilState } from "recoil";
+import { useEffect } from "react";
 
 const FETCH_USER_LOGGED_IN = gql`
   query {
@@ -36,9 +37,13 @@ const FETCH_USER_LOGGED_IN = gql`
 const Header = () => {
   const [accesstoken] = useRecoilState(accessTokenData);
   const [googleUser] = useRecoilState(googleUserData);
+  const [, setUserDatas] = useRecoilState(userInfo);
 
   const { data: userData } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
+  useEffect(() => {
+    setUserDatas(userData);
+  }, [userData]);
 
   // const [logoutUser] = useMutation<Pick<IMutation, "logoutUser">>(LOGOUT_USER);
 

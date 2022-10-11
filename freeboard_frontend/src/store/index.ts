@@ -25,3 +25,8 @@ export const commentAnswerId = atom({
   key: "commentAnswerId",
   default: "",
 });
+
+export const userInfo = atom({
+  key: "userInfo",
+  default: [],
+});

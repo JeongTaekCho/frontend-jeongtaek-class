@@ -40,6 +40,7 @@ export const AnswerBtn = styled.button`
   border: none;
   background: none;
   cursor: pointer;
+  position: relative;
 `;
 
 export const CommentBtnBox = styled.div`
