@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>이벤트 루프</title>
+    <script>
+      const onClickLoop = () => {
+        console.log("시작");
+        setTimeout(() => {
+          console.log("0초 뒤에 실행될 거임");
+        }, 0);
+        for (let i = 0; i <= 900000000; i++) {
+          console.log(`컴퓨터 터지겠당..${i}`);
+        }
+        console.log("끝");
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="onClickLoop()">시작하기</button>
+  </body>
+</html>
