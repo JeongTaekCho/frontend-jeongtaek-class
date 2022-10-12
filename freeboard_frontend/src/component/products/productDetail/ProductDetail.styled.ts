@@ -28,6 +28,7 @@ export const ProductImg = styled.div`
 
 export const ProductRightBox = styled.div`
   width: 53.3%;
+  position: relative;
 `;
 
 export const ProductSmTitle = styled.p`
@@ -190,6 +191,20 @@ export const ProductAddressBox = styled.div`
 export const ProductMapContainer = styled.div`
   width: 100%;
   height: 492px;
+`;
+
+export const EditBtn = styled.button`
+  width: 150px;
+  height: 35px;
+  border: none;
+  background-color: #111;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
 
 // 코멘트

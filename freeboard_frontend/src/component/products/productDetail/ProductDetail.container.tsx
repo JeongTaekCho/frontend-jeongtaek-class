@@ -23,13 +23,19 @@ const ProductDetail = () => {
   });
 
   useEffect(() => {
+    console.log(productInfo);
     const saveProduct = localStorage.getItem("todayProduct");
     if (saveProduct === null) {
-      localStorage.setItem("todayProduct", JSON.stringify([productInfo]));
+      if (productInfo) {
+        localStorage.setItem("todayProduct", JSON.stringify([productInfo]));
+      }
     } else {
       const parseProduct = JSON.parse(saveProduct);
-      parseProduct.push(productInfo);
-      localStorage.setItem("todayProduct", JSON.stringify(parseProduct));
+      parseProduct.unshift(productInfo);
+      if (parseProduct.length > 4) parseProduct.pop();
+      if (productInfo) {
+        localStorage.setItem("todayProduct", JSON.stringify(parseProduct));
+      }
     }
   }, [productInfo]);
 
@@ -41,7 +47,10 @@ const ProductDetail = () => {
 
   const onChangeComment = (event) => {
     setComment(event.target.value);
-    console.log(typeof comment);
+  };
+
+  const onClickGoUpdate = () => {
+    void router.push(`/products/detail/${router.query.productId}/edit`);
   };
 
   const [createQuestion] = useMutation(CREATE_QUESTION);
@@ -100,6 +109,7 @@ const ProductDetail = () => {
         onClickQuestionSubmit={onClickQuestionSubmit}
         comment={comment}
         productComments={productComments}
+        onClickGoUpdate={onClickGoUpdate}
       />
     </>
   );

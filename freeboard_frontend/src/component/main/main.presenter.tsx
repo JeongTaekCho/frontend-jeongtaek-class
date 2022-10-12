@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { IMainHomeUi } from "./main.types";
 import Link from "next/link";
-import { useRouter } from "next/router";
 // import InfiniteScroll from "react-infinite-scroller";
 
 const MainHomeUi = ({
@@ -28,8 +27,7 @@ const MainHomeUi = ({
         <S.MainSection>
           {todayProductList.length !== 0 ? (
             <>
-              {console.log(todayProductList)}
-              <S.MainContentTitle>오늘 내가 본 상품</S.MainContentTitle>
+              <S.MainContentTitle>최근 본 상품</S.MainContentTitle>
               <S.MainItemContainer>
                 {todayProductList.reverse()?.map((todayItem) => {
                   return (
