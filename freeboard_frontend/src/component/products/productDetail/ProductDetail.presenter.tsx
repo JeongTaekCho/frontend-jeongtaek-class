@@ -20,6 +20,7 @@ const ProductDetailUi = ({
   productComments,
   onClickGoUpdate,
   onClickdeleteProduct,
+  onClickProductBuy,
 }) => {
   const [productData] = useRecoilState(productDatas);
   const router = useRouter();
@@ -225,7 +226,9 @@ const ProductDetailUi = ({
                 </S.ProductInfoContainer>
               </S.ProductAddressBox>
               <S.ProductBasketBtnContainer>
-                <S.ProductBuyBtn>구매하기</S.ProductBuyBtn>
+                <S.ProductBuyBtn onClick={onClickProductBuy}>
+                  구매하기
+                </S.ProductBuyBtn>
                 <S.ProductBasketBtn>장바구니 담기</S.ProductBasketBtn>
               </S.ProductBasketBtnContainer>
             </S.ProductRightBox>

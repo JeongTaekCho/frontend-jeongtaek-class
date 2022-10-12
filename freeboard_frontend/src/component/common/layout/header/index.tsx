@@ -20,7 +20,10 @@ const FETCH_USER_LOGGED_IN = gql`
       email
       name
       picture
-      # userPoint
+      userPoint {
+        _id
+        amount
+      }
       createdAt
       updatedAt
       deletedAt

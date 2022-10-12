@@ -8,6 +8,7 @@ import {
   DELETE_ITEM,
   FETCH_PRODUCT,
   FETCH_PRODUCT_COMMENT,
+  PRODUCT_BUY,
 } from "./ProductDetail.querys";
 import "antd/dist/antd.css";
 
@@ -46,6 +47,16 @@ const ProductDetail = () => {
       useditemId: router.query.productId,
     },
   });
+
+  const [productBuy] = useMutation(PRODUCT_BUY);
+
+  const onClickProductBuy = async () => {
+    await productBuy({
+      variables: {
+        useritemId: router.query.productId,
+      },
+    });
+  };
 
   const onClickdeleteProduct = async () => {
     try {
@@ -130,6 +141,7 @@ const ProductDetail = () => {
         productComments={productComments}
         onClickGoUpdate={onClickGoUpdate}
         onClickdeleteProduct={onClickdeleteProduct}
+        onClickProductBuy={onClickProductBuy}
       />
     </>
   );
