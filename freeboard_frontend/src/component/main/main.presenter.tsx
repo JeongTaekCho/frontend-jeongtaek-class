@@ -31,7 +31,7 @@ const MainHomeUi = ({
               {console.log(todayProductList)}
               <S.MainContentTitle>오늘 내가 본 상품</S.MainContentTitle>
               <S.MainItemContainer>
-                {todayProductList?.map((todayItem) => {
+                {todayProductList.reverse()?.map((todayItem) => {
                   return (
                     <Link
                       href={`/products/detail/${todayItem.fetchUseditem._id}`}
