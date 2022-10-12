@@ -15,11 +15,15 @@ const ProductWriteUi = ({
   fileUrl,
   ReactQuill,
   onChangeQuill,
+  productData,
+  isEdit,
+  onSubmitUpdate,
 }: IProductWriteUi) => {
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
 
-  console.log(typeof lat);
+  console.log(productData);
+  console.log(isEdit);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -139,14 +143,23 @@ const ProductWriteUi = ({
     <>
       <S.ProductWrapper>
         <S.Container>
-          <S.ProductWriteTitle>상품 등록하기</S.ProductWriteTitle>
-          <S.ProductWriteForm onSubmit={handleSubmit(onSubmitProduct)}>
+          <S.ProductWriteTitle>
+            {isEdit ? "상품 수정하기" : "상품 등록하기"}
+          </S.ProductWriteTitle>
+          <S.ProductWriteForm
+            onSubmit={
+              isEdit
+                ? handleSubmit(onSubmitUpdate)
+                : handleSubmit(onSubmitProduct)
+            }
+          >
             <S.DefaultInputBox>
               <p>제목</p>
               <InputDefault
                 type="text"
                 placeholder="제목을 작성해주세요."
                 register={register("name")}
+                defaultValue={productData && productData.fetchUseditem.name}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>
@@ -156,6 +169,7 @@ const ProductWriteUi = ({
                 type="text"
                 placeholder="한줄요약을 작성해주세요."
                 register={register("remarks")}
+                defaultValue={productData && productData.fetchUseditem.remarks}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>
@@ -165,6 +179,7 @@ const ProductWriteUi = ({
                 placeholder="내용을 작성해주세요."
                 onChange={onChangeQuill}
                 style={{ height: "400px", marginBottom: "30px" }}
+                value={productData && productData?.fetchUseditem?.contents}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.TextareaBox>
@@ -174,6 +189,7 @@ const ProductWriteUi = ({
                 type="text"
                 placeholder="판매가격을 작성해주세요."
                 register={register("price")}
+                defaultValue={productData && productData.fetchUseditem.price}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>{" "}
@@ -183,6 +199,7 @@ const ProductWriteUi = ({
                 type="text"
                 placeholder="태그를 작성해주세요."
                 register={register("tags")}
+                defaultValue={productData && productData.fetchUseditem.tags}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>
@@ -197,7 +214,11 @@ const ProductWriteUi = ({
                   <S.GpsInput
                     type="text"
                     placeholder="위도(LAT)"
-                    value={lat}
+                    value={
+                      (productData &&
+                        productData?.fetchUseditem?.useditemAddress.lat) ||
+                      lat
+                    }
                     {...register("useditemAddress.lat")}
                   />
                   <svg
@@ -215,7 +236,11 @@ const ProductWriteUi = ({
                   <S.GpsInput
                     type="text"
                     placeholder="경도(LNG)"
-                    value={lng}
+                    value={
+                      (productData &&
+                        productData?.fetchUseditem?.useditemAddress.lng) ||
+                      lng
+                    }
                     {...register("useditemAddress.lng")}
                   />
                 </S.GpsInfoBox>
@@ -226,10 +251,18 @@ const ProductWriteUi = ({
                     register={register("useditemAddress.address")}
                     style={{ marginBottom: "15px" }}
                     id="infoDiv"
+                    defaultValue={
+                      productData &&
+                      productData?.fetchUseditem?.useditemAddress.address
+                    }
                   />
                   <InputDefault
                     type="text"
                     register={register("useditemAddress.addressDetail")}
+                    defaultValue={
+                      productData &&
+                      productData?.fetchUseditem?.useditemAddress.addressDetail
+                    }
                   />
                 </S.ProductAddressContainer>
               </S.AddressInfoBox>
@@ -266,7 +299,9 @@ const ProductWriteUi = ({
                 );
               })}
             </S.PorductImgBox>
-            <S.ProductSubmit type="submit">등록하기</S.ProductSubmit>
+            <S.ProductSubmit type="submit">
+              {isEdit ? "수정하기" : "등록하기"}
+            </S.ProductSubmit>
           </S.ProductWriteForm>
         </S.Container>
       </S.ProductWrapper>

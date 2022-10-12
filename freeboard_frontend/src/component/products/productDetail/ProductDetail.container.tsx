@@ -5,6 +5,7 @@ import { errorModal, successModal } from "../../common/modal/modal-function";
 import ProductDetailUi from "./ProductDetail.presenter";
 import {
   CREATE_QUESTION,
+  DELETE_ITEM,
   FETCH_PRODUCT,
   FETCH_PRODUCT_COMMENT,
 } from "./ProductDetail.querys";
@@ -16,6 +17,7 @@ const ProductDetail = () => {
   const [itemCount, setItemCount] = useState(1);
   const [comment, setComment] = useState("");
 
+  const [dateleProduct] = useMutation(DELETE_ITEM);
   const { data: productInfo } = useQuery(FETCH_PRODUCT, {
     variables: {
       useditemId: router.query.productId,
@@ -44,6 +46,23 @@ const ProductDetail = () => {
       useditemId: router.query.productId,
     },
   });
+
+  const onClickdeleteProduct = async () => {
+    try {
+      await dateleProduct({
+        variables: {
+          useditemId: router.query.productId,
+        },
+        refetchQueries: [FETCH_PRODUCT],
+      });
+      successModal("상품이 삭제되었습니다.");
+      void router.push("/products");
+    } catch (error) {
+      if (error instanceof Error) {
+        errorModal(error.message);
+      }
+    }
+  };
 
   const onChangeComment = (event) => {
     setComment(event.target.value);
@@ -110,6 +129,7 @@ const ProductDetail = () => {
         comment={comment}
         productComments={productComments}
         onClickGoUpdate={onClickGoUpdate}
+        onClickdeleteProduct={onClickdeleteProduct}
       />
     </>
   );

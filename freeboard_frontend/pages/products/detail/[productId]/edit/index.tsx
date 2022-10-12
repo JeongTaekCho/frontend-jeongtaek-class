@@ -1,7 +1,7 @@
 import ProductWrite from "../../../../../src/component/products/productWrite/ProductWrite.container";
 
-const BoardWritePage = () => {
+const ProductWritePage = () => {
   return <ProductWrite isEdit={true} />;
 };
 
-export default BoardWritePage;
+export default ProductWritePage;

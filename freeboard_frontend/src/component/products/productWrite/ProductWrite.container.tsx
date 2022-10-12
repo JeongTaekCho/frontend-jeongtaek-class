@@ -1,23 +1,36 @@
 import { useRouter } from "next/router";
 import ProductWriteUi from "./ProductWrite.presenter";
-import { CREATE_PRODUCT } from "./ProductWrite.querys";
-import { useMutation } from "@apollo/client";
+import { CREATE_PRODUCT, UPDATE_PRODUCT } from "./ProductWrite.querys";
+import { useMutation, useQuery } from "@apollo/client";
 import { useForm, UseFormRegisterReturn } from "react-hook-form";
 import { ChangeEvent, useState } from "react";
 import { UPLOAD_FILE } from "../../boards/boardWrite/BoardWrite.querys";
-import { successModal } from "../../common/modal/modal-function";
+import { errorModal, successModal } from "../../common/modal/modal-function";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
+import { FETCH_PRODUCT } from "../productDetail/ProductDetail.querys";
 
-const ProductWrite = () => {
+const ProductWrite = ({ isEdit }) => {
   const [fileUrl, setFileUrl] = useState(["", "", ""]);
-
-  const { register, handleSubmit, setValue } = useForm();
 
   const router = useRouter();
 
   const [createProduct] = useMutation(CREATE_PRODUCT);
+  const [updateProduct] = useMutation(UPDATE_PRODUCT);
   const [uploadFile] = useMutation(UPLOAD_FILE);
+  const { data: productData } = useQuery(FETCH_PRODUCT, {
+    variables: {
+      useditemId: router.query.productId,
+    },
+  });
+
+  console.log(productData);
+  const { register, handleSubmit, setValue } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      contents: productData ? productData?.fetchUseditem?.contents : "",
+    },
+  });
 
   const onSubmitProduct = async (data: UseFormRegisterReturn) => {
     data.price = Number(data.price);
@@ -31,6 +44,29 @@ const ProductWrite = () => {
     });
     successModal("상품등록에 성공하였습니다.");
     void router.push("/");
+  };
+
+  const onSubmitUpdate = async (data: UseFormRegisterReturn) => {
+    console.log(data);
+    data.price = Number(data.price);
+    data.useditemAddress.lat = Number(data.useditemAddress.lat);
+    data.useditemAddress.lng = Number(data.useditemAddress.lng);
+    data.images = fileUrl;
+    try {
+      await updateProduct({
+        variables: {
+          useditemId: router.query.productId,
+          updateUseditemInput: data,
+        },
+        refetchQueries: [FETCH_PRODUCT],
+      });
+      successModal("수정이 완료되었습니다.");
+      void router.push(`/products/detail/${router.query.productId}`);
+    } catch (error) {
+      if (error instanceof Error) {
+        errorModal(error.message);
+      }
+    }
   };
 
   const onChangeQuill = (value: string) => {
@@ -63,6 +99,9 @@ const ProductWrite = () => {
         fileUrl={fileUrl}
         ReactQuill={ReactQuill}
         onChangeQuill={onChangeQuill}
+        productData={productData}
+        isEdit={isEdit}
+        onSubmitUpdate={onSubmitUpdate}
       />
     </>
   );

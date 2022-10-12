@@ -19,6 +19,7 @@ const ProductDetailUi = ({
   comment,
   productComments,
   onClickGoUpdate,
+  onClickdeleteProduct,
 }) => {
   const [productData] = useRecoilState(productDatas);
   const router = useRouter();
@@ -76,7 +77,11 @@ const ProductDetailUi = ({
               ></S.ProductImg>
             </S.ProductImgBox>
             <S.ProductRightBox>
-              <S.EditBtn onClick={onClickGoUpdate}>수정하기</S.EditBtn>
+              <S.EditDelBox>
+                <S.EditBtn onClick={onClickGoUpdate}>수정하기</S.EditBtn>
+                <S.EditBtn onClick={onClickdeleteProduct}>삭제하기</S.EditBtn>
+              </S.EditDelBox>
+
               <S.ProductSmTitle>샛별배송</S.ProductSmTitle>
               <S.ProductTitle>
                 {productInfo

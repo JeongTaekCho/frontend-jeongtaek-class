@@ -67,6 +67,10 @@ const Header = () => {
     await router.push("/products");
   };
 
+  const goMyPage = () => {
+    void router.push("/mypage");
+  };
+
   const logout = async () => {
     // setAccessToken("");
     // await logoutUser();
@@ -101,7 +105,7 @@ const Header = () => {
                 {userData?.fetchUserLoggedIn.name || googleUser.displayName}
                 {/* {accesstoken.data.fetchUserLoggedIn.userName} */}
                 <S.LoginMenuLi>|</S.LoginMenuLi>
-                <S.LoginMenuLi onClick={goLogin}>마이페이지</S.LoginMenuLi>
+                <S.LoginMenuLi onClick={goMyPage}>마이페이지</S.LoginMenuLi>
                 <S.LoginMenuLi>|</S.LoginMenuLi>
                 <S.LoginMenuLi onClick={goCenter}>고객센터</S.LoginMenuLi>
                 <S.LoginMenuLi>|</S.LoginMenuLi>

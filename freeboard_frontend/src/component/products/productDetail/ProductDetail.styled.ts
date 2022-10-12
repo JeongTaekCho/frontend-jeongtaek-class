@@ -202,6 +202,11 @@ export const EditBtn = styled.button`
   font-weight: 500;
   color: #fff;
   cursor: pointer;
+`;
+
+export const EditDelBox = styled.div`
+  display: flex;
+  gap: 10px;
   position: absolute;
   top: 0;
   right: 0;

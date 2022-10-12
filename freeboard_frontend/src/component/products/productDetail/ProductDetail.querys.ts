@@ -77,3 +77,9 @@ export const CREATE_QUESTION_ANSWER = gql`
     }
   }
 `;
+
+export const DELETE_ITEM = gql`
+  mutation deleteUseditem($useditemId: ID!) {
+    deleteUseditem(useditemId: $useditemId)
+  }
+`;
