@@ -27,7 +27,7 @@ const MyPage = () => {
         pay_method: "card",
         // merchant_uid: "ORD20180131-0000011",
         name: `${data.point} 포인트 충전`,
-        amount: data.point,
+        amount: 100,
         buyer_email: userDatas.fetchUserLoggedIn.email,
         buyer_name: userDatas.fetchUserLoggedIn.name,
         buyer_tel: "010-9774-3591",
@@ -38,12 +38,12 @@ const MyPage = () => {
         console.log(rsp.imp_uid);
         if (rsp.success) {
           // 결제 성공 시 로직,
-          const result = await pointCharge({
+
+          await pointCharge({
             variables: {
               impUid: rsp.imp_uid,
             },
           });
-          console.log(result);
         } else {
           // 결제 실패 시 로직,
           alert("충전이 실패했습니다. 다시 시도해주세요.");

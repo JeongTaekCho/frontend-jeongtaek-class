@@ -28,6 +28,7 @@ const ApolloSetting = (props: IApollo) => {
     uri: "http://backend09.codebootcamp.co.kr/graphql",
     headers: {
       Authorization: `Bearer ${accessToken}`,
+      // "Content-Type": "application/graphql",
     },
   });
   const client = new ApolloClient({
