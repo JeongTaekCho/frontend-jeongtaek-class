@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Document</title>
+    <script>
+      const onClickThen = () => {
+        new Promise((resolve, reject) => {
+          // 시간이 걸리는 작업(api보내기 등)
+          setTimeout(() => {
+            try {
+              const res = "철수";
+              resolve(res);
+            } catch (error) {
+              reject(error);
+            }
+          }, 2000);
+        }).then((res) => {
+          console.log(res);
+        });
+      };
+      const onClickAwait = async () => {
+        const result = await new Promise((resolve, reject) => {
+          // 시간이 걸리는 작업(api보내기 등)
+          setTimeout(() => {
+            try {
+              const res = "철수";
+              resolve(res);
+            } catch (error) {
+              reject(error);
+            }
+          }, 2000);
+        });
+        console.log(result);
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="onClickThen()">Promise 실행하기(.then)</button>
+    <button onclick="onClickAwait()">Promise 실행하기(await)</button>
+  </body>
+</html>

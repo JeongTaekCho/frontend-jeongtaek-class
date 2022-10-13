@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { productDatas } from "../../../store";
+import { productDatas, userInfo } from "../../../store";
 import * as S from "./ProductDetail.styled";
 import * as A from "../../boards/boardDetail/BoardDetail.styled";
 import ProductCommentAnswer from "../comment/comment.container";
@@ -23,6 +23,8 @@ const ProductDetailUi = ({
   onClickProductBuy,
 }) => {
   const [productData] = useRecoilState(productDatas);
+  const [userDatas] = useRecoilState(userInfo);
+
   const router = useRouter();
 
   const result = productData.filter((item) => item._id === router.query.id);
@@ -31,6 +33,7 @@ const ProductDetailUi = ({
   const productLat = productInfo?.fetchUseditem.useditemAddress.lat;
   const productLng = productInfo?.fetchUseditem.useditemAddress.lng;
 
+  console.log(productInfo);
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
@@ -61,7 +64,7 @@ const ProductDetailUi = ({
         marker.setMap(map);
       });
     };
-  }, []);
+  }, [productInfo]);
 
   return (
     <>
@@ -78,10 +81,13 @@ const ProductDetailUi = ({
               ></S.ProductImg>
             </S.ProductImgBox>
             <S.ProductRightBox>
-              <S.EditDelBox>
-                <S.EditBtn onClick={onClickGoUpdate}>수정하기</S.EditBtn>
-                <S.EditBtn onClick={onClickdeleteProduct}>삭제하기</S.EditBtn>
-              </S.EditDelBox>
+              {userDatas?.fetchUserLoggedIn?._id ===
+              productInfo?.fetchUseditem.seller?._id ? (
+                <S.EditDelBox>
+                  <S.EditBtn onClick={onClickGoUpdate}>수정하기</S.EditBtn>
+                  <S.EditBtn onClick={onClickdeleteProduct}>삭제하기</S.EditBtn>
+                </S.EditDelBox>
+              ) : null}
 
               <S.ProductSmTitle>샛별배송</S.ProductSmTitle>
               <S.ProductTitle>
@@ -207,7 +213,9 @@ const ProductDetailUi = ({
                 </S.ProductPriceContainer>
               </S.ProductPriceInfoBox>
               <S.ProductAddressBox>
-                <S.ProductMapContainer id="map"></S.ProductMapContainer>
+                {!process.browser && (
+                  <S.ProductMapContainer id="map"></S.ProductMapContainer>
+                )}
                 <S.ProductInfoContainer>
                   <S.ProductInfoUl>
                     <S.ProductInfoLeft>주소</S.ProductInfoLeft>

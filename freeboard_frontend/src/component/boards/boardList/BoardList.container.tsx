@@ -51,7 +51,6 @@ const BoardList = () => {
     });
     setKeyword(value);
     setPageNum(0);
-    console.log(value);
   }, 500);
 
   const onChangeSearchData = (event: ChangeEvent<HTMLInputElement>) => {

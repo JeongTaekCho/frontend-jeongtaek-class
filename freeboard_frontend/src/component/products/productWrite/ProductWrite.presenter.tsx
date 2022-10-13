@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import InputDefault from "../../common/inputs/inputDefault";
 import * as S from "./ProductWrite.styled";
 import { IProductWriteUi } from "./ProductWrite.types";
@@ -18,17 +18,13 @@ const ProductWriteUi = ({
   productData,
   isEdit,
   onSubmitUpdate,
+  setValue,
 }: IProductWriteUi) => {
-  const [lat, setLat] = useState("");
-  const [lng, setLng] = useState("");
-
   console.log(productData);
-  console.log(isEdit);
-
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=67ff797434525aa2bbca4bf944af63c8";
+      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&libraries=services&appkey=67ff797434525aa2bbca4bf944af63c8";
 
     document.head.appendChild(script);
 
@@ -37,20 +33,21 @@ const ProductWriteUi = ({
         const container = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
         const options = {
           // 지도를 생성할 때 필요한 기본 옵션
-          center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표.
+          center: new window.kakao.maps.LatLng(
+            productData?.fetchUseditem?.useditemAddress.lat || 37.5445755,
+            productData?.fetchUseditem?.useditemAddress.lng || 127.0559695
+          ), // 지도의 중심좌표.
           level: 3, // 지도의 레벨(확대, 축소 정도)
         };
 
         const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
-
-        const infowindow = new window.kakao.maps.InfoWindow({ zindex: 1 });
 
         const marker = new window.kakao.maps.Marker({
           // 지도 중심좌표에 마커를 생성합니다
           position: map.getCenter(),
         });
 
-        // const geocoder = new window.kakao.maps.services.Geocoder();
+        const geocoder = new window.kakao.maps.services.Geocoder();
         // 지도에 마커를 표시합니다
         marker.setMap(map);
 
@@ -66,81 +63,16 @@ const ProductWriteUi = ({
             // 마커 위치를 클릭한 위치로 옮깁니다
             marker.setPosition(latlng);
 
-            // var message = "클릭한 위치의 위도는 " + latlng.getLat() + " 이고, ";
-            // message += "경도는 " + latlng.getLng() + " 입니다";
-
-            // var resultDiv = document.getElementById("clickLatlng");
-            // resultDiv.innerHTML = message;
-            setLat(latlng.getLat());
-            setLng(latlng.getLng());
-
-            // searchDetailAddrFromCoords(
-            //   mouseEvent.latLng,
-            //   function (result, status) {
-            //     if (status === window.kakao.maps.services.Status.OK) {
-            //       let detailAddr = !!result[0].road_address
-            //         ? "<div>도로명주소 : " +
-            //           result[0].road_address.address_name +
-            //           "</div>"
-            //         : "";
-            //       detailAddr +=
-            //         "<div>지번 주소 : " +
-            //         result[0].address.address_name +
-            //         "</div>";
-
-            //       var content =
-            //         '<div class="bAddr">' +
-            //         '<span class="title">법정동 주소정보</span>' +
-            //         detailAddr +
-            //         "</div>";
-
-            //       // 마커를 클릭한 위치에 표시합니다
-            //       marker.setPosition(mouseEvent.latLng);
-            //       marker.setMap(map);
-
-            //       // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-            //       infowindow.setContent(content);
-            //       infowindow.open(map, marker);
-            //     }
-            //   }
-            // );
+            setValue("useditemAddress.lat", latlng.getLat());
+            setValue("useditemAddress.lng", latlng.getLng());
           }
         );
-
-        // 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
-        window.kakao.maps.event.addListener(map, "idle", function () {
-          searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-        });
-
-        function searchAddrFromCoords(coords, callback) {
-          // 좌표로 행정동 주소 정보를 요청합니다
-          geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
-        }
-
-        function searchDetailAddrFromCoords(coords, callback) {
-          // 좌표로 법정동 상세 주소 정보를 요청합니다
-          geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-        }
-
-        // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
-        function displayCenterInfo(result, status) {
-          if (status === window.kakao.maps.services.Status.OK) {
-            var infoDiv = document.getElementById("centerAddr");
-
-            for (var i = 0; i < result.length; i++) {
-              // 행정동의 region_type 값은 'H' 이므로
-              if (result[i].region_type === "H") {
-                infoDiv.innerHTML = result[i].address_name;
-                break;
-              }
-            }
-          }
-        }
       });
     };
   }, []);
   return (
     <>
+      {}
       <S.ProductWrapper>
         <S.Container>
           <S.ProductWriteTitle>
@@ -215,9 +147,8 @@ const ProductWriteUi = ({
                     type="text"
                     placeholder="위도(LAT)"
                     value={
-                      (productData &&
-                        productData?.fetchUseditem?.useditemAddress.lat) ||
-                      lat
+                      productData &&
+                      productData?.fetchUseditem?.useditemAddress.lat
                     }
                     {...register("useditemAddress.lat")}
                   />
@@ -237,9 +168,8 @@ const ProductWriteUi = ({
                     type="text"
                     placeholder="경도(LNG)"
                     value={
-                      (productData &&
-                        productData?.fetchUseditem?.useditemAddress.lng) ||
-                      lng
+                      productData &&
+                      productData?.fetchUseditem?.useditemAddress.lng
                     }
                     {...register("useditemAddress.lng")}
                   />

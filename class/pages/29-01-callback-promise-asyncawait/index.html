@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <!-- `http://numbersapi.com/random?min=1&max=200` -->
+    <!-- `https://koreanjson.com/posts/${num}` -->
+    <!-- `https://koreanjson.com/posts?userId=${userId}` -->
+    <head>
+        <title>콜백과 친구들</title>
+        <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            const myCallback = () => {
+                const aa = new XMLHttpRequest();
+                aa.open("get", `http://numbersapi.com/random?min=1&max=200`);
+                aa.send();
+                aa.addEventListener("load", (res) => {
+                    console.log(res);
+                    const num = res.target.response.split(" ")[0];
+
+                    const bb = new XMLHttpRequest();
+                    bb.open("bb", `https://koreanjson.com/posts/${num}`);
+                    bb.send();
+                    bb.addEventListener("load", (res) => {
+                        console.log(res);
+                        const userId = JSON.parse(res.target.responce).UserId;
+
+                        const cc = new XMLHttpRequest();
+                        cc.open(
+                            "get",
+                            `https://koreanjson.com/posts?userId=${userId}`
+                        );
+                        cc.send();
+                        cc.addEventListener("load", (res) => {
+                            console.log(res);
+                        });
+                    });
+                });
+            };
+            // new Promise((resolve, reject) => {
+            //         // 여기서 api요청을 한다면??
+            //         try {
+            //             const result = "철수";
+            //             resolve(result);
+            //         } catch (error) {
+            //             reject("실패 했음");
+            //         }
+            //     })
+            //         .then((res) => {
+            //             alert(res);
+            //         })
+            //         .catch((err) => {
+            //             alert(err);
+            //         });
+            const myPromise = () => {
+                console.log("1");
+                axios
+                    .get("http://numbersapi.com/random?min=1&max=200")
+                    .then((res) => {
+                        return axios.get(
+                            "http://numbersapi.com/random?min=1&max=200"
+                        );
+                        console.log("2");
+                    })
+                    .then((res) => {
+                        return axios.get(
+                            "http://numbersapi.com/random?min=1&max=200"
+                        );
+                        console.log("3");
+                    })
+                    .then((res) => {
+                        return axios.get(
+                            "http://numbersapi.com/random?min=1&max=200"
+                        );
+                        console.log("4");
+                    });
+            };
+
+            //axios, fetch 등 => 대표적인 Promise (.then 등의 기능) 을 지원하는 기능
+            // axios, fetch등 기다리는 2가지 방법
+            // 1. .then() 활용
+            // 2. await 활용
+            const myAsyncAwait = async () => {
+                await axios.get("http://numbersapi.com/random?min=1&max=200");
+                await axios.get("http://numbersapi.com/random?min=1&max=200");
+                await axios.get("http://numbersapi.com/random?min=1&max=200");
+            };
+        </script>
+    </head>
+    <body>
+        <button onclick="myCallback()">callback 연습하기</button>
+        <button onclick="myPromise()">promise 연습하기</button>
+        <button onclick="myAsyncAwait()">async,await 연습하기</button>
+    </body>
+</html>

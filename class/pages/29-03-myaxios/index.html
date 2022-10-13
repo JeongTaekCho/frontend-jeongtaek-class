@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>나만의 axios 만들기</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <script>
+      const myAxios = {
+        get: (url) => {
+          return new Promise((resolve, reject) => {
+            const qq = new XMLHttpRequest();
+            qq.open("get", url);
+            qq.send();
+            qq.addEventListener("load", (res) => {
+              resolve(res.target.response);
+            });
+          });
+        },
+        //   post: (url) => {}, //같은방식
+      };
+
+      const onClickAxios = async () => {
+        // axios요청하기
+        // 1. .then으로 받기
+        myAxios.get("https://koreanjson.com/posts/1").then((res) => {
+          console.log(res);
+        });
+
+        // 2. await로 받기
+
+        const result = await myAxios.get("https://koreanjson.com/posts/1");
+        console.log(result);
+      };
+
+      // axios 요청
+    </script>
+  </head>
+  <body>
+    <button onclick="onClickAxios()">엑시오스야 실행되거라</button>
+  </body>
+</html>

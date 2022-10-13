@@ -1,11 +1,10 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { userInfo } from "../../store";
 import MyPageUi from "./mypage.presenter";
 import { POINT_CHARGE } from "./mypage.queries";
-import { v4 as uuidV4 } from "uuid";
 
 const MyPage = () => {
   const [userDatas] = useRecoilState(userInfo);
@@ -18,7 +17,7 @@ const MyPage = () => {
 
   const onClickPointCharge = (data) => {
     const IMP = window.IMP; // 생략 가능
-    IMP.init("imp20064436"); // Example: imp00000000
+    IMP.init("imp49910675"); // Example: imp00000000
 
     IMP.request_pay(
       {
@@ -27,15 +26,14 @@ const MyPage = () => {
         pay_method: "card",
         // merchant_uid: "ORD20180131-0000011",
         name: `${data.point} 포인트 충전`,
-        amount: 100,
+        amount: data.point,
         buyer_email: userDatas.fetchUserLoggedIn.email,
         buyer_name: userDatas.fetchUserLoggedIn.name,
         buyer_tel: "010-9774-3591",
       },
       async (rsp) => {
         // callback
-        console.log(rsp);
-        console.log(rsp.imp_uid);
+
         if (rsp.success) {
           // 결제 성공 시 로직,
 

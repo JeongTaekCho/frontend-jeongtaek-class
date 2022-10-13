@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>이벤트 루프</title>
+    <script>
+      const onClickLoop = () => {
+        console.log("시작"); // 1
+
+        // 비동기 작업 (테스트큐에 들어감)
+        setTimeout(() => {
+          console.log(
+            "저는 셋타임아웃이구요 메크로큐에요 그리고 0초 뒤에 실행될 거임"
+          );
+        }, 0); //6
+
+        // 비동기 작업(마이크로큐에 들어감)
+        new Promise((resolve) => {
+          resolve("철수");
+        }).then((res) => {
+          console.log(
+            "저는 프로미스(1)!! 저는 마이크로큐에여 0초뒤에 실행될 거에여"
+          );
+        }); //4
+
+        // 비동기 작업(테스크큐에 들어감)
+        setInterval(() => {
+          console.log("저는 셋인터벌이구요 메크로큐에요 0초마다 실행될거래요");
+        }, 0); //7
+
+        for (let i = 0; i <= 9; i++) {
+          console.log(`컴퓨터 터지겠당..`);
+        } // 2
+
+        // 비동기 작업(마이크로큐에 들어감)
+        new Promise((resolve) => {
+          resolve("철수");
+        }).then((res) => {
+          console.log(
+            "저는 프로미스(1)!! 저는 마이크로큐에여 0초뒤에 실행될 거에여"
+          );
+        }); // 5
+
+        console.log("끝"); //3
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="onClickLoop()">시작하기</button>
+  </body>
+</html>

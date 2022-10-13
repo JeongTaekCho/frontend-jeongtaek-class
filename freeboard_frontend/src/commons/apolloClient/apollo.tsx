@@ -30,6 +30,7 @@ const ApolloSetting = (props: IApollo) => {
       Authorization: `Bearer ${accessToken}`,
       // "Content-Type": "application/graphql",
     },
+    credentials: "include",
   });
   const client = new ApolloClient({
     link: ApolloLink.from([uploadLink]),

@@ -1,0 +1,6 @@
+console.log("=======시작!!!!=======");
+console.log("aaa-시작");
+console.log("bbb-시작");
+console.log("aaa-끝");
+console.log("=======끝!!!!=======");
+console.log(friend);

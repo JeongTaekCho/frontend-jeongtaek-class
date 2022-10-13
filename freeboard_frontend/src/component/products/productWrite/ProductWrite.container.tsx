@@ -24,7 +24,6 @@ const ProductWrite = ({ isEdit }) => {
     },
   });
 
-  console.log(productData);
   const { register, handleSubmit, setValue } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -37,17 +36,16 @@ const ProductWrite = ({ isEdit }) => {
     data.useditemAddress.lat = Number(data.useditemAddress.lat);
     data.useditemAddress.lng = Number(data.useditemAddress.lng);
     data.images = fileUrl;
-    await createProduct({
+    const result = await createProduct({
       variables: {
         createUseditemInput: data,
       },
     });
     successModal("상품등록에 성공하였습니다.");
-    void router.push("/");
+    void router.push(`/products/detail/${result.data.createUseditem._id}`);
   };
 
   const onSubmitUpdate = async (data: UseFormRegisterReturn) => {
-    console.log(data);
     data.price = Number(data.price);
     data.useditemAddress.lat = Number(data.useditemAddress.lat);
     data.useditemAddress.lng = Number(data.useditemAddress.lng);
@@ -86,7 +84,6 @@ const ProductWrite = ({ isEdit }) => {
       const urlArray = [...fileUrl];
       urlArray[Number(event.target.title)] = result.data.uploadFile.url;
       setFileUrl(urlArray);
-      console.log(urlArray);
     };
 
   return (
@@ -102,6 +99,7 @@ const ProductWrite = ({ isEdit }) => {
         productData={productData}
         isEdit={isEdit}
         onSubmitUpdate={onSubmitUpdate}
+        setValue={setValue}
       />
     </>
   );

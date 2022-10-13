@@ -1,9 +1,18 @@
 import { useQuery } from "@apollo/client";
+import { useEffect } from "react";
 import ProductListUi from "./ProductList.presenter";
 import { FETCH_USED_ITEM } from "./ProductList.querys";
 
 const ProductList = () => {
-  const { data: productList, fetchMore } = useQuery(FETCH_USED_ITEM);
+  const {
+    data: productList,
+    fetchMore,
+    refetch: plRefetch,
+  } = useQuery(FETCH_USED_ITEM);
+
+  useEffect(() => {
+    void plRefetch();
+  }, []);
 
   const infiniteFun = () => {
     if (productList === undefined) return;

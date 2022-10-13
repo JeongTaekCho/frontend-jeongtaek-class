@@ -19,14 +19,14 @@ const ProductDetail = () => {
   const [comment, setComment] = useState("");
 
   const [dateleProduct] = useMutation(DELETE_ITEM);
-  const { data: productInfo } = useQuery(FETCH_PRODUCT, {
+  const { data: productInfo, refetch: piRefetch } = useQuery(FETCH_PRODUCT, {
     variables: {
       useditemId: router.query.productId,
     },
   });
 
   useEffect(() => {
-    console.log(productInfo);
+    void piRefetch();
     const saveProduct = localStorage.getItem("todayProduct");
     if (saveProduct === null) {
       if (productInfo) {
@@ -60,14 +60,18 @@ const ProductDetail = () => {
 
   const onClickdeleteProduct = async () => {
     try {
-      await dateleProduct({
-        variables: {
-          useditemId: router.query.productId,
-        },
-        refetchQueries: [FETCH_PRODUCT],
-      });
-      successModal("상품이 삭제되었습니다.");
-      void router.push("/products");
+      // await dateleProduct({
+      //   variables: {
+      //     useditemId: router.query.productId,
+      //   },
+      // });
+      // successModal("상품이 삭제되었습니다.");
+      const result = JSON.parse(localStorage.getItem("todayProduct"));
+      const newResult = result.filter((el) => el._id === productInfo._id);
+      // localStorage.setItem("todayProduct", newResult);
+      // void router.push("/products");
+      console.log(result);
+      console.log(newResult);
     } catch (error) {
       if (error instanceof Error) {
         errorModal(error.message);
