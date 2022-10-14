@@ -13,12 +13,11 @@ const BoardList = () => {
   const [keyword, setKeyword] = useState("");
   const [pageNum, setPageNum] = useState(0);
 
-  const { data, refetch: boardsRefetch } =
-    useQuery<Pick<IQuery, "fetchBoards">>(FETCH_BOARD);
+  const { data, refetch } = useQuery<Pick<IQuery, "fetchBoards">>(FETCH_BOARD);
 
   useEffect(() => {
     void bestRefetch();
-    void boardsRefetch();
+    void refetch();
   }, [data]);
 
   const { data: boardBestPost, refetch: bestRefetch } =

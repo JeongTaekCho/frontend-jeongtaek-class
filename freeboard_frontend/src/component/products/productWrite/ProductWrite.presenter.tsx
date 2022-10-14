@@ -199,12 +199,15 @@ const ProductWriteUi = ({
             </S.ProductAddressBox>
             <S.PorductImgBox>
               {new Array(3).fill(1).map((_, index) => {
-                return fileUrl[index] ? (
+                return fileUrl[index] || productData ? (
                   <div key={index}>
+                    {console.log(productData)}
                     <S.ProductImgBack
                       htmlFor={`file${index + 1}`}
                       style={{
-                        backgroundImage: `url(https://storage.googleapis.com/${fileUrl[index]})`,
+                        backgroundImage:
+                          `url(https://storage.googleapis.com/${fileUrl[index]})` ||
+                          `url(https://storage.googleapis.com/ddd${productData.fetchUseditem.images[index]})`,
                       }}
                     ></S.ProductImgBack>
                     <S.ProductFile

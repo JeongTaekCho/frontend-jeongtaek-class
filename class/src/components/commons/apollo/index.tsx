@@ -51,11 +51,10 @@ export default function ApolloSetting(props: IApolloSettingProps) {
     // console.log("지금은 브라우저임");
     // const result = localStorage.getItem("accessToken");
     // if (result) setAccessToken(result);
-
     // 2. 리프레시토큰 이후
-    void getAccessToken().then((newAccessToken) => {
-      setAccessToken(newAccessToken);
-    });
+    // void getAccessToken().then((newAccessToken) => {
+    //   setAccessToken(newAccessToken);
+    // });
   }, []);
 
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
