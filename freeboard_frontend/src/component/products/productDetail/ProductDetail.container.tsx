@@ -55,7 +55,13 @@ const ProductDetail = () => {
       variables: {
         useritemId: router.query.productId,
       },
+      update(cache, { data }) {
+        cache.modify({
+          fields: () => {},
+        });
+      },
     });
+    successModal("상품구매를 완료 하였습니다.");
   };
 
   const onClickdeleteProduct = async () => {

@@ -88,16 +88,18 @@ export const PRODUCT_BUY = gql`
   mutation createPointTransactionOfBuyingAndSelling($useritemId: ID!) {
     createPointTransactionOfBuyingAndSelling(useritemId: $useritemId) {
       _id
-      name
       price
+      tags
       buyer {
         _id
-        name
+        picture
       }
       seller {
         _id
-        name
+        picture
       }
+      soldAt
+      createdAt
     }
   }
 `;
