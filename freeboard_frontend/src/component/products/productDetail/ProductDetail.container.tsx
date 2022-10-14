@@ -66,16 +66,16 @@ const ProductDetail = () => {
 
   const onClickdeleteProduct = async () => {
     try {
-      // await dateleProduct({
-      //   variables: {
-      //     useditemId: router.query.productId,
-      //   },
-      // });
-      // successModal("상품이 삭제되었습니다.");
+      await dateleProduct({
+        variables: {
+          useditemId: router.query.productId,
+        },
+      });
+      successModal("상품이 삭제되었습니다.");
       const result = JSON.parse(localStorage.getItem("todayProduct"));
       const newResult = result.filter((el) => el._id === productInfo._id);
-      // localStorage.setItem("todayProduct", newResult);
-      // void router.push("/products");
+      localStorage.setItem("todayProduct", newResult);
+      void router.push("/products");
       console.log(result);
       console.log(newResult);
     } catch (error) {

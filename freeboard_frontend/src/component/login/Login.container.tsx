@@ -79,7 +79,7 @@ const Login = () => {
           },
         });
         if (result.data === null && result === undefined) return;
-        const accessToken = result?.data?.loginUser.accessToken;
+        const accessToken = result?.data?.loginUserExample.accessToken;
 
         localStorage.setItem("accessToken", accessToken);
 
