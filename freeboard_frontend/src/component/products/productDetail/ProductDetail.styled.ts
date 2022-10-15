@@ -18,6 +18,10 @@ export const ProductInfoBox = styled.div`
 
 export const ProductImgBox = styled.div`
   width: 41%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
 `;
 export const ProductImg = styled.div`
   width: 100%;

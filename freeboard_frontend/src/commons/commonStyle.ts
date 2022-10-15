@@ -40,6 +40,11 @@ export const SearchBox = styled.div`
 export const IconBox = styled.div`
   display: flex;
   gap: 10px;
+  & svg:hover {
+    .svgG {
+      stroke: #f95621;
+    }
+  }
 `;
 
 export const MainSearchInput = styled.input`
@@ -175,4 +180,24 @@ export const FooterText = styled.p`
   font-size: 12px;
   font-weight: 400;
   color: rgb(153, 153, 153);
+`;
+
+export const HeartContainer = styled.div`
+  position: relative;
+`;
+
+export const PickNum = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  top: -3px;
+  right: -5px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
 `;

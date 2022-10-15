@@ -12,6 +12,7 @@ import { successModal } from "../../modal/modal-function";
 import { accessTokenData, googleUserData, userInfo } from "../../../../store";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
+import { FETCH_PRODUCT } from "../../../products/productDetail/ProductDetail.querys";
 
 const FETCH_USER_LOGGED_IN = gql`
   query {
@@ -31,6 +32,12 @@ const FETCH_USER_LOGGED_IN = gql`
   }
 `;
 
+const PICK_COUNT = gql`
+  query {
+    fetchUseditemsCountIPicked
+  }
+`;
+
 // const LOGOUT_USER = gql`
 //   mutation {
 //     logoutUser
@@ -47,6 +54,10 @@ const Header = () => {
   useEffect(() => {
     setUserDatas(userData);
   }, [userData]);
+
+  const { data: pickCount } = useQuery(PICK_COUNT);
+
+  console.log(pickCount);
 
   // const [logoutUser] = useMutation<Pick<IMutation, "logoutUser">>(LOGOUT_USER);
 
@@ -100,7 +111,10 @@ const Header = () => {
             </S.SearchBox>
             <S.IconBox>
               <Gps />
-              <Heart />
+              <S.HeartContainer>
+                <Heart stroke="#333" fill="#fff" />
+                <S.PickNum>{pickCount?.fetchUseditemsCountIPicked}</S.PickNum>
+              </S.HeartContainer>
               <Basket />
             </S.IconBox>
             {accesstoken || googleUser ? (

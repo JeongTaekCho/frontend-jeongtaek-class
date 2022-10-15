@@ -5,6 +5,7 @@ import { productDatas, userInfo } from "../../../store";
 import * as S from "./ProductDetail.styled";
 import * as A from "../../boards/boardDetail/BoardDetail.styled";
 import ProductCommentAnswer from "../comment/comment.container";
+import Heart from "../../common/svg/Heart";
 
 declare const window: typeof globalThis & {
   kakao: any;
@@ -21,6 +22,7 @@ const ProductDetailUi = ({
   onClickGoUpdate,
   onClickdeleteProduct,
   onClickProductBuy,
+  onClickPick,
 }) => {
   const [productData] = useRecoilState(productDatas);
   const [userDatas] = useRecoilState(userInfo);
@@ -79,6 +81,13 @@ const ProductDetailUi = ({
                     : ``,
                 }}
               ></S.ProductImg>
+              <Heart
+                stroke={"#f95621"}
+                onClick={onClickPick}
+                fill={
+                  productInfo?.fetchUseditem.pickedCount === 1 ? "red" : "#fff"
+                }
+              />
             </S.ProductImgBox>
             <S.ProductRightBox>
               {userDatas?.fetchUserLoggedIn?._id ===

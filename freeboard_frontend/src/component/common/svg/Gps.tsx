@@ -16,6 +16,7 @@ const Gps = () => {
             stroke="#333"
             strokeLinejoin="round"
             strokeWidth="1.7"
+            className="svgG"
           >
             <path
               d="M9.306 24S0 16.544 0 9.306a9.306 9.306 0 0 1 18.612 0C18.612 16.544 9.306 24 9.306 24z"

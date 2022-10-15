@@ -18,6 +18,7 @@ const Basket = () => {
             strokeLinecap="square"
             strokeLinejoin="round"
             strokeWidth="1.7"
+            className="svgG"
           >
             <path d="m25.68 3.66-2.72 11.57H7.37L4.66 3.66z" />
             <circle cx="20.52" cy="20.78" r="2.14" />

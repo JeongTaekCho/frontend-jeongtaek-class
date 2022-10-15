@@ -9,6 +9,7 @@ import {
   FETCH_PRODUCT,
   FETCH_PRODUCT_COMMENT,
   PRODUCT_BUY,
+  PRODUCT_PICK,
 } from "./ProductDetail.querys";
 import "antd/dist/antd.css";
 
@@ -24,6 +25,8 @@ const ProductDetail = () => {
       useditemId: router.query.productId,
     },
   });
+
+  console.log(productInfo);
 
   useEffect(() => {
     void piRefetch();
@@ -51,17 +54,24 @@ const ProductDetail = () => {
   const [productBuy] = useMutation(PRODUCT_BUY);
 
   const onClickProductBuy = async () => {
-    await productBuy({
-      variables: {
-        useritemId: router.query.productId,
-      },
-      update(cache, { data }) {
-        cache.modify({
-          fields: () => {},
-        });
-      },
-    });
-    successModal("상품구매를 완료 하였습니다.");
+    try {
+      await productBuy({
+        variables: {
+          useritemId: router.query.productId,
+        },
+        update(cache, { data }) {
+          cache.modify({
+            fields: () => {},
+          });
+        },
+      });
+      successModal("상품구매를 완료 하였습니다.");
+      // router.push(`products/detail/`)
+    } catch (error) {
+      if (error instanceof Error) {
+        errorModal(error.message);
+      }
+    }
   };
 
   const onClickdeleteProduct = async () => {
@@ -94,6 +104,7 @@ const ProductDetail = () => {
   };
 
   const [createQuestion] = useMutation(CREATE_QUESTION);
+  const [productPick] = useMutation(PRODUCT_PICK);
 
   // 댓글 달기
   const onClickQuestionSubmit = async () => {
@@ -139,6 +150,26 @@ const ProductDetail = () => {
     }
   };
 
+  const onClickPick = async () => {
+    try {
+      await productPick({
+        variables: {
+          useditemId: router.query.productId,
+        },
+        update(cache, { data }) {
+          cache.modify({
+            fields: () => {},
+          });
+        },
+      });
+      // successModal("너로 정했따!");
+    } catch (error) {
+      if (error instanceof Error) {
+        errorModal(error.message);
+      }
+    }
+  };
+
   return (
     <>
       <ProductDetailUi
@@ -152,6 +183,7 @@ const ProductDetail = () => {
         onClickGoUpdate={onClickGoUpdate}
         onClickdeleteProduct={onClickdeleteProduct}
         onClickProductBuy={onClickProductBuy}
+        onClickPick={onClickPick}
       />
     </>
   );

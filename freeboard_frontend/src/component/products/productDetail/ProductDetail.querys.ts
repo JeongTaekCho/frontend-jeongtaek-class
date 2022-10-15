@@ -103,3 +103,9 @@ export const PRODUCT_BUY = gql`
     }
   }
 `;
+
+export const PRODUCT_PICK = gql`
+  mutation toggleUseditemPick($useditemId: ID!) {
+    toggleUseditemPick(useditemId: $useditemId)
+  }
+`;
