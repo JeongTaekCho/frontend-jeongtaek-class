@@ -8,7 +8,7 @@ const MyPageUi = ({
 }) => {
   return (
     <S.MyPageWrapper>
-      <S.MyPageContainer>
+      <S.MyInfoBox>
         <S.MyInfoContainer>
           <S.MyInfoLeft>
             <S.MyProfile>
@@ -38,9 +38,17 @@ const MyPageUi = ({
                 Point
               </S.MyInfoContentCon>
             </S.MyInfoContentBox>
+            <S.MyInfoContentBox>
+              <S.ContentBoxTitle>회원등급</S.ContentBoxTitle>
+              <S.TodayWeather>VIP</S.TodayWeather>
+            </S.MyInfoContentBox>
+            <S.MyInfoContentBox>
+              <S.ContentBoxTitle>오늘의 날씨</S.ContentBoxTitle>
+              <S.TodayWeather>매우맑음</S.TodayWeather>
+            </S.MyInfoContentBox>
           </S.MyInfoRight>
         </S.MyInfoContainer>
-      </S.MyPageContainer>
+      </S.MyInfoBox>
     </S.MyPageWrapper>
   );
 };

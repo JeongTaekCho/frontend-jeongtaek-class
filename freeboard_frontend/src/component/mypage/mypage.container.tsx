@@ -13,8 +13,6 @@ const MyPage = () => {
 
   const { register, handleSubmit } = useForm();
 
-  console.log(userDatas);
-
   const onClickPointCharge = (data) => {
     const IMP = window.IMP; // 생략 가능
     IMP.init("imp49910675"); // Example: imp00000000
@@ -36,16 +34,16 @@ const MyPage = () => {
 
         if (rsp.success) {
           // 결제 성공 시 로직,
-
+          console.log(rsp);
           await pointCharge({
             variables: {
               impUid: rsp.imp_uid,
             },
-            // update(cache, { data }) {
-            //   cache.modify({
-            //     fields: (prev) => {},
-            //   });
-            // },
+            update(cache, { data }) {
+              cache.modify({
+                fields: () => {},
+              });
+            },
           });
         } else {
           // 결제 실패 시 로직,

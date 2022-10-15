@@ -111,7 +111,8 @@ const ProductWriteUi = ({
                 placeholder="내용을 작성해주세요."
                 onChange={onChangeQuill}
                 style={{ height: "400px", marginBottom: "30px" }}
-                value={productData && productData?.fetchUseditem?.contents}
+                // value={productData && }
+                defaultValue={productData?.fetchUseditem?.contents}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.TextareaBox>

@@ -50,10 +50,45 @@ const ProductWrite = ({ isEdit }) => {
     data.useditemAddress.lat = Number(data.useditemAddress.lat);
     data.useditemAddress.lng = Number(data.useditemAddress.lng);
     data.images = fileUrl;
+
     try {
+      console.log(data);
+      // const myVariables = {
+      //   useditemId: String(router.query.productId),
+      //   updateUseditemInput: data,
+      // };
+      // if (
+      //   data.useditemAddress.lat ||
+      //   data.useditemAddress.lng ||
+      //   data.useditemAddress.address ||
+      //   data.useditemAddress.addressDetail
+      // ) {
+      //   myVariables.updateUseditemInput.useditemAddress = {};
+
+      //   if (data.useditemAddress.lat)
+      //     myVariables.updateUseditemInput.useditemAddress.lat =
+      //       data.useditemAddress.lat;
+      //   if (data.useditemAddress.lng)
+      //     myVariables.updateUseditemInput.useditemAddress.lng =
+      //       data.useditemAddress.lng;
+      //   if (data.useditemAddress.address)
+      //     myVariables.updateUseditemInput.useditemAddress.address =
+      //       data.useditemAddress.address;
+      //   if (data.useditemAddress.addressDetail)
+      //     myVariables.updateUseditemInput.useditemAddress.addressDetail =
+      //       data.useditemAddress.addressDetail;
+      // }
+      // if (data.name) myVariables.updateUseditemInput.name = data.name;
+      // if (data.remarks) myVariables.updateUseditemInput.remarks = data.remarks;
+      // if (data.pirce) myVariables.updateUseditemInput.pirce = data.pirce;
+      // if (data.contents)
+      //   myVariables.updateUseditemInput.contents = data.contents;
+      // if (data.tags) myVariables.updateUseditemInput.tags = data.tags;
+      // if (fileUrl) myVariables.updateUseditemInput.images = [fileUrl];
+
       await updateProduct({
         variables: {
-          useditemId: router.query.productId,
+          useditemId: String(router.query.productId),
           updateUseditemInput: data,
         },
         refetchQueries: [FETCH_PRODUCT],

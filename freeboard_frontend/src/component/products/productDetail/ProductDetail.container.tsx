@@ -30,6 +30,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     void piRefetch();
+
     const saveProduct = localStorage.getItem("todayProduct");
     if (saveProduct === null) {
       if (productInfo) {

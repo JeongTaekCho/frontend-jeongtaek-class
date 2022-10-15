@@ -49,15 +49,13 @@ const Header = () => {
   const [googleUser] = useRecoilState(googleUserData);
   const [, setUserDatas] = useRecoilState(userInfo);
 
-  const { data: userData } =
+  const { data: userData, refetch: userDataRefetch } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
   useEffect(() => {
     setUserDatas(userData);
   }, [userData]);
 
   const { data: pickCount } = useQuery(PICK_COUNT);
-
-  console.log(pickCount);
 
   // const [logoutUser] = useMutation<Pick<IMutation, "logoutUser">>(LOGOUT_USER);
 
@@ -115,7 +113,7 @@ const Header = () => {
                 <Heart stroke="#333" fill="#fff" />
                 <S.PickNum>{pickCount?.fetchUseditemsCountIPicked}</S.PickNum>
               </S.HeartContainer>
-              <Basket />
+              {/* <Basket /> */}
             </S.IconBox>
             {accesstoken || googleUser ? (
               <S.LogoutMenu>
@@ -134,8 +132,8 @@ const Header = () => {
                 <S.LoginMenuLi>|</S.LoginMenuLi>
                 <S.LoginMenuLi onClick={goLogin}>로그인</S.LoginMenuLi>
                 <S.LoginMenuLi>|</S.LoginMenuLi>
-                <S.LoginMenuLi onClick={logout}>장바구니(비회원)</S.LoginMenuLi>
-                <S.LoginMenuLi>|</S.LoginMenuLi>
+                {/* <S.LoginMenuLi onClick={logout}>장바구니(비회원)</S.LoginMenuLi>
+                <S.LoginMenuLi>|</S.LoginMenuLi> */}
                 <S.LoginMenuLi onClick={goCenter}>고객센터</S.LoginMenuLi>
               </S.LoginMenu>
             )}

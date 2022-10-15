@@ -69,7 +69,7 @@ const MainHomeUi = ({
 
           <S.MainContentTitle>가장 많이팔린 상품</S.MainContentTitle>
           <S.MainItemContainer>
-            {productData?.map((item: any) => {
+            {/* {productData?.map((item: any) => {
               return (
                 <Link
                   href={`/products/coupangDetail/${item._id}`}
@@ -96,7 +96,7 @@ const MainHomeUi = ({
                   </S.MainItemBox>
                 </Link>
               );
-            })}
+            })} */}
           </S.MainItemContainer>
         </S.MainSection>
       </S.MainContainer>

@@ -4,19 +4,23 @@ export const MyPageWrapper = styled.div`
   width: 100%;
 `;
 
-export const MyPageContainer = styled.div`
+export const MyInfoContainer = styled.div`
   width: 1200px;
   margin: 0 auto;
+  display: flex;
+  padding: 50px 0;
+  gap: 5px;
 `;
 
-export const MyInfoContainer = styled.div`
+export const MyInfoBox = styled.div`
   width: 100%;
-  display: flex;
+  background-color: #f7f7f7;
 `;
 
 export const MyInfoLeft = styled.div`
   width: 35.42%;
   padding: 30px 30px 26px;
+  background-color: #fff;
 `;
 
 export const MyProfile = styled.div`
@@ -46,12 +50,14 @@ export const EventMent = styled.p`
 export const MyInfoRight = styled.div`
   width: 64.19%;
   display: flex;
+  gap: 5px;
   flex-wrap: wrap;
 `;
 
 export const MyInfoContentBox = styled.div`
-  width: 32.93%;
-  padding: 26px 0 30px 30px;
+  width: 32.5%;
+  background-color: #fff;
+  padding: 25px;
 `;
 
 export const MyInfoContentTitle = styled.div``;
@@ -81,7 +87,20 @@ export const ChargeBox = styled.form`
   gap: 10px;
 `;
 export const PointSelect = styled.select`
-  width: 120px;
+  width: 105px;
   height: 35px;
   border: 1px solid gray;
+`;
+
+export const ContentBoxTitle = styled.h2`
+  font-size: 18px;
+  font-weight: 500;
+  color: #111;
+  margin-bottom: 25px;
+`;
+
+export const TodayWeather = styled.p`
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
 `;
