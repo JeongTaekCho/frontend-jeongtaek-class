@@ -83,6 +83,10 @@ const Header = () => {
     void router.push("/mypage");
   };
 
+  const goPickProduct = () => {
+    void router.push("/mypage/#pickProduct");
+  };
+
   const logout = async () => {
     // setAccessToken("");
     // await logoutUser();

@@ -26,8 +26,6 @@ const ProductDetail = () => {
     },
   });
 
-  console.log(productInfo);
-
   useEffect(() => {
     void piRefetch();
 

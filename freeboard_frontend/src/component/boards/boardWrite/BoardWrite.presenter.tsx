@@ -2,7 +2,6 @@ import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import * as S from "./BoardWrite.styled";
 import { IBoardWriteUi } from "./BoardWrite.types";
-import "antd/dist/antd.css";
 
 const BoardWriteUi = ({
   onChangeinputState,

@@ -1,8 +1,9 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { commentAnswerId } from "../../../store";
 import { errorModal, successModal } from "../../common/modal/modal-function";
+import { FETCH_QUESTION_ANSWER } from "../comment-answer/comment-answer.queries";
 import ProductCommentUi from "./comment.presetner";
 import { DELETE_QUESTION, UPDATE_QUESTION } from "./comment.queries";
 
@@ -12,6 +13,12 @@ const ProductComment = ({ comment }) => {
   const [commentId, setCommentId] = useRecoilState(commentAnswerId);
   const [editComment, setEditComment] = useState("");
   const [isUpdateActive, setIsUpdateActive] = useState(false);
+
+  const { data: questionAnswerDatas } = useQuery(FETCH_QUESTION_ANSWER, {
+    variables: {
+      useditemQuestionId: comment._id,
+    },
+  });
 
   // 답글 부분 보여주는 이벤트
   const onClickViewAnswer = (commentId) => () => {
@@ -93,6 +100,7 @@ const ProductComment = ({ comment }) => {
     <ProductCommentUi
       comment={comment}
       isAnswerActive={isAnswerActive}
+      setIsAnswerActive={setIsAnswerActive}
       onClickViewAnswer={onClickViewAnswer}
       isPwModal={isPwModal}
       onClickPwModalOpen={onClickPwModalOpen}
@@ -103,6 +111,7 @@ const ProductComment = ({ comment }) => {
       isUpdateActive={isUpdateActive}
       onClickUpdateSvg={onClickUpdateSvg}
       editComment={editComment}
+      questionAnswerDatas={questionAnswerDatas}
     />
   );
 };

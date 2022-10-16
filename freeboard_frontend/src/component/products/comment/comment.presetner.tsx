@@ -5,10 +5,12 @@ import { userInfo } from "../../../store";
 import CommentAnswer from "../comment-answer/comment-answer.container";
 import * as S from "./comment.style";
 import * as A from "../../boards/boardDetail/BoardDetail.styled";
+import CommentWriteAnswer from "../comment-answer-write/commentAWrite.container";
 
 const ProductCommentUi = ({
   comment,
   isAnswerActive,
+  setIsAnswerActive,
   onClickViewAnswer,
   isPwModal,
   onClickDeleteQuestion,
@@ -19,6 +21,7 @@ const ProductCommentUi = ({
   isUpdateActive,
   onClickUpdateSvg,
   editComment,
+  questionAnswerDatas,
 }) => {
   const [userDatas] = useRecoilState(userInfo);
   return (
@@ -83,7 +86,6 @@ const ProductCommentUi = ({
               ) : null}
             </S.CommentBtnBox>
           </S.CommentAnswerContainer>
-          <CommentAnswer isAnswerActive={isAnswerActive} />
         </>
         <Modal
           title="댓글 삭제"
@@ -105,14 +107,23 @@ const ProductCommentUi = ({
               defaultValue={comment.contents}
             />
             <A.CommentSubmitBox>
-              <A.CommentLengthBox>{editComment.length}/100</A.CommentLengthBox>
+              <A.CommentLengthBox>
+                {editComment.length || comment.contents.length}/100
+              </A.CommentLengthBox>
               <A.CommentSubmit onClick={onClickEditCommentSubmit}>
-                등록하기
+                수정하기
               </A.CommentSubmit>
             </A.CommentSubmitBox>
           </A.CommentTextareaBox>
         </A.CommentContainer>
       )}
+      {isAnswerActive && (
+        <CommentWriteAnswer setIsAnswerActive={setIsAnswerActive} />
+      )}
+
+      {questionAnswerDatas?.fetchUseditemQuestionAnswers.map((answer) => (
+        <CommentAnswer key={answer._id} comment={comment} answer={answer} />
+      ))}
     </>
   );
 };

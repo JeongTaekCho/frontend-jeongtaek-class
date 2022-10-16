@@ -27,8 +27,6 @@ const ApolloSetting = (props: IApollo) => {
     });
   }, []);
 
-  console.log(accessToken);
-
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     if (graphQLErrors) {
       for (const err of graphQLErrors) {

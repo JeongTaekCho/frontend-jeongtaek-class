@@ -102,6 +102,7 @@ export const ProductImgBack = styled.label`
   width: 200px;
   height: 200px;
   background-color: gray;
+  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -164,3 +165,23 @@ export const GpsInput = styled.input`
 `;
 
 export const ProductAddressContainer = styled.div``;
+
+export const ProductAddressFindBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  h3 {
+    margin-bottom: 0;
+  }
+`;
+export const ProductAddressFindBtn = styled.button`
+  width: 120px;
+  height: 35px;
+  border: none;
+  background-color: #111;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+`;

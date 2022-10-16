@@ -35,7 +35,6 @@ const ProductDetailUi = ({
   const productLat = productInfo?.fetchUseditem.useditemAddress.lat;
   const productLng = productInfo?.fetchUseditem.useditemAddress.lng;
 
-  console.log(productInfo);
   useEffect(() => {
     const script = document.createElement("script");
     script.src =

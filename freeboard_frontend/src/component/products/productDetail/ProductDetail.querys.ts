@@ -64,20 +64,6 @@ export const CREATE_QUESTION = gql`
   }
 `;
 
-export const CREATE_QUESTION_ANSWER = gql`
-  mutation createUseditemQuestionAnswer(
-    $createUseditemQuestionAnswerInput: CreateUseditemQuestionAnswerInput!
-    $useditemQuestionId: ID!
-  ) {
-    createUseditemQuestionAnswer(
-      createUseditemQuestionAnswerInput: $createUseditemQuestionAnswerInput
-      useditemQuestionId: $useditemQuestionId
-    ) {
-      _id
-    }
-  }
-`;
-
 export const DELETE_ITEM = gql`
   mutation deleteUseditem($useditemId: ID!) {
     deleteUseditem(useditemId: $useditemId)

@@ -1,4 +1,6 @@
+import { Modal } from "antd";
 import { useEffect } from "react";
+import DaumPostcodeEmbed from "react-daum-postcode";
 import InputDefault from "../../common/inputs/inputDefault";
 import * as S from "./ProductWrite.styled";
 import { IProductWriteUi } from "./ProductWrite.types";
@@ -19,8 +21,11 @@ const ProductWriteUi = ({
   isEdit,
   onSubmitUpdate,
   setValue,
+  isModalActive,
+  onClickAddressOpen,
+  onClickAddressComprete,
+  addressInfo,
 }: IProductWriteUi) => {
-  console.log(productData);
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
@@ -111,7 +116,6 @@ const ProductWriteUi = ({
                 placeholder="내용을 작성해주세요."
                 onChange={onChangeQuill}
                 style={{ height: "400px", marginBottom: "30px" }}
-                // value={productData && }
                 defaultValue={productData?.fetchUseditem?.contents}
               />
               <S.ErrorMsg></S.ErrorMsg>
@@ -122,7 +126,7 @@ const ProductWriteUi = ({
                 type="text"
                 placeholder="판매가격을 작성해주세요."
                 register={register("price")}
-                defaultValue={productData && productData.fetchUseditem.price}
+                defaultValue={productData?.fetchUseditem.price}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>{" "}
@@ -132,7 +136,7 @@ const ProductWriteUi = ({
                 type="text"
                 placeholder="태그를 작성해주세요."
                 register={register("tags")}
-                defaultValue={productData && productData.fetchUseditem.tags}
+                defaultValue={productData?.fetchUseditem.tags}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>
@@ -176,14 +180,26 @@ const ProductWriteUi = ({
                   />
                 </S.GpsInfoBox>
                 <S.ProductAddressContainer>
-                  <S.Ptitle>주소</S.Ptitle>
+                  <S.ProductAddressFindBox>
+                    <S.Ptitle>주소</S.Ptitle>
+                    <S.ProductAddressFindBtn
+                      type="button"
+                      onClick={onClickAddressOpen}
+                    >
+                      주소찾기
+                    </S.ProductAddressFindBtn>
+                  </S.ProductAddressFindBox>
+
                   <InputDefault
                     type="text"
                     register={register("useditemAddress.address")}
                     style={{ marginBottom: "15px" }}
                     id="infoDiv"
                     defaultValue={
-                      productData &&
+                      productData?.fetchUseditem?.useditemAddress.address
+                    }
+                    value={
+                      addressInfo ||
                       productData?.fetchUseditem?.useditemAddress.address
                     }
                   />
@@ -191,9 +207,9 @@ const ProductWriteUi = ({
                     type="text"
                     register={register("useditemAddress.addressDetail")}
                     defaultValue={
-                      productData &&
                       productData?.fetchUseditem?.useditemAddress.addressDetail
                     }
+                    placeholder="상세주소를 입력해주세요."
                   />
                 </S.ProductAddressContainer>
               </S.AddressInfoBox>
@@ -202,13 +218,12 @@ const ProductWriteUi = ({
               {new Array(3).fill(1).map((_, index) => {
                 return fileUrl[index] || productData ? (
                   <div key={index}>
-                    {console.log(productData)}
                     <S.ProductImgBack
                       htmlFor={`file${index + 1}`}
                       style={{
-                        backgroundImage:
-                          `url(https://storage.googleapis.com/${fileUrl[index]})` ||
-                          `url(https://storage.googleapis.com/ddd${productData.fetchUseditem.images[index]})`,
+                        backgroundImage: fileUrl[index]
+                          ? `url(https://storage.googleapis.com/${fileUrl[index]})`
+                          : `url(https://storage.googleapis.com/${productData?.fetchUseditem?.images[index]})`,
                       }}
                     ></S.ProductImgBack>
                     <S.ProductFile
@@ -239,6 +254,15 @@ const ProductWriteUi = ({
           </S.ProductWriteForm>
         </S.Container>
       </S.ProductWrapper>
+      {isModalActive && (
+        <Modal
+          title="대한민국의 모든 주소를 찾아주는 신기한 도구!!"
+          open={isModalActive}
+          onCancel={onClickAddressOpen}
+        >
+          <DaumPostcodeEmbed onComplete={onClickAddressComprete} />
+        </Modal>
+      )}
     </>
   );
 };

@@ -3,7 +3,6 @@ import * as A from "../main/main.styles";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 const MyPageUi = ({
@@ -95,7 +94,7 @@ const MyPageUi = ({
         {/* </S.BuiedProductContainer> */}
       </S.BuiedProductBox>
       <S.BuiedProductBox>
-        <S.BuiedTitle>찜한 물품</S.BuiedTitle>
+        <S.BuiedTitle id="pickProduct">찜한 물품</S.BuiedTitle>
         {/* <S.BuiedProductContainer> */}
         <Slider {...settings}>
           {pickedProductData?.fetchUseditemsIPicked?.map((pickData) => (
