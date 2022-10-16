@@ -63,6 +63,7 @@ export const MyInfoContentBox = styled.div`
 export const MyInfoContentTitle = styled.div``;
 
 export const PointCharge = styled.button`
+  width: 50%;
   font-size: 16px;
   font-weight: 500;
   color: #fff;
@@ -87,7 +88,7 @@ export const ChargeBox = styled.form`
   gap: 10px;
 `;
 export const PointSelect = styled.select`
-  width: 105px;
+  width: 100px;
   height: 35px;
   border: 1px solid gray;
 `;
@@ -103,4 +104,40 @@ export const TodayWeather = styled.p`
   font-size: 16px;
   font-weight: 400;
   color: #333;
+`;
+
+export const BuiedProductBox = styled.div`
+  width: 1200px;
+  margin: 0 auto;
+  padding: 80px 0;
+  .slick-slide {
+  }
+  .slick-next {
+    top: 50%;
+    right: -40px;
+    &::before {
+      color: #f95621;
+    }
+  }
+  .slick-prev {
+    top: 50%;
+    left: -40px;
+    &::before {
+      color: #f95621;
+    }
+  }
+`;
+
+export const BuiedProductContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px 2%;
+`;
+
+export const BuiedTitle = styled.h2`
+  font-size: 30px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 50px;
 `;

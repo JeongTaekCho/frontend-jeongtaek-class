@@ -1,11 +1,27 @@
 import * as S from "./mypage.styles";
+import * as A from "../main/main.styles";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const MyPageUi = ({
   register,
   handleSubmit,
   onClickPointCharge,
   userDatas,
+  boughtProductData,
+  pickedProductData,
 }) => {
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+  };
+  const router = useRouter();
   return (
     <S.MyPageWrapper>
       <S.MyInfoBox>
@@ -49,6 +65,70 @@ const MyPageUi = ({
           </S.MyInfoRight>
         </S.MyInfoContainer>
       </S.MyInfoBox>
+      <S.BuiedProductBox>
+        <S.BuiedTitle>구매한 물품</S.BuiedTitle>
+        {/* <S.BuiedProductContainer> */}
+        <Slider {...settings}>
+          {boughtProductData?.fetchUseditemsIBought?.map((boughtData) => (
+            <A.MainItemBox key={boughtData._id} className="productC">
+              <A.MainItemBg
+                style={{
+                  backgroundImage: `url(https://storage.googleapis.com/${boughtData.images[0]})`,
+                }}
+              ></A.MainItemBg>
+              <A.ItemInfoBox>
+                <A.ItemName>{boughtData.name}</A.ItemName>
+                <A.ItemPrice>
+                  <span>
+                    {String(boughtData.price).replace(
+                      /\B(?=(\d{3})+(?!\d))/g,
+                      ","
+                    )}
+                    원 ~
+                  </span>
+                </A.ItemPrice>
+                <A.ItemEventBox></A.ItemEventBox>
+              </A.ItemInfoBox>
+            </A.MainItemBox>
+          ))}
+        </Slider>
+        {/* </S.BuiedProductContainer> */}
+      </S.BuiedProductBox>
+      <S.BuiedProductBox>
+        <S.BuiedTitle>찜한 물품</S.BuiedTitle>
+        {/* <S.BuiedProductContainer> */}
+        <Slider {...settings}>
+          {pickedProductData?.fetchUseditemsIPicked?.map((pickData) => (
+            <A.MainItemBox
+              className="productC"
+              key={pickData._id}
+              onClick={() => {
+                void router.push(`/products/detail/${pickData._id}`);
+              }}
+            >
+              <A.MainItemBg
+                style={{
+                  backgroundImage: `url(https://storage.googleapis.com/${pickData.images[0]})`,
+                }}
+              ></A.MainItemBg>
+              <A.ItemInfoBox>
+                <A.ItemName>{pickData.name}</A.ItemName>
+                <A.ItemPrice>
+                  <span>
+                    {String(pickData.price).replace(
+                      /\B(?=(\d{3})+(?!\d))/g,
+                      ","
+                    )}
+                    원 ~
+                  </span>
+                </A.ItemPrice>
+                <A.ItemEventBox></A.ItemEventBox>
+              </A.ItemInfoBox>
+            </A.MainItemBox>
+          ))}
+        </Slider>
+        {/* </S.BuiedProductContainer> */}
+      </S.BuiedProductBox>
     </S.MyPageWrapper>
   );
 };

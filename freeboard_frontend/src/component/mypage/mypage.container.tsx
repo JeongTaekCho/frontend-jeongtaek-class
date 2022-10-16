@@ -1,16 +1,35 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import Head from "next/head";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { userInfo } from "../../store";
 import MyPageUi from "./mypage.presenter";
-import { POINT_CHARGE } from "./mypage.queries";
+import { BOUGHT_PRODUCT, PICKED_PRODUCT, POINT_CHARGE } from "./mypage.queries";
 
 const MyPage = () => {
   const [userDatas] = useRecoilState(userInfo);
 
   const [pointCharge] = useMutation(POINT_CHARGE);
 
+  const { data: boughtProductData, refetch: bpRefetch } =
+    useQuery(BOUGHT_PRODUCT);
+  const { data: pickedProductData, refetch: pPRefetch } = useQuery(
+    PICKED_PRODUCT,
+    {
+      variables: {
+        page: 1,
+        search: "",
+      },
+    }
+  );
+
+  useEffect(() => {
+    void bpRefetch();
+    void pPRefetch();
+  }, [boughtProductData, pickedProductData]);
+
+  console.log(pickedProductData);
   const { register, handleSubmit } = useForm();
 
   const onClickPointCharge = (data) => {
@@ -72,6 +91,8 @@ const MyPage = () => {
         handleSubmit={handleSubmit}
         onClickPointCharge={onClickPointCharge}
         userDatas={userDatas}
+        boughtProductData={boughtProductData}
+        pickedProductData={pickedProductData}
       />
     </>
   );
