@@ -5,5 +5,5 @@ import { themeStyle } from "../../styles/theme";
 export default function Layout({ children }) {
   const [theme, setTheme] = useRecoilState(themeState);
 
-  return <ThemeProvide theme={themeStyle(theme)}>{children}</ThemeProvide>;
+  return <ThemeProvider theme={themeStyle(theme)}>{children}</ThemeProvider>;
 }

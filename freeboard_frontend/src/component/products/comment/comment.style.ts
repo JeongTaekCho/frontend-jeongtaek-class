@@ -16,6 +16,8 @@ export const MyImgBox = styled.div`
   height: 40px;
   background-color: #ddd;
   border-radius: 50%;
+  background-position: center;
+  background-size: cover;
 `;
 export const CommentContentsBox = styled.div``;
 export const CommentWriter = styled.p`

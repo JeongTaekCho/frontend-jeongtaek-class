@@ -244,7 +244,7 @@ const ProductDetailUi = ({
                 <S.ProductBuyBtn onClick={onClickProductBuy}>
                   구매하기
                 </S.ProductBuyBtn>
-                <S.ProductBasketBtn>장바구니 담기</S.ProductBasketBtn>
+                {/* <S.ProductBasketBtn>장바구니 담기</S.ProductBasketBtn> */}
               </S.ProductBasketBtnContainer>
             </S.ProductRightBox>
           </S.ProductInfoBox>

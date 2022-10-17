@@ -4,6 +4,27 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { userInfo } from "../../store";
+import { gql, useQuery } from "@apollo/client";
+
+const FETCH_USER_LOGGED_IN = gql`
+  query {
+    fetchUserLoggedIn {
+      _id
+      email
+      name
+      picture
+      userPoint {
+        _id
+        amount
+      }
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;
 
 const MyPageUi = ({
   register,
@@ -12,6 +33,11 @@ const MyPageUi = ({
   userDatas,
   boughtProductData,
   pickedProductData,
+  onChangeProfile,
+  profileImg,
+  onClickProfileUpdate,
+  isActive,
+  onClickModalToggle,
 }) => {
   const settings = {
     dots: false,
@@ -21,14 +47,27 @@ const MyPageUi = ({
     slidesToScroll: 1,
   };
   const router = useRouter();
+
+  const { data: userData } = useQuery(FETCH_USER_LOGGED_IN);
+
+  console.log(userData);
+
+  console.log(userDatas);
   return (
     <S.MyPageWrapper>
       <S.MyInfoBox>
         <S.MyInfoContainer>
           <S.MyInfoLeft>
             <S.MyProfile>
-              <S.MyImg></S.MyImg>
+              <S.MyImg
+                style={{
+                  backgroundImage: `url(${userData?.fetchUserLoggedIn.picture})`,
+                }}
+              ></S.MyImg>
               <S.MyName>조정택님</S.MyName>
+              <S.ProfileModalBtn onClick={onClickModalToggle}>
+                <span>사진등록</span>
+              </S.ProfileModalBtn>
             </S.MyProfile>
             <S.EventMent>최초 1회 무료배송</S.EventMent>
           </S.MyInfoLeft>
@@ -128,6 +167,29 @@ const MyPageUi = ({
         </Slider>
         {/* </S.BuiedProductContainer> */}
       </S.BuiedProductBox>
+      {isActive && (
+        <S.ProfileModal>
+          <S.ProfilePhoto
+            style={{
+              backgroundImage: profileImg
+                ? `url(https://storage.googleapis.com/${profileImg})`
+                : `url(${userData?.fetchUserLoggedIn.picture})`,
+            }}
+          ></S.ProfilePhoto>
+          <S.uploadBtn htmlFor="fileUpload">
+            <span>업로드</span>
+          </S.uploadBtn>
+          <S.fileInput type="file" id="fileUpload" onChange={onChangeProfile} />
+          <S.ProfileModalBtnBox>
+            <S.ProfileModalBtns onClick={onClickProfileUpdate}>
+              확인
+            </S.ProfileModalBtns>
+            <S.ProfileModalBtns onClick={onClickModalToggle}>
+              취소
+            </S.ProfileModalBtns>
+          </S.ProfileModalBtnBox>
+        </S.ProfileModal>
+      )}
     </S.MyPageWrapper>
   );
 };

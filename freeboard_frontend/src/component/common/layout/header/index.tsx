@@ -113,7 +113,7 @@ const Header = () => {
             </S.SearchBox>
             <S.IconBox>
               <Gps />
-              <S.HeartContainer>
+              <S.HeartContainer onClick={goPickProduct}>
                 <Heart stroke="#333" fill="#fff" />
                 <S.PickNum>{pickCount?.fetchUseditemsCountIPicked}</S.PickNum>
               </S.HeartContainer>

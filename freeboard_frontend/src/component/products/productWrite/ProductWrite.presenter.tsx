@@ -6,7 +6,6 @@ import InputDefault from "../../common/inputs/inputDefault";
 import * as S from "./ProductWrite.styled";
 import { IProductWriteUi } from "./ProductWrite.types";
 import "react-quill/dist/quill.snow.css";
-// import ReactQuill from "react-quill";
 
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
@@ -32,15 +31,7 @@ const ProductWriteUi = ({
   onClickAddressOpen,
   onClickAddressComprete,
   addressInfo,
-  loading,
-  test,
-  onClickdd,
 }: IProductWriteUi) => {
-  const [mapLng, setMapLng] = useState("");
-  const [mapLat, setMapLat] = useState("");
-
-  // const ReactQuill = dynamic(import("react-quill"));
-
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
@@ -73,9 +64,6 @@ const ProductWriteUi = ({
         geocoder.addressSearch(
           addressInfo || productData?.fetchUseditem?.useditemAddress.address,
           function (result, status) {
-            console.log(result);
-            setMapLat(result[0].y);
-            setMapLng(result[0].x);
             setValue("useditemAddress.lat", result[0].y);
             setValue("useditemAddress.lng", result[0].x);
             // 정상적으로 검색이 완료됐으면
@@ -122,10 +110,10 @@ const ProductWriteUi = ({
           >
             <S.DefaultInputBox>
               <p>제목</p>
-              <InputDefault
+              <S.DefaultInput
                 type="text"
                 placeholder="제목을 작성해주세요."
-                // {...register("name")}
+                {...register("name")}
                 defaultValue={
                   productData?.fetchUseditem.name
                     ? String(productData?.fetchUseditem.name)
@@ -152,9 +140,6 @@ const ProductWriteUi = ({
                 style={{ height: "400px", marginBottom: "30px" }}
                 defaultValue={productData?.fetchUseditem?.contents}
               />
-              <button type="button" onClick={onClickdd}>
-                버튼
-              </button>
               <S.ErrorMsg></S.ErrorMsg>
             </S.TextareaBox>
             <S.DefaultInputBox>
@@ -183,7 +168,7 @@ const ProductWriteUi = ({
                 {process.browser && <S.MapContainer id="map"></S.MapContainer>}
               </S.MapApiBox>
               <S.AddressInfoBox>
-                <S.Ptitle>GPS</S.Ptitle>
+                {/* <S.Ptitle>GPS</S.Ptitle>
                 <S.GpsInfoBox>
                   <S.GpsInput
                     type="text"
@@ -207,7 +192,7 @@ const ProductWriteUi = ({
                     placeholder="경도(LNG)"
                     value={mapLng}
                   />
-                </S.GpsInfoBox>
+                </S.GpsInfoBox> */}
                 <S.ProductAddressContainer>
                   <S.ProductAddressFindBox>
                     <S.Ptitle>주소</S.Ptitle>

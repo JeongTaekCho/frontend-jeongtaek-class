@@ -11,6 +11,7 @@ import {
   PRODUCT_BUY,
   PRODUCT_PICK,
 } from "./ProductDetail.querys";
+import { PICKED_PRODUCT } from "../../mypage/mypage.queries";
 import "antd/dist/antd.css";
 
 const ProductDetail = () => {
@@ -25,6 +26,17 @@ const ProductDetail = () => {
       useditemId: router.query.productId,
     },
   });
+  console.log(productInfo?.fetchUseditem.name);
+  const { data: pickedProcut } = useQuery(PICKED_PRODUCT, {
+    variables: {
+      search: productInfo?.fetchUseditem.name,
+      // page: 2,
+    },
+  });
+
+  console.log(pickedProcut);
+
+  const myPickProduct = pickedProcut;
 
   useEffect(() => {
     void piRefetch();

@@ -29,7 +29,9 @@ const ProductCommentUi = ({
       <S.CommentAnswerBox>
         <>
           <S.CommentAnswerContainer>
-            <S.MyImgBox></S.MyImgBox>
+            <S.MyImgBox
+              style={{ backgroundImage: `url(${comment.user.picture})` }}
+            ></S.MyImgBox>
             <S.CommentContentsBox>
               <S.CommentWriter>{comment.user.name}</S.CommentWriter>
               <S.CommentCon>{comment.contents}</S.CommentCon>

@@ -33,7 +33,9 @@ const CommentAnswerUi = ({
             />
           </svg>
           <S.CommentAnswerTextBox>
-            <S.MyImgBox></S.MyImgBox>
+            <S.MyImgBox
+              style={{ backgroundImage: `url(${answer.user.picture})` }}
+            ></S.MyImgBox>
             <S.CommentContentsBox>
               <S.CommentWriter>{answer.user.name}</S.CommentWriter>
               <S.CommentCon>{answer.contents}</S.CommentCon>

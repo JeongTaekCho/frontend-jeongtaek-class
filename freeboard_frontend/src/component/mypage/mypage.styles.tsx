@@ -35,6 +35,8 @@ export const MyImg = styled.div`
   height: 48px;
   border: 1px solid gray;
   border-radius: 50%;
+  background-position: center;
+  background-size: cover;
 `;
 
 export const MyName = styled.p`
@@ -140,4 +142,73 @@ export const BuiedTitle = styled.h2`
   font-weight: 600;
   color: #333;
   margin-bottom: 50px;
+`;
+
+export const ProfileModalBtn = styled.div`
+  width: 120px;
+  height: 35px;
+  background-color: #111;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const ProfileModal = styled.div`
+  width: 450px;
+  height: 400px;
+  background-color: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  border: 1px solid #f95621;
+`;
+
+export const ProfilePhoto = styled.div`
+  width: 150px;
+  height: 200px;
+  margin: 0 auto;
+  border: 1px solid #b1b1b1;
+  background-position: center;
+  background-size: cover;
+`;
+
+export const fileInput = styled.input`
+  display: none;
+`;
+
+export const uploadBtn = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 35px;
+  background-color: #111;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 30px auto 0;
+`;
+
+export const ProfileModalBtnBox = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+`;
+
+export const ProfileModalBtns = styled.button`
+  width: 150px;
+  height: 40px;
+  border: 1px solid #f95621;
+  font-size: 18px;
+  font-weight: 500;
+  color: #f95621;
+  margin-top: 20px;
+  background: none;
+  cursor: pointer;
 `;

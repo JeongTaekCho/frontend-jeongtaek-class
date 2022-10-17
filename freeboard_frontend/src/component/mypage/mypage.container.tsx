@@ -1,16 +1,31 @@
 import { useMutation, useQuery } from "@apollo/client";
 import Head from "next/head";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { userInfo } from "../../store";
+import { UPLOAD_FILE } from "../boards/boardWrite/BoardWrite.querys";
+import { errorModal, successModal } from "../common/modal/modal-function";
 import MyPageUi from "./mypage.presenter";
-import { BOUGHT_PRODUCT, PICKED_PRODUCT, POINT_CHARGE } from "./mypage.queries";
+import {
+  BOUGHT_PRODUCT,
+  PICKED_PRODUCT,
+  POINT_CHARGE,
+  UPDATE_PROFILE,
+} from "./mypage.queries";
 
 const MyPage = () => {
   const [userDatas] = useRecoilState(userInfo);
+  const [profileImg, setProfileImg] = useState("");
+  const [isActive, setIsActive] = useState(false);
 
   const [pointCharge] = useMutation(POINT_CHARGE);
+  const [uploadFile] = useMutation(UPLOAD_FILE);
+  const [updateProfile] = useMutation(UPDATE_PROFILE);
+
+  const onClickModalToggle = () => {
+    setIsActive((prev) => !prev);
+  };
 
   const { data: boughtProductData, refetch: bpRefetch } =
     useQuery(BOUGHT_PRODUCT);
@@ -72,6 +87,34 @@ const MyPage = () => {
     );
   };
 
+  const onChangeProfile = async (event) => {
+    const file = event.target.files?.[0];
+    const result = await uploadFile({
+      variables: {
+        file,
+      },
+    });
+    setProfileImg(result?.data.uploadFile.url);
+  };
+
+  const onClickProfileUpdate = async () => {
+    try {
+      await updateProfile({
+        variables: {
+          updateUserInput: {
+            picture: `https://storage.googleapis.com/${profileImg}`,
+          },
+        },
+      });
+      successModal("프로필 이미지를 등록하였습니다.");
+      setIsActive((prev) => !prev);
+    } catch (error) {
+      if (error instanceof Error) {
+        errorModal(error.message);
+      }
+    }
+  };
+
   return (
     <>
       <Head>
@@ -93,6 +136,11 @@ const MyPage = () => {
         userDatas={userDatas}
         boughtProductData={boughtProductData}
         pickedProductData={pickedProductData}
+        onChangeProfile={onChangeProfile}
+        profileImg={profileImg}
+        onClickProfileUpdate={onClickProfileUpdate}
+        isActive={isActive}
+        onClickModalToggle={onClickModalToggle}
       />
     </>
   );
