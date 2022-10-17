@@ -75,7 +75,6 @@ export const EventMsg = styled.p`
 
 export const ProductInfoContainer = styled.div`
   width: 100%;
-  margin-bottom: 30px;
 `;
 
 export const ProductInfoUl = styled.div`
@@ -194,7 +193,7 @@ export const ProductAddressBox = styled.div`
 
 export const ProductMapContainer = styled.div`
   width: 100%;
-  height: 492px;
+  height: 350px;
 `;
 
 export const EditBtn = styled.button`

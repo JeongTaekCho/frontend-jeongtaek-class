@@ -36,9 +36,10 @@ const ProductDetailUi = ({
   const productLng = productInfo?.fetchUseditem.useditemAddress.lng;
 
   useEffect(() => {
+    console.log("dd");
     const script = document.createElement("script");
     script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=67ff797434525aa2bbca4bf944af63c8";
+      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&libraries=services&appkey=67ff797434525aa2bbca4bf944af63c8";
     document.head.appendChild(script);
 
     script.onload = () => {
@@ -65,7 +66,7 @@ const ProductDetailUi = ({
         marker.setMap(map);
       });
     };
-  }, [productInfo]);
+  });
 
   return (
     <>
@@ -221,9 +222,6 @@ const ProductDetailUi = ({
                 </S.ProductPriceContainer>
               </S.ProductPriceInfoBox>
               <S.ProductAddressBox>
-                {!process.browser && (
-                  <S.ProductMapContainer id="map"></S.ProductMapContainer>
-                )}
                 <S.ProductInfoContainer>
                   <S.ProductInfoUl>
                     <S.ProductInfoLeft>주소</S.ProductInfoLeft>
@@ -240,6 +238,7 @@ const ProductDetailUi = ({
                     </S.ProductInfoRight>
                   </S.ProductInfoUl>
                 </S.ProductInfoContainer>
+                <S.ProductMapContainer id="map">dd</S.ProductMapContainer>
               </S.ProductAddressBox>
               <S.ProductBasketBtnContainer>
                 <S.ProductBuyBtn onClick={onClickProductBuy}>

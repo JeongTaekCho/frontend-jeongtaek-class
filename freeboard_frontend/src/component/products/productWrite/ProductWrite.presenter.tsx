@@ -1,5 +1,5 @@
 import { Modal } from "antd";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import InputDefault from "../../common/inputs/inputDefault";
 import * as S from "./ProductWrite.styled";
@@ -25,7 +25,11 @@ const ProductWriteUi = ({
   onClickAddressOpen,
   onClickAddressComprete,
   addressInfo,
+  loading,
 }: IProductWriteUi) => {
+  const [mapLng, setMapLng] = useState("");
+  const [mapLat, setMapLat] = useState("");
+
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
@@ -53,31 +57,46 @@ const ProductWriteUi = ({
         });
 
         const geocoder = new window.kakao.maps.services.Geocoder();
-        // 지도에 마커를 표시합니다
-        marker.setMap(map);
 
-        // 지도에 클릭 이벤트를 등록합니다
-        // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-        window.kakao.maps.event.addListener(
-          map,
-          "click",
-          function (mouseEvent) {
-            // 클릭한 위도, 경도 정보를 가져옵니다
-            const latlng = mouseEvent.latLng;
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch(
+          addressInfo || productData?.fetchUseditem?.useditemAddress.address,
+          function (result, status) {
+            console.log(result);
+            setMapLat(result[0].y);
+            setMapLng(result[0].x);
+            setValue("useditemAddress.lat", result[0].y);
+            setValue("useditemAddress.lng", result[0].x);
+            // 정상적으로 검색이 완료됐으면
+            if (status === window.kakao.maps.services.Status.OK) {
+              const coords = new window.kakao.maps.LatLng(
+                result[0].y,
+                result[0].x
+              );
 
-            // 마커 위치를 클릭한 위치로 옮깁니다
-            marker.setPosition(latlng);
+              // 결과값으로 받은 위치를 마커로 표시합니다
+              const marker = new window.kakao.maps.Marker({
+                map: map,
+                position: coords,
+              });
 
-            setValue("useditemAddress.lat", latlng.getLat());
-            setValue("useditemAddress.lng", latlng.getLng());
+              // 인포윈도우로 장소에 대한 설명을 표시합니다
+              // const infowindow = new window.kakao.maps.InfoWindow({
+              //   content:
+              //     '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>',
+              // });
+              // infowindow.open(map, marker);
+
+              // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+              map.setCenter(coords);
+            }
           }
         );
       });
     };
-  }, []);
+  });
   return (
     <>
-      {}
       <S.ProductWrapper>
         <S.Container>
           <S.ProductWriteTitle>
@@ -92,21 +111,26 @@ const ProductWriteUi = ({
           >
             <S.DefaultInputBox>
               <p>제목</p>
-              <InputDefault
+              {console.log(productData)}
+              <S.DefaultInput
                 type="text"
                 placeholder="제목을 작성해주세요."
-                register={register("name")}
-                defaultValue={productData && productData.fetchUseditem.name}
+                {...register("name")}
+                defaultValue={
+                  productData?.fetchUseditem.name
+                    ? String(productData?.fetchUseditem.name)
+                    : ""
+                }
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>
             <S.DefaultInputBox>
               <p>상품 한줄요약</p>
-              <InputDefault
+              <S.DefaultInput
                 type="text"
                 placeholder="한줄요약을 작성해주세요."
-                register={register("remarks")}
-                defaultValue={productData && productData.fetchUseditem.remarks}
+                {...register("remarks")}
+                defaultValue={productData?.fetchUseditem.remarks}
               />
               <S.ErrorMsg></S.ErrorMsg>
             </S.DefaultInputBox>
@@ -143,7 +167,7 @@ const ProductWriteUi = ({
             <S.ProductAddressBox>
               <S.MapApiBox>
                 <S.Ptitle>거래위치</S.Ptitle>
-                <S.MapContainer id="map"></S.MapContainer>
+                {process.browser && <S.MapContainer id="map"></S.MapContainer>}
               </S.MapApiBox>
               <S.AddressInfoBox>
                 <S.Ptitle>GPS</S.Ptitle>
@@ -151,11 +175,7 @@ const ProductWriteUi = ({
                   <S.GpsInput
                     type="text"
                     placeholder="위도(LAT)"
-                    value={
-                      productData &&
-                      productData?.fetchUseditem?.useditemAddress.lat
-                    }
-                    {...register("useditemAddress.lat")}
+                    value={mapLat}
                   />
                   <svg
                     width="14"
@@ -172,11 +192,7 @@ const ProductWriteUi = ({
                   <S.GpsInput
                     type="text"
                     placeholder="경도(LNG)"
-                    value={
-                      productData &&
-                      productData?.fetchUseditem?.useditemAddress.lng
-                    }
-                    {...register("useditemAddress.lng")}
+                    value={mapLng}
                   />
                 </S.GpsInfoBox>
                 <S.ProductAddressContainer>
@@ -192,7 +208,6 @@ const ProductWriteUi = ({
 
                   <InputDefault
                     type="text"
-                    register={register("useditemAddress.address")}
                     style={{ marginBottom: "15px" }}
                     id="infoDiv"
                     defaultValue={

@@ -65,7 +65,7 @@ const ProductDetail = () => {
         },
       });
       successModal("상품구매를 완료 하였습니다.");
-      // router.push(`products/detail/`)
+      void router.push(`/mypage`);
     } catch (error) {
       if (error instanceof Error) {
         errorModal(error.message);

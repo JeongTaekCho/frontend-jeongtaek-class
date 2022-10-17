@@ -20,12 +20,12 @@ const ProductWrite = ({ isEdit }) => {
   const [createProduct] = useMutation(CREATE_PRODUCT);
   const [updateProduct] = useMutation(UPDATE_PRODUCT);
   const [uploadFile] = useMutation(UPLOAD_FILE);
-  const { data: productData } = useQuery(FETCH_PRODUCT, {
+  const { loading, data: productData } = useQuery(FETCH_PRODUCT, {
     variables: {
       useditemId: router.query.productId,
     },
   });
-
+  console.log(loading);
   useEffect(() => {
     if (productData) {
       setFileUrl(productData?.fetchUseditem?.images);
@@ -34,9 +34,6 @@ const ProductWrite = ({ isEdit }) => {
 
   const { register, handleSubmit, setValue } = useForm({
     mode: "onChange",
-    defaultValues: {
-      contents: productData ? productData?.fetchUseditem?.contents : "",
-    },
   });
 
   const onClickAddressComprete = (value) => {
@@ -51,10 +48,11 @@ const ProductWrite = ({ isEdit }) => {
   };
 
   const onSubmitProduct = async (data: UseFormRegisterReturn) => {
+    console.log(data);
     data.price = Number(data.price);
     data.useditemAddress.lat = Number(data.useditemAddress.lat);
     data.useditemAddress.lng = Number(data.useditemAddress.lng);
-
+    data.images = fileUrl;
     const result = await createProduct({
       variables: {
         createUseditemInput: data,
@@ -69,7 +67,6 @@ const ProductWrite = ({ isEdit }) => {
     data.useditemAddress.lat = Number(data.useditemAddress.lat);
     data.useditemAddress.lng = Number(data.useditemAddress.lng);
     data.images = fileUrl;
-    data.fileurl;
     try {
       const myVariables = {
         useditemId: String(router.query.productId),
@@ -155,6 +152,7 @@ const ProductWrite = ({ isEdit }) => {
         onClickAddressOpen={onClickAddressOpen}
         onClickAddressComprete={onClickAddressComprete}
         addressInfo={addressInfo}
+        loading={loading}
       />
     </>
   );
