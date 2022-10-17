@@ -15,6 +15,8 @@ const ProductWrite = ({ isEdit }) => {
   const [isModalActive, setIsModalActive] = useState(false);
   const [addressInfo, setAddressInfo] = useState("");
 
+  const [test, setTest] = useState(false);
+
   const router = useRouter();
 
   const [createProduct] = useMutation(CREATE_PRODUCT);
@@ -45,6 +47,10 @@ const ProductWrite = ({ isEdit }) => {
 
   const onClickAddressOpen = () => {
     setIsModalActive((prev) => !prev);
+  };
+
+  const onClickdd = () => {
+    setTest(true);
   };
 
   const onSubmitProduct = async (data: UseFormRegisterReturn) => {
@@ -118,9 +124,8 @@ const ProductWrite = ({ isEdit }) => {
   const onChangeQuill = (value: string) => {
     console.log(value);
     setValue("contents", value);
+    // setTest(value);
   };
-
-  const ReactQuill = dynamic(import("react-quill"));
 
   const onChangeFile =
     (index) => async (event: ChangeEvent<HTMLInputElement>) => {
@@ -143,7 +148,6 @@ const ProductWrite = ({ isEdit }) => {
         handleSubmit={handleSubmit}
         onChangeFile={onChangeFile}
         fileUrl={fileUrl}
-        ReactQuill={ReactQuill}
         onChangeQuill={onChangeQuill}
         productData={productData}
         isEdit={isEdit}
@@ -154,6 +158,8 @@ const ProductWrite = ({ isEdit }) => {
         onClickAddressComprete={onClickAddressComprete}
         addressInfo={addressInfo}
         loading={loading}
+        test={test}
+        onClickdd={onClickdd}
       />
     </>
   );

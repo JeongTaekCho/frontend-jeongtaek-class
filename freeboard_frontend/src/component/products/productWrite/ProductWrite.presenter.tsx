@@ -1,9 +1,17 @@
 import { Modal } from "antd";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import InputDefault from "../../common/inputs/inputDefault";
 import * as S from "./ProductWrite.styled";
 import { IProductWriteUi } from "./ProductWrite.types";
+import "react-quill/dist/quill.snow.css";
+// import ReactQuill from "react-quill";
+
+const ReactQuill = dynamic(async () => await import("react-quill"), {
+  ssr: false,
+});
+// 결론 : 정택님이 다이나믹임포트를 잘못했던거였다 리액트퀼이 불러와지기를 기다렸다가 렌더해주지 않았다 미워
 
 declare const window: typeof globalThis & {
   kakao: any;
@@ -15,7 +23,6 @@ const ProductWriteUi = ({
   handleSubmit,
   onChangeFile,
   fileUrl,
-  ReactQuill,
   onChangeQuill,
   productData,
   isEdit,
@@ -26,9 +33,13 @@ const ProductWriteUi = ({
   onClickAddressComprete,
   addressInfo,
   loading,
+  test,
+  onClickdd,
 }: IProductWriteUi) => {
   const [mapLng, setMapLng] = useState("");
   const [mapLat, setMapLat] = useState("");
+
+  // const ReactQuill = dynamic(import("react-quill"));
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -111,10 +122,10 @@ const ProductWriteUi = ({
           >
             <S.DefaultInputBox>
               <p>제목</p>
-              <S.DefaultInput
+              <InputDefault
                 type="text"
                 placeholder="제목을 작성해주세요."
-                {...register("name")}
+                // {...register("name")}
                 defaultValue={
                   productData?.fetchUseditem.name
                     ? String(productData?.fetchUseditem.name)
@@ -141,6 +152,9 @@ const ProductWriteUi = ({
                 style={{ height: "400px", marginBottom: "30px" }}
                 defaultValue={productData?.fetchUseditem?.contents}
               />
+              <button type="button" onClick={onClickdd}>
+                버튼
+              </button>
               <S.ErrorMsg></S.ErrorMsg>
             </S.TextareaBox>
             <S.DefaultInputBox>
