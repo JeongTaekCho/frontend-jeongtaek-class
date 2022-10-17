@@ -6,8 +6,6 @@ import { useForm, UseFormRegisterReturn } from "react-hook-form";
 import { ChangeEvent, useEffect, useState } from "react";
 import { UPLOAD_FILE } from "../../boards/boardWrite/BoardWrite.querys";
 import { errorModal, successModal } from "../../common/modal/modal-function";
-import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css";
 import { FETCH_PRODUCT } from "../productDetail/ProductDetail.querys";
 
 const ProductWrite = ({ isEdit }) => {
