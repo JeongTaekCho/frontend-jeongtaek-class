@@ -58,8 +58,8 @@ const ProductWrite = ({ isEdit }) => {
         createUseditemInput: data,
       },
     });
-    successModal("상품등록에 성공하였습니다.");
-    void router.push(`/products/detail/${result.data.createUseditem._id}`);
+    // successModal("상품등록에 성공하였습니다.");
+    // void router.push(`/products/detail/${result.data.createUseditem._id}`);
   };
 
   const onSubmitUpdate = async (data: UseFormRegisterReturn) => {
@@ -116,6 +116,7 @@ const ProductWrite = ({ isEdit }) => {
   };
 
   const onChangeQuill = (value: string) => {
+    console.log(value);
     setValue("contents", value);
   };
 
