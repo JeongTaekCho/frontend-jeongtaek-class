@@ -36,7 +36,6 @@ const ProductDetailUi = ({
   const productLng = productInfo?.fetchUseditem.useditemAddress.lng;
 
   useEffect(() => {
-    console.log("dd");
     const script = document.createElement("script");
     script.src =
       "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&libraries=services&appkey=67ff797434525aa2bbca4bf944af63c8";

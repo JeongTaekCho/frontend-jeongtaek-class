@@ -26,17 +26,14 @@ const ProductDetail = () => {
       useditemId: router.query.productId,
     },
   });
-  console.log(productInfo?.fetchUseditem.name);
   const { data: pickedProcut } = useQuery(PICKED_PRODUCT, {
     variables: {
-      search: productInfo?.fetchUseditem.name,
-      // page: 2,
+      search: "싸요",
+      page: 1,
     },
   });
 
   console.log(pickedProcut);
-
-  const myPickProduct = pickedProcut;
 
   useEffect(() => {
     void piRefetch();
