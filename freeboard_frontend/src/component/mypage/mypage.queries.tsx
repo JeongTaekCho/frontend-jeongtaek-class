@@ -64,31 +64,32 @@ export const PICKED_PRODUCT = gql`
   query fetchUseditemsIPicked($search: String, $page: Int) {
     fetchUseditemsIPicked(search: $search, page: $page) {
       _id
-      # name
-      # remarks
-      # contents
-      # price
-      # tags
-      # images
-      # pickedCount
-      # useditemAddress {
-      #   _id
-      #   zipcode
-      #   address
-      #   addressDetail
-      #   lat
-      #   lng
-      #   createdAt
-      # }
-      # seller {
-      #   _id
-      #   email
-      #   name
-      #   picture
-      #   createdAt
-      # }
-      # soldAt
-      # createdAt
+      name
+      remarks
+      contents
+      price
+      tags
+      images
+      pickedCount
+      useditemAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+        lat
+        lng
+        createdAt
+      }
+      seller {
+        _id
+        email
+        name
+        picture
+        createdAt
+      }
+      soldAt
+      createdAt
+      updatedAt
     }
   }
 `;

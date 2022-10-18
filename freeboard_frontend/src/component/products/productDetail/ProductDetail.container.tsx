@@ -28,8 +28,8 @@ const ProductDetail = () => {
   });
   const { data: pickedProcut } = useQuery(PICKED_PRODUCT, {
     variables: {
-      search: "싸요",
       page: 1,
+      search: "",
     },
   });
 
