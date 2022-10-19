@@ -31,6 +31,8 @@ const ProductWriteUi = ({
   onClickAddressOpen,
   onClickAddressComprete,
   addressInfo,
+  imgUrls,
+  imgData,
 }: IProductWriteUi) => {
   useEffect(() => {
     const script = document.createElement("script");
@@ -229,14 +231,16 @@ const ProductWriteUi = ({
             </S.ProductAddressBox>
             <S.PorductImgBox>
               {new Array(3).fill(1).map((_, index) => {
-                return fileUrl[index] || productData ? (
+                return imgUrls[index] ||
+                  productData?.fetchUseditem.images[index] ? (
                   <div key={index}>
+                    {console.log(productData)}
                     <S.ProductImgBack
                       htmlFor={`file${index + 1}`}
                       style={{
-                        backgroundImage: fileUrl[index]
-                          ? `url(https://storage.googleapis.com/${fileUrl[index]})`
-                          : `url(https://storage.googleapis.com/${productData?.fetchUseditem?.images[index]})`,
+                        backgroundImage: imgUrls[index]
+                          ? `url(${imgUrls[index]} )`
+                          : `url(https://storage.googleapis.com/${imgData[index]})`,
                       }}
                     ></S.ProductImgBack>
                     <S.ProductFile

@@ -38,6 +38,7 @@ const MyPageUi = ({
   onClickProfileUpdate,
   isActive,
   onClickModalToggle,
+  profileUrl,
 }) => {
   const settings = {
     dots: false,
@@ -50,9 +51,6 @@ const MyPageUi = ({
 
   const { data: userData } = useQuery(FETCH_USER_LOGGED_IN);
 
-  console.log(userData);
-
-  console.log(userDatas);
   return (
     <S.MyPageWrapper>
       <S.MyInfoBox>
@@ -171,8 +169,8 @@ const MyPageUi = ({
         <S.ProfileModal>
           <S.ProfilePhoto
             style={{
-              backgroundImage: profileImg
-                ? `url(https://storage.googleapis.com/${profileImg})`
+              backgroundImage: profileUrl
+                ? `url(${profileUrl})`
                 : `url(${userData?.fetchUserLoggedIn.picture})`,
             }}
           ></S.ProfilePhoto>

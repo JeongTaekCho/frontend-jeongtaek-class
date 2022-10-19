@@ -16,7 +16,9 @@ import {
 
 const MyPage = () => {
   const [userDatas] = useRecoilState(userInfo);
+  const [file, setFile] = useState("");
   const [profileImg, setProfileImg] = useState("");
+  const [profileUrl, setProfileUrl] = useState("");
   const [isActive, setIsActive] = useState(false);
 
   const [pointCharge] = useMutation(POINT_CHARGE);
@@ -44,7 +46,6 @@ const MyPage = () => {
     void pPRefetch();
   }, [boughtProductData, pickedProductData]);
 
-  console.log(pickedProductData);
   const { register, handleSubmit } = useForm();
 
   const onClickPointCharge = (data) => {
@@ -89,23 +90,31 @@ const MyPage = () => {
 
   const onChangeProfile = async (event) => {
     const file = event.target.files?.[0];
-    const result = await uploadFile({
-      variables: {
-        file,
-      },
-    });
-    setProfileImg(result?.data.uploadFile.url);
-  };
 
+    const fileReader = new FileReader();
+
+    fileReader.readAsDataURL(file);
+    fileReader.onload = (value) => {
+      if (typeof value?.target?.result === "string") {
+        setFile(file);
+        setProfileUrl(value?.target?.result);
+      }
+    };
+  };
   const onClickProfileUpdate = async () => {
+    const resultImg = await uploadFile({
+      variables: { file },
+    });
+    console.log(resultImg);
     try {
       await updateProfile({
         variables: {
           updateUserInput: {
-            picture: `https://storage.googleapis.com/${profileImg}`,
+            picture: `https://storage.googleapis.com/${resultImg?.data?.uploadFile?.url}`,
           },
         },
       });
+
       successModal("프로필 이미지를 등록하였습니다.");
       setIsActive((prev) => !prev);
     } catch (error) {
@@ -114,6 +123,8 @@ const MyPage = () => {
       }
     }
   };
+
+  console.log(profileImg);
 
   return (
     <>
@@ -141,6 +152,7 @@ const MyPage = () => {
         onClickProfileUpdate={onClickProfileUpdate}
         isActive={isActive}
         onClickModalToggle={onClickModalToggle}
+        profileUrl={profileUrl}
       />
     </>
   );

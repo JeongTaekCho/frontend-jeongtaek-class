@@ -9,7 +9,13 @@ import { errorModal, successModal } from "../../common/modal/modal-function";
 import { FETCH_PRODUCT } from "../productDetail/ProductDetail.querys";
 
 const ProductWrite = ({ isEdit }) => {
-  const [fileUrl, setFileUrl] = useState(["", "", ""]);
+  const [files, setFiles] = useState<File[] | undefined[]>([
+    undefined,
+    undefined,
+    undefined,
+  ]);
+  const [imgUrls, setImgUrls] = useState(["", "", ""]);
+  const [imgData, setImgData] = useState(["", "", ""]);
   const [isModalActive, setIsModalActive] = useState(false);
   const [addressInfo, setAddressInfo] = useState("");
 
@@ -25,10 +31,9 @@ const ProductWrite = ({ isEdit }) => {
       useditemId: router.query.productId,
     },
   });
-  console.log(loading);
   useEffect(() => {
     if (productData) {
-      setFileUrl(productData?.fetchUseditem?.images);
+      setImgData(productData?.fetchUseditem?.images);
     }
   }, [productData]);
 
@@ -52,11 +57,17 @@ const ProductWrite = ({ isEdit }) => {
   };
 
   const onSubmitProduct = async (data: UseFormRegisterReturn) => {
-    console.log(data);
+    const fileDatas = await Promise.all(
+      files.map((el) => (el ? uploadFile({ variables: { file: el } }) : ""))
+    );
+
+    const filesUrl = fileDatas.map((el) => (el ? el.data.uploadFile.url : ""));
+    console.log(fileDatas);
+
     data.price = Number(data.price);
     data.useditemAddress.lat = Number(data.useditemAddress.lat);
     data.useditemAddress.lng = Number(data.useditemAddress.lng);
-    data.images = fileUrl;
+    data.images = filesUrl;
     const result = await createProduct({
       variables: {
         createUseditemInput: data,
@@ -67,10 +78,18 @@ const ProductWrite = ({ isEdit }) => {
   };
 
   const onSubmitUpdate = async (data: UseFormRegisterReturn) => {
+    const fileDatas = await Promise.all(
+      files.map((el) => (el ? uploadFile({ variables: { file: el } }) : ""))
+    );
+    const filesUrl = [...productData?.fetchUseditem.images];
+
+    const updateDatas = fileDatas.map((el, index) => {
+      return el ? el?.data?.uploadFile.url : filesUrl[index];
+    });
+
     data.price = Number(data.price);
     data.useditemAddress.lat = Number(data.useditemAddress.lat);
     data.useditemAddress.lng = Number(data.useditemAddress.lng);
-    data.images = fileUrl;
     try {
       const myVariables = {
         useditemId: String(router.query.productId),
@@ -83,7 +102,6 @@ const ProductWrite = ({ isEdit }) => {
         data.useditemAddress.addressDetail
       ) {
         myVariables.updateUseditemInput.useditemAddress = {};
-
         if (data.useditemAddress.lat)
           myVariables.updateUseditemInput.useditemAddress.lat =
             data.useditemAddress.lat;
@@ -103,9 +121,8 @@ const ProductWrite = ({ isEdit }) => {
       if (data.contents)
         myVariables.updateUseditemInput.contents = data.contents;
       if (data.tags) myVariables.updateUseditemInput.tags = data.tags;
-      if (fileUrl[0] || fileUrl[1] || fileUrl[2])
-        myVariables.updateUseditemInput.images = fileUrl;
-
+      if (filesUrl[0] || filesUrl[1] || filesUrl[2])
+        myVariables.updateUseditemInput.images = updateDatas;
       await updateProduct({
         variables: myVariables,
         refetchQueries: [FETCH_PRODUCT],
@@ -126,16 +143,24 @@ const ProductWrite = ({ isEdit }) => {
   };
 
   const onChangeFile =
-    (index) => async (event: ChangeEvent<HTMLInputElement>) => {
+    (index: number) => async (event: ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0];
-      const result = await uploadFile({
-        variables: {
-          file,
-        },
-      });
-      const urlArray = [...fileUrl];
-      urlArray[Number(event.target.title)] = result.data.uploadFile.url;
-      setFileUrl(urlArray);
+      if (file === undefined) return;
+
+      const fileReader = new FileReader();
+
+      fileReader.readAsDataURL(file);
+      fileReader.onload = (value) => {
+        if (typeof value.target?.result === "string") {
+          const tempImgUrl = [...imgUrls];
+          tempImgUrl[index] = value.target?.result;
+          setImgUrls(tempImgUrl);
+
+          const tempFiles = [...files];
+          tempFiles[index] = file;
+          setFiles(tempFiles);
+        }
+      };
     };
 
   return (
@@ -145,7 +170,6 @@ const ProductWrite = ({ isEdit }) => {
         register={register}
         handleSubmit={handleSubmit}
         onChangeFile={onChangeFile}
-        fileUrl={fileUrl}
         onChangeQuill={onChangeQuill}
         productData={productData}
         isEdit={isEdit}
@@ -158,6 +182,8 @@ const ProductWrite = ({ isEdit }) => {
         loading={loading}
         test={test}
         onClickdd={onClickdd}
+        imgUrls={imgUrls}
+        imgData={imgData}
       />
     </>
   );
