@@ -10,7 +10,6 @@ import "antd/dist/antd.css";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
-      {" "}
       <ApolloSetting>
         <ThemeProvider theme={theme}>
           <Layout>
