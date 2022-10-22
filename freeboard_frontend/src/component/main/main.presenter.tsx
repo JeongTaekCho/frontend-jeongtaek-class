@@ -32,22 +32,22 @@ const MainHomeUi = ({
                 {todayProductList.reverse()?.map((todayItem) => {
                   return (
                     <Link
-                      href={`/products/detail/${todayItem.fetchUseditem._id}`}
+                      href={`/products/detail/${todayItem?.fetchUseditem?._id}`}
                       key={todayItem._id}
                     >
                       <S.MainItemBox>
                         <S.MainItemBg
                           style={{
-                            background: `url(https://storage.googleapis.com/${todayItem.fetchUseditem.images[0]}) no-repeat center center`,
+                            background: `url(https://storage.googleapis.com/${todayItem?.fetchUseditem?.images?.[0]}) no-repeat center center`,
                             backgroundSize: "cover",
                           }}
                         ></S.MainItemBg>
                         <S.ItemInfoBox>
                           <S.ItemName>
-                            {todayItem.fetchUseditem.name}
+                            {todayItem?.fetchUseditem?.name}
                           </S.ItemName>
                           <S.ItemPrice>
-                            {String(todayItem.fetchUseditem.price).replace(
+                            {String(todayItem?.fetchUseditem?.price).replace(
                               /\B(?=(\d{3})+(?!\d))/g,
                               ","
                             )}
