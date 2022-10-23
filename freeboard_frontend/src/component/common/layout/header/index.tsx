@@ -6,7 +6,7 @@ import Gps from "../../svg/Gps";
 import Heart from "../../svg/Heart";
 import Basket from "../../svg/Basket";
 import Hamberger from "../../svg/Hamberger";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { IQuery } from "../../../../commons/types/generated/types";
 import { successModal } from "../../modal/modal-function";
 import { accessTokenData, googleUserData, userInfo } from "../../../../store";
@@ -38,18 +38,18 @@ const PICK_COUNT = gql`
   }
 `;
 
-// const LOGOUT_USER = gql`
-//   mutation {
-//     logoutUser
-//   }
-// `;
+const LOGOUT_USER = gql`
+  mutation {
+    logoutUser
+  }
+`;
 
 const Header = () => {
   const [accesstoken] = useRecoilState(accessTokenData);
   const [googleUser] = useRecoilState(googleUserData);
   const [, setUserDatas] = useRecoilState(userInfo);
 
-  const { data: userData, refetch: userDataRefetch } =
+  const { data: userData } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
   useEffect(() => {
     setUserDatas(userData);
@@ -57,7 +57,7 @@ const Header = () => {
 
   const { data: pickCount } = useQuery(PICK_COUNT);
 
-  // const [logoutUser] = useMutation<Pick<IMutation, "logoutUser">>(LOGOUT_USER);
+  const [logoutUser] = useMutation(LOGOUT_USER);
 
   const router: NextRouter = useRouter();
   const goLogin = async () => {
@@ -88,11 +88,8 @@ const Header = () => {
   };
 
   const logout = async () => {
-    // setAccessToken("");
-    // await logoutUser();
-    localStorage.removeItem("accessToken");
+    await logoutUser();
     router.reload();
-    // await logoutUser();
     successModal("로그아웃 되었습니다.");
   };
 
