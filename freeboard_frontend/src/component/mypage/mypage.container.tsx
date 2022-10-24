@@ -59,7 +59,7 @@ const MyPage = () => {
         pay_method: "card",
         // merchant_uid: "ORD20180131-0000011",
         name: `${data.point} 포인트 충전`,
-        amount: 100,
+        amount: data.point,
         buyer_email: userDatas.fetchUserLoggedIn.email,
         buyer_name: userDatas.fetchUserLoggedIn.name,
         buyer_tel: "010-9774-3591",

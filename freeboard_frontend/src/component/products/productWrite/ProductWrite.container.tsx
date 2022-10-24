@@ -36,7 +36,7 @@ const ProductWrite = ({ isEdit }) => {
       setImgData(productData?.fetchUseditem?.images);
     }
   }, [productData]);
-
+  console.log(productData?.fetchUseditem?.images);
   const { register, handleSubmit, setValue } = useForm({
     mode: "onChange",
   });
@@ -68,6 +68,8 @@ const ProductWrite = ({ isEdit }) => {
     data.useditemAddress.lat = Number(data.useditemAddress.lat);
     data.useditemAddress.lng = Number(data.useditemAddress.lng);
     data.images = filesUrl;
+    data.tags = data.tags.split("#");
+    data.tags.shift();
     const result = await createProduct({
       variables: {
         createUseditemInput: data,
@@ -77,19 +79,21 @@ const ProductWrite = ({ isEdit }) => {
     void router.push(`/products/detail/${result.data.createUseditem._id}`);
   };
 
-  const onSubmitUpdate = async (data: UseFormRegisterReturn) => {
+  const onSubmitUpdate = async (data: any) => {
     const fileDatas = await Promise.all(
       files.map((el) => (el ? uploadFile({ variables: { file: el } }) : ""))
     );
     const filesUrl = [...productData?.fetchUseditem.images];
 
-    const updateDatas = fileDatas.map((el, index) => {
+    const updateDatas = fileDatas.map((el: any, index: number) => {
       return el ? el?.data?.uploadFile.url : filesUrl[index];
     });
 
     data.price = Number(data.price);
     data.useditemAddress.lat = Number(data.useditemAddress.lat);
     data.useditemAddress.lng = Number(data.useditemAddress.lng);
+    data.tags = data.tags.split("#");
+    data.tags.shift();
     try {
       const myVariables = {
         useditemId: String(router.query.productId),

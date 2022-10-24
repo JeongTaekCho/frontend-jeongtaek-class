@@ -6,6 +6,8 @@ import * as S from "./ProductDetail.styled";
 import * as A from "../../boards/boardDetail/BoardDetail.styled";
 import ProductCommentAnswer from "../comment/comment.container";
 import Heart from "../../common/svg/Heart";
+import dynamic from "next/dynamic";
+import DOMPurify from "dompurify";
 
 declare const window: typeof globalThis & {
   kakao: any;
@@ -32,9 +34,6 @@ const ProductDetailUi = ({
   const result = productData.filter((item) => item._id === router.query.id);
   const itemPrice = Number(result[0]?.salePrice);
 
-  const productLat = productInfo?.fetchUseditem.useditemAddress.lat;
-  const productLng = productInfo?.fetchUseditem.useditemAddress.lng;
-
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
@@ -42,27 +41,44 @@ const ProductDetailUi = ({
     document.head.appendChild(script);
 
     script.onload = () => {
-      window.kakao.maps.load(function () {
-        const mapContainer = document.getElementById("map"); // 지도를 표시할 div
-        const mapOption = {
-          center: new window.kakao.maps.LatLng(productLat, productLng), // 지도의 중심좌표
-          level: 3, // 지도의 확대 레벨
+      window.kakao.maps.load(() => {
+        const container = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
+        const options = {
+          // 지도를 생성할 때 필요한 기본 옵션
+          center: new window.kakao.maps.LatLng(37.5445755, 127.0559695), // 지도의 중심좌표.
+          level: 3, // 지도의 레벨(확대, 축소 정도)
         };
-        // v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
-        const map = new window.kakao.maps.Map(mapContainer, mapOption);
 
-        const markerPosition = new window.kakao.maps.LatLng(
-          productLat,
-          productLng
-        );
+        const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
 
-        // 마커를 생성합니다
         const marker = new window.kakao.maps.Marker({
-          position: markerPosition,
+          // 지도 중심좌표에 마커를 생성합니다
+          position: map.getCenter(),
         });
 
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
+        const geocoder = new window.kakao.maps.services.Geocoder();
+
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch(
+          productInfo?.fetchUseditem.useditemAddress?.address,
+          function (result: any, status: any) {
+            // 정상적으로 검색이 완료됐으면
+            if (status === window.kakao.maps.services.Status.OK) {
+              const coords = new window.kakao.maps.LatLng(
+                result[0].y,
+                result[0].x
+              );
+
+              // 결과값으로 받은 위치를 마커로 표시합니다
+              const marker = new window.kakao.maps.Marker({
+                map: map,
+                position: coords,
+              });
+
+              map.setCenter(coords);
+            }
+          }
+        );
       });
     };
   });
@@ -120,9 +136,14 @@ const ProductDetailUi = ({
                   ? productInfo.fetchUseditem.remarks
                   : "로그인 후,적립 혜택이 제공됩니다."}
               </S.EventMsg>
-              <S.EventMsg>
-                {productInfo ? productInfo.fetchUseditem.tags : ""}
-              </S.EventMsg>
+              <S.TagBox>
+                {productInfo
+                  ? productInfo.fetchUseditem.tags.map((el, index) => (
+                      <S.TagMsg key={index}>#{el}</S.TagMsg>
+                    ))
+                  : ""}
+              </S.TagBox>
+
               <S.ProductInfoContainer>
                 <S.ProductInfoUl>
                   <S.ProductInfoLeft>배송</S.ProductInfoLeft>
@@ -198,6 +219,18 @@ const ProductDetailUi = ({
                       </S.ProductCountBtn>
                     </S.ProductCountBox>
                   </S.ProductInfoRight>
+                </S.ProductInfoUl>
+                <S.ProductInfoUl>
+                  <S.ProductInfoLeft>내용</S.ProductInfoLeft>
+                  {process.browser && (
+                    <S.ProductInfoRight
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(
+                          productInfo?.fetchUseditem.contents
+                        ),
+                      }}
+                    ></S.ProductInfoRight>
+                  )}
                 </S.ProductInfoUl>
               </S.ProductInfoContainer>
               <S.ProductPriceInfoBox>

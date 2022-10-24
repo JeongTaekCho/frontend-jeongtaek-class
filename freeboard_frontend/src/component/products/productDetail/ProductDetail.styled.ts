@@ -73,6 +73,22 @@ export const EventMsg = styled.p`
   margin-bottom: 15px;
 `;
 
+export const TagBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+`;
+
+export const TagMsg = styled.span`
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  padding: 5px 10px;
+  background-color: #f95621;
+  border-radius: 10px;
+`;
+
 export const ProductInfoContainer = styled.div`
   width: 100%;
 `;
