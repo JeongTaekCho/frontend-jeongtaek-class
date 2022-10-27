@@ -10,3 +10,7 @@ export default function BoardPage() {
     </div>
   );
 }
+
+export const getServerSideProps = () => {
+  // 만약 서버사이드렌더링을 한다면?? => out 폴더로 생성 불가
+};
