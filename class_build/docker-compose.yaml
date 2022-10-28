@@ -7,3 +7,4 @@ service:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
+#ymal파일에서는 줄 잘 맞춰야 함.
