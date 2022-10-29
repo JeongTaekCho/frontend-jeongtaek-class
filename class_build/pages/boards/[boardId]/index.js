@@ -13,4 +13,5 @@ export default function BoardPage() {
 
 export const getServerSideProps = () => {
   // 만약 서버사이드렌더링을 한다면?? => out 폴더로 생성 불가
+  // 도커
 };
