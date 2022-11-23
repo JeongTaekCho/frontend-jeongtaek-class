@@ -1,8 +1,8 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { errorModal, successModal } from "../../common/modal/modal-function";
 import CommentAnswerUi from "./comment-answer.presenter";
-import { DELETE_ANSWER, FETCH_QUESTION_ANSWER } from "./comment-answer.queries";
+import { DELETE_ANSWER } from "./comment-answer.queries";
 
 const CommentAnswer = ({ comment, answer }) => {
   const [isPwModal, setIsPwModal] = useState(false);
