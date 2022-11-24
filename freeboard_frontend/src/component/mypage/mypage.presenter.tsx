@@ -4,8 +4,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
-import { userInfo } from "../../store";
 import { gql, useQuery } from "@apollo/client";
 
 const FETCH_USER_LOGGED_IN = gql`

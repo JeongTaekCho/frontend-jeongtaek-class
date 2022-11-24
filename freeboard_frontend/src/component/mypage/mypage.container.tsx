@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { userInfo } from "../../store";
@@ -16,8 +16,8 @@ import {
 
 const MyPage = () => {
   const [userDatas] = useRecoilState(userInfo);
-  const [file, setFile] = useState("");
-  const [profileImg, setProfileImg] = useState("");
+  const [file, setFile] = useState<any>("");
+  const [profileImg] = useState("");
   const [profileUrl, setProfileUrl] = useState("");
   const [isActive, setIsActive] = useState(false);
 
@@ -48,7 +48,7 @@ const MyPage = () => {
 
   const { register, handleSubmit } = useForm();
 
-  const onClickPointCharge = (data) => {
+  const onClickPointCharge = (data: any) => {
     const IMP = window.IMP; // 생략 가능
     IMP.init("imp49910675"); // Example: imp00000000
 
@@ -88,7 +88,7 @@ const MyPage = () => {
     );
   };
 
-  const onChangeProfile = async (event) => {
+  const onChangeProfile = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
     const fileReader = new FileReader();
