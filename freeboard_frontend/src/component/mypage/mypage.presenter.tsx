@@ -23,7 +23,7 @@ const FETCH_USER_LOGGED_IN = gql`
     }
   }
 `;
-// 타입 수정하기
+// 커밋 테스트
 const MyPageUi = ({
   register,
   handleSubmit,
