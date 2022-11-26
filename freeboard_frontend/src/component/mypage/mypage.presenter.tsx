@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRouter } from "next/router";
 import { gql, useQuery } from "@apollo/client";
+import { IMypageUiProps } from "./mypage.types";
 
 const FETCH_USER_LOGGED_IN = gql`
   query {
@@ -23,7 +24,7 @@ const FETCH_USER_LOGGED_IN = gql`
     }
   }
 `;
-// 커밋 테스트
+
 const MyPageUi = ({
   register,
   handleSubmit,
@@ -32,12 +33,11 @@ const MyPageUi = ({
   boughtProductData,
   pickedProductData,
   onChangeProfile,
-  profileImg,
   onClickProfileUpdate,
   isActive,
   onClickModalToggle,
   profileUrl,
-}) => {
+}: IMypageUiProps) => {
   const settings = {
     dots: false,
     infinite: true,
