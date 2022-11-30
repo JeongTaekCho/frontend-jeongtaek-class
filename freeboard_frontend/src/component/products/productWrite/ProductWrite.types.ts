@@ -9,3 +9,5 @@ export interface IProductWriteUi {
   register: UseFormRegister<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
 }
+
+// 타입 수정
