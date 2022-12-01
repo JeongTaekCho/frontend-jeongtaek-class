@@ -16,6 +16,9 @@ declare const window: typeof globalThis & {
   kakao: any;
 };
 
+// 카카오맵 수정
+// 타입 수정
+
 const ProductWriteUi = ({
   onSubmitProduct,
   register,
